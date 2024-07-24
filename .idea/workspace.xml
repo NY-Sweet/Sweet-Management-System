@@ -4,36 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1c7f3b6-f730-49e5-b479-2d741c3b758c" name="Changes" comment="feature">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/sweet/ny/sweet_ny/c2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/test1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="c1c7f3b6-f730-49e5-b479-2d741c3b758c" name="Changes" comment="features and acceptance test">
+      <change afterPath="$PROJECT_DIR$/src/use_case/purchase.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/sweet/ny/sweet_ny/user.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sweet/ny/sweet_ny/user.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/ purchase.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/ purchase.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/adminContentManage.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/adminContentManage.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/adminManageAccounts.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/adminManageAccounts.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/adminReports.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/adminReports.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/login.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/massaging.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/massaging.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/notification.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/notification.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/orderStatus.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/orderStatus.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/ownerAccountManage.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/ownerAccountManage.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/ownerReports.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/ownerReports.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/productManage.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/productManage.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/userAcountSetting.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/userAcountSetting.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/userFeedBack.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/userFeedBack.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/userRecipes.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/userRecipes.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sweet_NY.iml" beforeDir="false" afterPath="$PROJECT_DIR$/sweet_NY.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="noor" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -215,6 +189,7 @@
     <MESSAGE value="test case directory" />
     <MESSAGE value="java class" />
     <MESSAGE value="feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature" />
+    <MESSAGE value="features and acceptance test" />
+    <option name="LAST_COMMIT_MESSAGE" value="features and acceptance test" />
   </component>
 </project>
