@@ -9,8 +9,5 @@
         <module name="sweet_NY" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="sweet_NY" target="1.5" />
-    </bytecodeTargetLevel>
   </component>
 </project>
