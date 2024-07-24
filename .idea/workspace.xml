@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="c1c7f3b6-f730-49e5-b479-2d741c3b758c" name="Changes" comment="feature">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sweet/ny/sweet_ny/c2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/test1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/sweet/ny/sweet_ny/user.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/sweet/ny/sweet_ny/user.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/ purchase.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/ purchase.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/adminContentManage.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/adminContentManage.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/adminManageAccounts.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/adminManageAccounts.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/adminReports.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/adminReports.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/massaging.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/massaging.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/notification.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/notification.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/orderStatus.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/orderStatus.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/ownerAccountManage.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/ownerAccountManage.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/ownerReports.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/ownerReports.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/productManage.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/productManage.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/userAcountSetting.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/userAcountSetting.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/userFeedBack.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/userFeedBack.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/userRecipes.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/userRecipes.feature" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="origin/noor" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="noor" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2jK4TpkrcfZJQBgwkiW6IJhmJVo" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kareem Sabri/IdeaProjects/sweet_NY&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c1c7f3b6-f730-49e5-b479-2d741c3b758c" name="Changes" comment="" />
+      <created>1721122447517</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1721122447517</updated>
+      <workItem from="1721122448820" duration="3480000" />
+      <workItem from="1721326461993" duration="921000" />
+      <workItem from="1721496207872" duration="11457000" />
+      <workItem from="1721671514456" duration="6323000" />
+      <workItem from="1721750980781" duration="10807000" />
+      <workItem from="1721837698227" duration="481000" />
+      <workItem from="1721838904450" duration="304000" />
+    </task>
+    <task id="LOCAL-00001" summary="first commit">
+      <created>1721123995542</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1721123995542</updated>
+    </task>
+    <task id="LOCAL-00002" summary="second commit">
+      <created>1721124083998</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1721124083998</updated>
+    </task>
+    <task id="LOCAL-00003" summary="second commit">
+      <created>1721124115609</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1721124115609</updated>
+    </task>
+    <task id="LOCAL-00004" summary="second commit">
+      <created>1721124680518</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1721124680518</updated>
+    </task>
+    <task id="LOCAL-00005" summary="second commit">
+      <created>1721124969459</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1721124969459</updated>
+    </task>
+    <task id="LOCAL-00006" summary="c2 add">
+      <created>1721125687713</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1721125687713</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added the features">
+      <created>1721837091784</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721837091784</updated>
+    </task>
+    <task id="LOCAL-00008" summary="added the features">
+      <created>1721837395337</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1721837395337</updated>
+    </task>
+    <task id="LOCAL-00009" summary="test case directory">
+      <created>1721837893032</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1721837893032</updated>
+    </task>
+    <task id="LOCAL-00010" summary="java class">
+      <created>1721837965636</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1721837965636</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="noor" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="first commit" />
+    <MESSAGE value="second commit" />
+    <MESSAGE value="c2 add" />
+    <MESSAGE value="added the features" />
+    <MESSAGE value="test case directory" />
+    <MESSAGE value="java class" />
+    <MESSAGE value="feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature" />
+  </component>
+</project>
