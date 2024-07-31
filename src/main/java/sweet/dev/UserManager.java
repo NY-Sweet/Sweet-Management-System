@@ -15,7 +15,9 @@ public class UserManager {
         return userCreated;
     }
 
-
+    public List<user> getUsers() {
+        return users;
+    }
 
     public void createAccountForUser(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role) {
         userCreated = false;

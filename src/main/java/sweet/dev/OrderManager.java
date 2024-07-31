@@ -288,4 +288,75 @@ public class OrderManager {
         showOrders("delivered");
 
     }
+
+
+    public boolean showFinancialReports(int year) {
+        double[] totalSalesByMonth = new double[12];
+        double[] totalCostByMonth = new double[12];
+
+
+            for (int month = 1; month <= 12; month++) {
+                double[] monthlyTotals = MonthlySalesAndProfits(month, year);
+                totalSalesByMonth[month - 1] += monthlyTotals[0];
+                totalCostByMonth[month - 1] += monthlyTotals[1];
+            }
+
+        printAnnualReport(year, totalSalesByMonth, totalCostByMonth);
+        return true;
+    }
+    private double[] MonthlySalesAndProfits(int month, int year) {
+        double totalSales = 0.0;
+        double totalCost = 0.0;
+        totalSales = getTotalSalesForMonth(month, year);
+        totalCost = getTotalCostForMonth(month, year);
+
+        return new double[]{totalSales, totalCost};
+    }
+    private void printAnnualReport(int year, double[] totalSalesByMonth, double[] totalCostByMonth) {
+        StringBuilder report = new StringBuilder();
+        report.append(String.format("Financial Report for Year %d%n", year));
+        report.append(String.format("%-10s %-15s %-15s %-15s%n", "Month", "Total Sales", "Total Cost", "Profit"));
+        report.append("---------------------------------------------------------------\n");
+
+        // Add each month's data to the report
+        for (int month = 0; month < 12; month++) {
+            double profit = totalSalesByMonth[month] - totalCostByMonth[month];
+            report.append(String.format("%-10d %-15.2f %-15.2f %-15.2f%n", month + 1, totalSalesByMonth[month], totalCostByMonth[month], profit));
+        }
+
+        logger.info(report.toString());
+    }
+
+
+    public double getTotalSalesForMonth(int month, int year) {
+        double totalSales = 0.0;
+
+        for (Order order : orders) {
+            LocalDate orderDate = order.getDate();
+            if (orderDate.getMonthValue() == month && orderDate.getYear() == year) {
+                totalSales += order.getTotalPrice();
+            }
+        }
+
+        return totalSales;
+    }
+
+    public double getTotalCostForMonth(int month, int year) {
+        double totalCost = 0.0;
+
+        for (Order order : orders) {
+            LocalDate orderDate = order.getDate();
+            if (orderDate.getMonthValue() == month && orderDate.getYear() == year) {
+                totalCost += order.getTotalCost();
+            }
+        }
+
+        return totalCost;
+    }
+
+
+
+
+
+
 }

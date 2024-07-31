@@ -15,7 +15,9 @@ public class SupplierManager {
         return supplierCreated;
     }
 
-
+    public List<supplier> getSuppliers() {
+        return suppliers;
+    }
 
     public void createAccountForSupplier(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role, String shopName, int emplyeeNum) {
         supplierCreated = false;
