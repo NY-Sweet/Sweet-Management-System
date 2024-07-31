@@ -1,5 +1,7 @@
 package sweet.dev;
 
+import java.util.LinkedList;
+
 public class user {
 
     private  String userName;
@@ -11,6 +13,7 @@ public class user {
     private String homeNum;
     private String role;
 
+
     public user(String userName, String password, String phoneNum, String email, String city, String street, String homeNum, String role) {
         this.userName = userName;
         this.password = password;
@@ -20,9 +23,11 @@ public class user {
         this.street = street;
         this.homeNum = homeNum;
         this.role=role;
+        this.orders=new LinkedList<>();
     }
 
     public user() {
+
     }
 
     public String getUserName() {
@@ -89,4 +94,6 @@ public class user {
     public void setRole(String role) {
         this.role = role;
     }
+
+
 }

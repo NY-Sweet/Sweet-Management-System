@@ -38,7 +38,7 @@ public class UserManager {
     }
 
 
-    public Object getTheUser(String userName) {
+    public user getTheUser(String userName) {
 
         for (user s : users) {
             if (s.getUserName().equals(userName)) {

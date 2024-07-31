@@ -4,6 +4,7 @@ import java.util.List;
 
 public class SupplierManager {
     private boolean supplierCreated;
+    private boolean validShopName;
     private List<supplier> suppliers;
 
     public SupplierManager(List<supplier> suppliers) {
@@ -44,6 +45,22 @@ public class SupplierManager {
         }
 
         return null;
+    }
+
+    public boolean isValidShopName() {
+        return validShopName;
+    }
+
+    public supplier getTheSupplierByUsingShopName(String shopName) {
+        for (supplier s : suppliers) {
+            if (s.getShopName().equals(shopName)) {
+                validShopName=true;
+                return s;
+            }
+        }
+        validShopName=false;
+        return null;
+
     }
 }
 

@@ -13,7 +13,9 @@ import java.util.Properties;
 public class OrderManager {
     private LinkedList<Order> orders;
     private boolean successOperation;
+    private supplier supplier;
     private static final Logger logger = Logger.getLogger(OrderManager.class.getName());
+
 
     public boolean isSuccessOperation() {
         return successOperation;
@@ -22,13 +24,23 @@ public class OrderManager {
     public OrderManager() {
         this.orders = new LinkedList<>();
     }
-    public OrderManager(LinkedList<Order> orders) {
-        this.orders = orders;
+
+    public OrderManager(supplier supplier) {
+        this.supplier = supplier;
+        this.orders= supplier.getOrders();
     }
 
 
-    public void addOrder(Order order) {
-        orders.add(order);
+    public boolean addOrder(Order order) {
+       if( isStockAvailable(order)) {
+           orders.add(order);
+           reserveStock(order);
+           return true;
+       }
+       else
+       {
+           return false;
+       }
     }
 
     public void viewDailySalesAndProfits(int day, int month, int year) {
@@ -116,24 +128,82 @@ public class OrderManager {
 
     }
 
+    public void reserveStock(Order order) {
+        for (OrderDetails details : order.getOrderDetails()) {
+            product product = supplier.getProductManager().findProduct(details.getProduct().getId());
+            if (product != null) {
+                product.setQuantity(product.getQuantity() - details.getQuantity());
+            }
+        }
+    }
 
-    public void updateOrderStatus(String orderId, String newStatus) {
+    public void restoreStock(Order order) {
+        for (OrderDetails details : order.getOrderDetails()) {
+            product product = supplier.getProductManager().findProduct(details.getProduct().getId());
+            if (product != null) {
+                product.setQuantity(product.getQuantity() + details.getQuantity());
+            }
+        }
+    }
+
+
+
+    private boolean isStockAvailable(Order order) {
+        for (OrderDetails details : order.getOrderDetails()) {
+            product product = supplier.getProductManager().findProduct(details.getProduct().getId());
+            if (product == null || product.getQuantity() < details.getQuantity()) {
+                logger.info("Sorry the product "+product.getName()+" quantity not available the max quantity you can order "+product.getQuantity());
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Update order status
+    public void updateOrderStatus(String orderId, String newStatus, UserManager userManager) {
+        successOperation = true;
         for (Order order : orders) {
             if (order.getOrderId().equals(orderId)) {
+                if (newStatus.equals("rejected")) {
+                    restoreStock(order);
+                }
+
                 order.setStatus(newStatus);
-                String message="Order status updated: " + orderId + " to " + newStatus+"\n";
+                String message = "Order status updated: " + orderId + " to " + newStatus + "\n";
                 StringBuilder table = new StringBuilder();
                 printProduct(order, table);
-
+                String username = order.getUsername();
+                String email = userManager.getTheUser(username).getEmail();
                 logger.info("Order status updated: " + orderId + " to " + newStatus);
-                sendEmailTo("s12112422@stu.najah.edu",message+table.toString());
+                sendEmailTo(email, message + table.toString());
+                successOperation = true;
                 return;
             }
         }
         logger.warning("Order not found: " + orderId);
+        successOperation = false;
     }
 
-    private void printProduct(Order order, StringBuilder table) {
+//    public void updateOrderStatus(String orderId, String newStatus,UserManager userManager) {
+//        for (Order order : orders) {
+//            if (order.getOrderId().equals(orderId)) {
+//                order.setStatus(newStatus);
+//                String message="Order status updated: " + orderId + " to " + newStatus+"\n";
+//                StringBuilder table = new StringBuilder();
+//                printProduct(order, table);
+//                String username=order.getUsername();
+//                String email=userManager.getTheUser(username).getEmail();
+//                logger.info("Order status updated: " + orderId + " to " + newStatus);
+//                sendEmailTo(email,message+table.toString());
+//
+//
+//                return;
+//            }
+//        }
+//        logger.warning("Order not found: " + orderId);
+//    }
+
+    public void printProduct(Order order, StringBuilder table) {
         table.append("Products:\n");
         table.append(String.format("  %-10s %-20s %-10s %-10s%n", "Product ID", "Name", "Quantity", "Price"));
         for (OrderDetails details : order.getOrderDetails()) {

@@ -8,6 +8,7 @@ public class SweetApp {
 
     private boolean isLogged;
     private LoginManager loginManager;
+    private boolean userInPurchasePage;
     private UserManager userManager;
     private SupplierManager supplierManager;
     private boolean InOwnerPage;
@@ -91,7 +92,7 @@ public class SweetApp {
         users.add(u1);
         user u2=new user("sara","123456","","s12112422@stu.najah.edu","","","","u");
         users.add(u2);
-       supplier s1=new supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","",4);
+       supplier s1=new supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","sweetee",4);
        s1.getProductManager().addProduct("101","milk",100,10.5,8.0,28,7,2024,0.0);
        s1.getProductManager().addProduct("102", "bread", 50, 3.0, 2.0, 25, 7, 2024, 0.0);
 
@@ -327,5 +328,10 @@ public class SweetApp {
 
     public void InMessagePage(boolean b) {
         this.InMessagePage=b;
+    }
+
+    public void userInPurchasePage(boolean b) {
+        userInPurchasePage=true;
+
     }
 }

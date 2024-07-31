@@ -9,6 +9,7 @@ public class ProductManager {
 
     private LinkedList<product> products;
     private DiscountRule discountRule;
+    private boolean invalidProductId;
 
     private boolean operationSuccess;
     private static final Logger logger = Logger.getLogger(ProductManager.class.getName());
@@ -82,8 +83,10 @@ public class ProductManager {
     }
 
     public product findProduct(String productId) {
+        invalidProductId=true;
         for (product product : products) {
             if (product.getId().equals(productId)) {
+                invalidProductId=false;
                 return product;
             }
         }
@@ -159,6 +162,10 @@ public class ProductManager {
 
     public boolean isOperationSuccess() {
         return operationSuccess;
+    }
+
+    public boolean isInvalidProductId() {
+        return invalidProductId;
     }
 
     private void setOperationSuccess(boolean operationSuccess) {

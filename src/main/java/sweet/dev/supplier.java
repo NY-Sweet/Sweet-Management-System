@@ -20,9 +20,12 @@ public class supplier {
     private boolean productCreated;
     private LinkedList<product> products;
     private LinkedList<Order> orders;
-    private boolean enterProductPage;
     private boolean validProductToAdd;
     private boolean operationSuccess;
+
+    public LinkedList<Order> getOrders() {
+        return orders;
+    }
 
     private static final Logger logger = Logger.getLogger(supplier.class.getName());
     private DiscountRule discountRule;
@@ -44,20 +47,21 @@ public class supplier {
         products=new LinkedList<>();
         orders=new LinkedList<>();
         this.productManager = new ProductManager(this.products);
-        this.orderManager=new OrderManager(this.orders);
+        this.orderManager=new OrderManager(this);
 
     }
 
     public supplier() {
         products=new LinkedList<>();
         this.productManager = new ProductManager(this.products);
-        this.orderManager = new OrderManager(this.orders);
+        this.orderManager = new OrderManager(this);
 
     }
 
     public OrderManager getOrderManager() {
         return orderManager;
     }
+
 
     public ProductManager getProductManager() {
         return productManager;
@@ -181,6 +185,12 @@ public class supplier {
     public boolean isOperationSuccess() {
         return operationSuccess;
     }
+
+
+
+
+
+
 
 
 
