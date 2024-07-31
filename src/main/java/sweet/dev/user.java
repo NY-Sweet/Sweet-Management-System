@@ -23,7 +23,6 @@ public class user {
         this.street = street;
         this.homeNum = homeNum;
         this.role=role;
-        this.orders=new LinkedList<>();
     }
 
     public user() {
