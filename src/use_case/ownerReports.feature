@@ -36,6 +36,16 @@ Feature: Monitor sales and profits and Identify best-selling products.
       |owner   | option | int1|int2 |
       |"noor"   | "2"    |7       |2024|
 
+  Scenario Outline: Show Annual financial reports
+    Given the owner in Reports page
+    When the owner <owner> selects the financial reports set year <year>
+    Then the owner financial reports will display all shops' financial details
+
+    Examples:
+      |owner| year |
+      |"noor"| 2024   |
+
+
   Scenario Outline: View the Best Selling Products
     Given the owner in Reports page
     When the owner <owner> enters the option to View the Best Selling Products <option>

@@ -17,7 +17,7 @@ public class ownerReports {
     private supplier owner;
     private boolean  isValidOption;
 
-
+private boolean success;
     public LoginManager loginManager;
     public UserManager userManager;
     public SupplierManager supplierManager;
@@ -125,6 +125,16 @@ public class ownerReports {
     @Then("invalid option in report page and  message is displayed")
     public void invalid_option_in_report_page_and_message_is_displayed() {
        assertTrue( isValidOption);
+    }
+
+    @When("the owner {string} selects the financial reports set year {int}")
+    public void the_owner_selects_the_financial_reports_set_year(String string, Integer int1) {
+        owner=supplierManager.getTheSupplier(string);
+        success=owner.getOrderManager().showFinancialReports(int1);
+    }
+    @Then("the owner financial reports will display all shops' financial details")
+    public void the_owner_financial_reports_will_display_all_shops_financial_details() {
+      assertTrue(success);
     }
 
 }
