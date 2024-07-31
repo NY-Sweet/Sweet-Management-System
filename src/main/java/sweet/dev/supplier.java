@@ -22,6 +22,16 @@ public class supplier {
     private LinkedList<Order> orders;
     private boolean validProductToAdd;
     private boolean operationSuccess;
+    private boolean wrongOldPass;
+    private boolean mismatchPass;
+
+    public boolean isMismatchPass() {
+        return mismatchPass;
+    }
+
+    public boolean isWrongOldPass() {
+        return wrongOldPass;
+    }
 
     public LinkedList<Order> getOrders() {
         return orders;
@@ -119,6 +129,8 @@ public class supplier {
 
     public void setPassword(String password) {
         this.password = password;
+        operationSuccess=true;
+
     }
 
     public void setBirthDate(String birthDate) {
@@ -127,22 +139,31 @@ public class supplier {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+        operationSuccess=true;
+
     }
 
     public void setEmail(String email) {
         this.email = email;
+        operationSuccess=true;
+
     }
 
     public void setCity(String city) {
         this.city = city;
+        operationSuccess=true;
     }
 
     public void setStreet(String street) {
         this.street = street;
+        operationSuccess=true;
+
     }
 
     public void setHomeNum(String homeNum) {
         this.homeNum = homeNum;
+        operationSuccess=true;
+
     }
 
     public void setRole(String role) {
@@ -155,6 +176,8 @@ public class supplier {
 
     public void setEpmloyeeNum(int epmloyeeNum) {
         this.epmloyeeNum = epmloyeeNum;
+        operationSuccess=true;
+
     }
 
     public boolean isProductCreated() {
@@ -187,14 +210,21 @@ public class supplier {
     }
 
 
+    public void updatePassword(String oldPassword, String newPassword, String confirmPassword) {
+        if (oldPassword.equals(getPassword())) {
+            wrongOldPass = false;
+            if (newPassword.equals(confirmPassword)) {
+                mismatchPass = false;
+                setPassword(newPassword);
+                operationSuccess = true;
+            } else
+                mismatchPass = true;
+
+        } else
+            wrongOldPass = true;
 
 
-
-
-
-
-
-
+    }
 
 }
 
