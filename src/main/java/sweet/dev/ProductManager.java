@@ -38,7 +38,7 @@ public class ProductManager {
         }
     }
 
-    public void showProducts() {
+    public boolean showProducts() {
 
         applyDiscount();
         StringBuilder table = new StringBuilder();
@@ -53,6 +53,7 @@ public class ProductManager {
         }
 
         logger.info(table.toString());
+        return true;
     }
 
     public void setDiscountRule(double percentage, int daysBeforeExpiration) {
@@ -141,7 +142,7 @@ public class ProductManager {
         }
     }
 
-    public void showDiscountProducts() {
+    public boolean showDiscountProducts() {
         StringBuilder table = new StringBuilder();
         table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-15s %-10s  %-10s%n",
                 "ID", "Name", "Quantity", "Price", "Cost", "Expiration Date", "Discount (%)", "After Discount"));
@@ -158,6 +159,8 @@ public class ProductManager {
         }
 
         logger.info(table.toString());
+        return true;
+
     }
 
     public boolean isOperationSuccess() {

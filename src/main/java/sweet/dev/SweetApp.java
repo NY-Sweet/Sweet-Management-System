@@ -11,24 +11,13 @@ public class SweetApp {
     private boolean userInPurchasePage;
     private UserManager userManager;
     private SupplierManager supplierManager;
-    private boolean InOwnerPage;
+
     private boolean OwnerInReprotsPage;
     private boolean InMessagePage;
     private boolean inOwnerTrackOrderPage;
-    private boolean showProductPage;
-    private boolean showAddProductPage;
-    private boolean EditProductName;
-    private boolean EditProductQuantity;
-    private boolean EditProductExpirationDate;
+
     private boolean InProductPage;
-    private boolean EditProductPrice;
-    private boolean EditProductCost;
-    private boolean DeleteProductOption;
-    private boolean invalidOptionInProductPage;
-    private boolean ExitProductPage;
-    private boolean ViewDiscountProduct;
-    private boolean setDiscountRuleOption;
-    private boolean ownerOptionToReportsPage;
+
     private LinkedList<user> users;
 
     private LinkedList<Admin> admins;
@@ -38,53 +27,13 @@ public class SweetApp {
     private AdminManager adminManager;
 
 
-    public boolean isSetDiscountRuleOption() {
-        return setDiscountRuleOption;
-    }
 
-    public boolean isExitProductPage() {
-        return ExitProductPage;
-    }
-
-    public boolean isViewDiscountProduct() {
-        return ViewDiscountProduct;
-    }
-
-    public boolean isEditProductExpirationDate() {
-        return EditProductExpirationDate;
-    }
 
     public void setInProductPage(boolean inProductPage) {
         InProductPage = inProductPage;
     }
 
-    public boolean isDeleteProductOption() {
-        return DeleteProductOption;
-    }
 
-    public void setShowProductPage(boolean showProductPage) {
-        this.showProductPage = showProductPage;
-    }
-
-    public boolean isEditProductName() {
-        return EditProductName;
-    }
-
-    public boolean isEditProductPrice() {
-        return EditProductPrice;
-    }
-
-    public void setShowAddProductPage(boolean showAddProductPage) {
-        this.showAddProductPage = showAddProductPage;
-    }
-
-    public void setInOwnerPage(boolean inOwnerPage) {
-        InOwnerPage = inOwnerPage;
-    }
-
-    public boolean isInProductPage() {
-        return InProductPage;
-    }
 
     public void setOwnerInReprotsPage(boolean ownerInReprotsPage) {
         OwnerInReprotsPage = ownerInReprotsPage;
@@ -153,184 +102,12 @@ public class SweetApp {
         return supplierManager;
     }
 
-    public void IamInOwnerPage(SweetApp obj) {
-        obj.InOwnerPage=true;
-    }
-
-    public boolean isInOwnerPage() {
-        return InOwnerPage;
-    }
-
-    public boolean isShowProductPage() {
-        return showProductPage;
-    }
-
-    public boolean isShowAddProductPage() {
-        return showAddProductPage;
-    }
-
-    public boolean isEditProductQuantity() {
-        return EditProductQuantity;
-    }
-
-    public boolean isEditProductCost() {
-        return EditProductCost;
-    }
-
-    public boolean isInvalidOptionInProductPage() {
-        return invalidOptionInProductPage;
-    }
-
-    public boolean isOwnerOptionToReportsPage() {
-        return ownerOptionToReportsPage;
-    }
-
-    public void ownerChooseToEnterProductPage(Integer int1) {
-        if(int1==1)
-            setInProductPage(true);
-        else
-            setInProductPage(false);
-    }
-
-    public void showProductPage(String string) {
-        if(string.equals("0"))
-            setShowProductPage(true);
-        else
-            setShowProductPage(false);
-    }
-
-    public void optionToAddProducts(String string2) {
-        if(string2.equals("1"))
-            setShowAddProductPage(true);
-        else
-            setShowAddProductPage(false);
-
-    }
-
-    public void EditProductName(String string) {
-        if(string.equals("2a"))
-        EditProductName=true;
-        else
-            EditProductName=false;
-
-    }
-
-    public void EditProductQuantity(String string) {
-        if(string.equals("2b"))
-            EditProductQuantity=true;
-        else
-            EditProductQuantity=false;
 
 
-    }
-    public void EditProductPrice(String string) {
-        if(string.equals("2c"))
-            EditProductPrice=true;
-        else
-            EditProductPrice=false;
 
 
-    }
-
-    public void EditProductCost(String option) {
-        if(option.equals("2d"))
-            EditProductCost=true;
-        else
-            EditProductCost=false;
-
-    }
-    public void EditProductExpirationDate(String option) {
-        if(option.equals("2e"))
-            EditProductExpirationDate=true;
-        else
-            EditProductExpirationDate=false;
-    }
-    public void DeleteProduct(String option) {
-        if(option.equals("3"))
-            DeleteProductOption=true;
-        else
-            DeleteProductOption=false;
-
-    }
 
 
-    public void invalidOptionInProductPage(String option) {
-        String[] validOptions = {"0", "1", "2a", "2b", "2c", "2d", "2e", "3", "4a", "4b", "5"};
-        invalidOptionInProductPage=false;
-        for (String validOption : validOptions) {
-            if (validOption.equals(option)) {
-                invalidOptionInProductPage = false; // Option is valid
-                break;
-            }
-        }
-        invalidOptionInProductPage=true;
-    }
-
-    public void ExitProductPage(String option) {
-        if("5".equals(option)) {
-            ExitProductPage = true;
-        }
-        else
-            ExitProductPage=false;
-    }
-
-    public void ViewDiscountProduct(String option) {
-        if(option.equals("4a"))
-            ViewDiscountProduct=true;
-        else
-            ViewDiscountProduct=false;
-
-    }
-
-    public void setDiscountRuleOption(String option) {
-        if(option.equals("4b"))
-            setDiscountRuleOption=true;
-        else
-            setDiscountRuleOption=false;
-    }
-
-    public void ownerOptionToReportsPage(int option) {
-        if(option==2)
-            ownerOptionToReportsPage=true;
-        else
-            ownerOptionToReportsPage=false;
-    }
-
-    public boolean invalidOptionInReportsPage(String option) {
-        String[] validOptions = {"0", "1", "2","3","4"};
-
-        for (String validOption : validOptions) {
-            if (validOption.equals(option)) {
-               return false;
-            }
-        }
-        return true;
-    }
-
-    public boolean exitOwnerReportPage(String string) {
-        if(string.equals("4"))
-            return true;
-            return false;
-
-    }
-
-    public boolean ownerViewDailySales(String string2) {
-        if(string2.equals("1"))
-            return true;
-            return false;
-    }
-
-    public boolean ownerViewMonthlySales(String string2) {
-        if(string2.equals("2"))
-            return true;
-        return false;
-    }
-
-    public boolean ownerViewBestSellingProducts(String string2) {
-        if(string2.equals("3"))
-            return true;
-        return false;
-    }
 
     public void inOwnerTrackOrderPage(boolean inOwnerTrackOrderPage ) {
         this.inOwnerTrackOrderPage=inOwnerTrackOrderPage;
