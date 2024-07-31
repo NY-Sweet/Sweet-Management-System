@@ -12,7 +12,7 @@ public class user {
     private String street;
     private String homeNum;
     private String role;
-
+    private LinkedList<Order> orders;
 
     public user(String userName, String password, String phoneNum, String email, String city, String street, String homeNum, String role) {
         this.userName = userName;
@@ -23,10 +23,11 @@ public class user {
         this.street = street;
         this.homeNum = homeNum;
         this.role=role;
+        this.orders=new LinkedList<>();
     }
 
     public user() {
-
+        this.orders=new LinkedList<>();
     }
 
     public String getUserName() {
@@ -94,5 +95,9 @@ public class user {
         this.role = role;
     }
 
-
+    public boolean addOrder(Order order)
+    {
+        orders.add(order);
+        return true;
+    }
 }

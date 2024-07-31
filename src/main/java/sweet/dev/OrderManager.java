@@ -177,6 +177,10 @@ public class OrderManager {
                 logger.info("Order status updated: " + orderId + " to " + newStatus);
                 sendEmailTo(email, message + table.toString());
                 successOperation = true;
+                if(newStatus.equals("delivered"))
+                {
+                    userManager.getTheUser(username).addOrder(order);
+                }
                 return;
             }
         }
