@@ -76,7 +76,7 @@ public class loginView {
         if(loginManager.getRoleInSys()==1)
         {
             supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
-            ownerView ownerView=new ownerView(supplier);
+            ownerView ownerView=new ownerView(supplier,userManager);
             ownerView.displayMenu();
         }
 

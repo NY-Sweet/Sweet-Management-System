@@ -7,6 +7,7 @@ import sweet.dev.*;
 
 import java.util.logging.Logger;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class orderStatus {
@@ -37,10 +38,9 @@ public class orderStatus {
     }
     @When("the owner {string} choose option  change pending set id {string} and states {string}")
     public void theOwnerChooseOptionChangePendingSetIdOrderIdAndStates(String string, String id,String state) {
-        owner=supplierManager.getTheSupplier(string);
-      owner.getOrderManager().showPendingOrders();
+        orderUpdateCall(string, id, state);
 
-       owner.getOrderManager().updateOrderStatus(id,state,userManager);
+        owner.getOrderManager().showPendingOrders();
     }
     @Then("the order status should be updated and email sent")
     public void the_order_status_should_be_updated_and_email_sent() {
@@ -50,10 +50,15 @@ public class orderStatus {
 
     @When("the owner {string} choose option change shipped set id {string} and states {string}")
     public void theOwnerChooseOptionChangeShippedSetIdOrderIdAndStates(String string, String id,String state) {
-        owner=supplierManager.getTheSupplier(string);
-        owner.getOrderManager().showShippedOrders();
-        owner.getOrderManager().updateOrderStatus(id,state,userManager);
+        orderUpdateCall(string, id, state);
 
+        owner.getOrderManager().showShippedOrders();
+
+    }
+
+    private void orderUpdateCall(String string, String id, String state) {
+        owner=supplierManager.getTheSupplier(string);
+        owner.getOrderManager().updateOrderStatus(id, state,userManager);
     }
 
     @When("the owner {string} chooses option Show delivered orders")
@@ -67,6 +72,17 @@ public class orderStatus {
         assertTrue(owner.getOrderManager().isSuccessOperation());
 
     }
+
+    @When("the owner {string} choose update option set invalid id {string}")
+    public void the_owner_choose_update_option_set_invalid_id(String string, String id) {
+        orderUpdateCall(string, id,"");
+    }
+    @Then("the order status failed to updated")
+    public void the_order_status_failed_to_updated() {
+        assertFalse(owner.getOrderManager().isSuccessOperation());
+
+    }
+
 
 
 

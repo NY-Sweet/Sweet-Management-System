@@ -178,11 +178,9 @@ public class OrderManager {
         return true;
     }
 
-    // Update order status
     public void updateOrderStatus(String orderId, String newStatus, UserManager userManager) {
-        successOperation = true;
-        for (Order order : orders) {
-            if (order.getOrderId().equals(orderId)) {
+        Order order=getOrderById(orderId);
+            if (order!=null) {
                 if (newStatus.equals("rejected")) {
                     restoreStock(order);
                 }
@@ -202,29 +200,21 @@ public class OrderManager {
                 }
                 return;
             }
-        }
-        logger.warning("Order not found: " + orderId);
-        successOperation = false;
+        else {
+                logger.warning("Order not found: " + orderId);
+                successOperation = false;
+            }
     }
 
-//    public void updateOrderStatus(String orderId, String newStatus,UserManager userManager) {
-//        for (Order order : orders) {
-//            if (order.getOrderId().equals(orderId)) {
-//                order.setStatus(newStatus);
-//                String message="Order status updated: " + orderId + " to " + newStatus+"\n";
-//                StringBuilder table = new StringBuilder();
-//                printProduct(order, table);
-//                String username=order.getUsername();
-//                String email=userManager.getTheUser(username).getEmail();
-//                logger.info("Order status updated: " + orderId + " to " + newStatus);
-//                sendEmailTo(email,message+table.toString());
-//
-//
-//                return;
-//            }
-//        }
-//        logger.warning("Order not found: " + orderId);
-//    }
+    public Order getOrderById(String id)
+    {
+        for (Order order:orders)
+        {
+            if (order.getOrderId().equals(id))
+                return order;
+        }
+        return null;
+    }
 
     public void printProduct(Order order, StringBuilder table) {
         table.append("Products:\n");
@@ -372,9 +362,6 @@ public class OrderManager {
 
         return totalCost;
     }
-
-
-
 
 
 

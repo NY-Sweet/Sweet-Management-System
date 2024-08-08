@@ -15,8 +15,9 @@ public class ownerView {
     private final Scanner scanner;
     private final Logger logger;
     private supplier supplier;
+    private UserManager userManager;
 
-    public ownerView(supplier supplier) {
+    public ownerView(supplier supplier,UserManager userManager) {
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger(ownerView.class.getName());
         logger.setUseParentHandlers(false);
@@ -25,6 +26,7 @@ public class ownerView {
         logger.addHandler(consoleHandler);
 
         this.supplier = supplier;
+        this.userManager=userManager;
     }
 
     public void displayMenu() {
@@ -51,6 +53,9 @@ public class ownerView {
                 case "2":
                     reports();
                     break;
+                case "3":
+                    orderManagement();
+                    break;
                 case "5":
                     logger.info("Exiting owner menu");
                     return;
@@ -60,6 +65,8 @@ public class ownerView {
             }
         }
     }
+
+
 
     private void manageProducts() {
         while (true) {
@@ -311,6 +318,87 @@ public class ownerView {
                     logger.info("Invalid choice. Please select a valid option.");
             }
         }
+    }
+
+    private void orderManagement() {
+        while (true) {
+            String menuOptions = ANSI_PURPLE + """
+            ╔════════════════════════════════════╗
+            ║      Order Management Menu         ║
+            ╠════════════════════════════════════╣
+            ║ 1. View Pending Orders             ║
+            ║ 2. View Shipped Orders             ║
+            ║ 3. View Delivered Orders           ║
+            ║ 4. Update Order Status             ║
+            ║ 5. Return to Main Menu             ║
+            ╚════════════════════════════════════╝
+            """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
+            logger.info(menuOptions);
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    showOrdersByState("pending");
+                    break;
+                case "2":
+                    showOrdersByState("shipped");
+                    break;
+                case "3":
+                    showOrdersByState("delivered");
+                    break;
+                case "4":
+                    updateOrderStatus();
+                    break;
+                case "5":
+                    logger.info("Returning to main menu");
+                    return;
+                default:
+                    logger.warning("Invalid menu choice: " + choice);
+                    logger.info("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
+    private void showOrdersByState(String state) {
+        logger.info("Showing orders with state: " + state);
+        supplier.getOrderManager().showOrders(state);
+    }
+    private void updateOrderStatus() {
+        showOrdersByState("pending");
+        showOrdersByState("shipped");
+        String orderId;
+        while(true)
+        {
+            orderId = promptForNonEmptyInput("Enter the Order ID to update: ");
+
+            Order order=supplier.getOrderManager().getOrderById(orderId);
+            if(order!=null)
+                break;
+            logger.warning("Invalid Order Id");
+        }
+        String newStatus = promptForNonEmptyInput("Enter new status (shipped, rejected, or delivered): ").toLowerCase();
+        if (newStatus.equals("shipped") || newStatus.equals("rejected") || newStatus.equals("delivered")) {
+            supplier.getOrderManager().updateOrderStatus(orderId, newStatus, userManager);
+
+            if (supplier.getOrderManager().isSuccessOperation()) {
+                logger.info("Order status updated successfully.");
+            } else {
+                logger.warning("Failed to update order status. Please check if the Order ID is correct.");
+            }
+        } else {
+            logger.warning("Invalid new status: " + newStatus);
+            logger.info("Status update failed.");
+        }
+    }
+
+
+
+    private String promptForNonEmptyInput(String promptMessage) {
+        String input;
+        do {
+            logger.info(promptMessage);
+            input = scanner.nextLine().trim();
+        } while (input.isEmpty());
+        return input;
     }
 
 
