@@ -22,8 +22,4 @@ public class Admin {
     public boolean AdminPermession() {
         return true;
     }
-
 }
-
-
-

@@ -110,4 +110,10 @@ public class user {
         orders.add(order);
         return true;
     }
+
+    public boolean addOrder(Order order)
+    {
+        orders.add(order);
+        return true;
+    }
 }
