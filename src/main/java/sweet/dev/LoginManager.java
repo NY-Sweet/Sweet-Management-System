@@ -1,6 +1,9 @@
 package sweet.dev;
 
-import java.util.List;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.*;
 
 public class LoginManager {
     private boolean validation;
@@ -14,6 +17,8 @@ public class LoginManager {
 
     private supplier LoggedSupplierObj;
     private user LoggedUserObj;
+    private Map<String, String> resetTokens = new HashMap<>();
+
 
     public LoginManager(List<user> users, List<supplier> suppliers) {
         this.users = users;
@@ -51,6 +56,7 @@ public class LoginManager {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 validation = true;
                 roleInSys = 0;
+                enteredUsername=userName;
                 LoggedInUser = userName;
                 return;
             }
@@ -59,10 +65,12 @@ public class LoginManager {
             if (s.getUserName().equals(userName) && s.getPassword().equals(password)) {
                 validation = true;
                 LoggedInSupplier = userName;
+                enteredUsername=userName;
                 roleInSys = 1;
             }
         }
     }
+
 
     public void setEmptyUsernameAndPasswordFromSystem(String username, String password) {
         if (username.isEmpty() && !password.isEmpty()) {
@@ -98,17 +106,6 @@ public class LoginManager {
                 }
             }
         }
-    }
-
-    public user getTheUser() {
-        if (LoggedInUser != null) {
-            for (user u : users) {
-                if (u.getUserName().equals(LoggedInUser)) {
-                    return u;
-                }
-            }
-        }
-        return null;
     }
 
 }

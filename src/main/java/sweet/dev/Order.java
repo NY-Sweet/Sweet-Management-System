@@ -19,6 +19,7 @@ public class Order {
         this.username = username;
         this.orderDetails = orderDetails;
         this.date=LocalDate.now();
+        System.out.println(this.date);
         this.totalPrice = calculateTotalPrice();
         this.totalCost = calculateTotalCost();
         this.status="pending";

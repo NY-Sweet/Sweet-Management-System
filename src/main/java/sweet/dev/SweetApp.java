@@ -1,7 +1,8 @@
 package sweet.dev;
 
+import menus.loginView;
+
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 public class SweetApp {
@@ -18,14 +19,6 @@ public class SweetApp {
 
     private boolean InProductPage;
 
-    private boolean EditProductPrice;
-    private boolean EditProductCost;
-    private boolean DeleteProductOption;
-    private boolean invalidOptionInProductPage;
-    private boolean ExitProductPage;
-    private boolean ViewDiscountProduct;
-    private boolean setDiscountRuleOption;
-    private boolean ownerOptionToReportsPage;
     public LinkedList<user> users;
     private LinkedList<Admin> admins;
     private LinkedList<supplier> suppliers;
@@ -190,6 +183,11 @@ public class SweetApp {
 
     public AdminManager getAdminManager() {
         return adminManager;
+    }
+
+    public void run() {
+        loginView loginView = new loginView( loginManager,userManager, supplierManager);
+        loginView.displayMenu();
     }
 
 }

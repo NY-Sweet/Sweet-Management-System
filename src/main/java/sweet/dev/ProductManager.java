@@ -1,8 +1,11 @@
 package sweet.dev;
 
+import menus.PrettyFormatter;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 public class ProductManager {
@@ -14,9 +17,18 @@ public class ProductManager {
     private boolean operationSuccess;
     private static final Logger logger = Logger.getLogger(ProductManager.class.getName());
 
+
     public ProductManager(LinkedList<product> products) {
         this.products = products;
-        this.discountRule = new DiscountRule(30, 3);
+        this.discountRule = new DiscountRule(0, 0);
+        setupLogger();
+    }
+
+    private void setupLogger() {
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.setUseParentHandlers(false);
+        logger.addHandler(consoleHandler);
     }
 
     public void addProduct(String id, String name, Integer quantity, Double price,Double cost, Integer day, Integer month, Integer year, Double percentage) {
@@ -39,22 +51,22 @@ public class ProductManager {
     }
 
     public boolean showProducts() {
-
         applyDiscount();
         StringBuilder table = new StringBuilder();
-        table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-15s %-10s  %-10s%n",
+        table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-20s %-15s %-15s%n",
                 "ID", "Name", "Quantity", "Price", "Cost", "Expiration Date", "Discount (%)", "After Discount"));
-        table.append("-----------------------------------------------------------------------------------------\n");
-
+        table.append("===============================================================================================================================\n");
         for (product p : products) {
             String expirationDate = String.format("%02d/%02d/%04d", p.getDay(), p.getMonth(), p.getYear());
-            table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-15s %-10.2f %-10.2f%n",
+            table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-20s %-15.2f %-15.2f%n",
                     p.getId(), p.getName(), p.getQuantity(), p.getPrice(), p.getCost(), expirationDate, p.getDiscountPercentage(), p.getPrice() * (1 - p.getDiscountPercentage() / 100)));
         }
 
         logger.info(table.toString());
         return true;
     }
+
+
 
     public void setDiscountRule(double percentage, int daysBeforeExpiration) {
         this.discountRule = new DiscountRule(percentage, daysBeforeExpiration);
@@ -146,7 +158,7 @@ public class ProductManager {
         StringBuilder table = new StringBuilder();
         table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-15s %-10s  %-10s%n",
                 "ID", "Name", "Quantity", "Price", "Cost", "Expiration Date", "Discount (%)", "After Discount"));
-        table.append("-----------------------------------------------------------------------------------------\n");
+        table.append("-----------------------------------------------------------------------------------------------------\n");
 
         applyDiscount();
 

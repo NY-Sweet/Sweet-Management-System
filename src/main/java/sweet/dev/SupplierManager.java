@@ -53,7 +53,7 @@ public class SupplierManager {
 
         return null;
     }
-<<<<<<< HEAD
+
     public boolean deleteSupplier (String supplierName){
         supplier userToRemove = getTheSupplier(supplierName);
         if (userToRemove != null) {
@@ -69,7 +69,7 @@ public class SupplierManager {
         }
         return true;
     }
-=======
+
 
     public boolean isValidShopName() {
         return validShopName;
@@ -86,7 +86,6 @@ public class SupplierManager {
         return null;
 
     }
->>>>>>> c8a7d80c0c32f2ba785796d45731ea4ece821b63
 }
 
 

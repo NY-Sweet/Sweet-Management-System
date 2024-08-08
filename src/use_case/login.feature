@@ -79,3 +79,4 @@ Feature: log in user and sign up to user
       | "lama"     | "1234"   | "Nablus" |"Nablus street"|"54G"           |  "0594507933" | "salma@gmail.com" |"o"  |"NY sweet"|23     |
       | "AbuAhmad"     | "11"     | "Nablus" |"Nablus street"|"54G"           | "0594507933"  | "ahmad@gmail.com" |"s"  |"Abu ahmad shop"|12|
 
+

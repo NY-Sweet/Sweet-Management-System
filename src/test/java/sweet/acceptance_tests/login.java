@@ -5,16 +5,19 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import sweet.dev.*;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 
 public class login {
 
     public SweetApp obj;
-    public LoginManager loginManager;
-    public UserManager userManager;
-    public SupplierManager supplierManager;
+    private LoginManager loginManager;
+    private UserManager userManager;
+    private SupplierManager supplierManager;
+    private String username;
+    private String newPassword;
+    private String resetToken;
+
 
     public login(SweetApp obj) {
         super();
@@ -111,4 +114,5 @@ public class login {
         supplierManager.createAccountForSupplier(userName,password,city,street,homeNum,phneNum,email,role,shopName,emplyeeNum);
 
     }
+
 }

@@ -1,7 +1,10 @@
 package sweet.dev;
 
+import menus.PrettyFormatter;
+
 import java.time.LocalDate;
 import java.util.*;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -28,6 +31,13 @@ public class OrderManager {
     public OrderManager(supplier supplier) {
         this.supplier = supplier;
         this.orders= supplier.getOrders();
+        setupLogger();
+    }
+    private void setupLogger() {
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.setUseParentHandlers(false);
+        logger.addHandler(consoleHandler);
     }
 
 
@@ -44,48 +54,57 @@ public class OrderManager {
     }
 
     public void viewDailySalesAndProfits(int day, int month, int year) {
-        successOperation=false;
+        successOperation = false;
         double totalSales = 0.0;
         double totalCost = 0.0;
         StringBuilder dailyReport = new StringBuilder();
-        dailyReport.append(String.format("%-10s %-20s %-10s %-10s %-15s%n", "Order ID", "Username", "Total Price", "Total Cost", "Date"));
-        dailyReport.append("------------------------------------------------------------\n");
 
+        // Header
+        dailyReport.append(String.format("%-10s %-20s %-12s %-12s %-15s%n",
+                "Order ID", "Username", "Total Price", "Total Cost", "Date"));
+        dailyReport.append("--------------------------------------------------------------\n");
+
+        // Add data rows
         for (Order order : orders) {
             LocalDate orderDate = order.getDate();
             if (orderDate.getDayOfMonth() == day && orderDate.getMonthValue() == month && orderDate.getYear() == year) {
                 totalSales += order.getTotalPrice();
                 totalCost += order.getTotalCost();
-                dailyReport.append(String.format("%-10s %-20s %-10.2f %-10.2f %-15s%n",
+                dailyReport.append(String.format("%-10s %-20s %-12.2f %-12.2f %-15s%n",
                         order.getOrderId(), order.getUsername(), order.getTotalPrice(), order.getTotalCost(), orderDate.toString()));
             }
         }
 
+        dailyReport.append(String.format("%n %-10s %-20s %-12.2f %-12.2f%n",
+                "Total", "", totalSales, totalCost));
+        dailyReport.append(String.format("Profit: %.2f%n", totalSales - totalCost));
+
         logger.info(dailyReport.toString());
-        logger.info(String.format("Total Sales: %.2f, Total Cost: %.2f, Profit: %.2f", totalSales, totalCost, totalSales - totalCost));
-        successOperation=true;
+        successOperation = true;
     }
+
 
     public void viewMonthlySalesAndProfits(int month, int year) {
         successOperation=false;
         double totalSales = 0.0;
         double totalCost = 0.0;
         StringBuilder monthlyReport = new StringBuilder();
-        monthlyReport.append(String.format("%-10s %-20s %-10s %-10s %-15s%n", "Order ID", "Username", "Total Price", "Total Cost", "Date"));
-        monthlyReport.append("------------------------------------------------------------\n");
+        monthlyReport.append(String.format(String.format("%-10s %-20s %-12s %-12s %-15s%n",
+                "Order ID", "Username", "Total Price", "Total Cost", "Date")));
+        monthlyReport.append("--------------------------------------------------------------\n");
 
         for (Order order : orders) {
             LocalDate orderDate = order.getDate();
             if (orderDate.getMonthValue() == month && orderDate.getYear() == year) {
                 totalSales += order.getTotalPrice();
                 totalCost += order.getTotalCost();
-                monthlyReport.append(String.format("%-10s %-20s %-10.2f %-10.2f %-15s%n",
+                monthlyReport.append(String.format("%-10s %-20s %-12.2f %-12.2f %-15s%n",
                         order.getOrderId(), order.getUsername(), order.getTotalPrice(), order.getTotalCost(), orderDate.toString()));
             }
         }
 
         logger.info(monthlyReport.toString());
-        logger.info(String.format("Total Sales: %.2f, Total Cost: %.2f, Profit: %.2f", totalSales, totalCost, totalSales - totalCost));
+        logger.info(String.format("%n Total Sales: %.2f, Total Cost: %.2f, Profit: %.2f", totalSales, totalCost, totalSales - totalCost));
         successOperation=true;
     }
 

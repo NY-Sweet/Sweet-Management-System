@@ -8,7 +8,6 @@ public class supplier {
 
     private  String userName;
     private  String password;
-    private  String birthDate;
     private String phoneNum;
     private String email;
     private String city;
@@ -17,10 +16,8 @@ public class supplier {
     private String role;
     private String shopName;
     private int epmloyeeNum;
-    private boolean productCreated;
     private LinkedList<product> products;
     private LinkedList<Order> orders;
-    private boolean validProductToAdd;
     private boolean operationSuccess;
     private boolean wrongOldPass;
     private boolean mismatchPass;
@@ -87,14 +84,6 @@ public class supplier {
         return password;
     }
 
-    public String getBirthDate() {
-        return birthDate;
-    }
-
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -106,15 +95,6 @@ public class supplier {
     public String getStreet() {
         return street;
     }
-
-    public String getHomeNum() {
-        return homeNum;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
     public String getShopName() {
         return shopName;
     }
@@ -131,10 +111,6 @@ public class supplier {
         this.password = password;
         operationSuccess=true;
 
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birthDate = birthDate;
     }
 
     public void setPhoneNum(String phoneNum) {
@@ -166,44 +142,14 @@ public class supplier {
 
     }
 
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
-    }
-
     public void setEpmloyeeNum(int epmloyeeNum) {
         this.epmloyeeNum = epmloyeeNum;
         operationSuccess=true;
 
     }
 
-    public boolean isProductCreated() {
-        return productCreated;
-    }
-
-    public void setProductCreated(boolean productCreated) {
-        this.productCreated = productCreated;
-    }
-
-    public void addProduct(product p) {
-        products.add(p);
-    }
 
 
-    public boolean isValidProductToAdd() {
-        return validProductToAdd;
-    }
-
-    public void setValidProductToAdd(boolean validProductToAdd) {
-        this.validProductToAdd = validProductToAdd;
-    }
-
-    private void setOperationSuccess(boolean operationSuccess) {
-        this.operationSuccess = operationSuccess;
-    }
 
     public boolean isOperationSuccess() {
         return operationSuccess;
