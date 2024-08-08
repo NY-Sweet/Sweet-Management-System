@@ -58,35 +58,45 @@ public class user {
         return role;
     }
 
-    public void setUserName(String userName) {
+    public boolean setUserName(String userName) {
         this.userName = userName;
+        return true;
     }
 
-    public void setPassword(String password) {
+
+
+    public boolean setPassword(String password) {
         this.password = password;
+        return true;
     }
 
-    public void setPhoneNum(String phoneNum) {
+    public boolean setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+        return true;
     }
 
-    public void setEmail(String email) {
+    public boolean setEmail(String email) {
         this.email = email;
+        return true;
     }
 
-    public void setCity(String city) {
+    public boolean setCity(String city) {
         this.city = city;
+        return true;
     }
 
-    public void setStreet(String street) {
+    public boolean setStreet(String street) {
         this.street = street;
+        return true;
     }
 
-    public void setHomeNum(String homeNum) {
+    public boolean setHomeNum(String homeNum) {
         this.homeNum = homeNum;
+        return true;
     }
 
-    public void setRole(String role) {
+    public boolean setRole(String role) {
         this.role = role;
+        return true;
     }
 }

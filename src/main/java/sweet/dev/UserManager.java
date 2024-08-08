@@ -1,7 +1,11 @@
 package sweet.dev;
 
 import java.util.List;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class UserManager {
     private boolean userCreated;
 
@@ -32,13 +36,14 @@ public class UserManager {
         }
     }
 
-    public void addUser(String userName, String password, String phneNum, String email, String city, String street, String homeNum, String role) {
+    public boolean addUser(String userName, String password, String phneNum, String email, String city, String street, String homeNum, String role) {
         user newUser = new user(userName, password, phneNum, email, city, street, homeNum, role);
         users.add(newUser);
+        return true;
     }
 
 
-    public Object getTheUser(String userName) {
+    public user getTheUser(String userName) {
 
         for (user s : users) {
             if (s.getUserName().equals(userName)) {
@@ -48,4 +53,44 @@ public class UserManager {
 
         return null;
     }
+    public boolean isValidPassword(String OldPassword, String NewPassword, String confirmPassword ,user User) {
+        if (OldPassword == null || NewPassword == null || confirmPassword == null) {
+            return false;
+        } else if (OldPassword.equals(User.getPassword())) {
+            if (NewPassword.equals(confirmPassword)) {
+                return true;
+            }
+        }
+        return true ;
+    }
+    public static boolean isValidEmail(String email) {
+
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    public boolean deleteUser (String UserName){
+        user userToRemove =  getTheUser(UserName);
+        if (userToRemove != null) {
+            users.remove(userToRemove);
+            return true;
+        }
+        return false ;
+
+    }
+    private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
+    public boolean DisplayAllUsers (){
+        for (user User : this.users) {
+
+            logger.info(User.toString());
+        }
+        return true;
+    }
+
 }

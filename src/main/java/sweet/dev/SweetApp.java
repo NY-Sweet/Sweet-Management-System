@@ -28,9 +28,16 @@ public class SweetApp {
     private boolean ViewDiscountProduct;
     private boolean setDiscountRuleOption;
     private boolean ownerOptionToReportsPage;
-    private LinkedList<user> users;
+    public LinkedList<user> users;
     private LinkedList<supplier> suppliers;
     private MessageManager messageManager;
+    private RecipeManager Recipemanager ;
+    private boolean IsMessageDisplayedforVlidationaRecipe= false;
+    private Admin admin = new Admin("Yara","123456789");
+    public boolean isMessageDisplayedforVlidationaRecipe() {
+        return IsMessageDisplayedforVlidationaRecipe;
+    }
+
 
     public boolean isSetDiscountRuleOption() {
         return setDiscountRuleOption;
@@ -94,7 +101,7 @@ public class SweetApp {
        supplier s1=new supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","",4);
        s1.getProductManager().addProduct("101","milk",100,10.5,8.0,28,7,2024,0.0);
        s1.getProductManager().addProduct("102", "bread", 50, 3.0, 2.0, 25, 7, 2024, 0.0);
-
+        this.Recipemanager = new RecipeManager(users);
         LinkedList<OrderDetails> orderDetails = new LinkedList<>();
         product milk = s1.getProductManager().findProduct("101");
         product bread =s1.getProductManager().findProduct("102");
@@ -328,4 +335,51 @@ public class SweetApp {
     public void InMessagePage(boolean b) {
         this.InMessagePage=b;
     }
+    public RecipeManager getRecipemanager(){
+        return Recipemanager;
+    }
+
+    public boolean RecipoeTosearch (String recipe){
+        LinkedList <Recipe>SearchedRecipes =Recipemanager.searchRecipes(recipe);
+        return true ;
+
+    }
+    public void Messageaftervaledationoftherecipe (){
+        System.out.println("The Selected Recipe Has been Validated Successfulley ");
+        IsMessageDisplayedforVlidationaRecipe= true;
+    }
+    public void clearMessageDisplayedAfterRecipeValidation (){
+        IsMessageDisplayedforVlidationaRecipe= false;
+    }
+
+    public boolean  addStoreOwner(String userName, String password, String phoneNum, String email,
+                              String city, String street, String homeNum, String shopName,
+                              int employeeNum) {
+        if (admin.AdminPermession()){
+            this.supplierManager.createAccountForSupplier(userName, password, phoneNum, email, city,
+                    street, homeNum, "s", shopName, employeeNum);
+        }
+        return false;
+    }
+    public boolean DeleteAccount (String userName) {
+
+       if (null !=this.supplierManager.getTheSupplier(userName)) {
+           supplierManager.deleteSupplier(userName);
+           return true;
+       } else if (null != this.userManager.getTheUser(userName)) {
+           userManager.deleteUser(userName);
+           return true;
+       }
+       return false;
+    }
+    public boolean addFeedbackforaProductByitsId (String ID , String FeedBack){
+        for (supplier Sup : suppliers) {
+            if (Sup.getProductManager().findProduct(ID)!= null) {
+                Sup.getProductManager().findProduct(ID).addFeedback(FeedBack);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

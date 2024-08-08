@@ -2,6 +2,8 @@ package sweet.dev;
 
 import io.cucumber.java.sl.In;
 
+import java.util.LinkedList;
+
 public class product {
     private String id;
     private String name;
@@ -12,7 +14,7 @@ public class product {
     private Integer month;
     private Integer year;
     private Double discountPercentage;
-
+    public LinkedList<String> feedbacks;
     public product(String id, String name, Integer quantity, Double price, Double cost, Integer day, Integer month, Integer year, Double discountPercentage) {
         this.id = id;
         this.name = name;
@@ -23,6 +25,7 @@ public class product {
         this.month = month;
         this.year = year;
         this.discountPercentage = discountPercentage;
+        this.feedbacks = new LinkedList();
     }
 
     public void setId(String id) {
@@ -96,4 +99,19 @@ public class product {
     public Double getDiscountPercentage() {
         return discountPercentage;
     }
+
+    public boolean addFeedback(String feedback) {
+        feedbacks.add(feedback);
+        return true;
+    }
+
+    public boolean showFeedbaks (){
+        int i =0;
+        for (final String feedback : feedbacks) {
+            System.out.println(i+ "   "+feedback);
+        }
+        return true;
+
+    }
+
 }
