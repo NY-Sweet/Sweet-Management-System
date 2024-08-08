@@ -10,9 +10,9 @@ import java.util.logging.Logger;
 
 public class AdminManager {
 
-  private  List<Admin> admins;
-  private SupplierManager supplierManager;
-  private UserManager userManager;
+    private  List<Admin> admins;
+    private SupplierManager supplierManager;
+    private UserManager userManager;
     private static final Logger logger = Logger.getLogger(AdminManager.class.getName());
 
 
@@ -48,7 +48,7 @@ public class AdminManager {
 
         for (supplier supplier : suppliers) {
             logger.info("Best selling products in "+supplier.getShopName()+" manage by"+supplier.getUserName()+ " has employee number"+supplier.getEpmloyeeNum());
-          supplier.getOrderManager().showBestProducts();
+            supplier.getOrderManager().showBestProducts();
         }
         return true;
     }
