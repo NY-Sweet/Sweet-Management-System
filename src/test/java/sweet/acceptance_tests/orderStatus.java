@@ -39,7 +39,8 @@ public class orderStatus {
     public void theOwnerChooseOptionChangePendingSetIdOrderIdAndStates(String string, String id,String state) {
         owner=supplierManager.getTheSupplier(string);
       owner.getOrderManager().showPendingOrders();
-       owner.getOrderManager().updateOrderStatus(id,state);
+
+       owner.getOrderManager().updateOrderStatus(id,state,userManager);
     }
     @Then("the order status should be updated and email sent")
     public void the_order_status_should_be_updated_and_email_sent() {
@@ -51,7 +52,7 @@ public class orderStatus {
     public void theOwnerChooseOptionChangeShippedSetIdOrderIdAndStates(String string, String id,String state) {
         owner=supplierManager.getTheSupplier(string);
         owner.getOrderManager().showShippedOrders();
-        owner.getOrderManager().updateOrderStatus(id,state);
+        owner.getOrderManager().updateOrderStatus(id,state,userManager);
 
     }
 

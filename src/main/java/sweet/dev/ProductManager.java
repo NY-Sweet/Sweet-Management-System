@@ -9,6 +9,7 @@ public class ProductManager {
 
     private LinkedList<product> products;
     private DiscountRule discountRule;
+    private boolean invalidProductId;
 
     private boolean operationSuccess;
     private static final Logger logger = Logger.getLogger(ProductManager.class.getName());
@@ -37,7 +38,7 @@ public class ProductManager {
         }
     }
 
-    public void showProducts() {
+    public boolean showProducts() {
 
         applyDiscount();
         StringBuilder table = new StringBuilder();
@@ -52,6 +53,7 @@ public class ProductManager {
         }
 
         logger.info(table.toString());
+        return true;
     }
 
     public void setDiscountRule(double percentage, int daysBeforeExpiration) {
@@ -82,8 +84,10 @@ public class ProductManager {
     }
 
     public product findProduct(String productId) {
+        invalidProductId=true;
         for (product product : products) {
             if (product.getId().equals(productId)) {
+                invalidProductId=false;
                 return product;
             }
         }
@@ -138,7 +142,7 @@ public class ProductManager {
         }
     }
 
-    public void showDiscountProducts() {
+    public boolean showDiscountProducts() {
         StringBuilder table = new StringBuilder();
         table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-15s %-10s  %-10s%n",
                 "ID", "Name", "Quantity", "Price", "Cost", "Expiration Date", "Discount (%)", "After Discount"));
@@ -155,10 +159,16 @@ public class ProductManager {
         }
 
         logger.info(table.toString());
+        return true;
+
     }
 
     public boolean isOperationSuccess() {
         return operationSuccess;
+    }
+
+    public boolean isInvalidProductId() {
+        return invalidProductId;
     }
 
     private void setOperationSuccess(boolean operationSuccess) {
