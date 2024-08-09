@@ -9,7 +9,7 @@ Feature: Monitor sales and profits and Identify best-selling products.
 
     Examples:
     |owner   | int1|int2 |int3|
-    |"noor"      |27      |7|2024    |
+    |"noor"      |9      |8|2024    |
 
   Scenario Outline: View Monthly Sales and Profits
     Given the owner in Reports page
@@ -19,7 +19,7 @@ Feature: Monitor sales and profits and Identify best-selling products.
 
     Examples:
       |owner    | int1|int2 |
-      |"noor"      |7       |2024|
+      |"noor"      |8       |2024|
 
   Scenario Outline: Show Annual financial reports
     Given the owner in Reports page

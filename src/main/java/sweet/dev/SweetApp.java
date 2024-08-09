@@ -65,8 +65,11 @@ public class SweetApp {
         orderDetails.add(new OrderDetails(bread, 2)); // 2 units of bread
         Order order1 = new Order("order001", "sara", orderDetails);
         Order order2 = new Order("order002", "haya", orderDetails);
+        Order order3 = new Order("order003", "haya", orderDetails);
+
         s1.getOrderManager().addOrder(order1);
         s1.getOrderManager().addOrder(order2);
+        s1.getOrderManager().addOrder(order3);
        suppliers.add(s1);
 
        admins.add(new Admin("admin","123456"));
@@ -80,6 +83,7 @@ public class SweetApp {
         this.messageManager=new MessageManager(userManager,supplierManager);
         messageManager.sendMessage("noor","haya","hello haya", LocalDate.now());
         s1.getOrderManager().updateOrderStatus("order002","shipped",userManager);
+        s1.getOrderManager().updateOrderStatus("order003","delivered",userManager);
 
     }
 

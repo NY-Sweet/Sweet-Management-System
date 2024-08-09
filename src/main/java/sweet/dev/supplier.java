@@ -58,12 +58,7 @@ public class supplier {
 
     }
 
-    public supplier() {
-        products=new LinkedList<>();
-        this.productManager = new ProductManager(this.products);
-        this.orderManager = new OrderManager(this);
 
-    }
 
     public OrderManager getOrderManager() {
         return orderManager;
@@ -73,9 +68,6 @@ public class supplier {
     public ProductManager getProductManager() {
         return productManager;
     }
-    public LinkedList<product> getProducts() {
-        return products;
-    }
     public String getUserName() {
         return userName;
     }
@@ -84,17 +76,7 @@ public class supplier {
         return password;
     }
 
-    public String getEmail() {
-        return email;
-    }
 
-    public String getCity() {
-        return city;
-    }
-
-    public String getStreet() {
-        return street;
-    }
     public String getShopName() {
         return shopName;
     }
@@ -103,9 +85,6 @@ public class supplier {
         return epmloyeeNum;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
     public void setPassword(String password) {
         this.password = password;

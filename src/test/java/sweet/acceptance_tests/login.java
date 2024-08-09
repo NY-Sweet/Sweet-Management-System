@@ -104,6 +104,19 @@ public class login {
         assertTrue("New user successfully created ",userManager.isUserCreated());
 
     }
+
+    @When("set existing username {string}, password {string}, city={string},street={string},home number={string}, phone number={string} , email={string} and role={string}")
+    public void set_existing_username_password_city_street_home_number_phone_number_email_and_role(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role) {
+        userManager.createAccountForUser(userName,password,city,street,homeNum,phneNum,email,role);
+
+    }
+
+    @Then("user failed to create account")
+    public void user_failed_to_create_account() {
+        assertFalse(userManager.isUserCreated());
+
+    }
+
     @Then("owner created succeed")
     public void owner_created_succeed() {
         assertTrue("New supplier successfully created ",supplierManager.isSupplierCreated());
@@ -113,6 +126,47 @@ public class login {
     public void set_new_username_password_city_street_home_number_phone_number_email_role_shop_name_and_employee_number6(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role, String shopName, int emplyeeNum) {
         supplierManager.createAccountForSupplier(userName,password,city,street,homeNum,phneNum,email,role,shopName,emplyeeNum);
 
+    }
+
+    @When("set existing username {string}, password {string}, city={string},street={string},home number={string}, phone number={string} , email={string}  role={string}  shop name {string} and employee number {int}")
+    public void set_existing_username_password_city_street_home_number_phone_number_email_role_shop_name_and_employee_number(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role, String shopName, int emplyeeNum) {
+        supplierManager.createAccountForSupplier(userName,password,city,street,homeNum,phneNum,email,role,shopName,emplyeeNum);
+
+    }
+
+    @Then("owner failed to create")
+    public void owner_failed_to_create() {
+        assertFalse(supplierManager.isSupplierCreated());
+
+    }
+
+    @Given("a user has entered the username {string}")
+    public void a_user_has_entered_the_username(String username) {
+        loginManager.setEnteredUsername(username);
+    }
+
+    @When("the system retrieves the entered username")
+    public void the_system_retrieves_the_entered_username() {
+    }
+
+    @Then("the entered username should be {string}")
+    public void the_entered_username_should_be(String expectedUsername) {
+        assertEquals(expectedUsername, loginManager.getEnteredUsername());
+    }
+
+    @Given("the user has the role {string} in the system")
+    public void the_user_has_the_role_in_the_system(String role) {
+
+        loginManager.setRoleInSys(Integer.valueOf(role));
+    }
+
+    @When("the system retrieves the user's role")
+    public void the_system_retrieves_the_user_s_role() {
+    }
+
+    @Then("the role should be {string}")
+    public void the_role_should_be(String expectedRole) {
+        assertEquals(Integer.valueOf(expectedRole), loginManager.getRoleInSys());
     }
 
 }

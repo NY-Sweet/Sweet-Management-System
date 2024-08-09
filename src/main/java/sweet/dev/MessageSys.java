@@ -22,6 +22,5 @@ public class MessageSys {
     public String getReceiver() { return receiver; }
     public String getContent() { return content; }
     public LocalDate getDate() { return date; }
-    public boolean isRead() { return read; }
     public void setRead(boolean read) { this.read = read; }
 }

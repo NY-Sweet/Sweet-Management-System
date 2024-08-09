@@ -23,8 +23,5 @@ public class OrderDetails {
         return totalPrice;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-        this.totalPrice = product.getPrice() *(1-product.getDiscountPercentage())* quantity;
-    }
+
 }

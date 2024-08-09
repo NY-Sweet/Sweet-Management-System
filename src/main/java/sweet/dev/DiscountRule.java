@@ -17,11 +17,4 @@ public class DiscountRule {
         return daysBeforeExpiration;
     }
 
-    public void setPercentage(double percentage) {
-        this.percentage = percentage;
-    }
-
-    public void setDaysBeforeExpiration(int daysBeforeExpiration) {
-        this.daysBeforeExpiration = daysBeforeExpiration;
-    }
-}
+   }

@@ -26,6 +26,14 @@ public class LoginManager {
     }
 
 
+    public void setRoleInSys(Integer roleInSys) {
+        this.roleInSys = roleInSys;
+    }
+
+    public void setEnteredUsername(String enteredUsername) {
+        this.enteredUsername = enteredUsername;
+    }
+
     public boolean isValidation() {
         return validation;
     }
@@ -38,17 +46,11 @@ public class LoginManager {
         return forget;
     }
 
-    public void setForget(boolean forget) {
-        this.forget = forget;
-    }
 
     public String getEnteredUsername() {
         return enteredUsername;
     }
 
-    public void setEnteredUsername(String enteredUsername) {
-        this.enteredUsername = enteredUsername;
-    }
 
     public void setUsernameAndPasswordFromSystem(String userName, String password) {
         validation = false;

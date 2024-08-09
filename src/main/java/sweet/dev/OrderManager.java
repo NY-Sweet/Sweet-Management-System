@@ -24,9 +24,6 @@ public class OrderManager {
         return successOperation;
     }
 
-    public OrderManager() {
-        this.orders = new LinkedList<>();
-    }
 
     public OrderManager(supplier supplier) {
         this.supplier = supplier;
@@ -109,9 +106,6 @@ public class OrderManager {
     }
 
 
-    public LinkedList<Order> getOrders() {
-        return orders;
-    }
 
     public void showBestProducts() {
         successOperation=false;
@@ -272,7 +266,6 @@ public class OrderManager {
                 table.append(String.format("%-10s %-20s %-10.2f %-15s%n",
                         order.getOrderId(), order.getUsername(), order.getTotalPrice(), order.getDate()));
 
-                // Append product details
                 printProduct(order, table);
             }
         }

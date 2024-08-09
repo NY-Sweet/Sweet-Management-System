@@ -29,6 +29,7 @@ public class UserManager {
         for (user u : users) {
             if (u.getUserName().equals(userName)) {
                 flag = false;
+                userCreated = false;
                 break;
             }
         }

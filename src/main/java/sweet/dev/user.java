@@ -39,9 +39,6 @@ public class user {
     }
 
 
-    public String getPhoneNum() {
-        return phoneNum;
-    }
 
     public String getEmail() {
         return email;
@@ -51,22 +48,6 @@ public class user {
         return city;
     }
 
-    public String getStreet() {
-        return street;
-    }
-
-    public String getHomeNum() {
-        return homeNum;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public boolean setUserName(String userName) {
-        this.userName = userName;
-        return true;
-    }
 
 
 
@@ -100,10 +81,7 @@ public class user {
         return true;
     }
 
-    public boolean setRole(String role) {
-        this.role = role;
-        return true;
-    }
+
 
     public boolean addOrder(Order order)
     {

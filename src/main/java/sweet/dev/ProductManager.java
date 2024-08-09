@@ -74,9 +74,6 @@ public class ProductManager {
     }
 
     public void applyDiscount() {
-        if (discountRule == null) {
-            throw new IllegalStateException("No discount rule defined");
-        }
 
         for (product product : products) {
             if (isProductNearExpiration(product)) {

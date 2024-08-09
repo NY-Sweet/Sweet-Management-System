@@ -12,10 +12,7 @@ public class MessageManager {
 
     private static final Logger logger = Logger.getLogger(MessageManager.class.getName());
 
-    public MessageManager() {
-        this.messages = new ArrayList<>();
 
-    }
 
     public MessageManager(UserManager userManager, SupplierManager supplierManager) {
         this.userManager=userManager;

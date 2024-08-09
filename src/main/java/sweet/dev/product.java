@@ -28,9 +28,7 @@ public class product {
         this.feedbacks = new LinkedList();
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+
 
     public void setName(String name) {
         this.name = name;
