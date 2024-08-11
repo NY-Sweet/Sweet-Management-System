@@ -1,11 +1,14 @@
 package sweet.dev;
 
 import io.cucumber.java.bs.A;
+import menus.PrettyFormatter;
+import menus.adminView;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 public class AdminManager {
@@ -20,6 +23,11 @@ public class AdminManager {
         this.admins = admins;
         this.supplierManager = supplierManager;
         this.userManager = userManager;
+
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.setUseParentHandlers(false);
+        logger.addHandler(consoleHandler);
     }
 
     public Admin getTheAdmin(String string) {

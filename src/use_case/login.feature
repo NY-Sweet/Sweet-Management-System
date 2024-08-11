@@ -7,7 +7,7 @@ Feature: log in user and sign up to user
     |name|pass|
     |"sara"|"123456"|
     |"noor"|"123456"|
-
+    |"admin"|"123456"|
 
 
   Scenario: invalid user name
