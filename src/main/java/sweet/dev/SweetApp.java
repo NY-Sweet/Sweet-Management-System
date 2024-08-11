@@ -101,9 +101,6 @@ public class SweetApp {
         isLogged = logged;
     }
 
-    public boolean isLogged() {
-        return isLogged;
-    }
 
     public LoginManager getLoginManager() {
         return loginManager;
@@ -194,7 +191,7 @@ public class SweetApp {
     }
 
     public void run() {
-        loginView loginView = new loginView( loginManager,userManager, supplierManager);
+        loginView loginView = new loginView( loginManager,userManager, supplierManager,messageManager);
         loginView.displayMenu();
     }
 

@@ -147,8 +147,6 @@ public class supplier {
 
         } else
             wrongOldPass = true;
-
-
     }
 
 }

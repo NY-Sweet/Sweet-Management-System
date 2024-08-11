@@ -15,11 +15,12 @@ public class loginView {
 
     private final LoginManager loginManager;
     private final UserManager userManager;
+    private final MessageManager messageManager;
     private final SupplierManager supplierManager;
     private final Scanner scanner;
     private final Logger logger;
 
-    public loginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager) {
+    public loginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager,MessageManager messageManager) {
         this.loginManager = loginManager;
         this.userManager = userManager;
         this.supplierManager = supplierManager;
@@ -28,8 +29,9 @@ public class loginView {
 
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(new PrettyFormatter());
-        logger.setUseParentHandlers(false);  // Disable the default console handler
+        logger.setUseParentHandlers(false);
         logger.addHandler(consoleHandler);
+        this.messageManager=messageManager;
     }
 
     public void displayMenu() {
@@ -76,7 +78,7 @@ public class loginView {
         if(loginManager.getRoleInSys()==1)
         {
             supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
-            ownerView ownerView=new ownerView(supplier,userManager);
+            ownerView ownerView=new ownerView(supplier,userManager,messageManager);
             ownerView.displayMenu();
         }
 
