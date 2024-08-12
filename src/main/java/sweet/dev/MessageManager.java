@@ -1,7 +1,10 @@
 package sweet.dev;
 
+import menus.PrettyFormatter;
+
 import java.time.LocalDate;
 import java.util.*;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 public class MessageManager {
@@ -18,6 +21,11 @@ public class MessageManager {
         this.userManager=userManager;
         this.supplierManager=supplierManager;
         this.messages = new ArrayList<>();
+
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.setUseParentHandlers(false);  // Disable the default console handler
+        logger.addHandler(consoleHandler);
     }
 
 

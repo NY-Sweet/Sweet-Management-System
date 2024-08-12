@@ -74,7 +74,7 @@ public class SweetApp {
 
        admins.add(new Admin("admin","123456"));
 
-       this.loginManager = new LoginManager(users, suppliers);
+       this.loginManager = new LoginManager(users, suppliers,admins);
         this.userManager = new UserManager(users);
         this.supplierManager = new SupplierManager(suppliers);
 
@@ -101,9 +101,6 @@ public class SweetApp {
         isLogged = logged;
     }
 
-    public boolean isLogged() {
-        return isLogged;
-    }
 
     public LoginManager getLoginManager() {
         return loginManager;
@@ -194,7 +191,7 @@ public class SweetApp {
     }
 
     public void run() {
-        loginView loginView = new loginView( loginManager,userManager, supplierManager);
+        loginView loginView = new loginView( loginManager,userManager, supplierManager,messageManager,adminManager);
         loginView.displayMenu();
     }
 

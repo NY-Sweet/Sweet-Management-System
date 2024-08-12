@@ -15,21 +15,25 @@ public class loginView {
 
     private final LoginManager loginManager;
     private final UserManager userManager;
+    private final MessageManager messageManager;
     private final SupplierManager supplierManager;
     private final Scanner scanner;
     private final Logger logger;
+    private AdminManager adminManager;
 
-    public loginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager) {
+    public loginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager,MessageManager messageManager,AdminManager adminManager) {
         this.loginManager = loginManager;
         this.userManager = userManager;
         this.supplierManager = supplierManager;
+        this.adminManager=adminManager;
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger(loginView.class.getName());
 
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(new PrettyFormatter());
-        logger.setUseParentHandlers(false);  // Disable the default console handler
+        logger.setUseParentHandlers(false);
         logger.addHandler(consoleHandler);
+        this.messageManager=messageManager;
     }
 
     public void displayMenu() {
@@ -76,8 +80,17 @@ public class loginView {
         if(loginManager.getRoleInSys()==1)
         {
             supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
-            ownerView ownerView=new ownerView(supplier,userManager);
+            ownerView ownerView=new ownerView(supplier,userManager,messageManager);
             ownerView.displayMenu();
+        }
+
+        if(loginManager.getRoleInSys()==2)
+        {
+
+            Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
+            adminView adminView=new adminView(supplierManager,userManager,adminManager);
+            adminView.displayMenu();
+
         }
 
 

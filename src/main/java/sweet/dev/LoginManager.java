@@ -12,6 +12,7 @@ public class LoginManager {
     private String enteredUsername;
     private List<user> users;
     private List<supplier> suppliers;
+    private List<Admin> admins;
     private String LoggedInSupplier;
     private String LoggedInUser;
 
@@ -20,9 +21,10 @@ public class LoginManager {
     private Map<String, String> resetTokens = new HashMap<>();
 
 
-    public LoginManager(List<user> users, List<supplier> suppliers) {
+    public LoginManager(List<user> users, List<supplier> suppliers, List<Admin> admins) {
         this.users = users;
         this.suppliers = suppliers;
+        this.admins=admins;
     }
 
 
@@ -69,6 +71,13 @@ public class LoginManager {
                 LoggedInSupplier = userName;
                 enteredUsername=userName;
                 roleInSys = 1;
+            }
+        }
+        for (Admin admin : admins) {
+            if (admin.getAdminName().equals(userName) && admin.getPassword().equals(password)) {
+                validation = true;
+                enteredUsername=userName;
+                roleInSys = 2;
             }
         }
     }
