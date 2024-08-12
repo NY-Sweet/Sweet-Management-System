@@ -14,12 +14,25 @@ Feature: Admin account manage accounts
      | newUsername | password | city     |street         | homeNumber     |  phoneNumber  | email            |role|
      | "adam"      |"54321"   | "Nablus" |"Nablus street"|"54G"           |  "0594507933" | "haya@gmail.com" |"u" |
 
-  Scenario Outline: admin  delete account
+  Scenario Outline: admin  delete User account
     When  the admin set  username <newUsername> to delete this user
     Then the user deleted and a message displayed
     Examples:
    | newUsername |
    | "haya"      |
+
+  Scenario Outline: admin  delete account not existed
+    When  the admin set  username <newUsername> to delete this user
+    Then a failed message displayed
+    Examples:
+      | newUsername |
+      | "FOFO"      |
+  Scenario Outline: admin  delete Supplier  account
+    When  the admin set  username <newUsername> to delete this user
+    Then the Supplier deleted and a message displayed
+    Examples:
+      | newUsername |
+      | "noor"      |
 
   Scenario: admin show supplier
     When the admin set option to show supplier

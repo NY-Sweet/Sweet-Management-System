@@ -34,7 +34,10 @@ Feature:  Manage personal accounts
       |"new_email"|
       |"yaradaraghmeh056@gmail.com"|
 
-  Scenario: change user password
+  Scenario Outline: change user password
     When the user select edit password "p"
     And the user enters old password  "old Password" new password "New Password" and confirm password "Confirm Password"
     Then the system validates the inputs and sets the new password
+    Examples:
+      | "old Password" | "New Password" | "Confirm Password" |
+      | "123456789"    | "123"          | "123"              |

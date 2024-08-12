@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 public class user {
 
-    private  String userName;
+    public  String userName;
     private  String password;
     private String phoneNum;
     private String email;
@@ -24,6 +24,10 @@ public class user {
         this.homeNum = homeNum;
         this.role=role;
         this.orders=new LinkedList<>();
+    }
+
+    public LinkedList<Order> getOrders() {
+        return orders;
     }
 
     public user() {

@@ -57,35 +57,21 @@ public class UserManager {
         return null;
     }
     public boolean isValidPassword(String OldPassword, String NewPassword, String confirmPassword ,user User) {
-        if (OldPassword == null || NewPassword == null || confirmPassword == null) {
-            return false;
-        } else if (OldPassword.equals(User.getPassword())) {
+         if (OldPassword.equals(User.getPassword())) {
             if (NewPassword.equals(confirmPassword)) {
                 return true;
             }
         }
         return true ;
     }
-    public static boolean isValidEmail(String email) {
 
-        if (email == null || email.isEmpty()) {
-            return false;
-        }
-
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        Pattern pattern = Pattern.compile(emailRegex);
-
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
     public boolean deleteUser (String UserName){
         user userToRemove =  getTheUser(UserName);
         if (userToRemove != null) {
             users.remove(userToRemove);
             return true;
         }
-        return false ;
-
+        return false;
     }
     private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
     public boolean DisplayAllUsers (){

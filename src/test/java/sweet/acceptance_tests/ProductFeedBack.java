@@ -4,6 +4,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import sweet.dev.SweetApp;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ProductFeedBack {
@@ -19,5 +20,18 @@ public class ProductFeedBack {
     public void the_feedback_is_sent_and_a_confirmation_message_appears() {
      assertTrue("Succed",obj.addFeedbackforaProductByitsId(productid,FeedBackContent));
     }
+
+    @When("the user enters  product ID {string} and this product is not asigned , and feedback content {string}")
+    public void the_user_enters_product_id_and_this_product_is_not_asigned_and_feedback_content(String string, String string2) {
+        productid = string;
+        FeedBackContent = string2;
+    }
+    @Then("a failed message appears")
+    public void a_failed_message_appears() {
+        assertFalse("Failed",obj.addFeedbackforaProductByitsId(productid,FeedBackContent));
+
+    }
+
+
 
 }

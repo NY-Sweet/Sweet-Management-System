@@ -11,15 +11,6 @@ public class Admin {
         return AdminName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public boolean AdminPermession() {
-        return true;
-    }
 }
 
 

@@ -17,19 +17,13 @@ public class RecipeManager {
     public RecipeManager(  List <user> users) {
         this.users = users;
     }
+
     public  void postRecipe(Recipe recipe) {
-        if (recipe.validate()) {
-            NotValidatedRecipes.add(recipe);
-
-        } else {
-            Logger logger = null;
-            logger.setLevel(Level.INFO);
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setLevel(Level.INFO);
-
-            logger.warning("The recipe has not been validated ");
-        }
-
+        NotValidatedRecipes.add(recipe);
+        logger.setLevel(Level.INFO);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setLevel(Level.INFO);
+        logger.warning("The recipe has not been validated ");
     }
 
 
@@ -60,39 +54,31 @@ public class RecipeManager {
 
         for (Recipe recipe : recipes) {
             boolean matchesAllergies = true;
-
             for (String allergen : allergies) {
                 if (recipe.getIngredients().contains(allergen)) {
                     matchesAllergies = false;
                     break;
-                }
-            }
-
+                }}
             if (matchesAllergies) {
                 filteredRecipes.add(recipe);
             }
         }
-
         for (Recipe recipe : filteredRecipes) {
 
             logger.info(recipe.toString());
         }
         return true;
-
     }
     public  boolean filterRecipesByDietaryRestrictions(List<Recipe> recipes, Set<String> dietaryRestrictions) {
         List<Recipe> filteredRecipes = new ArrayList<>();
-
         for (Recipe recipe : recipes) {
             boolean matchesDietaryRestrictions = true;
-
             for (String restriction : dietaryRestrictions) {
                 if (!matchesDietaryRestriction(recipe, restriction)) {
                     matchesDietaryRestrictions = false;
                     break;
                 }
             }
-
             if (matchesDietaryRestrictions) {
                 filteredRecipes.add(recipe);
             }

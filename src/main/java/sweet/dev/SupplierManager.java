@@ -28,7 +28,6 @@ public class SupplierManager {
         for (supplier s : suppliers) {
             if (s.getUserName().equals(userName)) {
                 flag = false;
-                supplierCreated=false;
                 break;
             }
         }
@@ -87,6 +86,7 @@ public class SupplierManager {
         return null;
 
     }
+
 }
 
 

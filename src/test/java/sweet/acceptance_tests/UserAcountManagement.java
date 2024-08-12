@@ -3,7 +3,6 @@ package sweet.acceptance_tests;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import sweet.dev.SweetApp;
-import sweet.dev.UserManager;
 import sweet.dev.user;
 
 import static org.junit.Assert.assertFalse;
@@ -13,7 +12,7 @@ public class UserAcountManagement {
     SweetApp obj = new SweetApp();
     String x;
     String NewCityName;
-    user user = new user();
+    user user1 = new user();
     @When("the user select edit city {string}")
     public void the_user_select_edit_city(String string) {
         x = string;
@@ -101,13 +100,14 @@ public class UserAcountManagement {
     String ConfirmPassword;
     @When("the user enters old password  {string} new password {string} and confirm password {string}")
     public void the_user_enters_old_password_new_password_and_confirm_password(String string, String string2, String string3) {
+      user1.setPassword("123456789");
         OldPassword = string;
         NewPassword = string2;
         ConfirmPassword = string3;
     }
     @Then("the system validates the inputs and sets the new password")
     public void theSystemValidatesTheInputsAndSetsTheNewPassword() {
-        assertTrue("Success",obj.getUserManager().isValidPassword(OldPassword,NewPassword,ConfirmPassword,obj.users.get(0)));
+        assertTrue("Success",obj.getUserManager().isValidPassword(OldPassword,NewPassword,ConfirmPassword, user1));
         assertTrue("Success",obj.users.get(0).setPassword(NewPassword));
     }
 

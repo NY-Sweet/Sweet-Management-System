@@ -4,6 +4,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import sweet.dev.SweetApp;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class AdminManageAccounts {
@@ -57,6 +58,15 @@ public class AdminManageAccounts {
     public void the_user_deleted_and_a_message_displayed() {
         assertTrue("Succeed",obj.DeleteAccount(UserNametobedeleted));
     }
+    @Then("a failed message displayed")
+    public void a_failed_message_displayed() {
+        assertFalse("Succeed",obj.DeleteAccount(UserNametobedeleted));
+    }
+    @Then("the Supplier deleted and a message displayed")
+    public void the_supplier_deleted_and_a_message_displayed() {
+        assertTrue("Succeed",obj.DeleteAccount(UserNametobedeleted));
+    }
+
 
     @When("the admin set option to show supplier")
     public void the_admin_set_option_to_show_supplier() {

@@ -45,7 +45,7 @@ Feature: Post personal dessert creations, Search, Browse, Filter
     Then Display all recipes based on dietary
     Examples:
       |foodDietary|
-      |"eggs"     |
+      |"egge"     |
 
   Scenario Outline: Feedback to recipes
     When the user enters the recipe Name <Name> and feedback content <content>

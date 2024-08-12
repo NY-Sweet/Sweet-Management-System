@@ -45,6 +45,7 @@ public class RecipeManage {
         obj.Messageaftervaledationoftherecipe();
         assertTrue("success",obj.isMessageDisplayedforVlidationaRecipe());
         obj.clearMessageDisplayedAfterRecipeValidation ();
+        obj.getRecipemanager().ValidateRecipe(NewRecipe);
     }
 
     @When("the user select Browse Recipe")
@@ -60,6 +61,7 @@ public class RecipeManage {
 
     @When("the user enter the {string}")
     public void the_user_enter_the(String string) {
+
         Dtr= string ;
     }
 
@@ -71,7 +73,7 @@ public class RecipeManage {
     @Then("Display all recipes based on allergies")
     public void display_all_recipes_based_on_allergies() {
         Set<String> allergies = new HashSet<String>();
-        allergies.add("Milk");
+        allergies.add(Dtr);
         assertTrue("succeed", obj.getRecipemanager().filterRecipesByAllergies(obj.getRecipemanager().getValidatedRecipes(),allergies));
     }
 
