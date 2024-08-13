@@ -36,6 +36,9 @@ public class Recipe {
         this.getFeedbacks();
         return true;
     }
+    public void DeleteFeedback(String feedback) {
+        feedbacks.remove(feedback);
+    }
 
     public String getName() {
         return name;
@@ -43,13 +46,6 @@ public class Recipe {
 
     @Override
     public String toString() {
-        logger.info("Recipe Details:");
-        logger.info("  Name: " + name);
-        logger.info("  Number of Ingredients: " + numberOfIngredients);
-        logger.info("  Ingredients: " + this.getIngredients());
-        logger.info("  Steps: " + steps);
-        logger.info("  Publisher: " + Publisher);
-        logger.info("  Feedbacks: " + this.getFeedbacks());
         return "Recipe{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
@@ -66,6 +62,10 @@ public class Recipe {
          System.out.println(i+ "   "+feedback);
         }
 
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

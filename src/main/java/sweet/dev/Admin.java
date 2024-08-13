@@ -10,17 +10,13 @@ public class Admin {
     public String getAdminName() {
         return AdminName;
     }
-    public void setAdminName(String adminName) {
-        AdminName = adminName;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
+
     public boolean AdminPermession() {
         return true;
+    }
+
+    public Object getPassword() {
+        return password;
     }
 }
 
