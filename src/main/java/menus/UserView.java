@@ -48,7 +48,8 @@ public class UserView {
                 ║ 4. Messaging               ║
                 ║ 5. Give A feedBack         ║
                 ║ 6. Account Management      ║
-                ║ 7. Go Back                 ║
+                ║ 7.Find A suitable Recipe   ║
+                ║ 8. Go Back                 ║
                 ╚════════════════════════════╝
                 """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
             logger.info(menuOptions);
@@ -74,12 +75,50 @@ public class UserView {
                     UserAccountManagement();
                     break;
                 case "7":
+                    findarecipe();
+                    break;
+                case "8":
                     logger.info("Exiting User menu");
                     return;
                 default:
                     logger.warning("Invalid menu choice: " + choice);
                     logger.info("Invalid choice. Please select a valid option.");
             }
+        }
+    }
+    private void findarecipe() {
+        while (true) {
+            String menuOptions = ANSI_PURPLE + """
+                ╔══════════════════════════════════════════╗
+                ║                 Recipes                  ║
+                ╠══════════════════════════════════════════╣
+                ║ 1. Find A Recipe Based On Dietary        ║
+                ║ 2. Find A Recipe Based On Alergry        ║
+                ║ 3. Go Back                               ║
+                ║                                          ║
+                ╚══════════════════════════════════════════╝
+                """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
+            logger.info(menuOptions);
+            String choice = scanner.nextLine();
+            switch (choice) {
+                case "1":
+                    logger.info("Enter the Dietary Your looking for");
+                    String dietary = scanner.nextLine();
+                    recipeManager.filterRecipesByDietaryRestrictions(recipeManager.getValidatedRecipes(),dietary);
+                    break;
+                case "2":
+                    logger.info("Enter the Alergry Your looking for");
+                    String alergry = scanner.nextLine();
+                    Set<String> Alergry = new HashSet<>();
+                    Alergry.add(alergry);
+                    recipeManager.filterRecipesByAllergies(recipeManager.getValidatedRecipes(),Alergry);
+                    break;
+                case "3":
+                    return;
+                default:
+                    logger.warning("Invalid menu choice: " + choice);
+            }
+
         }
     }
 
@@ -295,6 +334,7 @@ public class UserView {
         }
 
         Recipe recipe= new Recipe(recipeName,ingrediantsNumber, ingredients.toString(),steps.toString(),User.getUserName());
+        recipe.setId(recipeManager.getValidatedRecipes().size()+recipeManager.getnotValidatedRecipes().size());
         recipeManager.postRecipe(recipe);
 
     }

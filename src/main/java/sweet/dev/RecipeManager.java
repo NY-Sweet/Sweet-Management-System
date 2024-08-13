@@ -64,46 +64,59 @@ public class RecipeManager {
         return results;
 
     }
-    public  boolean filterRecipesByAllergies(List<Recipe> recipes, Set<String> allergies) {
+    public boolean filterRecipesByAllergies(List<Recipe> recipes, Set<String> allergies) {
         List<Recipe> filteredRecipes = new ArrayList<>();
 
         for (Recipe recipe : recipes) {
-            boolean matchesAllergies = true;
+            boolean hasAllergy = false;
             for (String allergen : allergies) {
-                if (recipe.getIngredients().contains(allergen)) {
-                    matchesAllergies = false;
-                    break;
-                }}
-            if (matchesAllergies) {
-                filteredRecipes.add(recipe);
-            }
-        }
-        for (Recipe recipe : filteredRecipes) {
-
-            logger.info(recipe.toString());
-        }
-        return true;
-    }
-    public  boolean filterRecipesByDietaryRestrictions(List<Recipe> recipes, Set<String> dietaryRestrictions) {
-        List<Recipe> filteredRecipes = new ArrayList<>();
-        for (Recipe recipe : recipes) {
-            boolean matchesDietaryRestrictions = true;
-            for (String restriction : dietaryRestrictions) {
-                if (!matchesDietaryRestriction(recipe, restriction)) {
-                    matchesDietaryRestrictions = false;
+                if (recipe.getIngredients().toLowerCase().contains(allergen.toLowerCase())) {
+                    hasAllergy = true;
                     break;
                 }
             }
-            if (matchesDietaryRestrictions) {
+            if (!hasAllergy) {
                 filteredRecipes.add(recipe);
             }
         }
-        for (Recipe recipe : filteredRecipes) {
 
-            logger.info(recipe.toString());
+        logger.info("\nHere are the recipes that do NOT contain any of your allergies:\n");
+        if (filteredRecipes.isEmpty()) {
+            logger.info("Unfortunately, no recipes match your dietary restrictions.\n");
+        } else {
+            for (Recipe recipe : filteredRecipes) {
+                logger.info(recipe.toString() + "\n");
+            }
         }
+
         return true;
     }
+
+    public boolean filterRecipesByDietaryRestrictions(List<Recipe> recipes, String ingredient) {
+        List<Recipe> filteredRecipes = new ArrayList<>();
+
+        for (Recipe recipe : recipes) {
+            String[] ingredients = recipe.getIngredients().split(" ");
+
+            for (String recipeIngredient : ingredients) {
+                if (recipeIngredient.equalsIgnoreCase(ingredient)) {
+                    filteredRecipes.add(recipe);
+                    break;
+                }
+            }
+        }
+        logger.info("\nHere are the recipes that match your dietary restrictions:\n");
+        if (filteredRecipes.isEmpty()) {
+            logger.info("Unfortunately, no recipes match your dietary restrictions.\n");
+        } else {
+            for (Recipe recipe : filteredRecipes) {
+                logger.info(recipe.toString() + "\n");
+            }
+        }
+
+        return true;
+    }
+
 
 
     private  boolean matchesDietaryRestriction(Recipe recipe, String restriction) {
@@ -158,7 +171,14 @@ public class RecipeManager {
         if (feedbacks == null || feedbacks.isEmpty()) {
             return "No feedbacks";
         }
-        return String.join(", ", feedbacks);
+
+        StringBuilder formattedFeedbacks = new StringBuilder();
+        int index = 0;
+        for (String feedback : feedbacks) {
+            formattedFeedbacks.append(index).append(". ").append(feedback).append("\n");
+            index++;
+        }
+        return formattedFeedbacks.toString();
     }
 
     public boolean deleteRecipeByIndex(int index){

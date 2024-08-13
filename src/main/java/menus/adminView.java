@@ -75,6 +75,7 @@ public class adminView {
                     adminManager.showStatisticsOnRegisteredUsersByCity();
                     break;
                 case "5":
+                    ManageFeeds();
                     break;
                 case "6":
                     ManageContent();
@@ -85,6 +86,24 @@ public class adminView {
                     logger.info("Invalid choice. Please try again.");
             }
         }
+    }
+
+    private void ManageFeeds() {
+        logger.info("Heres the recipes in our system and their feedbacks ");
+        recipeManager.ShowAllRecipes();
+        logger.info(" enter the recipe Id you want to modifiy its feeds");
+        int recipeId =Integer.parseInt(scanner.nextLine());
+        List<String> feeds = recipeManager.searchRecipeById(recipeId).getFeedbacks();
+        int i=0;
+        for (String feed : feeds) {
+            logger.info(i+".  "+feed);
+            i++;
+        }
+        logger.info("Enter the FeedbacId you want to delete");
+        int feedbacId = Integer.parseInt(scanner.nextLine());
+        recipeManager.DeleteaFeedofaRecipe(recipeId,feedbacId);
+        logger.info(" Deleted the FeedbacId " + feedbacId);
+
     }
 
     private void ManageUsersAccounts() {
@@ -312,9 +331,4 @@ public class adminView {
         }
 
     }
-
-
-
-
-
 }

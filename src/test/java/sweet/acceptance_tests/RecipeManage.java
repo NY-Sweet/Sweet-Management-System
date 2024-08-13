@@ -79,8 +79,8 @@ public class RecipeManage {
 
     @Then("Display all recipes based on dietary")
     public void display_all_recipes_based_on_dietary() {
-        Set<String> Dietray = new HashSet<String>();
-        Dietray.add("Milk");
+        String Dietray = new String();
+        Dietray = "Milk";
         assertTrue("succeed", obj.getRecipemanager().filterRecipesByDietaryRestrictions(obj.getRecipemanager().getValidatedRecipes(), Dietray));
 
     }
