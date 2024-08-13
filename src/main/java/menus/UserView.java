@@ -2,7 +2,10 @@ package menus;
 import sweet.dev.UserManager;
 import sweet.dev.*;
 
+import java.awt.*;
+import java.time.LocalDate;
 import java.util.*;
+import java.util.List;
 import java.util.function.Supplier;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -14,12 +17,14 @@ public class UserView {
     private static final String CHOICE_PROMPT = ANSI_WHITE + "Enter the number of your choice: " + ANSI_RESET;
     private final Scanner scanner;
     private final Logger logger;
-
+    private MessageManager messageManager;
     private user User;
     private UserManager userManager;
     private  RecipeManager recipeManager;
     private  SupplierManager supplierManager ;
-    public UserView(user User,UserManager userManager ,RecipeManager recipeManager ,SupplierManager supplierManager) {
+
+
+    public UserView(user User,UserManager userManager ,RecipeManager recipeManager ,SupplierManager supplierManager,MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger("UserView");
         logger.setUseParentHandlers(false);
@@ -30,6 +35,7 @@ public class UserView {
         this.User = User;
         this.supplierManager = supplierManager;
         this.recipeManager = recipeManager;
+        this.messageManager = messageManager;
     }
 
     public void displayMenu() {
@@ -80,6 +86,7 @@ public class UserView {
     }
 
     private void UserAccountManagement() {
+
         while (true) {
         String menuOptions = ANSI_PURPLE + """
                 ╔════════════════════════════╗
@@ -98,28 +105,54 @@ public class UserView {
                 logger.info("1.UserName: " + User.getUserName());
                 logger.info("2.Password: " + User.getPassword());
                 logger.info("3.Email: " + User.getEmail());
-                logger.info("4. City"+User.getCity());
+                logger.info("4. City:  "+User.getCity());
+                logger.info("5.Phone Number: "+ User.getPhoneNum());
+                logger.info("6.Home Number: " + User.getHomeNum());
+                logger.info("7.Street: " + User.getStreet());
+                break;
             case "2":
                 logger.info("Enter the Number of info you want to update ");
                 int number = scanner.nextInt();
+                scanner.nextLine();
                 switch (number) {
                     case 1:
                         logger.info("Enter Your New User Name");
                         String newUserName = scanner.nextLine();
                         User.userName=newUserName;
+                        break;
 
                     case 2:
                         logger.info("Enter Your New Password");
                         String newPassword = scanner.nextLine();
                         User.setPassword(newPassword);
+                        break;
                     case 3 :
                         logger.info("Enter Your New Email");
                         String newEmail = scanner.nextLine();
                         User.setEmail(newEmail);
+                        break;
                     case 4 :
                         logger.info("Enter Your New City");
                         String newCity = scanner.nextLine();
                         User.setCity(newCity);
+                        break;
+                    case 5:
+                        logger.info("Enter Your New Phone Number");
+                        String newPhone = scanner.nextLine();
+                        User.setPhoneNum(newPhone);
+                        break;
+                    case 6:
+                        logger.info("Enter Your New Home Number");
+                        String newHome = scanner.nextLine();
+                        User.setHomeNum(newHome);
+                        break;
+
+                    case 7:
+                        logger.info("Enter Your New Street");
+                        String newStreet = scanner.nextLine();
+                        User.setStreet(newStreet);
+                        break;
+
                     default:
                         logger.warning("Invalid menu choice: " + choice);
                         logger.info("Invalid choice. Please select a valid option.");
@@ -178,11 +211,14 @@ public class UserView {
                 }
                 break;
             case 2 :
+                int RecipeID;
+                String feedbackContent2;
                 recipeManager.ShowAllRecipes();
                 logger.info("Enter the Recipe id you want give a feedback for ");
-                int RecipeID = scanner.nextInt();
-                logger.info("Enter the feedback Content ");
-                String feedbackContent2 = scanner.nextLine();
+                RecipeID = scanner.nextInt();
+                scanner.nextLine();
+                logger.info("Enter the feedback Content");
+                feedbackContent2 = scanner.nextLine();
                 recipeManager.searchRecipeById(RecipeID).addFeedback(feedbackContent2);
                 break;
             case 3 :
@@ -191,6 +227,42 @@ public class UserView {
     }
 
     private void Messaging() {
+        String menuOptions = ANSI_PURPLE + """
+            ╔════════════════════════════════════╗
+            ║        Message Management Menu     ║
+            ╠════════════════════════════════════╣
+            ║ 1. Send a Message                  ║
+            ║ 2. View Inbox                      ║
+            ║ 3. Go Back                         ║
+            ╚════════════════════════════════════╝
+            """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
+        logger.info(menuOptions);
+        String choice = scanner.nextLine();
+
+        switch (choice) {
+            case "1":
+                logger.info("Enter receiver username: ");
+                String receiver = scanner.nextLine();
+                logger.info("Enter message content: ");
+                String content = scanner.nextLine();
+                LocalDate date = LocalDate.now();
+                boolean success = messageManager.sendMessage(User.getUserName(), receiver, content, date);
+                if (success) {
+                    logger.info("Message sent successfully.");
+                } else {
+                    logger.info("Failed to send message. Invalid receiver.");
+                }
+                break;
+            case "2":
+                logger.info("Viewing inbox...");
+                messageManager.viewInbox(User.getUserName());
+                break;
+            case "3":
+                logger.info("Going back to the previous menu...");
+                break;
+            default:
+                logger.info("Invalid choice. Please try again.");
+        }
     }
 
     private void BrowseRecipes() {
@@ -213,6 +285,7 @@ public class UserView {
         logger.info("Enter Recipe Steps ");
         String steps = scanner.nextLine();
         Recipe recipe= new Recipe(recipeName,ingrediantsNumber, ingredients.toString(),steps,User.getUserName());
+        recipe.setId(recipeManager.getValidatedRecipes().size()+1);
         recipeManager.postRecipe(recipe);
 
     }

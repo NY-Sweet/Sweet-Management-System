@@ -95,7 +95,15 @@ public class RecipeManager {
         return !recipe.getIngredients().contains(restriction);
     }
     public Recipe searchRecipeById(int id) {
-        for (Recipe recipe : Validatedrecipes) {
+        for (Recipe recipe : this.Validatedrecipes) {
+            if (recipe.getId() == id) {
+                return recipe;
+            }
+        }
+        return null;
+    }
+    public Recipe searchRecipeByIdNotvalidated(int id) {
+        for (Recipe recipe : this.NotValidatedRecipes) {
             if (recipe.getId() == id) {
                 return recipe;
             }
@@ -103,9 +111,10 @@ public class RecipeManager {
         return null;
     }
     public boolean ShowAllRecipes (){
+        logger.info("Recipe Id "+" "+" Recipe Name "+" "+"Feedbacks "+" "+"Ingrediants");
         for (Recipe recipe : Validatedrecipes) {
 
-            logger.info(recipe.toString());
+            logger.info(recipe.getId() + " " + recipe.getName()+" "+recipe.getFeedbacks()+" "+recipe.getIngredients());
         }
         return true;
     }
