@@ -191,6 +191,9 @@ public class UserView {
     }
 
     private void Messaging() {
+
+
+
     }
 
     private void BrowseRecipes() {
