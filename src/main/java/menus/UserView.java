@@ -203,19 +203,30 @@ public class UserView {
         String recipeName = scanner.nextLine();
         logger.info("Enter Recipe Ingrediants Number");
         int ingrediantsNumber = scanner.nextInt();
-
+        scanner.nextLine();
         StringBuilder ingredients = new StringBuilder();
+        logger.info("Enter Recipe Ingredients ");
         for (int i = 0; i < ingrediantsNumber; i++) {
-            logger.info("Enter Recipe Ingredients ");
-             ingredients.append(scanner.nextLine());
+            String ingredient=scanner.nextLine();
+            ingredients.append(ingredient);
+        }
+        logger.info("Enter Number Recipe's Steps");
+        int stepsNumber = scanner.nextInt();
+        scanner.nextLine();
+
+        StringBuilder steps = new StringBuilder();
+        logger.info("Enter Recipe Steps ");
+        for (int i = 0; i < stepsNumber; i++) {
+            String step=scanner.nextLine();
+
+            steps.append(step);
         }
 
-        logger.info("Enter Recipe Steps ");
-        String steps = scanner.nextLine();
-        Recipe recipe= new Recipe(recipeName,ingrediantsNumber, ingredients.toString(),steps,User.getUserName());
+        Recipe recipe= new Recipe(recipeName,ingrediantsNumber, ingredients.toString(),steps.toString(),User.getUserName());
         recipeManager.postRecipe(recipe);
 
     }
+
 
     private void PurchaseDesserts() {
       logger.info("Our Shops :");
