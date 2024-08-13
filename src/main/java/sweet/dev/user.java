@@ -54,9 +54,6 @@ public class user {
         return street;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 
 
     public String getEmail() {
@@ -73,9 +70,6 @@ public class user {
     public boolean setPassword(String password) {
         this.password = password;
         return true;
-    }
-    public void sethomeNum (String homeNum){
-        this.homeNum=homeNum;
     }
 
     public boolean setPhoneNum(String phoneNum) {

@@ -87,7 +87,7 @@ public class ownerView {
         for (product product:products)
         {
             logger.info(product.getId()+"       " + product.getName());
-            product.showFeedbaks();
+            logger.info(product.formatFeedbacks());
         }
 
     }

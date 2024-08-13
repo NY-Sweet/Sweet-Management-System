@@ -311,7 +311,7 @@ public class UserView {
         supplier Supplier = supplierManager.getTheSupplierByUsingShopName(shopName);
         ProductManager prodManager= Supplier.getProductManager();
 
-        prodManager.showProducts();
+        prodManager.showProductsForCustomer();
         LinkedList<OrderDetails> orderDetailsList = new LinkedList<>();
         while (true) {
             logger.info("Enter the product ID to add to your order or type 'done' to finish: ");

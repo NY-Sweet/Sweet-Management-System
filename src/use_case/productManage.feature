@@ -155,6 +155,6 @@ Feature: add delete edit and discount
 
 
 
-
-
-
+  Scenario: Customer views all available products
+    When the customer requests to view all products from shop "sweetee"
+    Then the product details are displayed with discounts and feedbacks

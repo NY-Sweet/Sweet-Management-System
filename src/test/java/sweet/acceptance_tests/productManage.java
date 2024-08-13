@@ -14,11 +14,11 @@ import static org.junit.Assert.assertTrue;
 public class productManage {
     public SweetApp obj;
     private supplier owner;
-    private String option;
+    private boolean result;
 
-    public LoginManager loginManager;
-    public UserManager userManager;
-    public SupplierManager supplierManager;
+    private LoginManager loginManager;
+    private UserManager userManager;
+    private SupplierManager supplierManager;
 
     private static final Logger logger = Logger.getLogger(productManage.class.getName());
     public productManage(SweetApp obj) {
@@ -255,6 +255,16 @@ public class productManage {
     public void the_discount_rule_applied_successfully_and_a_message_is_displayed() {
         assertTrue(  owner.getProductManager().showDiscountProducts());
 
+    }
+    @When("the customer requests to view all products from shop {string}")
+    public void the_customer_requests_to_view_all_products_from_shop(String string) {
+        owner=supplierManager.getTheSupplierByUsingShopName(string);
+        result=owner.getProductManager().showProductsForCustomer();
+    }
+
+    @Then("the product details are displayed with discounts and feedbacks")
+    public void the_product_details_are_displayed_with_discounts_and_feedbacks() {
+       assertTrue(result);
     }
 
 

@@ -121,15 +121,17 @@ public class product {
         return true;
     }
 
-    public boolean showFeedbaks (){
-        int count =1;
-        logger.info("Number of Feedbacks you've got: "+ feedbacks.size());
-        for (final String feedback : feedbacks) {
-           logger.info(count+"_ "+feedback );
+    public String formatFeedbacks() {
+        if (feedbacks == null || feedbacks.isEmpty()) {
+            return "No feedbacks";
+        }
+        StringBuilder feedbackBuilder = new StringBuilder();
+        int count = 1;
+        for (String feedback : feedbacks) {
+            feedbackBuilder.append(count).append(". ").append(feedback).append(".....");
             count++;
         }
-        return true;
-
+        return feedbackBuilder.toString().trim();
     }
 
 }
