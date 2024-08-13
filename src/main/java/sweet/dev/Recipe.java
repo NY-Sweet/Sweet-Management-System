@@ -1,7 +1,10 @@
 package sweet.dev;
+import menus.PrettyFormatter;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 
 public class Recipe {
@@ -19,6 +22,10 @@ public class Recipe {
         return ingredients;
     }
 
+    public String getSteps() {
+        return steps;
+    }
+
     public Recipe(String name, int numberOfIngredients, String ingredients, String steps, String Publisher) {
         this.name = name;
         this.numberOfIngredients = numberOfIngredients;
@@ -26,6 +33,12 @@ public class Recipe {
         this.steps = steps;
         this.Publisher = Publisher;
         this.feedbacks = new LinkedList();
+
+        logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler);
+
     }
 
     public List<String> getFeedbacks() {
@@ -42,6 +55,10 @@ public class Recipe {
 
     public String getName() {
         return name;
+    }
+
+    public String getPublisher() {
+        return Publisher;
     }
 
     @Override

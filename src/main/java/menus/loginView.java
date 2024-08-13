@@ -21,6 +21,7 @@ public class loginView {
     private final Logger logger;
     private AdminManager adminManager;
 
+
     public loginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager,MessageManager messageManager,AdminManager adminManager,RecipeManager recipeManager) {
         this.loginManager = loginManager;
         this.userManager = userManager;
@@ -77,24 +78,35 @@ public class loginView {
         String password = promptForNonEmptyInput("Enter password: ");
 
         loginManager.setUsernameAndPasswordFromSystem(username, password);
-        if(loginManager.getRoleInSys()==1)
-        {
-            supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
-            ownerView ownerView=new ownerView(supplier,userManager,messageManager);
-            ownerView.displayMenu();
-        }
 
-        if(loginManager.getRoleInSys()==2)
-        {
-
-            Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
-            adminView adminView=new adminView(supplierManager,userManager,adminManager,recipeManager);
-            adminView.displayMenu();
-
-        }
 
 
         if (loginManager.isValidation()) {
+            if(loginManager.getRoleInSys()==1)
+            {
+                supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
+                ownerView ownerView=new ownerView(supplier,userManager,messageManager);
+                ownerView.displayMenu();
+            }
+
+            else if(loginManager.getRoleInSys()==2)
+            {
+
+                Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
+                adminView adminView=new adminView(supplierManager,userManager,adminManager,recipeManager);
+                adminView.displayMenu();
+
+            }
+
+            else if(loginManager.getRoleInSys()==0)
+            {
+
+                user user=userManager.getTheUser(loginManager.getEnteredUsername());
+                UserView userView=new UserView(user,userManager,recipeManager,supplierManager,messageManager);
+                userView.displayMenu();
+
+            }
+
             handleSuccessfulLogin();
         } else {
             logger.warning("Login failed for username: " + username);
@@ -112,6 +124,10 @@ public class loginView {
             case 1:
                 logger.info("Supplier logged in successfully: " + loginManager.getEnteredUsername());
                 logger.info(ANSI_WHITE + "Supplier logged in successfully!" + ANSI_RESET);
+                break;
+            case 2:
+                logger.info("Admin logged in successfully: " + loginManager.getEnteredUsername());
+                logger.info(ANSI_WHITE + "Admin logged in successfully!" + ANSI_RESET);
                 break;
             default:
                 logger.severe("Unknown role for username: " + loginManager.getEnteredUsername());

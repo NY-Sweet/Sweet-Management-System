@@ -6,6 +6,7 @@ import menus.ownerView;
 
 import java.util.LinkedList;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Handler;
 import java.util.logging.Logger;
 
 public class product {
@@ -31,6 +32,17 @@ public class product {
         this.year = year;
         this.discountPercentage = discountPercentage;
         this.feedbacks = new LinkedList();
+
+        logger.setUseParentHandlers(false);
+
+        Handler[] handlers = logger.getHandlers();
+        for (Handler handler : handlers) {
+            logger.removeHandler(handler);
+        }
+
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler);
 
 
     }

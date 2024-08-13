@@ -70,6 +70,7 @@ public class SweetApp {
         s1.getOrderManager().addOrder(order1);
         s1.getOrderManager().addOrder(order2);
         s1.getOrderManager().addOrder(order3);
+
        suppliers.add(s1);
 
        admins.add(new Admin("admin","123456"));
@@ -84,6 +85,12 @@ public class SweetApp {
         messageManager.sendMessage("noor","haya","hello haya", LocalDate.now());
         s1.getOrderManager().updateOrderStatus("order002","shipped",userManager);
         s1.getOrderManager().updateOrderStatus("order003","delivered",userManager);
+
+        this.Recipemanager=new RecipeManager(users);
+        Recipe Rec;
+        Recipemanager.postRecipe(Rec= new Recipe("Panckake",3,"Milk , flour, oil","Mix them all",u1.getUserName()));
+        Recipemanager.ValidateRecipe(Rec);
+
 
     }
 

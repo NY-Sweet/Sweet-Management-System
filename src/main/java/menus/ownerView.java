@@ -93,41 +93,43 @@ public class ownerView {
     }
 
     private void messageManagement() {
-        String menuOptions = ANSI_PURPLE + """
-            ╔════════════════════════════════════╗
-            ║        Message Management Menu     ║
-            ╠════════════════════════════════════╣
-            ║ 1. Send a Message                  ║
-            ║ 2. View Inbox                      ║
-            ║ 3. Go Back                         ║
-            ╚════════════════════════════════════╝
-            """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
-        logger.info(menuOptions);
-        String choice = scanner.nextLine();
+        while (true) {
+            String menuOptions = ANSI_PURPLE + """
+                    ╔════════════════════════════════════╗
+                    ║        Message Management Menu     ║
+                    ╠════════════════════════════════════╣
+                    ║ 1. Send a Message                  ║
+                    ║ 2. View Inbox                      ║
+                    ║ 3. Go Back                         ║
+                    ╚════════════════════════════════════╝
+                    """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
+            logger.info(menuOptions);
+            String choice = scanner.nextLine();
 
-        switch (choice) {
-            case "1":
-                logger.info("Enter receiver username: ");
-                String receiver = scanner.nextLine();
-                logger.info("Enter message content: ");
-                String content = scanner.nextLine();
-                LocalDate date = LocalDate.now();
-                boolean success = messageManager.sendMessage(supplier.getUserName(), receiver, content, date);
-                if (success) {
-                    logger.info("Message sent successfully.");
-                } else {
-                    logger.info("Failed to send message. Invalid receiver.");
-                }
-                break;
-            case "2":
-                logger.info("Viewing inbox...");
-                messageManager.viewInbox(supplier.getUserName());
-                break;
-            case "3":
-                logger.info("Going back to the previous menu...");
-                break;
-            default:
-                logger.info("Invalid choice. Please try again.");
+            switch (choice) {
+                case "1":
+                    logger.info("Enter receiver username: ");
+                    String receiver = scanner.nextLine();
+                    logger.info("Enter message content: ");
+                    String content = scanner.nextLine();
+                    LocalDate date = LocalDate.now();
+                    boolean success = messageManager.sendMessage(supplier.getUserName(), receiver, content, date);
+                    if (success) {
+                        logger.info("Message sent successfully.");
+                    } else {
+                        logger.info("Failed to send message. Invalid receiver.");
+                    }
+                    break;
+                case "2":
+                    logger.info("Viewing inbox...");
+                    messageManager.viewInbox(supplier.getUserName());
+                    break;
+                case "3":
+                    logger.info("Going back to the previous menu...");
+                    return;
+                default:
+                    logger.info("Invalid choice. Please try again.");
+            }
         }
     }
 
