@@ -1,6 +1,9 @@
 package sweet.dev;
+import menus.PrettyFormatter;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 
@@ -55,6 +58,13 @@ public class supplier {
         orders=new LinkedList<>();
         this.productManager = new ProductManager(this.products);
         this.orderManager=new OrderManager(this);
+
+        logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler);
+
+
 
     }
 
@@ -147,6 +157,33 @@ public class supplier {
 
         } else
             wrongOldPass = true;
+    }
+
+    public boolean displaySupplierInfo() {
+        String supplierInfo = String.format(
+                "\nSupplier Information:\n" +
+                        "Username: %s\n" +
+                        "Phone Number: %s\n" +
+                        "Email: %s\n" +
+                        "City: %s\n" +
+                        "Street: %s\n" +
+                        "Home Number: %s\n" +
+                        "Role: %s\n" +
+                        "Shop Name: %s\n" +
+                        "Employee Number: %d\n",
+                this.userName,
+                this.phoneNum,
+                this.email,
+                this.city,
+                this.street,
+                this.homeNum,
+                this.role,
+                this.shopName,
+                this.epmloyeeNum
+        );
+
+        logger.info(supplierInfo);
+        return true;
     }
 
 }

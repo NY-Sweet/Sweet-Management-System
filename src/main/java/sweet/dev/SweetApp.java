@@ -57,7 +57,8 @@ public class SweetApp {
        supplier s1=new supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","sweetee",4);
        s1.getProductManager().addProduct("101","milk",100,10.5,8.0,28,7,2024,0.0);
        s1.getProductManager().addProduct("102", "bread", 50, 3.0, 2.0, 25, 7, 2024, 0.0);
-        this.Recipemanager = new RecipeManager(users);
+
+       this.Recipemanager = new RecipeManager(users);
         LinkedList<OrderDetails> orderDetails = new LinkedList<>();
         product milk = s1.getProductManager().findProduct("101");
         product bread =s1.getProductManager().findProduct("102");
@@ -191,7 +192,7 @@ public class SweetApp {
     }
 
     public void run() {
-        loginView loginView = new loginView( loginManager,userManager, supplierManager,messageManager,adminManager);
+        loginView loginView = new loginView( loginManager,userManager, supplierManager,messageManager,adminManager,getRecipemanager());
         loginView.displayMenu();
     }
 

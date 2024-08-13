@@ -132,6 +132,16 @@ public class ownerAccountSetting {
     }
 
 
+    @When("the owner select account information")
+    public void the_owner_select_account_information() {
+        owner.displaySupplierInfo();
+
+    }
+    @Then("display owner information")
+    public void display_owner_information() {
+        assertTrue(owner.displaySupplierInfo());
+    }
+
 
 
 

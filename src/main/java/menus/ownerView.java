@@ -2,6 +2,7 @@ package menus;
 import sweet.dev.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Level;
@@ -43,7 +44,8 @@ public class ownerView {
                 ║ 3. Order Management        ║
                 ║ 4. Messaging               ║
                 ║ 5. Account Management      ║
-                ║ 6. Log out                 ║
+                ║ 6. Product Feedback        ║
+                ║ 7. Log out                 ║
                 ╚════════════════════════════╝
                 """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
             logger.info(menuOptions);
@@ -62,12 +64,14 @@ public class ownerView {
 
                 case "4":
                     messageManagement();
-                    break;  
+                    break;
                 case "5":
                     ownerAccountManage();
                     break;
-
                 case "6":
+                    productFeedback();
+                    break;
+                case "7":
                     logger.info("Exiting owner menu");
                     return;
                 default:
@@ -75,6 +79,17 @@ public class ownerView {
                     logger.info("Invalid choice. Please select a valid option.");
             }
         }
+    }
+
+    private void productFeedback() {
+        ProductManager productManager=supplier.getProductManager();
+        List<product> products=productManager.getProducts();
+        for (product product:products)
+        {
+            logger.info(product.getId()+"       " + product.getName());
+            product.showFeedbaks();
+        }
+
     }
 
     private void messageManagement() {
@@ -117,81 +132,90 @@ public class ownerView {
     }
 
     private void ownerAccountManage() {
-        String menuOptions = ANSI_PURPLE + """
-            ╔════════════════════════════════════╗
-            ║   Owner Account Management Menu    ║
-            ╠════════════════════════════════════╣
-            ║ 1. Update Phone Number             ║
-            ║ 2. Update Email                    ║
-            ║ 3. Update City                     ║
-            ║ 4. Update Street                   ║
-            ║ 5. Update Home Number              ║
-            ║ 6. Update Employee Number          ║
-            ║ 7. Update Password                 ║
-            ║ 8. Go Back                         ║
-            ╚════════════════════════════════════╝
-            """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
-        logger.info(menuOptions);
-        String choice = scanner.nextLine();
+        while (true) {
 
-        switch (choice) {
-            case "1":
-                logger.info("Enter new phone number: ");
-                String phoneNum = scanner.nextLine();
-                supplier.setPhoneNum(phoneNum);
-                break;
-            case "2":
-                logger.info("Enter new email: ");
-                String email = scanner.nextLine();
-                supplier.setEmail(email);
-                break;
-            case "3":
-                logger.info("Enter new city: ");
-                String city = scanner.nextLine();
-                supplier.setCity(city);
-                break;
-            case "4":
-                logger.info("Enter new street: ");
-                String street = scanner.nextLine();
-                supplier.setStreet(street);
-                break;
-            case "5":
-                logger.info("Enter new home number: ");
-                String homeNum = scanner.nextLine();
-                supplier.setHomeNum(homeNum);
-                break;
-            case "6":
-                logger.info("Enter new employee number: ");
-                int employeeNum = Integer.parseInt(scanner.nextLine());
-                supplier.setEpmloyeeNum(employeeNum);
-                break;
+            String menuOptions = ANSI_PURPLE + """
+                    ╔════════════════════════════════════╗
+                    ║   Owner Account Management Menu    ║
+                    ╠════════════════════════════════════╣
+                    ║ 1. Update Phone Number             ║
+                    ║ 2. Update Email                    ║
+                    ║ 3. Update City                     ║
+                    ║ 4. Update Street                   ║
+                    ║ 5. Update Home Number              ║
+                    ║ 6. Update Employee Number          ║
+                    ║ 7. Update Password                 ║
+                    ║ 8. Go Back                         ║
+                    ╚════════════════════════════════════╝
+                    """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
 
-            case "7":
-                while (!supplier.isOperationSuccess()) {
-                    logger.info("Enter old password: ");
-                    String oldPassword = scanner.nextLine();
-                    logger.info("Enter new password: ");
-                    String newPassword = scanner.nextLine();
-                    logger.info("Confirm new password: ");
-                    String confirmPassword = scanner.nextLine();
-                    supplier.updatePassword(oldPassword, newPassword, confirmPassword);
-                    if (supplier.isWrongOldPass()) {
-                        logger.info("Old password is incorrect.");
-                    } else if (supplier.isMismatchPass()) {
-                        logger.info("New password and confirmation do not match.");
-                    } else if (supplier.isOperationSuccess()) {
-                        logger.info("Password updated successfully.");
+
+            logger.info(menuOptions);
+
+            supplier.displaySupplierInfo();
+
+            String choice = scanner.nextLine();
+
+            switch (choice) {
+                case "1":
+                    logger.info("Enter new phone number: ");
+                    String phoneNum = scanner.nextLine();
+                    supplier.setPhoneNum(phoneNum);
+                    break;
+                case "2":
+                    logger.info("Enter new email: ");
+                    String email = scanner.nextLine();
+                    supplier.setEmail(email);
+                    break;
+                case "3":
+                    logger.info("Enter new city: ");
+                    String city = scanner.nextLine();
+                    supplier.setCity(city);
+                    break;
+                case "4":
+                    logger.info("Enter new street: ");
+                    String street = scanner.nextLine();
+                    supplier.setStreet(street);
+                    break;
+                case "5":
+                    logger.info("Enter new home number: ");
+                    String homeNum = scanner.nextLine();
+                    supplier.setHomeNum(homeNum);
+                    break;
+                case "6":
+                    logger.info("Enter new employee number: ");
+                    int employeeNum = Integer.parseInt(scanner.nextLine());
+                    supplier.setEpmloyeeNum(employeeNum);
+                    break;
+
+                case "7":
+                    while (!supplier.isOperationSuccess()) {
+                        logger.info("Enter old password: ");
+                        String oldPassword = scanner.nextLine();
+                        logger.info("Enter new password: ");
+                        String newPassword = scanner.nextLine();
+                        logger.info("Confirm new password: ");
+                        String confirmPassword = scanner.nextLine();
+                        supplier.updatePassword(oldPassword, newPassword, confirmPassword);
+                        if (supplier.isWrongOldPass()) {
+                            logger.info("Old password is incorrect.");
+                        } else if (supplier.isMismatchPass()) {
+                            logger.info("New password and confirmation do not match.");
+                        } else if (supplier.isOperationSuccess()) {
+                            logger.info("Password updated successfully.");
+                        }
                     }
-                }
-                break;
+                    break;
                 case "8":
-                logger.info("Going back to the previous menu...");
-                break;
-            default:
-                logger.info("Invalid choice. Please try again.");
+                    logger.info("Going back to the previous menu...");
+                    return;
+
+                default:
+                    logger.info("Invalid choice. Please try again.");
+            }
+            if (supplier.isOperationSuccess())
+                logger.info("Information updated successfully.");
         }
-        if(supplier.isOperationSuccess())
-            logger.info("Information updated successfully.");
 
     }
 
@@ -303,6 +327,7 @@ public class ownerView {
         ProductManager productManager = supplier.getProductManager();
         String id=productId(productManager);
         while (true) {
+
             String editMenu = ANSI_PURPLE + """
             ╔══════════════════════════════════╗
             ║  Edit Product Menu               ║
@@ -315,6 +340,8 @@ public class ownerView {
             ║ 6. Go Back                       ║
             ╚══════════════════════════════════╝
             """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
+            supplier.getProductManager().showProducts();
+
             logger.info(editMenu);
             String choice = scanner.nextLine();
 

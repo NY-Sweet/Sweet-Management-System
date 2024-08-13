@@ -2,9 +2,7 @@ package menus;
 
 import sweet.dev.*;
 import java.util.Scanner;
-import java.util.function.Supplier;
 import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class loginView {
@@ -20,8 +18,10 @@ public class loginView {
     private final Scanner scanner;
     private final Logger logger;
     private AdminManager adminManager;
+    private RecipeManager recipeManager;
 
-    public loginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager,MessageManager messageManager,AdminManager adminManager) {
+
+    public loginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager, MessageManager messageManager, AdminManager adminManager, RecipeManager recipemanager) {
         this.loginManager = loginManager;
         this.userManager = userManager;
         this.supplierManager = supplierManager;
@@ -34,6 +34,7 @@ public class loginView {
         logger.setUseParentHandlers(false);
         logger.addHandler(consoleHandler);
         this.messageManager=messageManager;
+        this.recipeManager=recipemanager;
     }
 
     public void displayMenu() {
@@ -77,25 +78,36 @@ public class loginView {
         String password = promptForNonEmptyInput("Enter password: ");
 
         loginManager.setUsernameAndPasswordFromSystem(username, password);
-        if(loginManager.getRoleInSys()==1)
-        {
-            supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
-            ownerView ownerView=new ownerView(supplier,userManager,messageManager);
-            ownerView.displayMenu();
-        }
 
-        if(loginManager.getRoleInSys()==2)
-        {
 
-            Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
-            adminView adminView=new adminView(supplierManager,userManager,adminManager);
-            adminView.displayMenu();
-
-        }
 
 
         if (loginManager.isValidation()) {
             handleSuccessfulLogin();
+            if(loginManager.getRoleInSys()==1)
+            {
+                supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
+                ownerView ownerView=new ownerView(supplier,userManager,messageManager);
+                ownerView.displayMenu();
+            }
+
+            else if(loginManager.getRoleInSys()==2)
+            {
+
+                Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
+                adminView adminView=new adminView(supplierManager,userManager,adminManager);
+                adminView.displayMenu();
+
+            }
+            else if(loginManager.getRoleInSys()==0)
+            {
+
+                user user=userManager.getTheUser(loginManager.getEnteredUsername());
+                UserView userView=new UserView(user,userManager,recipeManager,supplierManager);
+                userView.displayMenu();
+
+            }
+
         } else {
             logger.warning("Login failed for username: " + username);
             logger.info(ANSI_WHITE + "Invalid username or password. Please try again." + ANSI_RESET);

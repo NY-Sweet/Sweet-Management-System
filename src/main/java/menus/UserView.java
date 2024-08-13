@@ -169,7 +169,7 @@ public class UserView {
                 if (productMap.containsKey(productId)) {
                     logger.info("Enter the feedback content: ");
                     String feedbackContent = scanner.nextLine().trim();
-
+                    feedbackContent+= "  by: "+User.getUserName();
                     // Add feedback to the product retrieved from the map
                     productMap.get(productId).addFeedback(feedbackContent);
                     logger.info("Feedback added successfully.");

@@ -17,6 +17,9 @@ public class ProductManager {
     private boolean operationSuccess;
     private static final Logger logger = Logger.getLogger(ProductManager.class.getName());
 
+    public LinkedList<product> getProducts() {
+        return products;
+    }
 
     public ProductManager(LinkedList<product> products) {
         this.products = products;
@@ -56,7 +59,8 @@ public class ProductManager {
         table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-20s %-15s %-15s%n",
                 "ID", "Name", "Quantity", "Price", "Cost", "Expiration Date", "Discount (%)", "After Discount"));
         table.append("===============================================================================================================================\n");
-        for (product p : products) {
+       LinkedList<product> products1=getProducts();
+        for (product p : products1) {
             String expirationDate = String.format("%02d/%02d/%04d", p.getDay(), p.getMonth(), p.getYear());
             table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-20s %-15.2f %-15.2f%n",
                     p.getId(), p.getName(), p.getQuantity(), p.getPrice(), p.getCost(), expirationDate, p.getDiscountPercentage(), p.getPrice() * (1 - p.getDiscountPercentage() / 100)));

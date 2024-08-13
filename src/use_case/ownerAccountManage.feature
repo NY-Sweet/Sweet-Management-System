@@ -28,3 +28,7 @@ Feature: Account Settings
     Given  owner "noor" is on the account settings Account_Settings
     When the owner select edit password and enters old password  "123456" new password "12333" and mismatch confirm password "99999"
     Then the system displays a message indicating that the  password mismatch
+    Scenario: show owner account information
+      Given  owner "noor" is on the account settings Account_Settings
+      When the owner select account information
+      Then display owner information

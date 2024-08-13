@@ -1,8 +1,12 @@
 package sweet.dev;
 
 import io.cucumber.java.sl.In;
+import menus.PrettyFormatter;
+import menus.ownerView;
 
 import java.util.LinkedList;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Logger;
 
 public class product {
     private String id;
@@ -15,6 +19,7 @@ public class product {
     private Integer year;
     private Double discountPercentage;
     public LinkedList<String> feedbacks;
+    private final Logger logger=Logger.getLogger("MyProduct");
     public product(String id, String name, Integer quantity, Double price, Double cost, Integer day, Integer month, Integer year, Double discountPercentage) {
         this.id = id;
         this.name = name;
@@ -26,8 +31,9 @@ public class product {
         this.year = year;
         this.discountPercentage = discountPercentage;
         this.feedbacks = new LinkedList();
-    }
 
+
+    }
 
 
     public void setName(String name) {
@@ -104,9 +110,11 @@ public class product {
     }
 
     public boolean showFeedbaks (){
-        int i =0;
+        int count =1;
+        logger.info("Number of Feedbacks you've got: "+ feedbacks.size());
         for (final String feedback : feedbacks) {
-            System.out.println(i+ "   "+feedback);
+           logger.info(count+"_ "+feedback );
+            count++;
         }
         return true;
 
