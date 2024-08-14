@@ -254,7 +254,7 @@ public class UserView {
                 scanner.nextLine();
                 logger.info("Enter the feedback Content ");
                 String feedbackContent2 = scanner.nextLine();
-                feedbackContent2+=" by:"+User.getUserName();
+                String feedbackContent22="\n by:"+User.getUserName()+feedbackContent2;
                 recipeManager.searchRecipeById(RecipeID).addFeedback(feedbackContent2);
                 break;
             case 3 :
@@ -312,14 +312,14 @@ public class UserView {
         logger.info("New Recipe :");
         logger.info("Enter Recipe Name");
         String recipeName = scanner.nextLine();
-        logger.info("Enter Recipe Ingrediants Number");
+        logger.info("Enter Recipe Ingredients Number");
         int ingrediantsNumber = scanner.nextInt();
         scanner.nextLine();
         StringBuilder ingredients = new StringBuilder();
         logger.info("Enter Recipe Ingredients ");
         for (int i = 0; i < ingrediantsNumber; i++) {
             String ingredient=scanner.nextLine();
-            ingredients.append(ingredient+" /");
+            ingredients.append(ingredient+" , ");
         }
         logger.info("Enter Number Recipe's Steps");
         int stepsNumber = scanner.nextInt();
@@ -329,7 +329,7 @@ public class UserView {
         logger.info("Enter Recipe Steps ");
         for (int i = 0; i < stepsNumber; i++) {
             String step=scanner.nextLine();
-
+            step+="\n";
             steps.append(step);
         }
 

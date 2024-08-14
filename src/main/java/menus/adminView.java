@@ -91,18 +91,29 @@ public class adminView {
     private void ManageFeeds() {
         logger.info("Heres the recipes in our system and their feedbacks ");
         recipeManager.ShowAllRecipes();
-        logger.info(" enter the recipe Id you want to modifiy its feeds");
-        int recipeId =Integer.parseInt(scanner.nextLine());
-        List<String> feeds = recipeManager.searchRecipeById(recipeId).getFeedbacks();
-        int i=0;
-        for (String feed : feeds) {
-            logger.info(i+".  "+feed);
-            i++;
+        while (true) {
+            logger.info(" enter the recipe Id you want to modify its feedBacks");
+            int recipeId = Integer.parseInt(scanner.nextLine());
+            Recipe recipe=recipeManager.searchRecipeById(recipeId);
+            if(recipe!=null) {
+                List<String> feeds = recipe.getFeedbacks();
+
+                int i = 0;
+                for (String feed : feeds) {
+                    logger.info(i + ".  " + feed);
+                    i++;
+                }
+                logger.info("Enter the Feedback Id you want to delete");
+                int feedbacId = Integer.parseInt(scanner.nextLine());
+                if(recipeManager.DeleteaFeedofaRecipe(recipeId, feedbacId))
+                logger.info(" Deleted the Feedback Id " + feedbacId);
+                else
+                    logger.warning("Feedback Id not valid " + feedbacId);
+                break;
+            }
+            else
+                logger.warning("Recipe id not found enter valid one!!");
         }
-        logger.info("Enter the FeedbacId you want to delete");
-        int feedbacId = Integer.parseInt(scanner.nextLine());
-        recipeManager.DeleteaFeedofaRecipe(recipeId,feedbacId);
-        logger.info(" Deleted the FeedbacId " + feedbacId);
 
     }
 
@@ -124,10 +135,10 @@ public class adminView {
 
             switch (choice) {
                 case "1":
-                    manageUsers(); // Delegate user management logic to a separate method
+                    manageUsers();
                     break;
                 case "2":
-                    return; // Exit the loop
+                    return;
                 default:
                     logger.warning("Invalid choice. Please enter 1 or 2.");
                     break;
@@ -167,7 +178,6 @@ public class adminView {
     private void manageStoreOwners() {
         List<supplier> suppliers = supplierManager.getSuppliers();
 
-        // Display store owners with informative message
         if (suppliers.isEmpty()) {
             logger.info("There are currently no store owners.");
         } else {
@@ -177,7 +187,6 @@ public class adminView {
             }
         }
 
-        // Prompt with clear options and handle user input correctly
         logger.info("Do you want to delete a store owner? (yes/no)");
         String choice2 = scanner.nextLine().toLowerCase();
 
@@ -240,9 +249,8 @@ public class adminView {
         ╔═════════════════════════════════════════════════════════╗
         ║              App Content Management                     ║
         ╠═════════════════════════════════════════════════════════╣
-        ║ 1.Dispaly Validated Recipies                            ║
+        ║ 1.Display Validated Recipes                             ║
         ║ 2.Manage Not Validated Recipes                          ║
-        ║ 3.Manage Content FeedBacks                              ║
         ╚═════════════════════════════════════════════════════════╝
         """ + ANSI_RESET;
 
@@ -263,37 +271,15 @@ public class adminView {
                 if (validationChoice.equalsIgnoreCase("Yes")) {
                     logger.info("Enter the recipe Id to validate it ");
                     int  recipeId = scanner.nextInt();
+                    scanner.nextLine();
+
                     recipeManager.ValidateRecipe(recipeManager.searchRecipeByIdNotvalidated(recipeId));
                     logger.info("Its Done successfully");
                 } else if (validationChoice.equalsIgnoreCase("No")) {
                 logger.info("Recipe validation skipped.");
 
                 }break;
-                case "3":
-                    logger.info(" Recipes and thier feedbacks :");
-                    List<Recipe> showrecipes = recipeManager.getValidatedRecipes();
-                    for (Recipe recipe : showrecipes) {
-                        logger.info(recipe.getId()+"      "+recipe.getName());
-                    }
-                    logger.info("Do you want to check feedbacks on  a recipe ?? Yes/No ");
-                    String feedbackChoice = scanner.nextLine().toLowerCase();
-                    if (feedbackChoice.equalsIgnoreCase("yes")) {
-                        logger.info("Enter the recipe Id to check feedbacks on  a recipe ");
-                        int  recipeId = scanner.nextInt();
-                         Recipe recipe = recipeManager.searchRecipeById(recipeId);
-                         recipeManager.ValidateRecipe(recipeManager.searchRecipeByIdNotvalidated(recipeId));
-                         List<String>Feeds=  recipe.getFeedbacks();
-                         int I = 0;
-                         for (String feed : Feeds) {
-                             logger.info(I+" "+feed);
-                         }
-                         logger.info("Enter the Id of feedback that you want to delete");
-                         int FeedId= scanner.nextInt();
-                         recipeManager.searchRecipeById(recipeId).DeleteFeedback(Feeds.get(FeedId));
-                        logger.info("Its Done successfully");
-                        break;
-                    }
-                    break;
+
             default:
                 logger.info("Invalid choice. Please try again.");
 

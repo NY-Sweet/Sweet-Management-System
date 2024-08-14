@@ -2,10 +2,7 @@ package sweet.dev;
 
 import menus.PrettyFormatter;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Level;
@@ -67,10 +64,17 @@ public class RecipeManager {
     public boolean filterRecipesByAllergies(List<Recipe> recipes, Set<String> allergies) {
         List<Recipe> filteredRecipes = new ArrayList<>();
 
+        Set<String> normalizedAllergies = new HashSet<>();
+        for (String allergen : allergies) {
+            normalizedAllergies.add(allergen.trim().toLowerCase());
+        }
+
         for (Recipe recipe : recipes) {
             boolean hasAllergy = false;
-            for (String allergen : allergies) {
-                if (recipe.getIngredients().toLowerCase().contains(allergen.toLowerCase())) {
+
+            String[] ingredients = recipe.getIngredients().split(",\\s*");
+            for (String ingredient : ingredients) {
+                if (normalizedAllergies.contains(ingredient.trim().toLowerCase())) {
                     hasAllergy = true;
                     break;
                 }
@@ -84,22 +88,22 @@ public class RecipeManager {
         if (filteredRecipes.isEmpty()) {
             logger.info("Unfortunately, no recipes match your dietary restrictions.\n");
         } else {
-            for (Recipe recipe : filteredRecipes) {
-                logger.info(recipe.toString() + "\n");
-            }
+            print(filteredRecipes);
         }
 
         return true;
     }
 
+
     public boolean filterRecipesByDietaryRestrictions(List<Recipe> recipes, String ingredient) {
         List<Recipe> filteredRecipes = new ArrayList<>();
+        String normalizedIngredient = ingredient.trim().toLowerCase();
 
         for (Recipe recipe : recipes) {
-            String[] ingredients = recipe.getIngredients().split(" ");
+            String[] ingredients = recipe.getIngredients().split(",\\s*");
 
             for (String recipeIngredient : ingredients) {
-                if (recipeIngredient.equalsIgnoreCase(ingredient)) {
+                if (recipeIngredient.trim().equalsIgnoreCase(normalizedIngredient)) {
                     filteredRecipes.add(recipe);
                     break;
                 }
@@ -109,19 +113,58 @@ public class RecipeManager {
         if (filteredRecipes.isEmpty()) {
             logger.info("Unfortunately, no recipes match your dietary restrictions.\n");
         } else {
-            for (Recipe recipe : filteredRecipes) {
-                logger.info(recipe.toString() + "\n");
-            }
+            return print(filteredRecipes);
+        }
+        return true;
+    }
+
+    private boolean print(List<Recipe> filteredRecipes) {
+        if (filteredRecipes.isEmpty()) {
+            logger.info("Unfortunately, no recipes match your dietary restrictions.");
+            return true;
+        }
+
+        logger.info("\nHere are the recipes that match your dietary restrictions:\n");
+        for (Recipe recipe : filteredRecipes) {
+            String formattedRecipe = formatRecipe(recipe);
+            logger.info(formattedRecipe);
         }
 
         return true;
     }
 
+    private String formatRecipe(Recipe recipe) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Recipe ID: ").append(recipe.getId()).append("\n")
+                .append("Recipe Name: ").append(recipe.getName()).append("\n")
+                .append("Ingredients: ").append(recipe.getIngredients()).append("\n")
+                .append("Steps: ").append(recipe.getSteps()).append("\n")
+                .append("Feedbacks: ").append(formatFeedbacks(recipe.getFeedbacks())).append("\n")
+                .append("Publisher: ").append(recipe.getPublisher()).append("\n")
+                .append("Total Feedbacks: ").append(recipe.getFeedbacks().size()).append("\n")
+                .append("─────────────────────────────────────────\n");
 
-
-    private  boolean matchesDietaryRestriction(Recipe recipe, String restriction) {
-        return !recipe.getIngredients().contains(restriction);
+        return sb.toString();
     }
+
+    private String formatFeedbacks(List<String> feedbacks) {
+        if (feedbacks.isEmpty()) {
+            return "No feedbacks available.";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < feedbacks.size(); i++) {
+            sb.append(feedbacks.get(i));
+            if (i != feedbacks.size() - 1) {
+                sb.append("; ");
+            }
+        }
+        return sb.toString();
+    }
+
+
+
+
     public Recipe searchRecipeById(int id) {
         for (Recipe recipe : this.Validatedrecipes) {
             if (recipe.getId() == id) {
@@ -139,47 +182,9 @@ public class RecipeManager {
         return null;
     }
     public boolean ShowAllRecipes() {
-        logger.info("\n╔═════════════════════════════════════════════════════════════════════════════════════════════════════════════╗");
-        logger.info("║                              ✨ All Recipes ✨                                                               ║");
-        logger.info("╠═══════╦══════════════════╦══════════════════════════════════╦═════════════════════╦═══════════════════════╣");
-        logger.info("║  ID   ║    Recipe Name   ║           Feedbacks              ║    Ingredients      ║       Publisher       ║");
-        logger.info("╠═══════╬══════════════════╬══════════════════════════════════╬═════════════════════╬═══════════════════════╣");
-
-        for (Recipe recipe : Validatedrecipes) {
-            String feedbacksFormatted = formatFeedbacks(recipe.getFeedbacks());
-            logger.info(String.format("║ %-5s ║ %-16s ║ %-32s ║ %-19s ║ %-21s ║",
-                    recipe.getId(),
-                    truncate(recipe.getName(), 16),
-                    truncate(feedbacksFormatted, 32),
-                    truncate(recipe.getIngredients(), 19),
-                    truncate(recipe.getPublisher(), 21)
-            ));
-        }
-
-        logger.info("╚═══════╩══════════════════╩══════════════════════════════════╩═════════════════════╩═══════════════════════╝\n");
-        return true;
+        return print(Validatedrecipes);
     }
 
-    private String truncate(String input, int maxLength) {
-        if (input.length() > maxLength) {
-            return input.substring(0, maxLength - 3) + "...";
-        }
-        return input;
-    }
-
-    private String formatFeedbacks(List<String> feedbacks) {
-        if (feedbacks == null || feedbacks.isEmpty()) {
-            return "No feedbacks";
-        }
-
-        StringBuilder formattedFeedbacks = new StringBuilder();
-        int index = 0;
-        for (String feedback : feedbacks) {
-            formattedFeedbacks.append(index).append(". ").append(feedback).append("\n");
-            index++;
-        }
-        return formattedFeedbacks.toString();
-    }
 
     public boolean deleteRecipeByIndex(int index){
         this.Validatedrecipes.remove(index);
@@ -187,9 +192,15 @@ public class RecipeManager {
 
     }
     public boolean DeleteaFeedofaRecipe(int recipeid , int feedbackid){
-
-        Validatedrecipes.get(recipeid).feedbacks.remove(feedbackid);
-        return true ;
+        if(recipeid<Validatedrecipes.size()) {
+          LinkedList<String> feedBacks= Validatedrecipes.get(recipeid).feedbacks;
+          if(feedBacks.size()>feedbackid) {
+              Validatedrecipes.get(recipeid).feedbacks.remove(feedbackid);
+              return true;
+          }
+          return false;
+        }
+       return false;
 
     }
 }
