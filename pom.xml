@@ -16,13 +16,6 @@
         <maven.compiler.target>17</maven.compiler.target>
         <sonar.organization>ny-sweet</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-            
-    <!-- ... other properties ... -->
-    <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
-    <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
-    <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
-    <sonar.language>java</sonar.language>
-
     </properties>
 
 <build>
@@ -58,7 +51,7 @@
         <plugin>
             <groupId>org.sonarsource.scanner.maven</groupId>
             <artifactId>sonar-maven-plugin</artifactId>
-            <version>3.9.1.2184</version> <!-- Ensure this version is up-to-date -->
+            <version>3.11.0.3441</version> <!-- Ensure this version is up-to-date -->
         </plugin>
     </plugins>
 </build>
