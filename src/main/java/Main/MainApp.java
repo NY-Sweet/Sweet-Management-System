@@ -1,6 +1,6 @@
-package menus;
+package Main;
 
-import sweet.dev.SweetApp;
+import sweet.dev.system.SweetApp;
 
 
 

@@ -1,11 +1,17 @@
-package menus;
-import sweet.dev.*;
+package sweet.menus;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.managers.MessageManager;
+import sweet.dev.managers.OrderManager;
+import sweet.dev.managers.ProductManager;
+import sweet.dev.managers.UserManager;
+import sweet.dev.models.Order;
+import sweet.dev.models.product;
+import sweet.dev.models.supplier;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ownerView {
@@ -16,7 +22,7 @@ public class ownerView {
     private static final String CHOICE_PROMPT = ANSI_WHITE + "Enter the number of your choice: " + ANSI_RESET;
     private final Scanner scanner;
     private final Logger logger;
-    private supplier supplier;
+    private sweet.dev.models.supplier supplier;
     private UserManager userManager;
     private MessageManager messageManager;
 

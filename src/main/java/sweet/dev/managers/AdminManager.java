@@ -1,10 +1,10 @@
-package sweet.dev;
+package sweet.dev.managers;
 
-import io.cucumber.java.bs.A;
-import menus.PrettyFormatter;
-import menus.adminView;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.models.Admin;
+import sweet.dev.models.supplier;
+import sweet.dev.models.user;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

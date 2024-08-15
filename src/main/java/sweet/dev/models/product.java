@@ -1,8 +1,6 @@
-package sweet.dev;
+package sweet.dev.models;
 
-import io.cucumber.java.sl.In;
-import menus.PrettyFormatter;
-import menus.ownerView;
+import sweet.Format.PrettyFormatter;
 
 import java.util.LinkedList;
 import java.util.logging.ConsoleHandler;

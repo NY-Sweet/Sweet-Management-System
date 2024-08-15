@@ -1,10 +1,8 @@
-package sweet.dev;
+package sweet.dev.managers;
+
+import sweet.dev.models.user;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 public class UserManager {
     private boolean userCreated;

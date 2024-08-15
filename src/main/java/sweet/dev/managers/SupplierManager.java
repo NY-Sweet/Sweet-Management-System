@@ -1,8 +1,8 @@
-package sweet.dev;
+package sweet.dev.managers;
+
+import sweet.dev.models.supplier;
 
 import java.util.List;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 public class SupplierManager {
     private boolean supplierCreated;

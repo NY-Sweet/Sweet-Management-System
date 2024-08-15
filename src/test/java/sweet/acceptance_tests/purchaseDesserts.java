@@ -3,7 +3,9 @@ package sweet.acceptance_tests;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweet.dev.*;
+import sweet.dev.managers.*;
+import sweet.dev.models.*;
+import sweet.dev.system.SweetApp;
 
 import java.util.LinkedList;
 import java.util.UUID;
@@ -11,7 +13,6 @@ import java.util.logging.Logger;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import java.util.logging.Logger;
 
 public class purchaseDesserts {
 
@@ -26,7 +27,7 @@ public class purchaseDesserts {
     private SupplierManager supplierManager;
     private supplier owner;
     private Order currentOrder;
-    private user user;
+    private sweet.dev.models.user user;
     public purchaseDesserts(SweetApp obj) {
         super();
         this.obj=obj;

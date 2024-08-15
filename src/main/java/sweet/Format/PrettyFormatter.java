@@ -1,4 +1,4 @@
-package menus;
+package sweet.Format;
 
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;

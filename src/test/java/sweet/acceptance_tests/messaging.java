@@ -3,7 +3,11 @@ package sweet.acceptance_tests;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
-import sweet.dev.*;
+import sweet.dev.managers.LoginManager;
+import sweet.dev.managers.MessageManager;
+import sweet.dev.managers.SupplierManager;
+import sweet.dev.managers.UserManager;
+import sweet.dev.system.SweetApp;
 
 import java.time.LocalDate;
 import java.util.logging.Logger;

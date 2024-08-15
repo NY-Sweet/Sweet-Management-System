@@ -1,7 +1,6 @@
-package sweet.dev;
+package sweet.dev.models;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.LinkedList;
 
 public class Order {

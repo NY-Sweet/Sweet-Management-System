@@ -1,4 +1,4 @@
-package sweet.dev;
+package sweet.dev.models;
 
 import java.time.LocalDate;
 

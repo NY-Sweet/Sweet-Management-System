@@ -1,6 +1,13 @@
-package menus;
+package sweet.menus;
 
-import sweet.dev.*;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.managers.AdminManager;
+import sweet.dev.managers.RecipeManager;
+import sweet.dev.managers.SupplierManager;
+import sweet.dev.managers.UserManager;
+import sweet.dev.models.Recipe;
+import sweet.dev.models.supplier;
+import sweet.dev.models.user;
 
 import java.util.List;
 import java.util.Scanner;

@@ -2,8 +2,8 @@ package sweet.acceptance_tests;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import sweet.dev.Recipe;
-import sweet.dev.SweetApp;
+import sweet.dev.models.Recipe;
+import sweet.dev.system.SweetApp;
 
 import java.util.*;
 

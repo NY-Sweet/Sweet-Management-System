@@ -1,8 +1,9 @@
-package sweet.dev;
+package sweet.dev.managers;
 
-import javax.mail.*;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
+import sweet.dev.models.Admin;
+import sweet.dev.models.supplier;
+import sweet.dev.models.user;
+
 import java.util.*;
 
 public class LoginManager {

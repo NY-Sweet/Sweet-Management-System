@@ -1,6 +1,10 @@
-package sweet.dev;
+package sweet.dev.managers;
 
-import menus.PrettyFormatter;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.models.Order;
+import sweet.dev.models.OrderDetails;
+import sweet.dev.models.product;
+import sweet.dev.models.supplier;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -16,7 +20,7 @@ import java.util.Properties;
 public class OrderManager {
     private LinkedList<Order> orders;
     private boolean successOperation;
-    private supplier supplier;
+    private sweet.dev.models.supplier supplier;
     private static final Logger logger = Logger.getLogger(OrderManager.class.getName());
 
 

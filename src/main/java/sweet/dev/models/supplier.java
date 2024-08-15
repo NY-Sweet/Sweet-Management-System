@@ -1,8 +1,8 @@
-package sweet.dev;
-import menus.PrettyFormatter;
+package sweet.dev.models;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.managers.OrderManager;
+import sweet.dev.managers.ProductManager;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 import java.util.LinkedList;

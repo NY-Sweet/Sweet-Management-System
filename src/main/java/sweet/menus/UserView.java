@@ -1,12 +1,11 @@
-package menus;
-import sweet.dev.UserManager;
-import sweet.dev.*;
+package sweet.menus;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.managers.*;
+import sweet.dev.models.*;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 public class UserView {
     private static final String ANSI_PURPLE = "\n\u001B[95m";
@@ -18,9 +17,9 @@ public class UserView {
 
     private user User;
     private UserManager userManager;
-    private  RecipeManager recipeManager;
-    private  SupplierManager supplierManager ;
-    private  MessageManager messageManager ;
+    private RecipeManager recipeManager;
+    private SupplierManager supplierManager ;
+    private MessageManager messageManager ;
 
     public UserView(user User,UserManager userManager ,RecipeManager recipeManager ,SupplierManager supplierManager,MessageManager messageManager) {
         this.scanner = new Scanner(System.in);

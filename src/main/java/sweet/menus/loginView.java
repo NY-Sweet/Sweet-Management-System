@@ -1,10 +1,13 @@
-package menus;
+package sweet.menus;
 
-import sweet.dev.*;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.managers.*;
+import sweet.dev.models.Admin;
+import sweet.dev.models.supplier;
+import sweet.dev.models.user;
+
 import java.util.Scanner;
-import java.util.function.Supplier;
 import java.util.logging.ConsoleHandler;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class loginView {

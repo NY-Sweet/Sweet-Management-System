@@ -4,7 +4,11 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
 
-import sweet.dev.*;
+import sweet.dev.managers.LoginManager;
+import sweet.dev.managers.SupplierManager;
+import sweet.dev.managers.UserManager;
+import sweet.dev.models.supplier;
+import sweet.dev.system.SweetApp;
 
 import java.util.logging.Logger;
 

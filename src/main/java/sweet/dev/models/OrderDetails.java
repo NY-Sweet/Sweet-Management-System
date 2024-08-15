@@ -1,7 +1,7 @@
-package sweet.dev;
+package sweet.dev.models;
 
 public class OrderDetails {
-    private product product;
+    private sweet.dev.models.product product;
     private int quantity;
     private double totalPrice;
 

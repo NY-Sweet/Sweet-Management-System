@@ -1,6 +1,8 @@
-package sweet.dev;
+package sweet.dev.managers;
 
-import menus.PrettyFormatter;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.models.DiscountRule;
+import sweet.dev.models.product;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;

@@ -1,7 +1,6 @@
-package sweet.dev;
-import menus.PrettyFormatter;
+package sweet.dev.models;
+import sweet.Format.PrettyFormatter;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;

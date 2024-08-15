@@ -1,4 +1,4 @@
-package sweet.dev;
+package sweet.dev.models;
 
 public class Admin {
     private String AdminName;

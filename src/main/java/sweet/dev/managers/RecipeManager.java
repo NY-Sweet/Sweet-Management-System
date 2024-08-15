@@ -1,6 +1,8 @@
-package sweet.dev;
+package sweet.dev.managers;
 
-import menus.PrettyFormatter;
+import sweet.Format.PrettyFormatter;
+import sweet.dev.models.Recipe;
+import sweet.dev.models.user;
 
 import java.util.*;
 import java.util.logging.ConsoleHandler;
