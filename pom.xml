@@ -29,7 +29,7 @@
                     <target>17</target>
                 </configuration>
             </plugin>
-                  <plugins>
+            
         <!-- JaCoCo plugin for code coverage -->
         <plugin>
             <groupId>org.jacoco</groupId>
