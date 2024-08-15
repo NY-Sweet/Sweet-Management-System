@@ -12,13 +12,12 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.9.1</junit.version>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
-
-       <sonar.organization>ny-sweet</sonar.organization>
-       <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <sonar.organization>ny-sweet</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
+
     <build>
         <plugins>
             <plugin>
@@ -34,7 +33,6 @@
     </build>
 
     <dependencies>
-
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-picocontainer</artifactId>
@@ -56,13 +54,11 @@
             <version>7.18.0</version>
             <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
-
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
@@ -79,10 +75,5 @@
             <artifactId>ecj</artifactId>
             <version>3.21.0</version>
         </dependency>
-
     </dependencies>
-
-
-
-
 </project>
