@@ -1,0 +1,22 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Feature: userRecipes" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" editBeforeRun="true" focusToolWindowBeforeRun="true" nameIsGenerated="true">
+    <option name="CUCUMBER_CORE_VERSION" value="5" />
+    <option name="FILE_PATH" value="$PROJECT_DIR$/src/use_case/userRecipes.feature" />
+    <option name="GLUE" value="sweet.acceptance_tests" />
+    <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+    <module name="sweet_NY" />
+    <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
+    <shortenClasspath name="NONE" />
+    <option name="SUGGESTED_NAME" value="Feature: userRecipes" />
+    <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+    <extension name="coverage">
+      <pattern>
+        <option name="PATTERN" value="io.cucumber.core.cli.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
