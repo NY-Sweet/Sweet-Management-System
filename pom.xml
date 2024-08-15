@@ -48,11 +48,7 @@
                 </execution>
             </executions>
         </plugin>
-        <plugin>
-            <groupId>org.sonarsource.scanner.maven</groupId>
-            <artifactId>sonar-maven-plugin</artifactId>
-            <version>3.11.0.3441</version> <!-- Ensure this version is up-to-date -->
-        </plugin>
+       
     </plugins>
 </build>
 
