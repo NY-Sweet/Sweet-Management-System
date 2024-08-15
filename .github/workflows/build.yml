@@ -26,12 +26,17 @@ jobs:
           restore-keys: ${{ runner.os }}-sonar
       - name: Cache Maven packages
         uses: actions/cache@v3
-        with: 
+        with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+      - name: Clean and Rebuild
+        run: |
+          mvn clean
+          rm -rf ~/.m2/repository
+          mvn install
       - name: Build and Test with JaCoCo Coverage
-        run: mvn -B clean verify
+        run: mvn -B verify
       - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
