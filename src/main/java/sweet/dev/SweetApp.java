@@ -61,6 +61,7 @@ public class SweetApp {
         LinkedList<OrderDetails> orderDetails = new LinkedList<>();
         product milk = s1.getProductManager().findProduct("101");
         product bread =s1.getProductManager().findProduct("102");
+        milk.addFeedback("Good Milk ");
         orderDetails.add(new OrderDetails(milk, 5)); // 5 units of milk
         orderDetails.add(new OrderDetails(bread, 2)); // 2 units of bread
         Order order1 = new Order("order001", "sara", orderDetails);
@@ -89,7 +90,6 @@ public class SweetApp {
         this.Recipemanager=new RecipeManager(users);
         Recipe Rec1;
         Recipemanager.postRecipe(Rec1 = new Recipe("Pancake", 3, "Milk, flour, oil", "Mix them all", u1.getUserName()));
-        Recipemanager.ValidateRecipe(Rec1);
         Rec1.addFeedback("0-by: haya nice and easy");
 
         Rec1.setId(1);
@@ -213,15 +213,6 @@ public class SweetApp {
         IsMessageDisplayedforVlidationaRecipe= false;
     }
 
-    public boolean  addStoreOwner(String userName, String password, String phoneNum, String email,
-                              String city, String street, String homeNum, String shopName,
-                              int employeeNum) {
-        if (admin.AdminPermession()){
-            this.supplierManager.createAccountForSupplier(userName, password, phoneNum, email, city,
-                    street, homeNum, "s", shopName, employeeNum);
-        }
-        return false;
-    }
     public boolean DeleteAccount (String userName) {
 
        if (null !=this.supplierManager.getTheSupplier(userName)) {

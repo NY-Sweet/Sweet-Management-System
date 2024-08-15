@@ -14,15 +14,13 @@ public class login {
     private LoginManager loginManager;
     private UserManager userManager;
     private SupplierManager supplierManager;
-    private String username;
-    private String newPassword;
-    private String resetToken;
+    private AdminManager adminManager;
 
 
     public login(SweetApp obj) {
         super();
         this.obj=obj;
-
+        adminManager=obj.getAdminManager();
         userManager = obj.getUserManager();
         userManager.addUser("haya","123456","","","","","","u");
         supplierManager = obj.getSupplierManager();
@@ -52,6 +50,7 @@ public class login {
 
     @Then("login failed")
     public void login_failed() {
+
         assertFalse("Login should fail", loginManager.isValidation());
     }
 
@@ -167,6 +166,16 @@ public class login {
     @Then("the role should be {string}")
     public void the_role_should_be(String expectedRole) {
         assertEquals(Integer.valueOf(expectedRole), loginManager.getRoleInSys());
+    }
+    Admin NewAdmin;
+    @When("Invalid Admin name {string}")
+    public void invalid_admin_name(String string) {
+       NewAdmin=adminManager.getTheAdmin(string);
+    }
+
+    @Then("Invalid Name Message")
+    public void invalid_name_message() {
+       assertNull(NewAdmin);
     }
 
 }

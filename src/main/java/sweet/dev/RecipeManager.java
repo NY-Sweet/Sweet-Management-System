@@ -87,11 +87,13 @@ public class RecipeManager {
         logger.info("\nHere are the recipes that do NOT contain any of your allergies:\n");
         if (filteredRecipes.isEmpty()) {
             logger.info("Unfortunately, no recipes match your dietary restrictions.\n");
+            return false;
         } else {
             print(filteredRecipes);
+            return true;
         }
 
-        return true;
+
     }
 
 
@@ -112,10 +114,11 @@ public class RecipeManager {
         logger.info("\nHere are the recipes that match your dietary restrictions:\n");
         if (filteredRecipes.isEmpty()) {
             logger.info("Unfortunately, no recipes match your dietary restrictions.\n");
+            return false;
         } else {
             return print(filteredRecipes);
         }
-        return true;
+
     }
 
     private boolean print(List<Recipe> filteredRecipes) {
@@ -192,9 +195,9 @@ public class RecipeManager {
 
     }
     public boolean DeleteaFeedofaRecipe(int recipeid , int feedbackid){
-        if(recipeid<Validatedrecipes.size()) {
+        if(recipeid<Validatedrecipes.size() && recipeid >=0) {
           LinkedList<String> feedBacks= Validatedrecipes.get(recipeid).feedbacks;
-          if(feedBacks.size()>feedbackid) {
+          if(feedBacks.size()>feedbackid && feedbackid >=0) {
               Validatedrecipes.get(recipeid).feedbacks.remove(feedbackid);
               return true;
           }

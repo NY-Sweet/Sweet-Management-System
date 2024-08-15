@@ -28,16 +28,24 @@ Feature:  Manage personal accounts
 
   Scenario Outline: change user email
     When the user select edit email "e"
-    And the user updates the "new_email" field with a new email name
+    And the user updates the <new_email> field with a new email name
     Then the system saves the new email
     Examples:
-      |"new_email"|
+      |new_email|
       |"yaradaraghmeh056@gmail.com"|
 
   Scenario Outline: change user password
     When the user select edit password "p"
-    And the user enters old password  "old Password" new password "New Password" and confirm password "Confirm Password"
+    And the user enters old password  <old Password> new password <New Password> and confirm password <Confirm Password>
     Then the system validates the inputs and sets the new password
     Examples:
-      | "old Password" | "New Password" | "Confirm Password" |
+      | old Password | New Password | Confirm Password |
       | "123456789"    | "123"          | "123"              |
+
+  Scenario Outline: failed change user password
+    When the user select edit password "p"
+    And the user enters  invalid inputs old password  <old Password> new password <New Password> and confirm password <Confirm Password>
+    Then the system validates the inputs and password change is not valid
+    Examples:
+      | old Password | New Password | Confirm Password |
+      | "123456789"    | "1234"          | "123"              |

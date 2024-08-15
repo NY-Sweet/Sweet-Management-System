@@ -49,9 +49,6 @@ public class Recipe {
         this.getFeedbacks();
         return true;
     }
-    public void DeleteFeedback(String feedback) {
-        feedbacks.remove(feedback);
-    }
 
     public String getName() {
         return name;
@@ -61,18 +58,7 @@ public class Recipe {
         return Publisher;
     }
 
-    @Override
-    public String toString() {
-        return "Recipe{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", numberOfIngredients=" + numberOfIngredients +
-                ", ingredients='" + ingredients + '\'' +
-                ", steps='" + steps + '\'' +
-                ", Publisher='" + Publisher + '\'' +
-                ", feedbacks=" + feedbacks +
-                '}';
-    }
+
     public void showFeedbaks (){
         int i =0;
         for (final String feedback : feedbacks) {

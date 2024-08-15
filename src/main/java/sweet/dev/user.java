@@ -26,9 +26,7 @@ public class user {
         this.orders=new LinkedList<>();
     }
 
-    public LinkedList<Order> getOrders() {
-        return orders;
-    }
+
 
     public user() {
         this.orders=new LinkedList<>();
@@ -53,7 +51,9 @@ public class user {
     public String getStreet() {
         return street;
     }
-
+    public LinkedList<Order> getOrders() {
+        return orders;
+    }
 
 
     public String getEmail() {

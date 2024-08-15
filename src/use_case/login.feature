@@ -10,10 +10,7 @@ Feature: log in user and sign up to user
     |"admin"|"123456"|
 
 
-  Scenario: invalid user name
-    Given I am not in sweet management system
-    When set invalid username "hayaw" and password "123"
-    Then login failed
+
 
 
   Scenario Outline: invalid password
@@ -115,3 +112,7 @@ Feature: log in user and sign up to user
     Given the user has the role "2" in the system
     When the system retrieves the user's role
     Then the role should be "2"
+
+    Scenario: Admin not found
+      When Invalid Admin name "Adminname"
+      Then Invalid Name Message

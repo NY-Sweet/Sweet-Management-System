@@ -62,16 +62,14 @@ public class UserManager {
                 return true;
             }
         }
-        return true ;
+        return false ;
     }
 
     public boolean deleteUser (String UserName){
         user userToRemove =  getTheUser(UserName);
-        if (userToRemove != null) {
-            users.remove(userToRemove);
-            return true;
-        }
-        return false;
+        users.remove(userToRemove);
+        return true;
+
     }
     private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
     public boolean DisplayAllUsers (){

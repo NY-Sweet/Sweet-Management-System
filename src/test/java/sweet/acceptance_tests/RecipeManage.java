@@ -5,10 +5,7 @@ import io.cucumber.java.en.When;
 import sweet.dev.Recipe;
 import sweet.dev.SweetApp;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -37,7 +34,7 @@ public class RecipeManage {
 
     @Then("if the details are valid, the recipe is created successfully")
     public void if_the_details_are_valid_the_recipe_is_created_successfully() {
-       assertEquals(NewRecipe,obj.getRecipemanager().searchRecipes(NewRecipe.getName()).get(0));
+       assertTrue("Success", Objects.equals(obj.getRecipemanager().searchRecipes(NewRecipe.getName()).get(0).getName(), NewRecipe.getName()));
     }
 
     @Then("a  message is displayed")
@@ -61,7 +58,6 @@ public class RecipeManage {
 
     @When("the user enter the {string}")
     public void the_user_enter_the(String string) {
-
         Dtr= string ;
     }
 
@@ -79,9 +75,19 @@ public class RecipeManage {
 
     @Then("Display all recipes based on dietary")
     public void display_all_recipes_based_on_dietary() {
-        String Dietray = new String();
-        Dietray = "Milk";
-        assertTrue("succeed", obj.getRecipemanager().filterRecipesByDietaryRestrictions(obj.getRecipemanager().getValidatedRecipes(), Dietray));
+        assertTrue("succeed", obj.getRecipemanager().filterRecipesByDietaryRestrictions(obj.getRecipemanager().getValidatedRecipes(), Dtr));
+
+    }
+
+    @When("the user enter the {string} and not found any for him")
+    public void the_user_enter_the_and_not_found_any_for_him(String string) {
+        Dtr= string;
+    }
+
+
+    @Then("Print Nothing found suitable for you")
+    public void print_nothing_found_suitable_for_you() {
+        assertFalse( obj.getRecipemanager().filterRecipesByDietaryRestrictions(obj.getRecipemanager().getValidatedRecipes(), Dtr));
 
     }
 
@@ -95,7 +101,8 @@ public class RecipeManage {
 
     @Then("the feedback is sent successfully")
     public void the_feedback_is_sent_successfully() {
-        Recipe RE1 =  new Recipe("cake",3,"egge milk flour","mix","haya");
+        Recipe RE1 =  new Recipe("Pancake",3,"Milk, flour, oil","Mix them all","haya");
+
         obj.getRecipemanager().postRecipe(RE1);
         obj.getRecipemanager().ValidateRecipe(RE1);
         assertTrue("Succeed",obj.getRecipemanager().searchRecipes("cake").get(0).addFeedback(Content) );

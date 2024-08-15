@@ -21,6 +21,13 @@ Feature: Admin account manage accounts
    | newUsername |
    | "haya"      |
 
+  Scenario Outline: admin  delete User account failed
+    When  the admin set  username <newUsername> to delete this invalid user
+    Then Failed Message Diplayed
+    Examples:
+      | newUsername |
+      | "ooood"      |
+
   Scenario Outline: admin  delete account not existed
     When  the admin set  username <newUsername> to delete this user
     Then a failed message displayed

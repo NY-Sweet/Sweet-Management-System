@@ -10,11 +10,6 @@ public class Admin {
     public String getAdminName() {
         return AdminName;
     }
-
-    public boolean AdminPermession() {
-        return true;
-    }
-
     public Object getPassword() {
         return password;
     }

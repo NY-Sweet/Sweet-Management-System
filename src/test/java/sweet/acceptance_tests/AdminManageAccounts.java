@@ -58,6 +58,17 @@ public class AdminManageAccounts {
     public void the_user_deleted_and_a_message_displayed() {
         assertTrue("Succeed",obj.DeleteAccount(UserNametobedeleted));
     }
+    @When("the admin set  username {string} to delete this invalid user")
+    public void the_admin_set_username_to_delete_this_invalid_user(String string) {
+        UserNametobedeleted = string;
+    }
+
+    @Then("Failed Message Diplayed")
+    public void failed_message_diplayed() {
+        assertFalse(obj.DeleteAccount(UserNametobedeleted));
+
+    }
+
     @Then("a failed message displayed")
     public void a_failed_message_displayed() {
         assertFalse("Succeed",obj.DeleteAccount(UserNametobedeleted));

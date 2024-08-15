@@ -7,7 +7,7 @@ Feature: Post personal dessert creations, Search, Browse, Filter
     And a  message is displayed
     Examples:
       | userName | name             | numberOfIngredients | ingredients       | steps|
-      | "haya"   | "cake"          | 3                | "egge milk flour" |"mix"|
+      | "haya"   | "Pancake"          | 3                | "egge milk flour" |"mix"|
 
 
   Scenario: Browse recipes
@@ -39,13 +39,22 @@ Feature: Post personal dessert creations, Search, Browse, Filter
       |"milk"     |
 
 
+
   Scenario Outline: Filter recipes based on dietary
 
     When the user enter the <foodDietary>
     Then Display all recipes based on dietary
     Examples:
       |foodDietary|
-      |"egge"     |
+      |"eggs"     |
+
+  Scenario Outline: Filter recipes based on dietary and not founding any suitable
+
+    When the user enter the <foodDietary> and not found any for him
+    Then Print Nothing found suitable for you
+    Examples:
+      |foodDietary|
+      |"eggee"     |
 
   Scenario Outline: Feedback to recipes
     When the user enters the recipe Name <Name> and feedback content <content>
