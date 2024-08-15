@@ -40,7 +40,7 @@
                     </goals>
                 </execution>
                 <execution>
-                    <id>generate-report</id>
+                    <id>report</id>
                     <phase>verify</phase>
                     <goals>
                         <goal>report</goal>
