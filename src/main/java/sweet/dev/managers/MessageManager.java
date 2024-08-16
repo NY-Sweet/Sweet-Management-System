@@ -44,11 +44,7 @@ public class MessageManager {
     }
 
     private boolean isValidReceiver(String receiver) {
-        if (supplierManager.getTheSupplier(receiver) != null || userManager.getTheUser(receiver) != null) {
-            return true;
-        } else {
-            return false;
-        }
+        return supplierManager.getTheSupplier(receiver) != null || userManager.getTheUser(receiver) != null;
     }
 
     public List<MessageSys> getInbox(String username) {
