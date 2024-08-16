@@ -72,9 +72,10 @@ public class MessageManager {
             message.setRead(true);
             inboxMessages.append(String.format(" %-20s %-10s %-15s%n", message.getSender(), message.getContent(), message.getDate()));
         }
-
-        logger.info("Inbox Messages for user " + user + ":");
-        logger.info(inboxMessages.toString());
+        if (!userMessages.isEmpty()) {
+            logger.info("Inbox Messages for user " + user + ":");
+            logger.info(inboxMessages.toString());
+        }
 
         return true;
     }
