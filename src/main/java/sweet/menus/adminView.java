@@ -1,6 +1,6 @@
 package sweet.menus;
 
-import sweet.Format.PrettyFormatter;
+import sweet.format.PrettyFormatter;
 import sweet.dev.managers.AdminManager;
 import sweet.dev.managers.RecipeManager;
 import sweet.dev.managers.SupplierManager;

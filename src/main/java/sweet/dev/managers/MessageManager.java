@@ -1,6 +1,6 @@
 package sweet.dev.managers;
 
-import sweet.Format.PrettyFormatter;
+import sweet.format.PrettyFormatter;
 import sweet.dev.models.MessageSys;
 
 import java.time.LocalDate;

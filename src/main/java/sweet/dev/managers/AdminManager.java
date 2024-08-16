@@ -1,6 +1,6 @@
 package sweet.dev.managers;
 
-import sweet.Format.PrettyFormatter;
+import sweet.format.PrettyFormatter;
 import sweet.dev.models.Admin;
 import sweet.dev.models.supplier;
 import sweet.dev.models.user;

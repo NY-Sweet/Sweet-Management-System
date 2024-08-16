@@ -1,5 +1,5 @@
 package sweet.menus;
-import sweet.Format.PrettyFormatter;
+import sweet.format.PrettyFormatter;
 import sweet.dev.managers.*;
 import sweet.dev.models.*;
 

@@ -1,6 +1,6 @@
 package sweet.dev.managers;
 
-import sweet.Format.PrettyFormatter;
+import sweet.format.PrettyFormatter;
 import sweet.dev.models.DiscountRule;
 import sweet.dev.models.product;
 

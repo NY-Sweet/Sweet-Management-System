@@ -1,4 +1,4 @@
-package sweet.Format;
+package sweet.format;
 
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;
@@ -12,9 +12,9 @@ public class PrettyFormatter extends Formatter {
     private static final String ANSI_RED = "\u001B[31m";
 
     @Override
-    public String format(LogRecord record) {
+    public String format(LogRecord logRecord) {
         String levelColor;
-        switch (record.getLevel().getName()) {
+        switch (logRecord.getLevel().getName()) {
             case "SEVERE":
                 levelColor = ANSI_RED;  // Red for severe messages
                 break;
@@ -27,6 +27,6 @@ public class PrettyFormatter extends Formatter {
             default:
                 levelColor = ANSI_BLUE;  // Blue for everything else
         }
-        return ANSI_BOLD + levelColor + formatMessage(record) + ANSI_RESET + System.lineSeparator();
+        return ANSI_BOLD + levelColor + formatMessage(logRecord) + ANSI_RESET + System.lineSeparator();
     }
 }
