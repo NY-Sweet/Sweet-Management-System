@@ -120,9 +120,6 @@ public class OrderManager {
 
 
     public void showBestProducts() {
-        if (!logger.isInfoEnabled()) {
-            return;
-        }
 
         Map<String, Integer> productSales = new HashMap<>();
 
