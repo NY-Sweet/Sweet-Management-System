@@ -66,16 +66,19 @@ public class MessageManager {
 
         StringBuilder inboxMessages = new StringBuilder();
         inboxMessages.append(String.format(" %-20s %-10s %-15s%n", "Sender", "Content", "Date"));
-        inboxMessages.append("---------------------------------------------------------\n");
+        inboxMessages.append("---------------------------------------------------------%n");
 
         for (MessageSys message : userMessages) {
             message.setRead(true);
             inboxMessages.append(String.format(" %-20s %-10s %-15s%n", message.getSender(), message.getContent(), message.getDate()));
         }
-        if (!userMessages.isEmpty()) {
-            logger.info("Inbox Messages for user " + user + ":");
-            logger.info(inboxMessages.toString());
-        }
+
+        logger.info(() -> {
+            if (!userMessages.isEmpty()) {
+                return "Inbox Messages for user " + user + ":%n" + inboxMessages.toString();
+            }
+            return "";
+        });
 
         return true;
     }
