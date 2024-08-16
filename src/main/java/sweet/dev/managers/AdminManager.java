@@ -79,16 +79,18 @@ public class AdminManager {
             return;
         }
 
-        StringBuilder sb = new StringBuilder();
-        sb.append("User Statistics by City%n");
-        sb.append(String.format("%-20s %-10s%n", "City", "User Count"));
-        sb.append("------------------------------%n");
+        logger.info(() -> {
+            StringBuilder sb = new StringBuilder();
+            sb.append("User Statistics by City%n");
+            sb.append(String.format("%-20s %-10s%n", "City", "User Count"));
+            sb.append("------------------------------%n");
 
-        for (Map.Entry<String, Integer> entry : cityUserCountMap.entrySet()) {
-            sb.append(String.format("%-20s %-10d%n", entry.getKey(), entry.getValue()));
-        }
+            for (Map.Entry<String, Integer> entry : cityUserCountMap.entrySet()) {
+                sb.append(String.format("%-20s %-10d%n", entry.getKey(), entry.getValue()));
+            }
 
-        logger.info(sb.toString());
+            return sb.toString();
+        });
     }
     }
 
