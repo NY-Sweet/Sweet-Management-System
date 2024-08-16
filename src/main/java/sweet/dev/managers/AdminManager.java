@@ -75,12 +75,14 @@ public class AdminManager {
         return true;
     }
     private void printCityUserStatistics(Map<String, Integer> cityUserCountMap) {
-        logger.info("User Statistics by City");
-        logger.info(String.format("%-20s %-10s", "City", "User Count"));
-        logger.info("------------------------------");
+        if (!cityUserCountMap.isEmpty()) { // Conditional logging
+            logger.info("User Statistics by City");
+            logger.info(String.format("%-20s %-10s", "City", "User Count"));
+            logger.info("------------------------------");
 
-        for (Map.Entry<String, Integer> entry : cityUserCountMap.entrySet()) {
-            logger.info(String.format("%-20s %-10d", entry.getKey(), entry.getValue()));
+            for (Map.Entry<String, Integer> entry : cityUserCountMap.entrySet()) {
+                logger.info(String.format("%-20s %-10d", entry.getKey(), entry.getValue()));
+            }
         }
     }
 }
