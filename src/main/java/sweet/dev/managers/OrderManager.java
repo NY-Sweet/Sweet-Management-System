@@ -86,27 +86,35 @@ public class OrderManager {
 
 
     public void viewMonthlySalesAndProfits(int month, int year) {
-        successOperation=false;
-        double totalSales = 0.0;
-        double totalCost = 0.0;
-        StringBuilder monthlyReport = new StringBuilder();
-        monthlyReport.append(String.format(String.format("%-10s %-20s %-12s %-12s %-15s%n",
-                "Order ID", "Username", "Total Price", "Total Cost", "Date")));
-        monthlyReport.append("--------------------------------------------------------------\n");
+        final StringBuilder monthlyReport = new StringBuilder();
+        monthlyReport.append(String.format("%-10s %-20s %-12s %-12s %-15s%n",
+                "Order ID", "Username", "Total Price", "Total Cost", "Date"));
+        monthlyReport.append("--------------------------------------------------------------%n");
+
+        final double[] totals = {0.0, 0.0}; // [totalSales, totalCost]
 
         for (Order order : orders) {
             LocalDate orderDate = order.getDate();
             if (orderDate.getMonthValue() == month && orderDate.getYear() == year) {
-                totalSales += order.getTotalPrice();
-                totalCost += order.getTotalCost();
+                totals[0] += order.getTotalPrice();
+                totals[1] += order.getTotalCost();
                 monthlyReport.append(String.format("%-10s %-20s %-12.2f %-12.2f %-15s%n",
-                        order.getOrderId(), order.getUsername(), order.getTotalPrice(), order.getTotalCost(), orderDate.toString()));
+                        order.getOrderId(), order.getUsername(), order.getTotalPrice(),
+                        order.getTotalCost(), orderDate.toString()));
             }
         }
 
-        logger.info(monthlyReport.toString());
-        logger.info(String.format("%n Total Sales: %.2f, Total Cost: %.2f, Profit: %.2f", totalSales, totalCost, totalSales - totalCost));
-        successOperation=true;
+        final double totalSales = totals[0];
+        final double totalCost = totals[1];
+
+        logger.info(() -> {
+            StringBuilder logMessage = new StringBuilder(monthlyReport);
+            logMessage.append(String.format("%nTotal Sales: %.2f, Total Cost: %.2f, Profit: %.2f",
+                    totalSales, totalCost, totalSales - totalCost));
+            return logMessage.toString();
+        });
+
+        successOperation = true;
     }
 
 
