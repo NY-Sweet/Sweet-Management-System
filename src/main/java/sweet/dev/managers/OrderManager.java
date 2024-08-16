@@ -26,6 +26,7 @@ public class OrderManager {
     private static final String TOTAL_PRICE_STRING = "Total Price";
      private static final String ORDER_ID_STRING = "Order Id";
      private static final String USER_NAME_STRING = "User Name";
+    private static final String TOTAL_COST_STRING = "Total Cost";
     public boolean isSuccessOperation() {
         return successOperation;
     }
@@ -64,7 +65,7 @@ public class OrderManager {
 
         // Header
         dailyReport.append(String.format("%-10s %-20s %-12s %-12s %-15s%n",
-                ORDER_ID_STRING, USER_NAME_STRING, TOTAL_PRICE_STRING, "Total Cost", "Date"));
+                ORDER_ID_STRING, USER_NAME_STRING, TOTAL_PRICE_STRING, TOTAL_COST_STRING, "Date"));
         dailyReport.append("--------------------------------------------------------------\n");
 
         // Add data rows
@@ -90,7 +91,7 @@ public class OrderManager {
     public void viewMonthlySalesAndProfits(int month, int year) {
         final StringBuilder monthlyReport = new StringBuilder();
         monthlyReport.append(String.format("%-10s %-20s %-12s %-12s %-15s%n",
-                ORDER_ID_STRING, USER_NAME_STRING, TOTAL_PRICE_STRING, "Total Cost", "Date"));
+                ORDER_ID_STRING, USER_NAME_STRING, TOTAL_PRICE_STRING, TOTAL_COST_STRING, "Date"));
         monthlyReport.append("--------------------------------------------------------------%n");
 
         final double[] totals = {0.0, 0.0}; // [totalSales, totalCost]
@@ -329,7 +330,7 @@ public class OrderManager {
     private void printAnnualReport(int year, double[] totalSalesByMonth, double[] totalCostByMonth) {
         StringBuilder report = new StringBuilder();
         report.append(String.format("Financial Report for Year %d%n", year));
-        report.append(String.format("%-10s %-15s %-15s %-15s%n", "Month", "Total Sales", "Total Cost", "Profit"));
+        report.append(String.format("%-10s %-15s %-15s %-15s%n", "Month", "Total Sales", TOTAL_COST_STRING, "Profit"));
         report.append("---------------------------------------------------------------\n");
 
         // Add each month's data to the report
