@@ -18,6 +18,14 @@ public class ProductManager {
 
     private boolean operationSuccess;
     private static final Logger logger = Logger.getLogger(ProductManager.class.getName());
+    private static final String EXPIRATION_DATE_STRING = "Expiration Date";
+    private static final String AFTER_DISCOUNT_STRING = "After Discount";
+    private static final String QUANTITY_STRING = "Quantity";
+    private static final String PRICE_STRING = "Price";
+    private static final String DISCOUNT_STRING ="Discount (%)";
+   private static final String EXPIRATION_DATE_FORMAT_STRING ="%02d/%02d/%04d"
+
+
 
     public LinkedList<product> getProducts() {
         return products;
@@ -59,11 +67,11 @@ public class ProductManager {
         applyDiscount();
         StringBuilder table = new StringBuilder();
         table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-20s %-15s %-15s%n",
-                "ID", "Name", "Quantity", "Price", "Cost", "Expiration Date", "Discount (%)", "After Discount"));
+                "ID", "Name", QUANTITY_STRING, PRICE_STRING, "Cost", EXPIRATION_DATE_STRING, DISCOUNT_STRING, AFTER_DISCOUNT_STRING));
         table.append("===============================================================================================================================\n");
        LinkedList<product> products1=getProducts();
         for (product p : products1) {
-            String expirationDate = String.format("%02d/%02d/%04d", p.getDay(), p.getMonth(), p.getYear());
+            String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
             table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-20s %-15.2f %-15.2f%n",
                     p.getId(), p.getName(), p.getQuantity(), p.getPrice(), p.getCost(), expirationDate, p.getDiscountPercentage(), p.getPrice() * (1 - p.getDiscountPercentage() / 100)));
         }
@@ -75,12 +83,12 @@ public class ProductManager {
         applyDiscount();
         StringBuilder table = new StringBuilder();
         table.append(String.format("%-10s %-20s %-10s %-10s %-20s %-15s %-15s %-50s%n",
-                "ID", "Name", "Quantity", "Price", "Expiration Date", "Discount (%)", "After Discount", "Feedbacks"));
+                "ID", "Name", QUANTITY_STRING, PRICE_STRING, EXPIRATION_DATE_STRING, DISCOUNT_STRING, AFTER_DISCOUNT_STRING, "Feedbacks"));
         table.append("==========================================================================================================================================================\n");
 
         LinkedList<product> products1 = getProducts();
         for (product p : products1) {
-            String expirationDate = String.format("%02d/%02d/%04d", p.getDay(), p.getMonth(), p.getYear());
+            String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
             String feedbacks = p.formatFeedbacks();
 
             table.append(String.format("%-10s %-20s %-10d %-10.2f %-20s %-15.2f %-15.2f %-50s%n",
@@ -182,14 +190,14 @@ public class ProductManager {
     public boolean showDiscountProducts() {
         StringBuilder table = new StringBuilder();
         table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-15s %-10s  %-10s%n",
-                "ID", "Name", "Quantity", "Price", "Cost", "Expiration Date", "Discount (%)", "After Discount"));
+                "ID", "Name", QUANTITY_STRING, PRICE_STRING, "Cost", EXPIRATION_DATE_STRING, DISCOUNT_STRING,AFTER_DISCOUNT_STRING));
         table.append("-----------------------------------------------------------------------------------------------------\n");
 
         applyDiscount();
 
         for (product p : products) {
             if (p.getDiscountPercentage() > 0) {
-                String expirationDate = String.format("%02d/%02d/%04d", p.getDay(), p.getMonth(), p.getYear());
+                String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
                 table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-15s %-10.2f %-10.2f%n",
                         p.getId(), p.getName(), p.getQuantity(), p.getPrice(), p.getCost(), expirationDate, p.getDiscountPercentage(), p.getPrice() * (1 - p.getDiscountPercentage() / 100)));
             }
