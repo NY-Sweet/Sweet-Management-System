@@ -120,6 +120,10 @@ public class OrderManager {
 
 
     public void showBestProducts() {
+        if (!logger.isInfoEnabled()) {
+            return;
+        }
+
         Map<String, Integer> productSales = new HashMap<>();
 
         // Count the total quantity sold for each product
@@ -146,8 +150,6 @@ public class OrderManager {
             }
             return bestProducts.toString();
         });
-
-        successOperation = true;
     }
 
     public void reserveStock(Order order) {
