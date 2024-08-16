@@ -24,7 +24,8 @@ public class OrderManager {
     private sweet.dev.models.supplier supplier;
     private static final Logger logger = Logger.getLogger(OrderManager.class.getName());
     private static final String TOTAL_PRICE_STRING = "Total Price";
-    
+     private static final String ORDER_ID_STRING = "Order Id";
+     private static final String USER_NAME_STRING = "User Name";
     public boolean isSuccessOperation() {
         return successOperation;
     }
@@ -63,7 +64,7 @@ public class OrderManager {
 
         // Header
         dailyReport.append(String.format("%-10s %-20s %-12s %-12s %-15s%n",
-                "Order ID", "Username", TOTAL_PRICE_STRING, "Total Cost", "Date"));
+                ORDER_ID_STRING, USER_NAME_STRING, TOTAL_PRICE_STRING, "Total Cost", "Date"));
         dailyReport.append("--------------------------------------------------------------\n");
 
         // Add data rows
@@ -89,7 +90,7 @@ public class OrderManager {
     public void viewMonthlySalesAndProfits(int month, int year) {
         final StringBuilder monthlyReport = new StringBuilder();
         monthlyReport.append(String.format("%-10s %-20s %-12s %-12s %-15s%n",
-                "Order ID", "Username", TOTAL_PRICE_STRING, "Total Cost", "Date"));
+                ORDER_ID_STRING, USER_NAME_STRING, TOTAL_PRICE_STRING, "Total Cost", "Date"));
         monthlyReport.append("--------------------------------------------------------------%n");
 
         final double[] totals = {0.0, 0.0}; // [totalSales, totalCost]
@@ -269,7 +270,7 @@ public class OrderManager {
     public void showOrders(String state) {
         successOperation = false;
         StringBuilder table = new StringBuilder();
-        table.append(String.format("%-10s %-20s %-10s %-15s%n", "Order ID", "Username", TOTAL_PRICE_STRING, "Date"));
+        table.append(String.format("%-10s %-20s %-10s %-15s%n", ORDER_ID_STRING, USER_NAME_STRING, TOTAL_PRICE_STRING, "Date"));
         table.append("---------------------------------------------------------\n");
 
         for (Order order : orders) {
