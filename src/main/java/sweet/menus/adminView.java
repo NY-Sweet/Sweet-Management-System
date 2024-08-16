@@ -97,7 +97,7 @@ public class adminView {
 
     private void ManageFeeds() {
         logger.info("Heres the recipes in our system and their feedbacks ");
-        recipeManager.ShowAllRecipes();
+        recipeManager.showAllRecipes();
         while (true) {
             logger.info(" enter the recipe Id you want to modify its feedBacks");
             int recipeId = Integer.parseInt(scanner.nextLine());
@@ -112,7 +112,7 @@ public class adminView {
                 }
                 logger.info("Enter the Feedback Id you want to delete");
                 int feedbacId = Integer.parseInt(scanner.nextLine());
-                if(recipeManager.DeleteaFeedofaRecipe(recipeId, feedbacId))
+                if(recipeManager.deleteaFeedofaRecipe(recipeId, feedbacId))
                 logger.info(" Deleted the Feedback Id " + feedbacId);
                 else
                     logger.warning("Feedback Id not valid " + feedbacId);
@@ -265,7 +265,7 @@ public class adminView {
         String choice = scanner.nextLine();
         switch (choice) {
             case "1":
-                recipeManager.ShowAllRecipes();
+                recipeManager.showAllRecipes();
                 break;
             case "2":
                 logger.info("Recipes Need Validation ");

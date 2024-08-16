@@ -203,7 +203,7 @@ public class SweetApp {
     }
 
     public boolean RecipoeTosearch (String recipe){
-        LinkedList <Recipe>SearchedRecipes =Recipemanager.searchRecipes(recipe);
+        LinkedList <Recipe>SearchedRecipes =Recipemanager.findRecipesByName(recipe);
         return true ;
 
     }

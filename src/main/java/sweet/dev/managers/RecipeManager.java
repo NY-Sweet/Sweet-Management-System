@@ -11,8 +11,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RecipeManager {
-    private LinkedList<Recipe> Validatedrecipes = new LinkedList<Recipe>();
-    private  LinkedList<Recipe> NotValidatedRecipes  = new LinkedList<Recipe>();
+    private LinkedList<Recipe> validatedRecipes = new LinkedList<Recipe>();
+    private  LinkedList<Recipe> notValidatedRecipes = new LinkedList<Recipe>();
     private  List <user> users ;
     private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
 
@@ -32,7 +32,7 @@ public class RecipeManager {
     }
 
     public  void postRecipe(Recipe recipe) {
-        NotValidatedRecipes.add(recipe);
+        notValidatedRecipes.add(recipe);
         logger.setLevel(Level.INFO);
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setLevel(Level.INFO);
@@ -42,21 +42,21 @@ public class RecipeManager {
 
 
     public  List<Recipe> getValidatedRecipes() {
-        return Validatedrecipes;
+        return validatedRecipes;
     }
     public  List<Recipe> getnotValidatedRecipes() {
-        return NotValidatedRecipes;
+        return notValidatedRecipes;
     }
     public boolean ValidateRecipe(Recipe recipetovaledate){
-        Validatedrecipes.add(recipetovaledate);
-        NotValidatedRecipes.remove(recipetovaledate);
+        validatedRecipes.add(recipetovaledate);
+        notValidatedRecipes.remove(recipetovaledate);
         return true;
     }
 
-    public  LinkedList<Recipe> searchRecipes(String RecipeToSearch) {
+    public  LinkedList<Recipe> findRecipesByName(String searchTerm) {
         LinkedList<Recipe> results = new LinkedList<>();
-        for (Recipe recipe : Validatedrecipes) {
-            if (recipe.getName().toLowerCase().contains(RecipeToSearch.toLowerCase())) {
+        for (Recipe recipe : validatedRecipes) {
+            if (recipe.getName().toLowerCase().contains(searchTerm.toLowerCase())) {
                 results.add(recipe);
             }
         }
@@ -171,7 +171,7 @@ public class RecipeManager {
 
 
     public Recipe searchRecipeById(int id) {
-        for (Recipe recipe : this.Validatedrecipes) {
+        for (Recipe recipe : this.validatedRecipes) {
             if (recipe.getId() == id) {
                 return recipe;
             }
@@ -179,28 +179,28 @@ public class RecipeManager {
         return null;
     }
     public Recipe searchRecipeByIdNotvalidated(int id) {
-        for (Recipe recipe : this.NotValidatedRecipes) {
+        for (Recipe recipe : this.notValidatedRecipes) {
             if (recipe.getId() == id) {
                 return recipe;
             }
         }
         return null;
     }
-    public boolean ShowAllRecipes() {
-        return print(Validatedrecipes);
+    public boolean showAllRecipes() {
+        return print(validatedRecipes);
     }
 
 
     public boolean deleteRecipeByIndex(int index){
-        this.Validatedrecipes.remove(index);
+        this.validatedRecipes.remove(index);
         return true ;
 
     }
-    public boolean DeleteaFeedofaRecipe(int recipeid , int feedbackid){
-        if(recipeid<Validatedrecipes.size() && recipeid >=0) {
-          LinkedList<String> feedBacks= Validatedrecipes.get(recipeid).feedbacks;
+    public boolean deleteaFeedofaRecipe(int recipeid , int feedbackid){
+        if(recipeid< validatedRecipes.size() && recipeid >=0) {
+          LinkedList<String> feedBacks= validatedRecipes.get(recipeid).feedbacks;
           if(feedBacks.size()>feedbackid && feedbackid >=0) {
-              Validatedrecipes.get(recipeid).feedbacks.remove(feedbackid);
+              validatedRecipes.get(recipeid).feedbacks.remove(feedbackid);
               return true;
           }
           return false;

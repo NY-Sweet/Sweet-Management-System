@@ -247,7 +247,7 @@ public class UserView {
                 }
                 break;
             case 2 :
-                recipeManager.ShowAllRecipes();
+                recipeManager.showAllRecipes();
                 logger.info("Enter the Recipe id you want give a feedback for ");
                 int RecipeID = scanner.nextInt();
                 scanner.nextLine();
@@ -304,7 +304,7 @@ public class UserView {
     }
 
     private void BrowseRecipes() {
-        recipeManager.ShowAllRecipes();
+        recipeManager.showAllRecipes();
     }
 
     private void PostaRecipe() {

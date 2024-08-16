@@ -34,7 +34,7 @@ public class ContentManagementByAdmin {
         obj.getRecipemanager().ValidateRecipe(addedre);
         obj.getRecipemanager().getValidatedRecipes().get(0).addFeedback("what an easy recipe");
         obj.getRecipemanager().getValidatedRecipes().get(0).addFeedback("Excellent!!!");
-        obj.getRecipemanager().ShowAllRecipes();
+        obj.getRecipemanager().showAllRecipes();
         recipeid= int1 ;
         obj.getRecipemanager().searchRecipeById(recipeid).showFeedbaks();
         feedid=int2;
@@ -42,7 +42,7 @@ public class ContentManagementByAdmin {
 
     @Then("the feedback is deleted")
     public void the_feedback_is_deleted() {
-       assertTrue("Succeed",obj.getRecipemanager().DeleteaFeedofaRecipe(recipeid,feedid));
+       assertTrue("Succeed",obj.getRecipemanager().deleteaFeedofaRecipe(recipeid,feedid));
     }
     int enteredbyadmin;
     @When("the admin  enters Invalid  recipe id  {int}")
@@ -74,7 +74,7 @@ public class ContentManagementByAdmin {
 
     @Then("failed message appears Invalid Feedback Id")
     public void failed_message_appears_invalid_feedback_id() {
-        assertFalse(obj.getRecipemanager().DeleteaFeedofaRecipe(recipeid,feedid));
+        assertFalse(obj.getRecipemanager().deleteaFeedofaRecipe(recipeid,feedid));
     }
 
     @When("the admin chooses a recipe to display its feedbacks by  Invalid  id {int} and   FeedbackId {int}")
@@ -85,7 +85,7 @@ public class ContentManagementByAdmin {
 
     @Then("failed message appears Invalid Recipe Id")
     public void failed_message_appears_invalid_recipe_id() {
-        assertFalse(obj.getRecipemanager().DeleteaFeedofaRecipe(recipeid,feedid));
+        assertFalse(obj.getRecipemanager().deleteaFeedofaRecipe(recipeid,feedid));
     }
 
 }

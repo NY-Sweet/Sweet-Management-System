@@ -34,7 +34,7 @@ public class RecipeManage {
 
     @Then("if the details are valid, the recipe is created successfully")
     public void if_the_details_are_valid_the_recipe_is_created_successfully() {
-       assertTrue("Success", Objects.equals(obj.getRecipemanager().searchRecipes(NewRecipe.getName()).get(0).getName(), NewRecipe.getName()));
+       assertTrue("Success", Objects.equals(obj.getRecipemanager().findRecipesByName(NewRecipe.getName()).get(0).getName(), NewRecipe.getName()));
     }
 
     @Then("a  message is displayed")
@@ -52,7 +52,7 @@ public class RecipeManage {
 
     @Then("Display all recipes from all users")
     public void display_all_recipes_from_all_users() {
-        assertTrue("succeed", obj.getRecipemanager().ShowAllRecipes());
+        assertTrue("succeed", obj.getRecipemanager().showAllRecipes());
 
     }
 
@@ -105,7 +105,7 @@ public class RecipeManage {
 
         obj.getRecipemanager().postRecipe(RE1);
         obj.getRecipemanager().ValidateRecipe(RE1);
-        assertTrue("Succeed",obj.getRecipemanager().searchRecipes("cake").get(0).addFeedback(Content) );
+        assertTrue("Succeed",obj.getRecipemanager().findRecipesByName("cake").get(0).addFeedback(Content) );
     }
 
 
