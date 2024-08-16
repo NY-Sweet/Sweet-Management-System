@@ -120,7 +120,6 @@ public class OrderManager {
 
 
     public void showBestProducts() {
-        successOperation=false;
         Map<String, Integer> productSales = new HashMap<>();
 
         // Count the total quantity sold for each product
@@ -128,29 +127,27 @@ public class OrderManager {
             for (OrderDetails orderDetail : order.getOrderDetails()) {
                 String productId = orderDetail.getProduct().getId();
                 int quantitySold = orderDetail.getQuantity();
-
-                productSales.put(productId, productSales.getOrDefault(productId, 0) + quantitySold);
+                productSales.merge(productId, quantitySold, Integer::sum);
             }
         }
 
         // Sort the products by quantity sold in descending order and get the top 5
         List<Map.Entry<String, Integer>> topProducts = productSales.entrySet()
                 .stream()
-                .sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .limit(5)
                 .collect(Collectors.toList());
 
-        // Collect the top 5 products
-        StringBuilder bestProducts = new StringBuilder("Top 5 Best Selling Products:\n");
-        for (Map.Entry<String, Integer> entry : topProducts) {
-            bestProducts.append(String.format("Product ID: %s, Quantity Sold: %d\n", entry.getKey(), entry.getValue()));
-        }
-
         // Log the best-selling products
-        Logger logger = Logger.getLogger(OrderManager.class.getName());
-        logger.info(bestProducts.toString());
-        successOperation=true;
+        logger.info(() -> {
+            StringBuilder bestProducts = new StringBuilder("Top 5 Best Selling Products:%n");
+            for (Map.Entry<String, Integer> entry : topProducts) {
+                bestProducts.append(String.format("Product ID: %s, Quantity Sold: %d%n", entry.getKey(), entry.getValue()));
+            }
+            return bestProducts.toString();
+        });
 
+        successOperation = true;
     }
 
     public void reserveStock(Order order) {
