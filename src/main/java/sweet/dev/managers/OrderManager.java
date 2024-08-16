@@ -237,10 +237,12 @@ public class OrderManager {
             properties.put("mail.smtp.auth", "true");
             properties.put("mail.smtp.starttls.enable", "true");
 
+             String emailUsername = System.getenv("EMAIL_USERNAME");
+          String emailPassword = System.getenv("EMAIL_PASSWORD");
             Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
                 @Override
                 protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("worldsweet974@gmail.com\n", "jrsd tqyg jehd umch");
+                    return new PasswordAuthentication(emailUsername, emailPassword);
                 }
             });
 
