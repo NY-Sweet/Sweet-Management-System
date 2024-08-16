@@ -23,7 +23,7 @@ public class ProductManager {
     private static final String QUANTITY_STRING = "Quantity";
     private static final String PRICE_STRING = "Price";
     private static final String DISCOUNT_STRING ="Discount (%)";
-   private static final String EXPIRATION_DATE_FORMAT_STRING ="%02d/%02d/%04d"
+   private static final String EXPIRATION_DATE_FORMAT_STRING ="%02d/%02d/%04d";
 
 
 
