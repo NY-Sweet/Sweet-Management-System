@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 import sweet.dev.system.SweetApp;
 
