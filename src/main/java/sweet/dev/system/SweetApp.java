@@ -53,11 +53,11 @@ public class SweetApp {
         users = new LinkedList<>();
         suppliers = new LinkedList<>();
         admins=new LinkedList<>();
-        User u1=new User("haya","123456","","","nablus","","","u");
+        User u1=new User("haya","123456","","s12112422@stu.najah.edu",new Adress("nablus","",""),"u");
         users.add(u1);
-        User u2=new User("sara","123456","","s12112422@stu.najah.edu","nablus","","","u");
+        User u2=new User("sara","123456","","s12112422@stu.najah.edu",new Adress("nablus","",""),"u");
         users.add(u2);
-       Supplier s1=new Supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","sweetee",4);
+       Supplier s1=new Supplier("noor","123456","","s12112422@stu.najah.edu",new Adress("nablus","",""),"s","sweetee",4);
        s1.getProductManager().addProduct(new Product("101","milk",100,10.5,8.0,new Date(28,7,2024),0.0));
        s1.getProductManager().addProduct(new Product("102", "bread", 50, 3.0, 2.0, new Date(25, 7, 2024), 0.0));
         this.Recipemanager = new RecipeManager();

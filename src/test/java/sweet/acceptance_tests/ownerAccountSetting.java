@@ -46,7 +46,7 @@ public class ownerAccountSetting {
     }
     @Then("the system displays a message indicating that the city has been updated successfully")
     public void the_system_displays_a_message_indicating_that_the_city_has_been_updated_successfully() {
-       assertTrue("city update successfully",owner.isOperationSuccess());
+       assertTrue("city update successfully",owner.getAdress().isOperationSuccess());
     }
 
     @When("the owner selects edit street and updates the field with a new {string}")
@@ -55,7 +55,7 @@ public class ownerAccountSetting {
     }
     @Then("the system displays a message indicating that the street has been updated successfully")
     public void the_system_displays_a_message_indicating_that_the_street_has_been_updated_successfully() {
-        assertTrue("strret update successfully",owner.isOperationSuccess());
+        assertTrue("street update successfully",owner.getAdress().isOperationSuccess());
     }
 
     @When("the owner selects edit home number and updates the field with a new {string}")
@@ -64,7 +64,7 @@ public class ownerAccountSetting {
     }
     @Then("the system displays a message indicating that the home number has been updated successfully")
     public void the_system_displays_a_message_indicating_that_the_home_number_has_been_updated_successfully() {
-        assertTrue("home number update successfully",owner.isOperationSuccess());
+        assertTrue("home number update successfully",owner.getAdress().isOperationSuccess());
     }
 
 

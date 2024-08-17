@@ -1,7 +1,9 @@
 package sweet.acceptance_tests;
 
+import io.cucumber.java.bs.A;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import sweet.dev.models.Adress;
 import sweet.dev.models.Supplier;
 import sweet.dev.models.User;
 import sweet.dev.system.SweetApp;
@@ -30,7 +32,7 @@ public class AdminManageAccounts {
     }
     @Then("a new supplier will be created")
     public void a_new_supplier_will_be_created() {
-        assertTrue("Succeed",obj.getSupplierManager().createAccountForSupplier(new Supplier(NewName, NewPassword,city,street,homeNum,phoneNum,email,"s",shopName,employeeNum)));
+        assertTrue("Succeed",obj.getSupplierManager().createAccountForSupplier(new Supplier(NewName, NewPassword,phoneNum,email,new Adress(city,street,homeNum),"s",shopName,employeeNum)));
 
     }
 
@@ -48,7 +50,7 @@ public class AdminManageAccounts {
     }
     @Then("a new user will be created")
     public void a_new_user_will_be_created() {
-        assertTrue("Succeed",obj.getUserManager().addUser(new User(NewName, NewPassword,city,street,homeNum,phoneNum,email,role)));
+        assertTrue("Succeed",obj.getUserManager().addUser(new User(NewName, NewPassword,phoneNum,email,new Adress(city,street,homeNum),role)));
 
     }
     String UserNametobedeleted;
