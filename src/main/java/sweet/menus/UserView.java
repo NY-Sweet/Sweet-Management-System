@@ -68,13 +68,13 @@ public class UserView {
                     Messaging();
                     break;
                 case "5":
-                    GiveAfeedBack();
+                    giveAfeedBack();
                     break;
                 case "6":
-                    UserAccountManagement();
+                    userAccountManagement();
                     break;
                 case "7":
-                    findarecipe();
+                    findaRecipe();
                     break;
                 case "8":
                     logger.info("Exiting User menu");
@@ -84,7 +84,7 @@ public class UserView {
             }
         }
     }
-    private void findarecipe() {
+    private void findaRecipe() {
         while (true) {
             String menuOptions = ANSI_PURPLE + """
                 ╔══════════════════════════════════════════╗
@@ -120,7 +120,7 @@ public class UserView {
         }
     }
 
-    private void UserAccountManagement() {
+    private void userAccountManagement() {
 
         while (true) {
             String menuOptions = ANSI_PURPLE + """
@@ -204,7 +204,7 @@ public class UserView {
         logger.info("Invalid choice. Please select a valid option.");
     }
 
-    private void GiveAfeedBack() {
+    private void giveAfeedBack() {
         while (true) {
             int choice = getChoiceForFeedbackType();
 
