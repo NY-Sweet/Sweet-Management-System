@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ProductManager {
@@ -44,9 +45,8 @@ public class ProductManager {
         logger.addHandler(consoleHandler);
     }
 
-    public void addProduct(String id, String name, Integer quantity, Double price,Double cost, Integer day, Integer month, Integer year, Double percentage) {
-       if(findProduct(id)==null) {
-           Product product=new Product(id, name, quantity, price, cost, day, month, year, percentage);
+    public void addProduct(Product product) {
+       if(findProduct(product.getId())==null) {
            products.add(product);
            setOperationSuccess(true);
        }
@@ -76,7 +76,9 @@ public class ProductManager {
                     p.getId(), p.getName(), p.getQuantity(), p.getPrice(), p.getCost(), expirationDate, p.getDiscountPercentage(), p.getPrice() * (1 - p.getDiscountPercentage() / 100)));
         }
 
-        logger.info(table.toString());
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(() -> table.toString());
+        }
         return true;
     }
     public boolean showProductsForCustomer() {
@@ -97,7 +99,9 @@ public class ProductManager {
                     feedbacks));
         }
 
-        logger.info(table.toString());
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(table::toString);
+        }
         return true;
     }
 
@@ -114,7 +118,6 @@ public class ProductManager {
         for (Product product : products) {
             if (isProductNearExpiration(product)) {
                 double discount = product.getPrice() * (discountRule.getPercentage() / 100);
-                double newPrice = product.getPrice() - discount;
                 product.setDiscountPercentage(discountRule.getPercentage());
             }
         }
@@ -203,7 +206,9 @@ public class ProductManager {
             }
         }
 
-        logger.info(table.toString());
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(table::toString);
+        }
         return true;
 
     }

@@ -14,9 +14,6 @@ public class LoginManager {
     private List<User> users;
     private List<Supplier> suppliers;
     private List<Admin> admins;
-    private String loggedInSupplier;
-
-    private Map<String, String> resetTokens = new HashMap<>();
 
 
     public LoginManager(List<User> users, List<Supplier> suppliers, List<Admin> admins) {
@@ -65,7 +62,6 @@ public class LoginManager {
         for (Supplier s : suppliers) {
             if (s.getUserName().equals(userName) && s.getPassword().equals(password)) {
                 validation = true;
-                loggedInSupplier = userName;
                 enteredUsername=userName;
                 roleInSys = 1;
             }

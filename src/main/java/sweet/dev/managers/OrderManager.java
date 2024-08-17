@@ -10,7 +10,6 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -85,7 +84,9 @@ public class OrderManager {
                 "Total", "", totalSales, totalCost));
         dailyReport.append(String.format("Profit: %.2f%n", totalSales - totalCost));
 
-        logger.info(dailyReport.toString());
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(dailyReport::toString);
+        }
         successOperation = true;
     }
 
@@ -288,7 +289,7 @@ public class OrderManager {
 
         if (logger.isLoggable(Level.INFO)) {
             logger.info("Delivered Orders:");
-            logger.info(() -> table.toString());
+            logger.info( table::toString);
         }
         successOperation = true;
     }
@@ -345,7 +346,7 @@ public class OrderManager {
         }
 
         if (logger.isLoggable(Level.INFO)) {
-            logger.info(() -> report.toString());
+            logger.info( report::toString);
         }
     }
 

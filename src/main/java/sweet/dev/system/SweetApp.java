@@ -57,8 +57,8 @@ public class SweetApp {
         User u2=new User("sara","123456","","s12112422@stu.najah.edu","nablus","","","u");
         users.add(u2);
        Supplier s1=new Supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","sweetee",4);
-       s1.getProductManager().addProduct("101","milk",100,10.5,8.0,28,7,2024,0.0);
-       s1.getProductManager().addProduct("102", "bread", 50, 3.0, 2.0, 25, 7, 2024, 0.0);
+       s1.getProductManager().addProduct(new Product("101","milk",100,10.5,8.0,28,7,2024,0.0));
+       s1.getProductManager().addProduct(new Product("102", "bread", 50, 3.0, 2.0, 25, 7, 2024, 0.0));
         this.Recipemanager = new RecipeManager(users);
         LinkedList<OrderDetails> orderDetails = new LinkedList<>();
         Product milk = s1.getProductManager().findProduct("101");

@@ -307,7 +307,7 @@ public class ownerView {
 
         logger.info("Discount Percentage: ");
         Double percentage = Double.parseDouble(scanner.nextLine());
-        productManager.addProduct(id, name, quantity, price, cost, day, month, year, percentage);
+        productManager.addProduct(new Product(id, name, quantity, price, cost, day, month, year, percentage));
 
         if (productManager.isOperationSuccess()) {
             logger.info("Product added successfully.");
