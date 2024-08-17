@@ -2,23 +2,23 @@ package sweet.dev.models;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Order {
     private String orderId;
     private String username;  // Added to identify the user who placed the order
 
     private String status;
-    private LinkedList<OrderDetails> orderDetails;
+    private List<OrderDetails> orderDetails;
     private double totalPrice;
     private double totalCost;
     private LocalDate date;
 
-    public Order(String orderId, String username, LinkedList<OrderDetails>orderDetails ) {
+    public Order(String orderId, String username, List<OrderDetails>orderDetails ) {
         this.orderId = orderId;
         this.username = username;
         this.orderDetails = orderDetails;
         this.date=LocalDate.now();
-        System.out.println(this.date);
         this.totalPrice = calculateTotalPrice();
         this.totalCost = calculateTotalCost();
         this.status="pending";
@@ -49,7 +49,7 @@ public class Order {
         return total;
     }
 
-    public LinkedList<OrderDetails> getOrderDetails() {
+    public List<OrderDetails> getOrderDetails() {
         return orderDetails;
     }
 

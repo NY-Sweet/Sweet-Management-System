@@ -3,6 +3,7 @@ package sweet.dev.models;
 import sweet.format.PrettyFormatter;
 
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
@@ -17,7 +18,7 @@ public class Product {
     private Integer month;
     private Integer year;
     private Double discountPercentage;
-    public LinkedList<String> feedbacks;
+    private List<String> feedbacks;
     private final Logger logger=Logger.getLogger("MyProduct");
     public Product(String id, String name, Integer quantity, Double price, Double cost, Integer day, Integer month, Integer year, Double discountPercentage) {
         this.id = id;
@@ -29,7 +30,7 @@ public class Product {
         this.month = month;
         this.year = year;
         this.discountPercentage = discountPercentage;
-        this.feedbacks = new LinkedList();
+        this.feedbacks = new LinkedList<String>();
 
         logger.setUseParentHandlers(false);
 

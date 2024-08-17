@@ -17,7 +17,6 @@ public class MessageSys {
         this.read = read;
     }
 
-    // Getters and setters
     public String getSender() { return sender; }
     public String getReceiver() { return receiver; }
     public String getContent() { return content; }

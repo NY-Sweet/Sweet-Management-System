@@ -1,14 +1,14 @@
 package sweet.dev.models;
 
 public class Admin {
-    private String AdminName;
+    private String adminName;
     private String password;
     public Admin(String username, String password) {
-        this.AdminName = username;
+        this.adminName = username;
         this.password = password;
     }
     public String getAdminName() {
-        return AdminName;
+        return adminName;
     }
     public Object getPassword() {
         return password;
