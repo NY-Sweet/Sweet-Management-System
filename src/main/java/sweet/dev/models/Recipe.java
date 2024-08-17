@@ -4,6 +4,7 @@ import sweet.format.PrettyFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class Recipe {
@@ -28,12 +29,12 @@ public class Recipe {
         return steps;
     }
 
-    public Recipe(String name, int numberOfIngredients, String ingredients, String steps, String Publisher) {
+    public Recipe(String name, int numberOfIngredients, String ingredients, String steps, String publisher) {
         this.name = name;
         this.numberOfIngredients = numberOfIngredients;
         this.ingredients = ingredients;
         this.steps = steps;
-        this.publisher = Publisher;
+        this.publisher = publisher;
         this.feedbacks = new LinkedList<>();
 
         logger.setUseParentHandlers(false);
@@ -64,7 +65,8 @@ public class Recipe {
     public void showFeedbaks (){
         int i =0;
         for (final String feedback : feedbacks) {
-        logger.info(i+ "   "+feedback);
+        logger.log(Level.INFO, "{0}   {1}", new Object[]{i, feedback});
+
         }
 
     }
