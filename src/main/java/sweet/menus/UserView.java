@@ -276,30 +276,8 @@ public class UserView {
         recipeManager.searchRecipeById(recipeId).addFeedback("\n by:" + User.getUserName() + feedbackContent);
     }
 
-    private Map<String, Product> buildProductMap(LinkedList<Order> orders) {
-        Map<String, Product> productMap = new HashMap<>();
-        for (Order order : orders) {
-            for (OrderDetails orderDetails : order.getOrderDetails()) {
-                Product product = orderDetails.getProduct();
-                productMap.put(product.getId(), product);
-            }
-        }
-        return productMap;
-    }
 
-    private String getValidProductId(Map<String, Product> productMap) {
-        logger.info("Enter the product ID you want to give feedback for: ");
-        while (true) {
-            String productId = scanner.nextLine().trim();
-            if (productId.isEmpty()) {
-                logger.warning("You entered an empty ID. Please enter a valid product ID:");
-            } else if (productMap.containsKey(productId)) {
-                return productId;
-            } else {
-                logger.warning("Invalid product ID entered.");
-            }
-        }
-    }
+
 
     private void messagingSys() {
         String menuOptions = ANSI_PURPLE + """
