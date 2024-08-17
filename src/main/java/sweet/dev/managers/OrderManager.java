@@ -16,6 +16,8 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
+import java.util.logging.Level;
+
 
 
 public class OrderManager {
@@ -135,14 +137,12 @@ public class OrderManager {
             }
         }
 
-        // Sort the products by quantity sold in descending order and get the top 5
         List<Map.Entry<String, Integer>> topProducts = productSales.entrySet()
                 .stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .limit(5)
-                .collect(Collectors.toList());
+                .toList();
 
-        // Log the best-selling products
         logger.info(() -> {
             StringBuilder bestProducts = new StringBuilder("Top 5 Best Selling Products:%n");
             for (Map.Entry<String, Integer> entry : topProducts) {
@@ -191,22 +191,25 @@ public class OrderManager {
                 }
 
                 order.setStatus(newStatus);
-                String message = "Order status updated: " + orderId + " to " + newStatus + "\n";
+                String message = String.format("Order status updated: %s to %s%n", orderId, newStatus);
                 StringBuilder table = new StringBuilder();
                 printProduct(order, table);
                 String username = order.getUsername();
                 String email = userManager.getTheUser(username).getEmail();
-                logger.info("Order status updated: " + orderId + " to " + newStatus);
+                if (logger.isLoggable(Level.INFO)) {
+                    logger.info(String.format("Order status updated: %s to %s", orderId, newStatus));
+                }
                 sendEmailTo(email, message + table.toString());
                 successOperation = true;
                 if(newStatus.equals("delivered"))
                 {
                     userManager.getTheUser(username).addOrder(order);
                 }
-                return;
             }
         else {
-                logger.warning("Order not found: " + orderId);
+                if (logger.isLoggable(Level.WARNING)) {
+                    logger.warning(String.format("Order not found: %s", orderId));
+                }
                 successOperation = false;
             }
     }
@@ -283,8 +286,10 @@ public class OrderManager {
             }
         }
 
-        logger.info("Delivered Orders:");
-        logger.info(table.toString());
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Delivered Orders:");
+            logger.info(() -> table.toString());
+        }
         successOperation = true;
     }
 
@@ -320,8 +325,8 @@ public class OrderManager {
         return true;
     }
     private double[] monthlySalesAndProfits(int month, int year) {
-        double totalSales = 0.0;
-        double totalCost = 0.0;
+        double totalSales ;
+        double totalCost ;
         totalSales = getTotalSalesForMonth(month, year);
         totalCost = getTotalCostForMonth(month, year);
 
@@ -339,7 +344,9 @@ public class OrderManager {
             report.append(String.format("%-10d %-15.2f %-15.2f %-15.2f%n", month + 1, totalSalesByMonth[month], totalCostByMonth[month], profit));
         }
 
-        logger.info(report.toString());
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(() -> report.toString());
+        }
     }
 
 
