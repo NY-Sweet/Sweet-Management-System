@@ -7,7 +7,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Handler;
 import java.util.logging.Logger;
 
-public class product {
+public class Product {
     private String id;
     private String name;
     private Integer quantity;
@@ -19,7 +19,7 @@ public class product {
     private Double discountPercentage;
     public LinkedList<String> feedbacks;
     private final Logger logger=Logger.getLogger("MyProduct");
-    public product(String id, String name, Integer quantity, Double price, Double cost, Integer day, Integer month, Integer year, Double discountPercentage) {
+    public Product(String id, String name, Integer quantity, Double price, Double cost, Integer day, Integer month, Integer year, Double discountPercentage) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;

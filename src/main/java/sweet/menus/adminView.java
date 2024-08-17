@@ -54,7 +54,7 @@ public class adminView {
                     ║    and raw material suppliers.                          ║
                     ║                                                         ║
                     ║ 2- Monitor profits and generate financial reports.      ║
-                    ║ 3- Identify best-selling products in each store.        ║
+                    ║ 3- Identify best-selling Products in each store.        ║
                     ║ 4- Gather and display statistics on registered users    ║
                     ║    by City (Nablus/Jenin etc...).                       ║
                     ║                                                         ║

@@ -1,9 +1,9 @@
 package sweet.dev.managers;
 
+import sweet.dev.models.Product;
 import sweet.format.PrettyFormatter;
 import sweet.dev.models.Order;
 import sweet.dev.models.OrderDetails;
-import sweet.dev.models.product;
 import sweet.dev.models.supplier;
 
 import java.time.LocalDate;
@@ -154,7 +154,7 @@ public class OrderManager {
 
     public void reserveStock(Order order) {
         for (OrderDetails details : order.getOrderDetails()) {
-            product product = supplier.getProductManager().findProduct(details.getProduct().getId());
+            Product product = supplier.getProductManager().findProduct(details.getProduct().getId());
             if (product != null) {
                 product.setQuantity(product.getQuantity() - details.getQuantity());
             }
@@ -163,7 +163,7 @@ public class OrderManager {
 
     public void restoreStock(Order order) {
         for (OrderDetails details : order.getOrderDetails()) {
-            product product = supplier.getProductManager().findProduct(details.getProduct().getId());
+            Product product = supplier.getProductManager().findProduct(details.getProduct().getId());
             if (product != null) {
                 product.setQuantity(product.getQuantity() + details.getQuantity());
             }
@@ -174,7 +174,7 @@ public class OrderManager {
 
     private boolean isStockAvailable(Order order) {
         for (OrderDetails details : order.getOrderDetails()) {
-            product product = supplier.getProductManager().findProduct(details.getProduct().getId());
+            Product product = supplier.getProductManager().findProduct(details.getProduct().getId());
             if (product == null || product.getQuantity() < details.getQuantity()) {
                 logger.info("Sorry the product "+product.getName()+" quantity not available the max quantity you can order "+product.getQuantity());
                 return false;
@@ -225,7 +225,7 @@ public class OrderManager {
         table.append("Products:\n");
         table.append(String.format("  %-10s %-20s %-10s %-10s%n", "Product ID", "Name", "Quantity", "Price"));
         for (OrderDetails details : order.getOrderDetails()) {
-            product product = details.getProduct();
+            Product product = details.getProduct();
             table.append(String.format("  %-10s %-20s %-10d %-10.2f%n",
                     product.getId(), product.getName(), details.getQuantity(), product.getPrice()));
         }

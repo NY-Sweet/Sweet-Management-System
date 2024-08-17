@@ -106,7 +106,7 @@ public class purchaseDesserts {
         LinkedList<OrderDetails> orderDetailsList = new LinkedList<>();
 
         for (int i = 0; i < productIdArray.length; i++) {
-            product product = productManager.findProduct(productIdArray[i]);
+            Product product = productManager.findProduct(productIdArray[i]);
             if(productManager.isInvalidProductId())
                 return;
             int quantity = Integer.parseInt(quantityArray[i]);

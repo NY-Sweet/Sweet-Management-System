@@ -61,8 +61,8 @@ public class SweetApp {
        s1.getProductManager().addProduct("102", "bread", 50, 3.0, 2.0, 25, 7, 2024, 0.0);
         this.Recipemanager = new RecipeManager(users);
         LinkedList<OrderDetails> orderDetails = new LinkedList<>();
-        product milk = s1.getProductManager().findProduct("101");
-        product bread =s1.getProductManager().findProduct("102");
+        Product milk = s1.getProductManager().findProduct("101");
+        Product bread =s1.getProductManager().findProduct("102");
         milk.addFeedback("Good Milk ");
         orderDetails.add(new OrderDetails(milk, 5)); // 5 units of milk
         orderDetails.add(new OrderDetails(bread, 2)); // 2 units of bread

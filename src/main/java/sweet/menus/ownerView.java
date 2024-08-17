@@ -1,11 +1,11 @@
 package sweet.menus;
+import sweet.dev.models.Product;
 import sweet.format.PrettyFormatter;
 import sweet.dev.managers.MessageManager;
 import sweet.dev.managers.OrderManager;
 import sweet.dev.managers.ProductManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.models.Order;
-import sweet.dev.models.product;
 import sweet.dev.models.supplier;
 
 import java.time.LocalDate;
@@ -89,8 +89,8 @@ public class ownerView {
 
     private void productFeedback() {
         ProductManager productManager=supplier.getProductManager();
-        List<product> products=productManager.getProducts();
-        for (product product:products)
+        List<Product> Products =productManager.getProducts();
+        for (Product product: Products)
         {
             logger.info(product.getId()+"       " + product.getName());
             logger.info(product.formatFeedbacks());

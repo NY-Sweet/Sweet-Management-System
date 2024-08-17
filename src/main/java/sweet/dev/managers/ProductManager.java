@@ -1,8 +1,8 @@
 package sweet.dev.managers;
 
+import sweet.dev.models.Product;
 import sweet.format.PrettyFormatter;
 import sweet.dev.models.DiscountRule;
-import sweet.dev.models.product;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 
 public class ProductManager {
 
-    private LinkedList<product> products;
+    private LinkedList<Product> Products;
     private DiscountRule discountRule;
     private boolean invalidProductId;
 
@@ -27,12 +27,12 @@ public class ProductManager {
 
 
 
-    public LinkedList<product> getProducts() {
-        return products;
+    public LinkedList<Product> getProducts() {
+        return Products;
     }
 
-    public ProductManager(LinkedList<product> products) {
-        this.products = products;
+    public ProductManager(LinkedList<Product> Products) {
+        this.Products = Products;
         this.discountRule = new DiscountRule(0, 0);
         setupLogger();
     }
@@ -46,8 +46,8 @@ public class ProductManager {
 
     public void addProduct(String id, String name, Integer quantity, Double price,Double cost, Integer day, Integer month, Integer year, Double percentage) {
        if(findProduct(id)==null) {
-           product product=new product(id, name, quantity, price, cost, day, month, year, percentage);
-           products.add(product);
+           Product product=new Product(id, name, quantity, price, cost, day, month, year, percentage);
+           Products.add(product);
            setOperationSuccess(true);
        }
        else
@@ -55,10 +55,10 @@ public class ProductManager {
     }
 
     public void deleteProduct(String id) {
-        product product = findProduct(id);
+        Product product = findProduct(id);
         setOperationSuccess(false);
         if (product != null) {
-            products.remove(product);
+            Products.remove(product);
             setOperationSuccess(true);
         }
     }
@@ -69,8 +69,8 @@ public class ProductManager {
         table.append(String.format("%-10s %-20s %-10s %-10s %-10s %-20s %-15s %-15s%n",
                 "ID", "Name", QUANTITY_STRING, PRICE_STRING, "Cost", EXPIRATION_DATE_STRING, DISCOUNT_STRING, AFTER_DISCOUNT_STRING));
         table.append("===============================================================================================================================\n");
-       LinkedList<product> products1=getProducts();
-        for (product p : products1) {
+       LinkedList<Product> products1=getProducts();
+        for (Product p : products1) {
             String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
             table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-20s %-15.2f %-15.2f%n",
                     p.getId(), p.getName(), p.getQuantity(), p.getPrice(), p.getCost(), expirationDate, p.getDiscountPercentage(), p.getPrice() * (1 - p.getDiscountPercentage() / 100)));
@@ -86,8 +86,8 @@ public class ProductManager {
                 "ID", "Name", QUANTITY_STRING, PRICE_STRING, EXPIRATION_DATE_STRING, DISCOUNT_STRING, AFTER_DISCOUNT_STRING, "Feedbacks"));
         table.append("==========================================================================================================================================================\n");
 
-        LinkedList<product> products1 = getProducts();
-        for (product p : products1) {
+        LinkedList<Product> products1 = getProducts();
+        for (Product p : products1) {
             String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
             String feedbacks = p.formatFeedbacks();
 
@@ -111,7 +111,7 @@ public class ProductManager {
 
     public void applyDiscount() {
 
-        for (product product : products) {
+        for (Product product : Products) {
             if (isProductNearExpiration(product)) {
                 double discount = product.getPrice() * (discountRule.getPercentage() / 100);
                 double newPrice = product.getPrice() - discount;
@@ -120,7 +120,7 @@ public class ProductManager {
         }
     }
 
-    private boolean isProductNearExpiration(product product) {
+    private boolean isProductNearExpiration(Product product) {
         LocalDate today = LocalDate.now();
         LocalDate expirationDate = LocalDate.of(product.getYear(), product.getMonth(), product.getDay());
         long daysUntilExpiration = ChronoUnit.DAYS.between(today, expirationDate);
@@ -128,9 +128,9 @@ public class ProductManager {
         return daysUntilExpiration <= discountRule.getDaysBeforeExpiration();
     }
 
-    public product findProduct(String productId) {
+    public Product findProduct(String productId) {
         invalidProductId=true;
-        for (product product : products) {
+        for (Product product : Products) {
             if (product.getId().equals(productId)) {
                 invalidProductId=false;
                 return product;
@@ -140,7 +140,7 @@ public class ProductManager {
     }
 
     public void editProductName(String id, String name) {
-        product product = findProduct(id);
+        Product product = findProduct(id);
         setOperationSuccess(false);
         if (product != null) {
             product.setName(name);
@@ -149,7 +149,7 @@ public class ProductManager {
     }
 
     public void editProductQuantity(String id, int quantity) {
-        product product = findProduct(id);
+        Product product = findProduct(id);
         setOperationSuccess(false);
         if (product != null) {
             product.setQuantity(quantity);
@@ -158,7 +158,7 @@ public class ProductManager {
     }
 
     public void editProductPrice(String id, double price) {
-        product product = findProduct(id);
+        Product product = findProduct(id);
         setOperationSuccess(false);
         if (product != null) {
             product.setPrice(price);
@@ -167,7 +167,7 @@ public class ProductManager {
     }
 
     public void editProductCost(String id, double cost) {
-        product product = findProduct(id);
+        Product product = findProduct(id);
         setOperationSuccess(false);
         if (product != null) {
             product.setCost(cost);
@@ -176,7 +176,7 @@ public class ProductManager {
     }
 
     public void editProductExpirationDate(String id, int day, int month, int year) {
-        product product = findProduct(id);
+        Product product = findProduct(id);
         setOperationSuccess(false);
         if (product != null) {
             product.setDay(day);
@@ -195,7 +195,7 @@ public class ProductManager {
 
         applyDiscount();
 
-        for (product p : products) {
+        for (Product p : Products) {
             if (p.getDiscountPercentage() > 0) {
                 String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
                 table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-15s %-10.2f %-10.2f%n",

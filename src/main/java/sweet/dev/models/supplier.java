@@ -19,7 +19,7 @@ public class supplier {
     private String role;
     private String shopName;
     private int epmloyeeNum;
-    private LinkedList<product> products;
+    private LinkedList<Product> Products;
     private LinkedList<Order> orders;
     private boolean operationSuccess;
     private boolean wrongOldPass;
@@ -54,9 +54,9 @@ public class supplier {
         this.shopName = shopName;
         this.epmloyeeNum = epmloyeeNum;
         this.discountRule=new DiscountRule(30,3);
-        products=new LinkedList<>();
+        Products =new LinkedList<>();
         orders=new LinkedList<>();
-        this.productManager = new ProductManager(this.products);
+        this.productManager = new ProductManager(this.Products);
         this.orderManager=new OrderManager(this);
 
         logger.setUseParentHandlers(false);

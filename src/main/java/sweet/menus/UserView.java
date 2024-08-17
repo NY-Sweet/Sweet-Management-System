@@ -5,8 +5,11 @@ import sweet.dev.models.*;
 
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Function;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
+
 public class UserView {
     private static final String ANSI_PURPLE = "\n\u001B[95m";
     private static final String ANSI_RESET = "\u001B[0m";
@@ -232,26 +235,35 @@ public class UserView {
     }
 
     private void handleProductFeedback() {
+
         LinkedList<Order> orders = User.getOrders();
-        Map<String, product> productMap = buildProductMap(orders);
+        Map<String, Product> productMap = buildProductMapFromOrders(orders);
 
-        logger.info("Here's the Product you have ordered:");
-        logger.info(String.format("%-15s %-20s", "Product Id", "Name"));
-
-        for (product product : productMap.values()) {
-            logger.info(String.format("%-15s %-20s", product.getId(), product.getName()));
+        if (productMap.isEmpty()) {
+            logger.info("You haven't ordered any products yet.");
+            return;
         }
 
-        String productId = getValidProductId(productMap);
+        logOrderedProducts(productMap);
+    }
 
-        if (productId != null) {
-            logger.info("Enter the feedback content: ");
-            String feedbackContent = scanner.nextLine().trim() + "  by: " + User.getUserName();
-            productMap.get(productId).addFeedback(feedbackContent);
-            logger.info("Feedback added successfully.");
-        } else {
-            logger.warning("No product found with that ID.");
+    private Map<String, Product> buildProductMapFromOrders(LinkedList<Order> orders) {
+        return orders.stream()
+                .flatMap(order -> order.getOrderDetails().stream())
+                .map(OrderDetails::getProduct)
+                .distinct()
+                .collect(Collectors.toMap(Product::getId, Function.identity(), (existing, replacement) -> existing));
+    }
+
+    private void logOrderedProducts(Map<String, Product> productMap) {
+        StringBuilder report = new StringBuilder("Here's the Product you have ordered:\n");
+        report.append(String.format("%-15s %-20s\n", "Product Id", "Name"));
+
+        for (Product product : productMap.values()) {
+            report.append(String.format("%-15s %-20s\n", product.getId(), product.getName()));
         }
+
+        logger.info(report.toString());
     }
 
     private void handleRecipeFeedback() {
@@ -264,18 +276,18 @@ public class UserView {
         recipeManager.searchRecipeById(recipeId).addFeedback("\n by:" + User.getUserName() + feedbackContent);
     }
 
-    private Map<String, product> buildProductMap(LinkedList<Order> orders) {
-        Map<String, product> productMap = new HashMap<>();
+    private Map<String, Product> buildProductMap(LinkedList<Order> orders) {
+        Map<String, Product> productMap = new HashMap<>();
         for (Order order : orders) {
             for (OrderDetails orderDetails : order.getOrderDetails()) {
-                product product = orderDetails.getProduct();
+                Product product = orderDetails.getProduct();
                 productMap.put(product.getId(), product);
             }
         }
         return productMap;
     }
 
-    private String getValidProductId(Map<String, product> productMap) {
+    private String getValidProductId(Map<String, Product> productMap) {
         logger.info("Enter the product ID you want to give feedback for: ");
         while (true) {
             String productId = scanner.nextLine().trim();
@@ -388,7 +400,7 @@ public class UserView {
                 break; // Exit the loop if the user is done adding products
             }
 
-            product product = prodManager.findProduct(productId);
+            Product product = prodManager.findProduct(productId);
             if (product != null) {
                 logger.info("Enter the quantity for " + product.getName() + ": ");
                 int quantity = Integer.parseInt(scanner.nextLine());
