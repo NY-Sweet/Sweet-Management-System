@@ -99,33 +99,37 @@ public class UserAcountManagement {
     public void the_user_select_edit_password(String string) {
         x=string;
     }
-    String NewPassword;
-    String OldPassword;
-    String ConfirmPassword;
+    String newPassword;
+    String oldPassword;
+    String confirmPassword;
     @When("the user enters old password  {string} new password {string} and confirm password {string}")
     public void the_user_enters_old_password_new_password_and_confirm_password(String string, String string2, String string3) {
-        OldPassword = obj.users.get(0).getPassword();
-        NewPassword = string2;
-        ConfirmPassword = string3;
+        oldPassword = obj.users.get(0).getPassword();
+        newPassword = string2;
+        confirmPassword = string3;
 
     }
     @Then("the system validates the inputs and sets the new password")
     public void theSystemValidatesTheInputsAndSetsTheNewPassword() {
-        assertTrue("Success",obj.getUserManager().isValidPassword(OldPassword,NewPassword,ConfirmPassword, obj.users.get(0)));
-       obj.users.get(0).setPassword(NewPassword);
+        assertTrue("Success",obj.getUserManager().isValidPassword(oldPassword, newPassword, confirmPassword, obj.users.get(0)));
+       obj.users.get(0).setPassword(newPassword);
 
     }
+    boolean areEqual;
 
     @When("the user enters  invalid inputs old password  {string} new password {string} and confirm password {string}")
     public void the_user_enters_invalid_inputs_old_password_new_password_and_confirm_password(String string, String string2, String string3) {
-        OldPassword = obj.users.get(0).getPassword();
-        NewPassword = string2;
-        ConfirmPassword = string3;
+        oldPassword = obj.users.get(0).getPassword();
+        newPassword = string2;
+        confirmPassword = string3;
+        if (oldPassword.equals(newPassword)){
+            areEqual=true;
+        }
     }
 
     @Then("the system validates the inputs and password change is not valid")
     public void the_system_validates_the_inputs_and_password_change_is_not_valid() {
-        assertFalse(obj.getUserManager().isValidPassword(OldPassword,NewPassword,ConfirmPassword, obj.users.get(0)));
+        assertFalse(obj.getUserManager().isValidPassword(oldPassword, newPassword, confirmPassword, obj.users.get(0)));
 
     }
 

@@ -311,7 +311,7 @@ public class OrderManager {
 
 
             for (int month = 1; month <= 12; month++) {
-                double[] monthlyTotals = MonthlySalesAndProfits(month, year);
+                double[] monthlyTotals = monthlySalesAndProfits(month, year);
                 totalSalesByMonth[month - 1] += monthlyTotals[0];
                 totalCostByMonth[month - 1] += monthlyTotals[1];
             }
@@ -319,7 +319,7 @@ public class OrderManager {
         printAnnualReport(year, totalSalesByMonth, totalCostByMonth);
         return true;
     }
-    private double[] MonthlySalesAndProfits(int month, int year) {
+    private double[] monthlySalesAndProfits(int month, int year) {
         double totalSales = 0.0;
         double totalCost = 0.0;
         totalSales = getTotalSalesForMonth(month, year);
