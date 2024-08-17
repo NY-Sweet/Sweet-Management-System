@@ -138,7 +138,7 @@ public class RecipeManager {
         StringBuilder sb = new StringBuilder();
         sb.append("Recipe ID: ").append(recipe.getId()).append("\n")
                 .append("Recipe Name: ").append(recipe.getName()).append("\n")
-                .append("Ingredients: ").append(recipe.getIngredients()).append("\n")
+                .append("Ingredients # ").append(recipe.getNumberOfIngredients()).append(recipe.getIngredients()).append("\n")
                 .append("Steps: ").append(recipe.getSteps()).append("\n")
                 .append("Feedbacks: ").append(formatFeedbacks(recipe.getFeedbacks())).append("\n")
                 .append("Publisher: ").append(recipe.getPublisher()).append("\n")
@@ -194,9 +194,9 @@ public class RecipeManager {
     }
     public boolean deleteaFeedofaRecipe(int recipeid , int feedbackid){
         if(recipeid< validatedRecipes.size() && recipeid >=0) {
-          LinkedList<String> feedBacks= validatedRecipes.get(recipeid).feedbacks;
+         List<String> feedBacks= validatedRecipes.get(recipeid).getFeedbacks();
           if(feedBacks.size()>feedbackid && feedbackid >=0) {
-              validatedRecipes.get(recipeid).feedbacks.remove(feedbackid);
+              validatedRecipes.get(recipeid).getFeedbacks().remove(feedbackid);
               return true;
           }
           return false;

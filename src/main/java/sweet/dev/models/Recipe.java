@@ -12,13 +12,16 @@ public class Recipe {
     private int numberOfIngredients;
     private String ingredients;
     private String steps;
-    private String Publisher ;
-    public LinkedList<String> feedbacks;
-    boolean valid = false;
+    private String publisher;
+    private List<String> feedbacks;
     private static final Logger logger = Logger.getLogger(Recipe.class.getName());
 
     public String getIngredients() {
         return ingredients;
+    }
+
+    public int getNumberOfIngredients() {
+        return numberOfIngredients;
     }
 
     public String getSteps() {
@@ -30,8 +33,8 @@ public class Recipe {
         this.numberOfIngredients = numberOfIngredients;
         this.ingredients = ingredients;
         this.steps = steps;
-        this.Publisher = Publisher;
-        this.feedbacks = new LinkedList();
+        this.publisher = Publisher;
+        this.feedbacks = new LinkedList<>();
 
         logger.setUseParentHandlers(false);
         ConsoleHandler consoleHandler = new ConsoleHandler();
@@ -54,14 +57,14 @@ public class Recipe {
     }
 
     public String getPublisher() {
-        return Publisher;
+        return publisher;
     }
 
 
     public void showFeedbaks (){
         int i =0;
         for (final String feedback : feedbacks) {
-         System.out.println(i+ "   "+feedback);
+        logger.info(i+ "   "+feedback);
         }
 
     }
