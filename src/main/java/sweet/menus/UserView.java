@@ -56,16 +56,16 @@ public class UserView {
 
             switch (choice) {
                 case "1":
-                    PurchaseDesserts();
+                    purchaseDesserts();
                     break;
                 case "2":
-                    PostaRecipe ();
+                    postaRecipe();
                     break;
                 case "3":
-                    BrowseRecipes();
+                    browseRecipes();
                     break;
                 case "4":
-                    Messaging();
+                    messagingSys();
                     break;
                 case "5":
                     giveAfeedBack();
@@ -289,7 +289,7 @@ public class UserView {
         }
     }
 
-    private void Messaging() {
+    private void messagingSys() {
         String menuOptions = ANSI_PURPLE + """
             ╔════════════════════════════════════╗
             ║        Message Management Menu     ║
@@ -331,11 +331,11 @@ public class UserView {
 
     }
 
-    private void BrowseRecipes() {
+    private void browseRecipes() {
         recipeManager.showAllRecipes();
     }
 
-    private void PostaRecipe() {
+    private void postaRecipe() {
         logger.info("New Recipe :");
         logger.info("Enter Recipe Name");
         String recipeName = scanner.nextLine();
@@ -367,7 +367,7 @@ public class UserView {
     }
 
 
-    private void PurchaseDesserts() {
+    private void purchaseDesserts() {
       logger.info("Our Shops :");
         List<supplier> OurSuppliers =supplierManager.getSuppliers();
         for (supplier supplier : OurSuppliers){
