@@ -20,7 +20,7 @@ import java.util.logging.Level;
 
 
 public class OrderManager {
-    private LinkedList<Order> orders;
+    private List<Order> orders;
     private boolean successOperation;
     private Supplier supplier;
     private static final Logger logger = Logger.getLogger(OrderManager.class.getName());

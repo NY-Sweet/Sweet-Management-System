@@ -3,6 +3,7 @@ import sweet.format.PrettyFormatter;
 import sweet.dev.managers.OrderManager;
 import sweet.dev.managers.ProductManager;
 
+import java.util.List;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 import java.util.LinkedList;
@@ -19,8 +20,8 @@ public class Supplier {
     private String role;
     private String shopName;
     private int epmloyeeNum;
-    private LinkedList<Product> Products;
-    private LinkedList<Order> orders;
+    private LinkedList<Product> products;
+    private List<Order> orders;
     private boolean operationSuccess;
     private boolean wrongOldPass;
     private boolean mismatchPass;
@@ -33,7 +34,7 @@ public class Supplier {
         return wrongOldPass;
     }
 
-    public LinkedList<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
@@ -54,9 +55,9 @@ public class Supplier {
         this.shopName = shopName;
         this.epmloyeeNum = epmloyeeNum;
         this.discountRule=new DiscountRule(30,3);
-        Products =new LinkedList<>();
+        products =new LinkedList<>();
         orders=new LinkedList<>();
-        this.productManager = new ProductManager(this.Products);
+        this.productManager = new ProductManager(this.products);
         this.orderManager=new OrderManager(this);
 
         logger.setUseParentHandlers(false);
@@ -67,7 +68,6 @@ public class Supplier {
 
 
     }
-
 
 
     public OrderManager getOrderManager() {
@@ -160,17 +160,20 @@ public class Supplier {
     }
 
     public boolean displaySupplierInfo() {
-        String supplierInfo = String.format(
-                "\nSupplier Information:\n" +
-                        "Username: %s\n" +
-                        "Phone Number: %s\n" +
-                        "Email: %s\n" +
-                        "City: %s\n" +
-                        "Street: %s\n" +
-                        "Home Number: %s\n" +
-                        "Role: %s\n" +
-                        "Shop Name: %s\n" +
-                        "Employee Number: %d\n",
+        String supplierInfo = """
+            Supplier Information:
+            Username: %s
+            Phone Number: %s
+            Email: %s
+            City: %s
+            Street: %s
+            Home Number: %s
+            Role: %s
+            Shop Name: %s
+            Employee Number: %d
+            Discount rule Percentage: %.2f
+            Discount rule days before Expiration: %d
+            """.formatted(
                 this.userName,
                 this.phoneNum,
                 this.email,
@@ -179,12 +182,15 @@ public class Supplier {
                 this.homeNum,
                 this.role,
                 this.shopName,
-                this.epmloyeeNum
+                this.epmloyeeNum,
+                this.discountRule.getPercentage(),
+                this.discountRule.getDaysBeforeExpiration()
         );
 
         logger.info(supplierInfo);
         return true;
     }
+
 
 }
 
