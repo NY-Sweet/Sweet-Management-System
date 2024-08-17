@@ -169,7 +169,7 @@ public class loginView {
         String city = promptForNonEmptyInput("Enter city: ");
         String street = promptForNonEmptyInput("Enter street: ");
         String homeNumber = promptForNonEmptyInput("Enter home number: ");
-        userManager.addUser(username, password, phoneNumber, email, city, street, homeNumber, "u");
+        userManager.addUser(new User(username, password, phoneNumber, email, city, street, homeNumber, "u"));
         logger.info("User registered successfully: " + username);
         login();
 

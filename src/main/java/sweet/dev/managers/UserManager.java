@@ -3,12 +3,13 @@ package sweet.dev.managers;
 import sweet.dev.models.User;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 public class UserManager {
     private boolean userCreated;
 
     private List<User> users;
-
+    private static final Logger logger = Logger.getLogger(UserManager.class.getName());
     public UserManager(List<User> users) {
         this.users = users;
     }
@@ -21,25 +22,24 @@ public class UserManager {
         return users;
     }
 
-    public void createAccountForUser(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role) {
+    public void createAccountForUser(User user) {
         userCreated = false;
         boolean flag = true;
         for (User u : users) {
-            if (u.getUserName().equals(userName)) {
+            if (u.getUserName().equals(user.getUserName())) {
                 flag = false;
                 userCreated = false;
                 break;
             }
         }
         if (flag) {
-            addUser(userName, password, phneNum, email, city, street, homeNum, role);
+            addUser(user);
             userCreated = true;
         }
     }
 
-    public boolean addUser(String userName, String password, String phneNum, String email, String city, String street, String homeNum, String role) {
-        User newUser = new User(userName, password, phneNum, email, city, street, homeNum, role);
-        users.add(newUser);
+    public boolean addUser(User user) {
+        users.add(user);
         return true;
     }
 
@@ -55,10 +55,8 @@ public class UserManager {
         return null;
     }
     public boolean isValidPassword(String oldPassword, String newPassword, String confirmpassword , User user) {
-         if (oldPassword.equals(user.getPassword())) {
-            if (newPassword.equals(confirmpassword)) {
+         if (oldPassword.equals(user.getPassword()) && newPassword.equals(confirmpassword)) {
                 return true;
-            }
         }
         return false ;
     }
@@ -69,11 +67,12 @@ public class UserManager {
         return true;
 
     }
-    private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
     public boolean DisplayAllUsers (){
-        for (sweet.dev.models.User User : this.users) {
+        for (User user : this.users) {
 
-            logger.info(User.toString());
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(user::toString);
+            }
         }
         return true;
     }

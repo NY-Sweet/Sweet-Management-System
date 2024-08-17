@@ -3,6 +3,7 @@ package sweet.acceptance_tests;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import sweet.dev.models.Supplier;
+import sweet.dev.models.User;
 import sweet.dev.system.SweetApp;
 
 import static org.junit.Assert.assertFalse;
@@ -47,7 +48,7 @@ public class AdminManageAccounts {
     }
     @Then("a new user will be created")
     public void a_new_user_will_be_created() {
-        assertTrue("Succeed",obj.getUserManager().addUser(NewName, NewPassword,city,street,homeNum,phoneNum,email,role));
+        assertTrue("Succeed",obj.getUserManager().addUser(new User(NewName, NewPassword,city,street,homeNum,phoneNum,email,role)));
 
     }
     String UserNametobedeleted;

@@ -8,6 +8,7 @@ import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.models.Product;
 import sweet.dev.models.Supplier;
+import sweet.dev.models.User;
 import sweet.dev.system.SweetApp;
 
 import java.util.logging.Logger;
@@ -31,7 +32,7 @@ public class productManage {
         this.obj=obj;
 
         userManager = obj.getUserManager();
-        userManager.addUser("haya","123456","","","","","","u");
+        userManager.addUser(new User("haya","123456","","","","","","u"));
         supplierManager = obj.getSupplierManager();
         loginManager = obj.getLoginManager();
 

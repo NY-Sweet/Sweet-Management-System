@@ -9,6 +9,7 @@ import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.models.Admin;
 import sweet.dev.models.Supplier;
+import sweet.dev.models.User;
 import sweet.dev.system.SweetApp;
 
 import static org.junit.Assert.*;
@@ -28,7 +29,7 @@ public class login {
         this.obj=obj;
         adminManager=obj.getAdminManager();
         userManager = obj.getUserManager();
-        userManager.addUser("haya","123456","","","","","","u");
+        userManager.addUser(new User("haya","123456","","","","","","u"));
         supplierManager = obj.getSupplierManager();
         loginManager = obj.getLoginManager();
 
@@ -92,7 +93,7 @@ public class login {
 
     @When("set new username {string}, password {string}, city={string},street={string},home number={string}, phone number={string} , email={string} and role={string}")
     public void set_new_username_password_city_street_home_number_phone_number_email_and_role(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role) {
-        userManager.createAccountForUser(userName,password,city,street,homeNum,phneNum,email,role);
+        userManager.createAccountForUser(new User(userName,password,city,street,homeNum,phneNum,email,role));
     }
 
     @When("if the details are valid, the system saves the new user details")
@@ -112,7 +113,7 @@ public class login {
 
     @When("set existing username {string}, password {string}, city={string},street={string},home number={string}, phone number={string} , email={string} and role={string}")
     public void set_existing_username_password_city_street_home_number_phone_number_email_and_role(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role) {
-        userManager.createAccountForUser(userName,password,city,street,homeNum,phneNum,email,role);
+        userManager.createAccountForUser(new User(userName,password,city,street,homeNum,phneNum,email,role));
 
     }
 
