@@ -157,30 +157,31 @@ public class login {
     public void the_entered_username_should_be(String expectedUsername) {
         assertEquals(expectedUsername, loginManager.getEnteredUsername());
     }
-
+    int  setedRole;
     @Given("the user has the role {string} in the system")
     public void the_user_has_the_role_in_the_system(String role) {
-
+        setedRole = Integer.parseInt(role);
         loginManager.setRoleInSys(Integer.valueOf(role));
     }
 
     @When("the system retrieves the user's role")
     public void the_system_retrieves_the_user_s_role() {
+        setedRole=loginManager.getRoleInSys();
     }
 
     @Then("the role should be {string}")
     public void the_role_should_be(String expectedRole) {
         assertEquals(Integer.valueOf(expectedRole), loginManager.getRoleInSys());
     }
-    Admin NewAdmin;
+    Admin newAdmin;
     @When("Invalid Admin name {string}")
     public void invalid_admin_name(String string) {
-       NewAdmin=adminManager.getTheAdmin(string);
+       newAdmin =adminManager.getTheAdmin(string);
     }
 
     @Then("Invalid Name Message")
     public void invalid_name_message() {
-       assertNull(NewAdmin);
+       assertNull(newAdmin);
     }
 
 }
