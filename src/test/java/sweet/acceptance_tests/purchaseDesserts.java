@@ -18,8 +18,6 @@ public class purchaseDesserts {
 
     public SweetApp obj;
     private static final Logger logger = Logger.getLogger(purchaseDesserts.class.getName());
-
-    private LoginManager loginManager;
     private UserManager userManager;
     private ProductManager productManager;
     private OrderManager orderManager;
@@ -33,7 +31,7 @@ public class purchaseDesserts {
         this.obj=obj;
         userManager = obj.getUserManager();
         supplierManager = obj.getSupplierManager();
-        loginManager = obj.getLoginManager();
+
     }
     @Given("I am a user {string} on the Purchase desserts page")
     public void i_am_a_user_on_the_purchase_desserts_page(String string) {
