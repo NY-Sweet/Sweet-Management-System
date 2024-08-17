@@ -28,7 +28,6 @@ public class UserManager {
         for (User u : users) {
             if (u.getUserName().equals(user.getUserName())) {
                 flag = false;
-                userCreated = false;
                 break;
             }
         }
@@ -54,11 +53,8 @@ public class UserManager {
 
         return null;
     }
-    public boolean isValidPassword(String oldPassword, String newPassword, String confirmpassword , User user) {
-         if (oldPassword.equals(user.getPassword()) && newPassword.equals(confirmpassword)) {
-                return true;
-        }
-        return false ;
+    public boolean isValidPassword(String oldPassword, String newPassword, String confirmPassword, User user) {
+        return oldPassword.equals(user.getPassword()) && newPassword.equals(confirmPassword);
     }
 
     public boolean deleteUser (String userName){
@@ -67,7 +63,7 @@ public class UserManager {
         return true;
 
     }
-    public boolean DisplayAllUsers (){
+    public boolean displayAllUsers(){
         for (User user : this.users) {
 
             if (logger.isLoggable(Level.INFO)) {

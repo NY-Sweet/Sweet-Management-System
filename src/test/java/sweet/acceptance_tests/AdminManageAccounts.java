@@ -98,7 +98,7 @@ public class AdminManageAccounts {
 
     @Then("all users details displayed")
     public void all_users_details_displayed() {
-        assertTrue("Succeed",obj.getUserManager().DisplayAllUsers());
+        assertTrue("Succeed",obj.getUserManager().displayAllUsers());
 
     }
 
