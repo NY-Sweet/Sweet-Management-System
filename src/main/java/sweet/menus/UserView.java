@@ -18,13 +18,13 @@ public class UserView {
     private final Scanner scanner;
     private final Logger logger;
 
-    private sweet.dev.models.User User;
+    private sweet.dev.models.User user;
     private UserManager userManager;
     private RecipeManager recipeManager;
     private SupplierManager supplierManager ;
     private MessageManager messageManager ;
 
-    public UserView(sweet.dev.models.User User, UserManager userManager , RecipeManager recipeManager , SupplierManager supplierManager, MessageManager messageManager) {
+    public UserView(sweet.dev.models.User user, UserManager userManager , RecipeManager recipeManager , SupplierManager supplierManager, MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger("UserView");
         logger.setUseParentHandlers(false);
@@ -32,7 +32,7 @@ public class UserView {
         consoleHandler.setFormatter(new PrettyFormatter());
         logger.addHandler(consoleHandler);
         this.userManager = userManager;
-        this.User = User;
+        this.user = user;
         this.supplierManager = supplierManager;
         this.recipeManager = recipeManager;
         this.messageManager=messageManager;
@@ -140,13 +140,13 @@ public class UserView {
             switch (choice) {
                 case "1":
                     logger.info("Show Account Details");
-                    logger.info("1.UserName: " + User.getUserName());
-                    logger.info("2.Password: " + User.getPassword());
-                    logger.info("3.Email: " + User.getEmail());
-                    logger.info("4. City:  "+User.getCity());
-                    logger.info("5.Phone Number: "+ User.getPhoneNum());
-                    logger.info("6.Home Number: " + User.getHomeNum());
-                    logger.info("7.Street: " + User.getStreet());
+                    logger.info("1.UserName: " + user.getUserName());
+                    logger.info("2.Password: " + user.getPassword());
+                    logger.info("3.Email: " + user.getEmail());
+                    logger.info("4. City:  "+ user.getCity());
+                    logger.info("5.Phone Number: "+ user.getPhoneNum());
+                    logger.info("6.Home Number: " + user.getHomeNum());
+                    logger.info("7.Street: " + user.getStreet());
                     break;
                 case "2":
                     logger.info("Enter the Number of info you want to update ");
@@ -156,39 +156,39 @@ public class UserView {
                         case 1:
                             logger.info("Enter Your New User Name");
                             String newUserName = scanner.nextLine();
-                            User.userName=newUserName;
+                            user.userName=newUserName;
                             break;
 
                         case 2:
                             logger.info("Enter Your New Password");
                             String newPassword = scanner.nextLine();
-                            User.setPassword(newPassword);
+                            user.setPassword(newPassword);
                             break;
                         case 3 :
                             logger.info("Enter Your New Email");
                             String newEmail = scanner.nextLine();
-                            User.setEmail(newEmail);
+                            user.setEmail(newEmail);
                             break;
                         case 4 :
                             logger.info("Enter Your New City");
                             String newCity = scanner.nextLine();
-                            User.setCity(newCity);
+                            user.setCity(newCity);
                             break;
                         case 5:
                             logger.info("Enter Your New Phone Number");
                             String newPhone = scanner.nextLine();
-                            User.setPhoneNum(newPhone);
+                            user.setPhoneNum(newPhone);
                             break;
                         case 6:
                             logger.info("Enter Your New Home Number");
                             String newHome = scanner.nextLine();
-                            User.setHomeNum(newHome);
+                            user.setHomeNum(newHome);
                             break;
 
                         case 7:
                             logger.info("Enter Your New Street");
                             String newStreet = scanner.nextLine();
-                            User.setStreet(newStreet);
+                            user.setStreet(newStreet);
                             break;
 
                         default:
@@ -198,6 +198,8 @@ public class UserView {
 
                 case "3":
                     return;
+                default:
+                    printInvalidMenuChoice(choice);
             }}
 
     }
@@ -236,7 +238,7 @@ public class UserView {
 
     private void handleProductFeedback() {
 
-        LinkedList<Order> orders = User.getOrders();
+        LinkedList<Order> orders = user.getOrders();
         Map<String, Product> productMap = buildProductMapFromOrders(orders);
 
         if (productMap.isEmpty()) {
@@ -273,7 +275,7 @@ public class UserView {
         scanner.nextLine();
         logger.info("Enter the feedback Content ");
         String feedbackContent = scanner.nextLine();
-        recipeManager.searchRecipeById(recipeId).addFeedback("\n by:" + User.getUserName() + feedbackContent);
+        recipeManager.searchRecipeById(recipeId).addFeedback("\n by:" + user.getUserName() + feedbackContent);
     }
 
 
@@ -299,7 +301,7 @@ public class UserView {
                 logger.info("Enter message content: ");
                 String content = scanner.nextLine();
                 LocalDate date = LocalDate.now();
-                boolean success = messageManager.sendMessage(User.getUserName(), receiver, content, date);
+                boolean success = messageManager.sendMessage(user.getUserName(), receiver, content, date);
                 if (success) {
                     logger.info("Message sent successfully.");
                 } else {
@@ -308,7 +310,7 @@ public class UserView {
                 break;
             case "2":
                 logger.info("Viewing inbox...");
-                messageManager.viewInbox(User.getUserName());
+                messageManager.viewInbox(user.getUserName());
                 break;
             case "3":
                 logger.info("Going back to the previous menu...");
@@ -350,7 +352,7 @@ public class UserView {
             steps.append(step);
         }
 
-        Recipe recipe= new Recipe(recipeName,ingrediantsNumber, ingredients.toString(),steps.toString(),User.getUserName());
+        Recipe recipe= new Recipe(recipeName,ingrediantsNumber, ingredients.toString(),steps.toString(), user.getUserName());
         recipe.setId(recipeManager.getValidatedRecipes().size()+recipeManager.getnotValidatedRecipes().size());
         recipeManager.postRecipe(recipe);
 
@@ -390,8 +392,8 @@ public class UserView {
         }
         if (!orderDetailsList.isEmpty()) {
 
-            String orderId = User.getUserName() + (Supplier.getOrders().size() + 1);
-            Order newOrder = new Order(orderId, User.getUserName(), orderDetailsList);
+            String orderId = user.getUserName() + (Supplier.getOrders().size() + 1);
+            Order newOrder = new Order(orderId, user.getUserName(), orderDetailsList);
             Supplier.getOrderManager().addOrder(newOrder);
 
             logger.info("Order placed successfully with Order ID: " + orderId);
