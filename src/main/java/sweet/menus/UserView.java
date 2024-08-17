@@ -206,62 +206,87 @@ public class UserView {
 
     private void GiveAfeedBack() {
         while (true) {
-        logger.info("Which one you want to give feed backfor");
+            int choice = getChoiceForFeedbackType();
+
+            switch (choice) {
+                case 1:
+                    handleProductFeedback();
+                    break;
+                case 2:
+                    handleRecipeFeedback();
+                    break;
+                case 3:
+                    return;
+                default:
+                    logger.warning("Invalid choice. Please select a valid option.");
+            }
+        }
+    }
+
+    private int getChoiceForFeedbackType() {
+        logger.info("Which one you want to give feedback for:");
         logger.info("1. Product");
         logger.info("2. Posted Recipe");
         logger.info("3. Go Back ");
-        int choice = scanner.nextInt();
+        return scanner.nextInt();
+    }
 
-        switch (choice) {
-            case 1:
-                LinkedList<Order> orders = User.getOrders();
-                Map<String, product> productMap = new HashMap<>();
+    private void handleProductFeedback() {
+        LinkedList<Order> orders = User.getOrders();
+        Map<String, product> productMap = buildProductMap(orders);
 
-                logger.info("Here's the Product you have ordered:");
-                logger.info(String.format("%-15s %-20s", "Product Id", "Name"));
+        logger.info("Here's the Product you have ordered:");
+        logger.info(String.format("%-15s %-20s", "Product Id", "Name"));
 
-                for (Order order : orders) {
-                    LinkedList<OrderDetails> orderDetailsList = order.getOrderDetails();
-                    for (OrderDetails orderDetails : orderDetailsList) {
-                        product product = orderDetails.getProduct();
-                        String productId = product.getId();
-                        productMap.put(productId, product); // Map product ID to the product
-                        logger.info(String.format("%-15s %-20s", productId, product.getName()));
-                    }
-                }
+        for (product product : productMap.values()) {
+            logger.info(String.format("%-15s %-20s", product.getId(), product.getName()));
+        }
 
-                logger.info("Enter the product ID you want to give feedback for: ");
-                String productId = scanner.nextLine().trim();
+        String productId = getValidProductId(productMap);
 
-                while (productId.isEmpty()) {
-                    logger.warning("You entered an empty ID. Please enter a valid product ID:");
-                    productId = scanner.nextLine().trim();
-                }
+        if (productId != null) {
+            logger.info("Enter the feedback content: ");
+            String feedbackContent = scanner.nextLine().trim() + "  by: " + User.getUserName();
+            productMap.get(productId).addFeedback(feedbackContent);
+            logger.info("Feedback added successfully.");
+        } else {
+            logger.warning("No product found with that ID.");
+        }
+    }
 
-                if (productMap.containsKey(productId)) {
-                    logger.info("Enter the feedback content: ");
-                    String feedbackContent = scanner.nextLine().trim();
-                    feedbackContent+= "  by: "+User.getUserName();
-                    // Add feedback to the product retrieved from the map
-                    productMap.get(productId).addFeedback(feedbackContent);
-                    logger.info("Feedback added successfully.");
-                } else {
-                    logger.warning("Invalid product ID entered.");
-                }
-                break;
-            case 2 :
-                recipeManager.showAllRecipes();
-                logger.info("Enter the Recipe id you want give a feedback for ");
-                int RecipeID = scanner.nextInt();
-                scanner.nextLine();
-                logger.info("Enter the feedback Content ");
-                String feedbackContent2 = scanner.nextLine();
-                String feedbackContent22="\n by:"+User.getUserName()+feedbackContent2;
-                recipeManager.searchRecipeById(RecipeID).addFeedback(feedbackContent2);
-                break;
-            case 3 :
-                return;
-        }}
+    private void handleRecipeFeedback() {
+        recipeManager.showAllRecipes();
+        logger.info("Enter the Recipe id you want give a feedback for ");
+        int recipeId = scanner.nextInt();
+        scanner.nextLine();
+        logger.info("Enter the feedback Content ");
+        String feedbackContent = scanner.nextLine();
+        recipeManager.searchRecipeById(recipeId).addFeedback("\n by:" + User.getUserName() + feedbackContent);
+    }
+
+    private Map<String, product> buildProductMap(LinkedList<Order> orders) {
+        Map<String, product> productMap = new HashMap<>();
+        for (Order order : orders) {
+            for (OrderDetails orderDetails : order.getOrderDetails()) {
+                product product = orderDetails.getProduct();
+                productMap.put(product.getId(), product);
+            }
+        }
+        return productMap;
+    }
+
+    private String getValidProductId(Map<String, product> productMap) {
+        logger.info("Enter the product ID you want to give feedback for: ");
+        while (true) {
+            String productId = scanner.nextLine().trim();
+            if (productId.isEmpty()) {
+                logger.warning("You entered an empty ID. Please enter a valid product ID:");
+            } else if (productMap.containsKey(productId)) {
+                return productId;
+            } else {
+                logger.warning("Invalid product ID entered.");
+            }
+        }
     }
 
     private void Messaging() {
