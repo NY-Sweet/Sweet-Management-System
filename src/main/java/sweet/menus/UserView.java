@@ -80,8 +80,7 @@ public class UserView {
                     logger.info("Exiting User menu");
                     return;
                 default:
-                    logger.warning("Invalid menu choice: " + choice);
-                    logger.info("Invalid choice. Please select a valid option.");
+                    printInvalidMenuChoice(choice);
             }
         }
     }
@@ -190,8 +189,7 @@ public class UserView {
                             break;
 
                         default:
-                            logger.warning("Invalid menu choice: " + choice);
-                            logger.info("Invalid choice. Please select a valid option.");
+                            printInvalidMenuChoice(choice);
                     }
 
 
@@ -199,6 +197,11 @@ public class UserView {
                     return;
             }}
 
+    }
+
+    private void printInvalidMenuChoice(String choice) {
+        logger.warning("Invalid menu choice: " + choice);
+        logger.info("Invalid choice. Please select a valid option.");
     }
 
     private void GiveAfeedBack() {
@@ -382,6 +385,7 @@ public class UserView {
         }
 
     }
+
 
 
 }
