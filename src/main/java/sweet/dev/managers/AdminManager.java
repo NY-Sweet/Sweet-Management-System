@@ -66,7 +66,7 @@ public class AdminManager {
         Map<String, Integer> cityUserCountMap = new HashMap<>();
 
         for (User user : users) {
-            String city = user.getCity().toLowerCase();
+            String city = user.getAdress().getCity().toLowerCase();
             cityUserCountMap.put(city, cityUserCountMap.getOrDefault(city, 0) + 1);
         }
 

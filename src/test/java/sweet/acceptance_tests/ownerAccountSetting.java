@@ -42,7 +42,7 @@ public class ownerAccountSetting {
     }
     @When("the owner selects edit city and updates the field with a new {string}")
     public void the_owner_selects_edit_city_and_updates_the_field_with_a_new(String string) {
-       owner.setCity(string);
+       owner.getAdress().setCity(string);
     }
     @Then("the system displays a message indicating that the city has been updated successfully")
     public void the_system_displays_a_message_indicating_that_the_city_has_been_updated_successfully() {
@@ -51,7 +51,7 @@ public class ownerAccountSetting {
 
     @When("the owner selects edit street and updates the field with a new {string}")
     public void the_owner_selects_edit_street_and_updates_the_field_with_a_new(String string) {
-       owner.setStreet(string);
+       owner.getAdress().setStreet(string);
     }
     @Then("the system displays a message indicating that the street has been updated successfully")
     public void the_system_displays_a_message_indicating_that_the_street_has_been_updated_successfully() {
@@ -60,7 +60,7 @@ public class ownerAccountSetting {
 
     @When("the owner selects edit home number and updates the field with a new {string}")
     public void the_owner_selects_edit_home_number_and_updates_the_field_with_a_new(String string) {
-        owner.setHomeNum(string);
+        owner.getAdress().setHomeNum(string);
     }
     @Then("the system displays a message indicating that the home number has been updated successfully")
     public void the_system_displays_a_message_indicating_that_the_home_number_has_been_updated_successfully() {

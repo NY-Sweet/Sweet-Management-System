@@ -179,17 +179,17 @@ public class ownerView {
                 case "3":
                     logger.info("Enter new city: ");
                     String city = scanner.nextLine();
-                    supplier.setCity(city);
+                    supplier.getAdress().setCity(city);
                     break;
                 case "4":
                     logger.info("Enter new street: ");
                     String street = scanner.nextLine();
-                    supplier.setStreet(street);
+                    supplier.getAdress().setStreet(street);
                     break;
                 case "5":
                     logger.info("Enter new home number: ");
                     String homeNum = scanner.nextLine();
-                    supplier.setHomeNum(homeNum);
+                    supplier.getAdress().setHomeNum(homeNum);
                     break;
                 case "6":
                     logger.info("Enter new employee number: ");

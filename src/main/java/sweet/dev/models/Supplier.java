@@ -14,9 +14,7 @@ public class Supplier {
     private  String password;
     private String phoneNum;
     private String email;
-    private String city;
-    private String street;
-    private String homeNum;
+    private Adress adress;
     private String role;
     private String shopName;
     private int epmloyeeNum;
@@ -42,15 +40,13 @@ public class Supplier {
     private DiscountRule discountRule;
     private ProductManager productManager;
     private OrderManager orderManager;
-    public Supplier(String userName, String password, String phoneNum, String email, String city, String street, String homeNum, String role, String shopName, int epmloyeeNum) {
+    public Supplier(String userName, String password, String phoneNum, String email, Adress adress, String role, String shopName, int epmloyeeNum) {
 
         this.userName = userName;
         this.password = password;
         this.phoneNum = phoneNum;
         this.email = email;
-        this.city = city;
-        this.street = street;
-        this.homeNum = homeNum;
+       this.adress=adress;
         this.role = role;
         this.shopName = shopName;
         this.epmloyeeNum = epmloyeeNum;
@@ -114,22 +110,7 @@ public class Supplier {
 
     }
 
-    public void setCity(String city) {
-        this.city = city;
-        operationSuccess=true;
-    }
 
-    public void setStreet(String street) {
-        this.street = street;
-        operationSuccess=true;
-
-    }
-
-    public void setHomeNum(String homeNum) {
-        this.homeNum = homeNum;
-        operationSuccess=true;
-
-    }
 
     public void setEpmloyeeNum(int epmloyeeNum) {
         this.epmloyeeNum = epmloyeeNum;
@@ -144,6 +125,9 @@ public class Supplier {
         return operationSuccess;
     }
 
+    public Adress getAdress() {
+        return adress;
+    }
 
     public void updatePassword(String oldPassword, String newPassword, String confirmPassword) {
         if (oldPassword.equals(getPassword())) {
@@ -177,9 +161,9 @@ public class Supplier {
                 this.userName,
                 this.phoneNum,
                 this.email,
-                this.city,
-                this.street,
-                this.homeNum,
+                this.adress.getCity(),
+                this.adress.getStreet(),
+                this.adress.getHomeNum(),
                 this.role,
                 this.shopName,
                 this.epmloyeeNum,

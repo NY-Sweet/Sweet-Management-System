@@ -25,7 +25,10 @@ public class UserAcountManagement {
 
     @Then("the system saves the new city")
     public void the_system_saves_the_new_city() {
-       assertTrue("Success",obj.users.get(0).setCity(NewCityName));
+        String OldCity=obj.users.get(0).getAdress().getStreet();
+        obj.users.get(0).getAdress().setCity(NewCityName);
+        assertNotEquals(OldCity,obj.users.get(0).getAdress().getCity());
+
     }
 
     @When("the user select edit street {string}")
@@ -40,9 +43,9 @@ public class UserAcountManagement {
 
     @Then("the system saves the new street")
     public void the_system_saves_the_new_street() {
-        String OldStreet=obj.users.get(0).getStreet();
-        assertTrue("Success",obj.users.get(0).setStreet(NewStreetName));
-        assertNotEquals(OldStreet,obj.users.get(0).getStreet());
+        String OldStreet=obj.users.get(0).getAdress().getStreet();
+       obj.users.get(0).getAdress().setStreet(NewStreetName);
+        assertNotEquals(OldStreet,obj.users.get(0).getAdress().getStreet());
     }
     String NewHomenumber;
     @When("the user select edit home number {string}")
@@ -57,9 +60,9 @@ public class UserAcountManagement {
 
     @Then("the system saves the new home number")
     public void the_system_saves_the_new_home_number() {
-        String Oldhome=obj.users.get(0).getHomeNum();
-        assertTrue("Success",obj.users.get(0).setHomeNum(NewHomenumber));
-        assertNotEquals(Oldhome,obj.users.get(0).getHomeNum());
+        String Oldhome=obj.users.get(0).getAdress().getHomeNum();
+       obj.users.get(0).getAdress().setHomeNum(NewHomenumber);
+        assertNotEquals(Oldhome,obj.users.get(0).getAdress().getHomeNum());
     }
     String NewPhoneNumber;
     @When("the user select edit phone number {string}")

@@ -143,10 +143,10 @@ public class UserView {
                     logger.info("1.UserName: " + user.getUserName());
                     logger.info("2.Password: " + user.getPassword());
                     logger.info("3.Email: " + user.getEmail());
-                    logger.info("4. City:  "+ user.getCity());
+                    logger.info("4. City:  "+ user.getAdress().getCity());
                     logger.info("5.Phone Number: "+ user.getPhoneNum());
-                    logger.info("6.Home Number: " + user.getHomeNum());
-                    logger.info("7.Street: " + user.getStreet());
+                    logger.info("6.Home Number: " + user.getAdress().getHomeNum());
+                    logger.info("7.Street: " + user.getAdress().getStreet());
                     break;
                 case "2":
                     logger.info("Enter the Number of info you want to update ");
@@ -156,7 +156,7 @@ public class UserView {
                         case 1:
                             logger.info("Enter Your New User Name");
                             String newUserName = scanner.nextLine();
-                            user.userName=newUserName;
+                            user.setUserName(newUserName);
                             break;
 
                         case 2:
@@ -172,7 +172,7 @@ public class UserView {
                         case 4 :
                             logger.info("Enter Your New City");
                             String newCity = scanner.nextLine();
-                            user.setCity(newCity);
+                            user.getAdress().setCity(newCity);
                             break;
                         case 5:
                             logger.info("Enter Your New Phone Number");
@@ -182,13 +182,13 @@ public class UserView {
                         case 6:
                             logger.info("Enter Your New Home Number");
                             String newHome = scanner.nextLine();
-                            user.setHomeNum(newHome);
+                            user.getAdress().setHomeNum(newHome);
                             break;
 
                         case 7:
                             logger.info("Enter Your New Street");
                             String newStreet = scanner.nextLine();
-                            user.setStreet(newStreet);
+                            user.getAdress().setStreet(newStreet);
                             break;
 
                         default:
@@ -238,8 +238,8 @@ public class UserView {
 
     private void handleProductFeedback() {
 
-        LinkedList<Order> orders = user.getOrders();
-        Map<String, Product> productMap = buildProductMapFromOrders(orders);
+      List<Order> orders = user.getOrders();
+        Map<String, Product> productMap = buildProductMapFromOrders((LinkedList<Order>) orders);
 
         if (productMap.isEmpty()) {
             logger.info("You haven't ordered any products yet.");

@@ -1,32 +1,31 @@
 package sweet.dev.models;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class User {
 
-    public  String userName;
+    private   String userName;
     private  String password;
     private String phoneNum;
+   private Adress adress;
     private String email;
-    private String city;
-    private String street;
-    private String homeNum;
     private String role;
-    private LinkedList<Order> orders;
+    private List<Order> orders;
 
-    public User(String userName, String password, String phoneNum, String email, String city, String street, String homeNum, String role) {
+    public User(String userName, String password, String phoneNum, String email, Adress adress, String role) {
         this.userName = userName;
         this.password = password;
         this.phoneNum = phoneNum;
         this.email = email;
-        this.city = city;
-        this.street = street;
-        this.homeNum = homeNum;
+       this.adress=adress;
         this.role=role;
         this.orders=new LinkedList<>();
     }
 
-
+    public Adress getAdress() {
+        return adress;
+    }
 
     public User() {
         this.orders=new LinkedList<>();
@@ -44,14 +43,8 @@ public class User {
         return phoneNum;
     }
 
-    public String getHomeNum() {
-        return homeNum;
-    }
 
-    public String getStreet() {
-        return street;
-    }
-    public LinkedList<Order> getOrders() {
+    public List<Order> getOrders() {
         return orders;
     }
 
@@ -60,12 +53,9 @@ public class User {
         return email;
     }
 
-    public String getCity() {
-        return city;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
-
-
-
 
     public boolean setPassword(String password) {
         this.password = password;
@@ -79,21 +69,6 @@ public class User {
 
     public boolean setEmail(String email) {
         this.email = email;
-        return true;
-    }
-
-    public boolean setCity(String city) {
-        this.city = city;
-        return true;
-    }
-
-    public boolean setStreet(String street) {
-        this.street = street;
-        return true;
-    }
-
-    public boolean setHomeNum(String homeNum) {
-        this.homeNum = homeNum;
         return true;
     }
 

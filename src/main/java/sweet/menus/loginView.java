@@ -1,5 +1,6 @@
 package sweet.menus;
 
+import sweet.dev.models.Adress;
 import sweet.dev.models.Supplier;
 import sweet.dev.models.User;
 import sweet.format.PrettyFormatter;
@@ -169,7 +170,7 @@ public class loginView {
         String city = promptForNonEmptyInput("Enter city: ");
         String street = promptForNonEmptyInput("Enter street: ");
         String homeNumber = promptForNonEmptyInput("Enter home number: ");
-        userManager.addUser(new User(username, password, phoneNumber, email, city, street, homeNumber, "u"));
+        userManager.addUser(new User(username, password, phoneNumber, email,new Adress( city, street, homeNumber), "u"));
         logger.info("User registered successfully: " + username);
         login();
 
@@ -187,7 +188,7 @@ public class loginView {
         String shopName = promptForNonEmptyInput("Enter shop name: ");
         int employeeNum = promptForIntegerInput("Enter employee number: ");
 
-        supplierManager.addSupplier(new Supplier(username, password, phoneNumber, email, city, street, homeNumber, "s", shopName, employeeNum));
+        supplierManager.addSupplier(new Supplier(username, password, phoneNumber, email, new Adress(city, street, homeNumber), "s", shopName, employeeNum));
         logger.info("Supplier registered successfully: " + username);
         login();
     }
