@@ -187,7 +187,7 @@ public class loginView {
         String shopName = promptForNonEmptyInput("Enter shop name: ");
         int employeeNum = promptForIntegerInput("Enter employee number: ");
 
-        supplierManager.addSupplier(username, password, phoneNumber, email, city, street, homeNumber, "s", shopName, employeeNum);
+        supplierManager.addSupplier(new Supplier(username, password, phoneNumber, email, city, street, homeNumber, "s", shopName, employeeNum));
         logger.info("Supplier registered successfully: " + username);
         login();
     }

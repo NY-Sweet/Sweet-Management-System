@@ -176,7 +176,7 @@ public class OrderManager {
     private boolean isStockAvailable(Order order) {
         for (OrderDetails details : order.getOrderDetails()) {
             Product product = supplier.getProductManager().findProduct(details.getProduct().getId());
-            if (product == null || product.getQuantity() < details.getQuantity()) {
+            if ( product.getQuantity() < details.getQuantity()) {
                 logger.info("Sorry the product "+product.getName()+" quantity not available the max quantity you can order "+product.getQuantity());
                 return false;
             }

@@ -15,7 +15,7 @@ public class RecipeManager {
     private  LinkedList<Recipe> notValidatedRecipes = new LinkedList<>();
     private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
 
-    public RecipeManager(  List <User> users) {
+    public RecipeManager(  ) {
         logger.setUseParentHandlers(false);
 
         Handler[] handlers = logger.getHandlers();

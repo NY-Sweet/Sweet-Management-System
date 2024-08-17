@@ -8,6 +8,7 @@ import sweet.dev.managers.LoginManager;
 import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.models.Admin;
+import sweet.dev.models.Supplier;
 import sweet.dev.system.SweetApp;
 
 import static org.junit.Assert.*;
@@ -128,13 +129,13 @@ public class login {
 
     @When("set new username {string}, password {string}, city={string},street={string},home number={string}, phone number={string} , email={string}  role={string}  shop name {string} and employee number {int}")
     public void set_new_username_password_city_street_home_number_phone_number_email_role_shop_name_and_employee_number6(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role, String shopName, int emplyeeNum) {
-        supplierManager.createAccountForSupplier(userName,password,city,street,homeNum,phneNum,email,role,shopName,emplyeeNum);
+        supplierManager.createAccountForSupplier(new Supplier(userName,password,city,street,homeNum,phneNum,email,role,shopName,emplyeeNum));
 
     }
 
     @When("set existing username {string}, password {string}, city={string},street={string},home number={string}, phone number={string} , email={string}  role={string}  shop name {string} and employee number {int}")
     public void set_existing_username_password_city_street_home_number_phone_number_email_role_shop_name_and_employee_number(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role, String shopName, int emplyeeNum) {
-        supplierManager.createAccountForSupplier(userName,password,city,street,homeNum,phneNum,email,role,shopName,emplyeeNum);
+        supplierManager.createAccountForSupplier(new Supplier(userName,password,city,street,homeNum,phneNum,email,role,shopName,emplyeeNum));
 
     }
 

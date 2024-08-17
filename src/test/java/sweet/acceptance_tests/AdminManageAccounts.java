@@ -2,6 +2,7 @@ package sweet.acceptance_tests;
 
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import sweet.dev.models.Supplier;
 import sweet.dev.system.SweetApp;
 
 import static org.junit.Assert.assertFalse;
@@ -28,7 +29,7 @@ public class AdminManageAccounts {
     }
     @Then("a new supplier will be created")
     public void a_new_supplier_will_be_created() {
-        assertTrue("Succeed",obj.getSupplierManager().createAccountForSupplier(NewName, NewPassword,city,street,homeNum,phoneNum,email,"s",shopName,employeeNum));
+        assertTrue("Succeed",obj.getSupplierManager().createAccountForSupplier(new Supplier(NewName, NewPassword,city,street,homeNum,phoneNum,email,"s",shopName,employeeNum)));
 
     }
 

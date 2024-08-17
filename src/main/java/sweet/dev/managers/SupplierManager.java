@@ -3,6 +3,7 @@ package sweet.dev.managers;
 import sweet.dev.models.Supplier;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 public class SupplierManager {
     private boolean supplierCreated;
@@ -22,26 +23,25 @@ public class SupplierManager {
         return suppliers;
     }
 
-    public boolean createAccountForSupplier(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role, String shopName, int emplyeeNum) {
+    public boolean createAccountForSupplier(Supplier supplier) {
         supplierCreated = false;
         boolean flag = true;
         for (Supplier s : suppliers) {
-            if (s.getUserName().equals(userName)) {
+            if (s.getUserName().equals(supplier.getUserName())) {
                 flag = false;
                 break;
             }
         }
         if (flag) {
-            addSupplier(userName, password, phneNum, email, city, street, homeNum, role, shopName, emplyeeNum);
+            addSupplier(supplier);
             supplierCreated = true;
         }
         return flag;
 
     }
 
-    public void addSupplier(String userName, String password, String phneNum, String email, String city, String street, String homeNum, String role, String shopName, int emplyeeNum) {
-        Supplier newSupplier = new Supplier(userName, password, phneNum, email, city, street, homeNum, role, shopName, emplyeeNum);
-        suppliers.add(newSupplier);
+    public void addSupplier(Supplier supplier) {
+        suppliers.add(supplier);
     }
 
     public Supplier getTheSupplier(String userName){
@@ -65,7 +65,11 @@ public class SupplierManager {
     }
     public boolean displayallsuplliers (){
         for (Supplier s : suppliers) {
-            logger.info(s.toString());
+
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(s::toString);
+            }
+
         }
         return true;
     }

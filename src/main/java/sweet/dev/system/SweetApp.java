@@ -60,7 +60,7 @@ public class SweetApp {
        Supplier s1=new Supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","sweetee",4);
        s1.getProductManager().addProduct(new Product("101","milk",100,10.5,8.0,28,7,2024,0.0));
        s1.getProductManager().addProduct(new Product("102", "bread", 50, 3.0, 2.0, 25, 7, 2024, 0.0));
-        this.Recipemanager = new RecipeManager(users);
+        this.Recipemanager = new RecipeManager();
         LinkedList<OrderDetails> orderDetails = new LinkedList<>();
         Product milk = s1.getProductManager().findProduct("101");
         Product bread =s1.getProductManager().findProduct("102");
@@ -90,7 +90,7 @@ public class SweetApp {
         s1.getOrderManager().updateOrderStatus("order002","shipped",userManager);
         s1.getOrderManager().updateOrderStatus("order003","delivered",userManager);
 
-        this.Recipemanager=new RecipeManager(users);
+        this.Recipemanager=new RecipeManager();
         Recipe Rec1;
         Recipemanager.postRecipe(Rec1 = new Recipe("Pancake", 3, "Milk, flour, oil", "Mix them all", u1.getUserName()));
         Rec1.addFeedback("0-by: haya nice and easy");
