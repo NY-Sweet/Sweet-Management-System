@@ -54,17 +54,17 @@ public class UserManager {
 
         return null;
     }
-    public boolean isValidPassword(String OldPassword, String NewPassword, String confirmPassword , User User) {
-         if (OldPassword.equals(User.getPassword())) {
-            if (NewPassword.equals(confirmPassword)) {
+    public boolean isValidPassword(String oldPassword, String newPassword, String confirmpassword , User user) {
+         if (oldPassword.equals(user.getPassword())) {
+            if (newPassword.equals(confirmpassword)) {
                 return true;
             }
         }
         return false ;
     }
 
-    public boolean deleteUser (String UserName){
-        User userToRemove =  getTheUser(UserName);
+    public boolean deleteUser (String userName){
+        User userToRemove =  getTheUser(userName);
         users.remove(userToRemove);
         return true;
 
