@@ -20,7 +20,7 @@ public class messaging {
 
     public SweetApp obj;
     private boolean  success;
-
+    private boolean failed;
 
     public LoginManager loginManager;
     public UserManager userManager;
@@ -59,12 +59,13 @@ public class messaging {
     @When("user {string} set invalid receiver={string} content ={string} date {int}-{int}-{int} status read={int}")
     public void user_set_invalid_receiver_content_date_status_read(String string, String string2, String string3, Integer int1, Integer int2, Integer int3, Integer int4) {
         LocalDate date = LocalDate.of(int3, int2, int1);
-        success= messageManager.sendMessage(string,string2,string3,date);
+        failed= messageManager.sendMessage(string,string2,string3,date);
+
     }
     @Then("Failed message")
     public void failed_message() {
         assertTrue(obj.isInMessagePage());
-        assertFalse(success);
+        assertFalse(failed);
     }
 
     @When("user {string} View inbox Message")

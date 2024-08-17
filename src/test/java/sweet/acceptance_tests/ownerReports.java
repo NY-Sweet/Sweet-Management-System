@@ -12,7 +12,6 @@ import sweet.dev.system.SweetApp;
 
 import java.util.logging.Logger;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class ownerReports {
