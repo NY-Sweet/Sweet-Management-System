@@ -1,8 +1,8 @@
 package sweet.dev.managers;
 
 import sweet.dev.models.Admin;
-import sweet.dev.models.supplier;
-import sweet.dev.models.user;
+import sweet.dev.models.Supplier;
+import sweet.dev.models.User;
 
 import java.util.*;
 
@@ -11,18 +11,18 @@ public class LoginManager {
     private Integer roleInSys;
     private boolean forget;
     private String enteredUsername;
-    private List<user> users;
-    private List<supplier> suppliers;
+    private List<User> users;
+    private List<Supplier> suppliers;
     private List<Admin> admins;
     private String loggedInSupplier;
     private String loggedInUser;
 
-    private supplier loggedSupplierObj;
-    private user loggedUserObj;
+    private Supplier loggedSupplierObj;
+    private User loggedUserObj;
     private Map<String, String> resetTokens = new HashMap<>();
 
 
-    public LoginManager(List<user> users, List<supplier> suppliers, List<Admin> admins) {
+    public LoginManager(List<User> users, List<Supplier> suppliers, List<Admin> admins) {
         this.users = users;
         this.suppliers = suppliers;
         this.admins=admins;
@@ -57,7 +57,7 @@ public class LoginManager {
 
     public void setUsernameAndPasswordFromSystem(String userName, String password) {
         validation = false;
-        for (user u : users) {
+        for (User u : users) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 validation = true;
                 roleInSys = 0;
@@ -66,7 +66,7 @@ public class LoginManager {
                 return;
             }
         }
-        for (supplier s : suppliers) {
+        for (Supplier s : suppliers) {
             if (s.getUserName().equals(userName) && s.getPassword().equals(password)) {
                 validation = true;
                 loggedInSupplier = userName;
@@ -98,7 +98,7 @@ public class LoginManager {
 
     public void validUsernameAndForgetPassword(String username, String forget) {
         this.forget = false;
-        for (user u : users) {
+        for (User u : users) {
             if (u.getUserName().equals(username) && forget.equals("Forget")) {
                 this.forget = true;
                 this.enteredUsername = username;
@@ -110,7 +110,7 @@ public class LoginManager {
 
     public void updatePassword(String newPassword) {
         if (isForget()) {
-            for (user u : users) {
+            for (User u : users) {
                 if (u.getUserName().equals(enteredUsername)) {
                     u.setPassword(newPassword);
                     roleInSys = 0;

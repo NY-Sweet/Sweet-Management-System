@@ -1,15 +1,15 @@
 package sweet.dev.managers;
 
-import sweet.dev.models.user;
+import sweet.dev.models.User;
 
 import java.util.List;
 import java.util.logging.Logger;
 public class UserManager {
     private boolean userCreated;
 
-    private List<user> users;
+    private List<User> users;
 
-    public UserManager(List<user> users) {
+    public UserManager(List<User> users) {
         this.users = users;
     }
 
@@ -17,14 +17,14 @@ public class UserManager {
         return userCreated;
     }
 
-    public List<user> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
     public void createAccountForUser(String userName, String password, String city, String street, String homeNum, String phneNum, String email, String role) {
         userCreated = false;
         boolean flag = true;
-        for (user u : users) {
+        for (User u : users) {
             if (u.getUserName().equals(userName)) {
                 flag = false;
                 userCreated = false;
@@ -38,15 +38,15 @@ public class UserManager {
     }
 
     public boolean addUser(String userName, String password, String phneNum, String email, String city, String street, String homeNum, String role) {
-        user newUser = new user(userName, password, phneNum, email, city, street, homeNum, role);
+        User newUser = new User(userName, password, phneNum, email, city, street, homeNum, role);
         users.add(newUser);
         return true;
     }
 
 
-    public user getTheUser(String userName) {
+    public User getTheUser(String userName) {
 
-        for (user s : users) {
+        for (User s : users) {
             if (s.getUserName().equals(userName)) {
                 return s;
             }
@@ -54,7 +54,7 @@ public class UserManager {
 
         return null;
     }
-    public boolean isValidPassword(String OldPassword, String NewPassword, String confirmPassword ,user User) {
+    public boolean isValidPassword(String OldPassword, String NewPassword, String confirmPassword , User User) {
          if (OldPassword.equals(User.getPassword())) {
             if (NewPassword.equals(confirmPassword)) {
                 return true;
@@ -64,14 +64,14 @@ public class UserManager {
     }
 
     public boolean deleteUser (String UserName){
-        user userToRemove =  getTheUser(UserName);
+        User userToRemove =  getTheUser(UserName);
         users.remove(userToRemove);
         return true;
 
     }
     private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
     public boolean DisplayAllUsers (){
-        for (user User : this.users) {
+        for (sweet.dev.models.User User : this.users) {
 
             logger.info(User.toString());
         }

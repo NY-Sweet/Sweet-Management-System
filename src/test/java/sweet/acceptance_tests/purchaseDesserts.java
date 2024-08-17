@@ -25,9 +25,9 @@ public class purchaseDesserts {
     private OrderManager orderManager;
 
     private SupplierManager supplierManager;
-    private supplier owner;
+    private Supplier owner;
     private Order currentOrder;
-    private sweet.dev.models.user user;
+    private User user;
     public purchaseDesserts(SweetApp obj) {
         super();
         this.obj=obj;

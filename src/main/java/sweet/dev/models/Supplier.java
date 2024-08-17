@@ -7,7 +7,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
 import java.util.LinkedList;
 
-public class supplier {
+public class Supplier {
 
     private  String userName;
     private  String password;
@@ -37,11 +37,11 @@ public class supplier {
         return orders;
     }
 
-    private static final Logger logger = Logger.getLogger(supplier.class.getName());
+    private static final Logger logger = Logger.getLogger(Supplier.class.getName());
     private DiscountRule discountRule;
     private ProductManager productManager;
     private OrderManager orderManager;
-    public supplier(String userName, String password, String phoneNum, String email, String city, String street, String homeNum, String role, String shopName, int epmloyeeNum) {
+    public Supplier(String userName, String password, String phoneNum, String email, String city, String street, String homeNum, String role, String shopName, int epmloyeeNum) {
 
         this.userName = userName;
         this.password = password;

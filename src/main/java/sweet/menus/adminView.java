@@ -1,13 +1,13 @@
 package sweet.menus;
 
+import sweet.dev.models.Supplier;
+import sweet.dev.models.User;
 import sweet.format.PrettyFormatter;
 import sweet.dev.managers.AdminManager;
 import sweet.dev.managers.RecipeManager;
 import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.models.Recipe;
-import sweet.dev.models.supplier;
-import sweet.dev.models.user;
 
 import java.util.List;
 import java.util.Scanner;
@@ -183,13 +183,13 @@ public class adminView {
     }
 
     private void manageStoreOwners() {
-        List<supplier> suppliers = supplierManager.getSuppliers();
+        List<Supplier> suppliers = supplierManager.getSuppliers();
 
         if (suppliers.isEmpty()) {
             logger.info("There are currently no store owners.");
         } else {
             logger.info("List of Store Owners:");
-            for (supplier supplier : suppliers) {
+            for (Supplier supplier : suppliers) {
                 logger.info(supplier.getUserName());
             }
         }
@@ -216,14 +216,14 @@ public class adminView {
     }
 
     private void manageNormalUsers() {
-        List<user> users = userManager.getUsers();
+        List<User> users = userManager.getUsers();
 
         // Display normal users with informative message
         if (users.isEmpty()) {
             logger.info("There are currently no normal users.");
         } else {
             logger.info("List of Normal Users:");
-            for (user user : users) {
+            for (User user : users) {
                 logger.info(user.getUserName());
             }
         }

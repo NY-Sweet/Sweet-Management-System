@@ -4,7 +4,7 @@ import sweet.dev.models.Product;
 import sweet.format.PrettyFormatter;
 import sweet.dev.models.Order;
 import sweet.dev.models.OrderDetails;
-import sweet.dev.models.supplier;
+import sweet.dev.models.Supplier;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -21,7 +21,7 @@ import java.util.Properties;
 public class OrderManager {
     private LinkedList<Order> orders;
     private boolean successOperation;
-    private sweet.dev.models.supplier supplier;
+    private Supplier supplier;
     private static final Logger logger = Logger.getLogger(OrderManager.class.getName());
     private static final String TOTAL_PRICE_STRING = "Total Price";
      private static final String ORDER_ID_STRING = "Order Id";
@@ -32,7 +32,7 @@ public class OrderManager {
     }
 
 
-    public OrderManager(supplier supplier) {
+    public OrderManager(Supplier supplier) {
         this.supplier = supplier;
         this.orders= supplier.getOrders();
         setupLogger();

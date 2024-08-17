@@ -21,9 +21,9 @@ public class SweetApp {
 
     private boolean InProductPage;
 
-    public LinkedList<user> users;
+    public LinkedList<User> users;
     private LinkedList<Admin> admins;
-    private LinkedList<supplier> suppliers;
+    private LinkedList<Supplier> suppliers;
     private MessageManager messageManager;
     private RecipeManager Recipemanager ;
     private boolean IsMessageDisplayedforVlidationaRecipe= false;
@@ -52,11 +52,11 @@ public class SweetApp {
         users = new LinkedList<>();
         suppliers = new LinkedList<>();
         admins=new LinkedList<>();
-        user u1=new user("haya","123456","","","nablus","","","u");
+        User u1=new User("haya","123456","","","nablus","","","u");
         users.add(u1);
-        user u2=new user("sara","123456","","s12112422@stu.najah.edu","nablus","","","u");
+        User u2=new User("sara","123456","","s12112422@stu.najah.edu","nablus","","","u");
         users.add(u2);
-       supplier s1=new supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","sweetee",4);
+       Supplier s1=new Supplier("noor","123456","","s12112422@stu.najah.edu","","","","s","sweetee",4);
        s1.getProductManager().addProduct("101","milk",100,10.5,8.0,28,7,2024,0.0);
        s1.getProductManager().addProduct("102", "bread", 50, 3.0, 2.0, 25, 7, 2024, 0.0);
         this.Recipemanager = new RecipeManager(users);
@@ -227,7 +227,7 @@ public class SweetApp {
        return false;
     }
     public boolean addFeedbackforaProductByitsId (String ID , String FeedBack){
-        for (supplier Sup : suppliers) {
+        for (Supplier Sup : suppliers) {
             if (Sup.getProductManager().findProduct(ID)!= null) {
                 Sup.getProductManager().findProduct(ID).addFeedback(FeedBack);
                 return true;

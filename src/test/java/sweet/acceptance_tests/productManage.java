@@ -6,7 +6,7 @@ import io.cucumber.java.en.Given;
 import sweet.dev.managers.LoginManager;
 import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
-import sweet.dev.models.supplier;
+import sweet.dev.models.Supplier;
 import sweet.dev.system.SweetApp;
 
 import java.util.logging.Logger;
@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 public class productManage {
     public SweetApp obj;
-    private supplier owner;
+    private Supplier owner;
     private boolean result;
 
     private LoginManager loginManager;

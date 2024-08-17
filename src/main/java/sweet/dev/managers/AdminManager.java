@@ -1,9 +1,9 @@
 package sweet.dev.managers;
 
+import sweet.dev.models.Supplier;
+import sweet.dev.models.User;
 import sweet.format.PrettyFormatter;
 import sweet.dev.models.Admin;
-import sweet.dev.models.supplier;
-import sweet.dev.models.user;
 
 import java.util.HashMap;
 import java.util.List;
@@ -42,8 +42,8 @@ public class AdminManager {
     }
     public boolean showAnnualReport(int year)
     {
-        List<supplier> suppliers=supplierManager.getSuppliers();
-        for(supplier supplier:suppliers)
+        List<Supplier> suppliers =supplierManager.getSuppliers();
+        for(Supplier supplier:suppliers)
         {
             logger.info("Annual Report "+supplier.getShopName()+" manage by"+supplier.getUserName()+ " has employee number"+supplier.getEpmloyeeNum());
             supplier.getOrderManager().showFinancialReports(year);
@@ -51,10 +51,10 @@ public class AdminManager {
         return true;
     }
     public boolean showBestSellingProducts() {
-        List<supplier> suppliers = supplierManager.getSuppliers();
+        List<Supplier> suppliers = supplierManager.getSuppliers();
 
 
-        for (supplier supplier : suppliers) {
+        for (Supplier supplier : suppliers) {
             logger.info("Best selling products in "+supplier.getShopName()+" manage by"+supplier.getUserName()+ " has employee number"+supplier.getEpmloyeeNum());
             supplier.getOrderManager().showBestProducts();
         }
@@ -62,10 +62,10 @@ public class AdminManager {
     }
 
     public boolean showStatisticsOnRegisteredUsersByCity() {
-        List<user> users=userManager.getUsers();
+        List<User> users =userManager.getUsers();
         Map<String, Integer> cityUserCountMap = new HashMap<>();
 
-        for (user user : users) {
+        for (User user : users) {
             String city = user.getCity().toLowerCase();
             cityUserCountMap.put(city, cityUserCountMap.getOrDefault(city, 0) + 1);
         }

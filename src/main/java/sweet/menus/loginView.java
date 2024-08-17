@@ -1,10 +1,10 @@
 package sweet.menus;
 
+import sweet.dev.models.Supplier;
+import sweet.dev.models.User;
 import sweet.format.PrettyFormatter;
 import sweet.dev.managers.*;
 import sweet.dev.models.Admin;
-import sweet.dev.models.supplier;
-import sweet.dev.models.user;
 
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
@@ -87,7 +87,7 @@ public class loginView {
         if (loginManager.isValidation()) {
             if(loginManager.getRoleInSys()==1)
             {
-                supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
+                Supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
                 ownerView ownerView=new ownerView(supplier,userManager,messageManager);
                 ownerView.displayMenu();
             }
@@ -104,7 +104,7 @@ public class loginView {
             else if(loginManager.getRoleInSys()==0)
             {
 
-                user user=userManager.getTheUser(loginManager.getEnteredUsername());
+                User user=userManager.getTheUser(loginManager.getEnteredUsername());
                 UserView userView=new UserView(user,userManager,recipeManager,supplierManager,messageManager);
                 userView.displayMenu();
 

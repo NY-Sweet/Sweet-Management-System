@@ -18,13 +18,13 @@ public class UserView {
     private final Scanner scanner;
     private final Logger logger;
 
-    private user User;
+    private sweet.dev.models.User User;
     private UserManager userManager;
     private RecipeManager recipeManager;
     private SupplierManager supplierManager ;
     private MessageManager messageManager ;
 
-    public UserView(user User,UserManager userManager ,RecipeManager recipeManager ,SupplierManager supplierManager,MessageManager messageManager) {
+    public UserView(sweet.dev.models.User User, UserManager userManager , RecipeManager recipeManager , SupplierManager supplierManager, MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger("UserView");
         logger.setUseParentHandlers(false);
@@ -359,13 +359,13 @@ public class UserView {
 
     private void purchaseDesserts() {
       logger.info("Our Shops :");
-        List<supplier> OurSuppliers =supplierManager.getSuppliers();
-        for (supplier supplier : OurSuppliers){
+        List<Supplier> ourSuppliers =supplierManager.getSuppliers();
+        for (Supplier supplier : ourSuppliers){
             logger.info(supplier.getShopName());
         }
         logger.info("Enter shop name ");
         String shopName = scanner.nextLine();
-        supplier Supplier = supplierManager.getTheSupplierByUsingShopName(shopName);
+        Supplier Supplier = supplierManager.getTheSupplierByUsingShopName(shopName);
         ProductManager prodManager= Supplier.getProductManager();
 
         prodManager.showProductsForCustomer();

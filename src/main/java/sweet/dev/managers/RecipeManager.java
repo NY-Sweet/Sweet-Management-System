@@ -1,8 +1,8 @@
 package sweet.dev.managers;
 
+import sweet.dev.models.User;
 import sweet.format.PrettyFormatter;
 import sweet.dev.models.Recipe;
-import sweet.dev.models.user;
 
 import java.util.*;
 import java.util.logging.ConsoleHandler;
@@ -13,10 +13,10 @@ import java.util.logging.Logger;
 public class RecipeManager {
     private LinkedList<Recipe> validatedRecipes = new LinkedList<Recipe>();
     private  LinkedList<Recipe> notValidatedRecipes = new LinkedList<Recipe>();
-    private  List <user> users ;
+    private  List <User> users;
     private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
 
-    public RecipeManager(  List <user> users) {
+    public RecipeManager(  List <User> users) {
         this.users = users;
         logger.setUseParentHandlers(false);
 

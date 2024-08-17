@@ -3,7 +3,7 @@ package sweet.acceptance_tests;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import sweet.dev.system.SweetApp;
-import sweet.dev.models.user;
+import sweet.dev.models.User;
 
 import static org.junit.Assert.*;
 
@@ -11,7 +11,7 @@ public class UserAcountManagement {
     SweetApp obj = new SweetApp();
     String x;
     String NewCityName;
-    user user1 = new user();
+    User user1 = new User();
     @When("the user select edit city {string}")
     public void the_user_select_edit_city(String string) {
         x = string;

@@ -2,7 +2,7 @@ package sweet.dev.models;
 
 import java.util.LinkedList;
 
-public class user {
+public class User {
 
     public  String userName;
     private  String password;
@@ -14,7 +14,7 @@ public class user {
     private String role;
     private LinkedList<Order> orders;
 
-    public user(String userName, String password, String phoneNum, String email, String city, String street, String homeNum, String role) {
+    public User(String userName, String password, String phoneNum, String email, String city, String street, String homeNum, String role) {
         this.userName = userName;
         this.password = password;
         this.phoneNum = phoneNum;
@@ -28,7 +28,7 @@ public class user {
 
 
 
-    public user() {
+    public User() {
         this.orders=new LinkedList<>();
     }
 
