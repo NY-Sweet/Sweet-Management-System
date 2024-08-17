@@ -14,12 +14,8 @@ public class LoginManager {
     private List<User> users;
     private List<Supplier> suppliers;
     private List<Admin> admins;
-    private String loggedInSupplier;
-    private String loggedInUser;
 
-    private Supplier loggedSupplierObj;
-    private User loggedUserObj;
-    private Map<String, String> resetTokens = new HashMap<>();
+
 
 
     public LoginManager(List<User> users, List<Supplier> suppliers, List<Admin> admins) {
@@ -62,14 +58,12 @@ public class LoginManager {
                 validation = true;
                 roleInSys = 0;
                 enteredUsername=userName;
-                loggedInUser = userName;
                 return;
             }
         }
         for (Supplier s : suppliers) {
             if (s.getUserName().equals(userName) && s.getPassword().equals(password)) {
                 validation = true;
-                loggedInSupplier = userName;
                 enteredUsername=userName;
                 roleInSys = 1;
             }
@@ -102,7 +96,6 @@ public class LoginManager {
             if (u.getUserName().equals(username) && forget.equals("Forget")) {
                 this.forget = true;
                 this.enteredUsername = username;
-                loggedInUser = username;
                 return;
             }
         }

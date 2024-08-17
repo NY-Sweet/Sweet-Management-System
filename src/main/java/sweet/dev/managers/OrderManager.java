@@ -9,6 +9,7 @@ import sweet.dev.models.Supplier;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -140,7 +141,7 @@ public class OrderManager {
                 .stream()
                 .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
                 .limit(5)
-                .collect(Collectors.toList());
+                .toList();
 
         // Log the best-selling products
         logger.info(() -> {
@@ -175,7 +176,7 @@ public class OrderManager {
     private boolean isStockAvailable(Order order) {
         for (OrderDetails details : order.getOrderDetails()) {
             Product product = supplier.getProductManager().findProduct(details.getProduct().getId());
-            if (product == null || product.getQuantity() < details.getQuantity()) {
+            if ( product.getQuantity() < details.getQuantity()) {
                 logger.info("Sorry the product "+product.getName()+" quantity not available the max quantity you can order "+product.getQuantity());
                 return false;
             }
@@ -191,22 +192,25 @@ public class OrderManager {
                 }
 
                 order.setStatus(newStatus);
-                String message = "Order status updated: " + orderId + " to " + newStatus + "\n";
+                String message = String.format("Order status updated: %s to %s%n", orderId, newStatus);
                 StringBuilder table = new StringBuilder();
                 printProduct(order, table);
                 String username = order.getUsername();
                 String email = userManager.getTheUser(username).getEmail();
-                logger.info("Order status updated: " + orderId + " to " + newStatus);
+                if (logger.isLoggable(Level.INFO)) {
+                    logger.info(String.format("Order status updated: %s to %s", orderId, newStatus));
+                }
                 sendEmailTo(email, message + table.toString());
                 successOperation = true;
                 if(newStatus.equals("delivered"))
                 {
                     userManager.getTheUser(username).addOrder(order);
                 }
-                return;
             }
         else {
-                logger.warning("Order not found: " + orderId);
+                if (logger.isLoggable(Level.WARNING)) {
+                    logger.warning(String.format("Order not found: %s", orderId));
+                }
                 successOperation = false;
             }
     }
@@ -283,8 +287,10 @@ public class OrderManager {
             }
         }
 
-        logger.info("Delivered Orders:");
-        logger.info(table.toString());
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Delivered Orders:");
+            logger.info(() -> table.toString());
+        }
         successOperation = true;
     }
 
@@ -320,8 +326,8 @@ public class OrderManager {
         return true;
     }
     private double[] monthlySalesAndProfits(int month, int year) {
-        double totalSales = 0.0;
-        double totalCost = 0.0;
+        double totalSales ;
+        double totalCost ;
         totalSales = getTotalSalesForMonth(month, year);
         totalCost = getTotalCostForMonth(month, year);
 
@@ -333,14 +339,14 @@ public class OrderManager {
         report.append(String.format("%-10s %-15s %-15s %-15s%n", "Month", "Total Sales", TOTAL_COST_STRING, "Profit"));
         report.append("---------------------------------------------------------------\n");
 
-        // Add each month's data to the report
         for (int month = 0; month < 12; month++) {
             double profit = totalSalesByMonth[month] - totalCostByMonth[month];
             report.append(String.format("%-10d %-15.2f %-15.2f %-15.2f%n", month + 1, totalSalesByMonth[month], totalCostByMonth[month], profit));
         }
 
-        logger.info(report.toString());
-    }
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(() -> report.toString());
+        }    }
 
 
     public double getTotalSalesForMonth(int month, int year) {
