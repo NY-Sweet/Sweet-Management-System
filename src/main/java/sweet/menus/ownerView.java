@@ -1,4 +1,5 @@
 package sweet.menus;
+import sweet.dev.models.Date;
 import sweet.dev.models.Product;
 import sweet.dev.models.Supplier;
 import sweet.format.PrettyFormatter;
@@ -307,7 +308,7 @@ public class ownerView {
 
         logger.info("Discount Percentage: ");
         Double percentage = Double.parseDouble(scanner.nextLine());
-        productManager.addProduct(new Product(id, name, quantity, price, cost, day, month, year, percentage));
+        productManager.addProduct(new Product(id, name, quantity, price, cost, new Date(day, month, year), percentage));
 
         if (productManager.isOperationSuccess()) {
             logger.info("Product added successfully.");

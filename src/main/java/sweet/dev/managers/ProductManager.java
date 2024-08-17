@@ -1,5 +1,6 @@
 package sweet.dev.managers;
 
+import sweet.dev.models.Date;
 import sweet.dev.models.Product;
 import sweet.format.PrettyFormatter;
 import sweet.dev.models.DiscountRule;
@@ -71,7 +72,7 @@ public class ProductManager {
         table.append("===============================================================================================================================\n");
        List<Product> products1=getProducts();
         for (Product p : products1) {
-            String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
+            String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getExpirationDate().getDay(), p.getExpirationDate().getMonth(), p.getExpirationDate().getYear());
             table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-20s %-15.2f %-15.2f%n",
                     p.getId(), p.getName(), p.getQuantity(), p.getPrice(), p.getCost(), expirationDate, p.getDiscountPercentage(), p.getPrice() * (1 - p.getDiscountPercentage() / 100)));
         }
@@ -90,7 +91,7 @@ public class ProductManager {
 
         List<Product> products1 = getProducts();
         for (Product p : products1) {
-            String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
+            String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getExpirationDate().getDay(), p.getExpirationDate().getMonth(), p.getExpirationDate().getYear());
             String feedbacks = p.formatFeedbacks();
 
             table.append(String.format("%-10s %-20s %-10d %-10.2f %-20s %-15.2f %-15.2f %-50s%n",
@@ -124,7 +125,7 @@ public class ProductManager {
 
     private boolean isProductNearExpiration(Product product) {
         LocalDate today = LocalDate.now();
-        LocalDate expirationDate = LocalDate.of(product.getYear(), product.getMonth(), product.getDay());
+        LocalDate expirationDate = LocalDate.of(product.getExpirationDate().getYear(), product.getExpirationDate().getMonth(), product.getExpirationDate().getDay());
         long daysUntilExpiration = ChronoUnit.DAYS.between(today, expirationDate);
 
         return daysUntilExpiration <= discountRule.getDaysBeforeExpiration();
@@ -181,9 +182,7 @@ public class ProductManager {
         Product product = findProduct(id);
         setOperationSuccess(false);
         if (product != null) {
-            product.setDay(day);
-            product.setMonth(month);
-            product.setYear(year);
+            product.setExpirationDate(new Date(day,month,year));
             applyDiscount();
             setOperationSuccess(true);
         }
@@ -199,7 +198,7 @@ public class ProductManager {
 
         for (Product p : products) {
             if (p.getDiscountPercentage() > 0) {
-                String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getDay(), p.getMonth(), p.getYear());
+                String expirationDate = String.format(EXPIRATION_DATE_FORMAT_STRING, p.getExpirationDate().getDay(), p.getExpirationDate().getMonth(), p.getExpirationDate().getYear());
                 table.append(String.format("%-10s %-20s %-10d %-10.2f %-10.2f %-15s %-10.2f %-10.2f%n",
                         p.getId(), p.getName(), p.getQuantity(), p.getPrice(), p.getCost(), expirationDate, p.getDiscountPercentage(), p.getPrice() * (1 - p.getDiscountPercentage() / 100)));
             }

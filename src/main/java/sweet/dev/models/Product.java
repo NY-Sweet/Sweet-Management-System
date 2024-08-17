@@ -14,23 +14,19 @@ public class Product {
     private Integer quantity;
     private Double price;
     private Double cost;
-    private Integer day;
-    private Integer month;
-    private Integer year;
+    private Date expirationDate;
     private Double discountPercentage;
     private List<String> feedbacks;
     private final Logger logger=Logger.getLogger("MyProduct");
-    public Product(String id, String name, Integer quantity, Double price, Double cost, Integer day, Integer month, Integer year, Double discountPercentage) {
+    public Product(String id, String name, Integer quantity, Double price, Double cost, Date date, Double discountPercentage) {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
         this.price = price;
         this.cost = cost;
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        this.expirationDate=date;
         this.discountPercentage = discountPercentage;
-        this.feedbacks = new LinkedList<String>();
+        this.feedbacks = new LinkedList<>();
 
         logger.setUseParentHandlers(false);
 
@@ -63,16 +59,9 @@ public class Product {
         this.cost = cost;
     }
 
-    public void setDay(Integer day) {
-        this.day = day;
-    }
 
-    public void setMonth(Integer month) {
-        this.month = month;
-    }
-
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setExpirationDate(Date expirationDate) {
+        this.expirationDate = expirationDate;
     }
 
     public void setDiscountPercentage(Double discountPercentage) {
@@ -99,16 +88,8 @@ public class Product {
         return cost;
     }
 
-    public Integer getDay() {
-        return day;
-    }
-
-    public Integer getMonth() {
-        return month;
-    }
-
-    public Integer getYear() {
-        return year;
+    public Date getExpirationDate() {
+        return expirationDate;
     }
 
     public Double getDiscountPercentage() {

@@ -6,6 +6,7 @@ import io.cucumber.java.en.Given;
 import sweet.dev.managers.LoginManager;
 import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
+import sweet.dev.models.Date;
 import sweet.dev.models.Product;
 import sweet.dev.models.Supplier;
 import sweet.dev.models.User;
@@ -69,7 +70,7 @@ public class productManage {
 
     @When("set product Id={string} product name ={string} quantity ={int}  price={double}  cost={double} expiration date {int}-{int}-{int} discount percentage={double}")
     public void set_product_id_product_name_quantity_price_cost_expiration_date_discount_percentage(String id, String name, Integer quantity, Double price,Double cost, Integer day, Integer month, Integer year, Double percentage) {
-        owner.getProductManager().addProduct(new Product(id,name,quantity,price,cost,day,month,year,percentage));
+        owner.getProductManager().addProduct(new Product(id,name,quantity,price,cost,new Date(day,month,year),percentage));
     }
     @Then("the product is created successfully and a  message is displayed")
     public void the_product_is_created_successfully_and_a_message_is_displayed() {
@@ -79,7 +80,7 @@ public class productManage {
 
     @When("set invalid product Id={string} product name ={string} quantity ={int}  price={double}  cost={double} expiration date {int}-{int}-{int} discount percentage={double}")
     public void setInvalidProductIdProductNameQuantityPriceCostExpirationDateDiscountPercentage(String id, String name, Integer quantity, Double price,Double cost, Integer day, Integer month, Integer year, Double percentage) {
-        owner.getProductManager().addProduct(new Product(id,name,quantity,price,cost,day,month,year,percentage));
+        owner.getProductManager().addProduct(new Product(id,name,quantity,price,cost,new Date(day,month,year),percentage));
     }
     @Then("message is displayed the product is already added")
     public void message_is_displayed_the_product_is_already_added() {
