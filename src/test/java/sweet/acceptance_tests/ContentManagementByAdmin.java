@@ -17,7 +17,7 @@ public class ContentManagementByAdmin {
     public void the_admin_choose_recipe_id_to_delete(Integer int1) {
         RecipeTodelete= int1;
         obj.getRecipemanager().postRecipe(addedre);
-        obj.getRecipemanager().ValidateRecipe(addedre);
+        obj.getRecipemanager().validateRecipe(addedre);
     }
 
     @Then("the recipe is deleted and a message is shown")
@@ -31,7 +31,7 @@ public class ContentManagementByAdmin {
     @When("the admin chooses a recipe to display its feedbacks by  its id {int} and FeedbackId {int}")
     public void the_admin_chooses_a_recipe_to_display_its_feedbacks_by_its_id_and_feedback_id(Integer int1, Integer int2) {
         obj.getRecipemanager().postRecipe(addedre);
-        obj.getRecipemanager().ValidateRecipe(addedre);
+        obj.getRecipemanager().validateRecipe(addedre);
         obj.getRecipemanager().getValidatedRecipes().get(0).addFeedback("what an easy recipe");
         obj.getRecipemanager().getValidatedRecipes().get(0).addFeedback("Excellent!!!");
         obj.getRecipemanager().showAllRecipes();

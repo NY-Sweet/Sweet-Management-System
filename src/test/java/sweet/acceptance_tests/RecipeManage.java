@@ -28,7 +28,7 @@ public class RecipeManage {
     @Then("the system validates the inputs")
     public void the_system_validates_the_inputs() {
         Recipe NotValidated= obj.getRecipemanager().getnotValidatedRecipes().get(0);
-        assertTrue("Succeed", obj.getRecipemanager().ValidateRecipe(NotValidated));
+        assertTrue("Succeed", obj.getRecipemanager().validateRecipe(NotValidated));
 
     }
 
@@ -42,7 +42,7 @@ public class RecipeManage {
         obj.Messageaftervaledationoftherecipe();
         assertTrue("success",obj.isMessageDisplayedforVlidationaRecipe());
         obj.clearMessageDisplayedAfterRecipeValidation ();
-        obj.getRecipemanager().ValidateRecipe(NewRecipe);
+        obj.getRecipemanager().validateRecipe(NewRecipe);
     }
 
     @When("the user select Browse Recipe")
@@ -104,7 +104,7 @@ public class RecipeManage {
         Recipe RE1 =  new Recipe("Pancake",3,"Milk, flour, oil","Mix them all","haya");
 
         obj.getRecipemanager().postRecipe(RE1);
-        obj.getRecipemanager().ValidateRecipe(RE1);
+        obj.getRecipemanager().validateRecipe(RE1);
         assertTrue("Succeed",obj.getRecipemanager().findRecipesByName("cake").get(0).addFeedback(Content) );
     }
 

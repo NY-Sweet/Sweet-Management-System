@@ -6,6 +6,7 @@ import sweet.dev.models.*;
 
 import java.time.LocalDate;
 import java.util.LinkedList;
+import java.util.List;
 
 public class SweetApp {
 
@@ -97,55 +98,55 @@ public class SweetApp {
         Rec1.setId(1);
         Recipe Rec2;
         Recipemanager.postRecipe(Rec2 = new Recipe("Chocolate Cake", 4, "Flour, sugar, cocoa powder, eggs, butter", "Bake it at 350°F for 30 minutes", u2.getUserName()));
-        Recipemanager.ValidateRecipe(Rec2);
+        Recipemanager.validateRecipe(Rec2);
         Rec2.addFeedback("0-by: sara delicious and rich");
         Rec2.setId(2);
 
         Recipe Rec3;
         Recipemanager.postRecipe(Rec3 = new Recipe("Vegetable Soup", 5, "Carrots, potatoes, celery, onions, water, salt", "Simmer all ingredients for 40 minutes", u1.getUserName()));
-        Recipemanager.ValidateRecipe(Rec3);
+        Recipemanager.validateRecipe(Rec3);
         Rec3.addFeedback("0-by: haya healthy and comforting");
         Rec3.setId(3);
 
         Recipe Rec4;
         Recipemanager.postRecipe(Rec4 = new Recipe("Spaghetti Bolognese", 4, "Spaghetti, ground beef, tomato sauce, onions, garlic", "Cook spaghetti and sauce separately and then mix", u1.getUserName()));
-        Recipemanager.ValidateRecipe(Rec4);
+        Recipemanager.validateRecipe(Rec4);
         Rec4.addFeedback("0-by: sara classic and tasty");
         Rec4.setId(0);
 
         Recipe Rec5;
         Recipemanager.postRecipe(Rec5 = new Recipe("Caesar Salad", 2, "Lettuce, croutons, Parmesan cheese, Caesar dressing", "Toss all ingredients together", u2.getUserName()));
-        Recipemanager.ValidateRecipe(Rec5);
+        Recipemanager.validateRecipe(Rec5);
         Rec5.addFeedback("0-by: haya fresh and crisp");
         Rec5.setId(4);
 
         Recipe Rec6;
         Recipemanager.postRecipe(Rec6 = new Recipe("Lemonade", 1, "Lemons, sugar, water", "Mix lemon juice, sugar, and water", u1.getUserName()));
-        Recipemanager.ValidateRecipe(Rec6);
+        Recipemanager.validateRecipe(Rec6);
         Rec6.addFeedback("0-by: sara refreshing and sweet");
         Rec6.setId(5);
 
         Recipe Rec7;
         Recipemanager.postRecipe(Rec7 = new Recipe("French Toast", 2, "Bread, eggs, milk, cinnamon, butter", "Dip bread in egg mixture and cook in butter", u1.getUserName()));
-        Recipemanager.ValidateRecipe(Rec7);
+        Recipemanager.validateRecipe(Rec7);
         Rec7.addFeedback("0-by: haya easy and delicious");
         Rec7.setId(6);
 
         Recipe Rec8;
         Recipemanager.postRecipe(Rec8 = new Recipe("Chicken Curry", 4, "Chicken, curry powder, coconut milk, onions, garlic", "Cook chicken with spices and add coconut milk", u2.getUserName()));
-        Recipemanager.ValidateRecipe(Rec8);
+        Recipemanager.validateRecipe(Rec8);
         Rec8.addFeedback("0-by: sara spicy and flavorful");
         Rec8.setId(7);
 
         Recipe Rec9;
         Recipemanager.postRecipe(Rec9 = new Recipe("Fruit Salad", 2, "Apples, bananas, grapes, oranges, honey", "Mix all fruits and drizzle with honey", u2.getUserName()));
-        Recipemanager.ValidateRecipe(Rec9);
+        Recipemanager.validateRecipe(Rec9);
         Rec9.addFeedback("0-by: haya sweet and tangy");
         Rec9.setId(8);
 
         Recipe Rec10;
         Recipemanager.postRecipe(Rec10 = new Recipe("Grilled Cheese Sandwich", 1, "Bread, cheese, butter", "Butter bread, add cheese, and grill", u1.getUserName()));
-        Recipemanager.ValidateRecipe(Rec10);
+        Recipemanager.validateRecipe(Rec10);
         Rec10.addFeedback("0-by: sara gooey and cheesy");
         Rec10.setId(9);
 
@@ -203,7 +204,7 @@ public class SweetApp {
     }
 
     public boolean RecipoeTosearch (String recipe){
-        LinkedList <Recipe>SearchedRecipes =Recipemanager.findRecipesByName(recipe);
+        List<Recipe> SearchedRecipes =Recipemanager.findRecipesByName(recipe);
         return true ;
 
     }

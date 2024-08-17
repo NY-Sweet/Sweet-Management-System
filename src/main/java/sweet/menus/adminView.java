@@ -280,7 +280,7 @@ public class adminView {
                     int  recipeId = scanner.nextInt();
                     scanner.nextLine();
 
-                    recipeManager.ValidateRecipe(recipeManager.searchRecipeByIdNotvalidated(recipeId));
+                    recipeManager.validateRecipe(recipeManager.searchRecipeByIdNotvalidated(recipeId));
                     logger.info("Its Done successfully");
                 } else if (validationChoice.equalsIgnoreCase("No")) {
                 logger.info("Recipe validation skipped.");

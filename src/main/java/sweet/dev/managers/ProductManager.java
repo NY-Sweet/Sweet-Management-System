@@ -77,7 +77,7 @@ public class ProductManager {
         }
 
         if (logger.isLoggable(Level.INFO)) {
-            logger.info(() -> table.toString());
+            logger.info(table::toString);
         }
         return true;
     }
@@ -117,7 +117,6 @@ public class ProductManager {
 
         for (Product product : products) {
             if (isProductNearExpiration(product)) {
-                double discount = product.getPrice() * (discountRule.getPercentage() / 100);
                 product.setDiscountPercentage(discountRule.getPercentage());
             }
         }

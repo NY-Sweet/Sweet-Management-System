@@ -11,13 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class RecipeManager {
-    private LinkedList<Recipe> validatedRecipes = new LinkedList<Recipe>();
-    private  LinkedList<Recipe> notValidatedRecipes = new LinkedList<Recipe>();
-    private  List <User> users;
+    private LinkedList<Recipe> validatedRecipes = new LinkedList<>();
+    private  LinkedList<Recipe> notValidatedRecipes = new LinkedList<>();
     private static final Logger logger = Logger.getLogger(RecipeManager.class.getName());
 
     public RecipeManager(  List <User> users) {
-        this.users = users;
         logger.setUseParentHandlers(false);
 
         Handler[] handlers = logger.getHandlers();
@@ -47,14 +45,14 @@ public class RecipeManager {
     public  List<Recipe> getnotValidatedRecipes() {
         return notValidatedRecipes;
     }
-    public boolean ValidateRecipe(Recipe recipetovaledate){
+    public boolean validateRecipe(Recipe recipetovaledate){
         validatedRecipes.add(recipetovaledate);
         notValidatedRecipes.remove(recipetovaledate);
         return true;
     }
 
-    public  LinkedList<Recipe> findRecipesByName(String searchTerm) {
-        LinkedList<Recipe> results = new LinkedList<>();
+    public List <Recipe> findRecipesByName(String searchTerm) {
+        List<Recipe> results = new ArrayList<>();
         for (Recipe recipe : validatedRecipes) {
             if (recipe.getName().toLowerCase().contains(searchTerm.toLowerCase())) {
                 results.add(recipe);
@@ -126,7 +124,6 @@ public class RecipeManager {
     private boolean print(List<Recipe> filteredRecipes) {
         if (filteredRecipes.isEmpty()) {
             logger.info("Unfortunately, no recipes match your dietary restrictions.");
-            return true;
         }
 
         logger.info("\nHere are the recipes that match your dietary restrictions:\n");
