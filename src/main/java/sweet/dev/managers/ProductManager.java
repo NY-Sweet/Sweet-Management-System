@@ -6,7 +6,6 @@ import sweet.dev.models.DiscountRule;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.ConsoleHandler;
 import java.util.logging.Logger;
