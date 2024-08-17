@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 public class ProductManager {
 
-    private LinkedList<Product> products;
+    private List<Product> products;
     private DiscountRule discountRule;
     private boolean invalidProductId;
 
@@ -32,8 +32,8 @@ public class ProductManager {
         return products;
     }
 
-    public ProductManager(LinkedList<Product> Products) {
-        this.products = Products;
+    public ProductManager(List<Product> products) {
+        this.products = products;
         this.discountRule = new DiscountRule(0, 0);
         setupLogger();
     }
