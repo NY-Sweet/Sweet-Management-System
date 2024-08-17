@@ -16,13 +16,13 @@ public class ContentManagementByAdmin {
     @When("the admin  choose recipe id to delete {int}")
     public void the_admin_choose_recipe_id_to_delete(Integer int1) {
         RecipeTodelete= int1;
-        obj.getRecipemanager().postRecipe(addedre);
-        obj.getRecipemanager().validateRecipe(addedre);
+        obj.getRecipeManager().postRecipe(addedre);
+        obj.getRecipeManager().validateRecipe(addedre);
     }
 
     @Then("the recipe is deleted and a message is shown")
     public void the_recipe_is_deleted_and_a_message_is_shown() {
-        assertTrue("Succeed",obj.getRecipemanager().deleteRecipeByIndex(RecipeTodelete));
+        assertTrue("Succeed",obj.getRecipeManager().deleteRecipeByIndex(RecipeTodelete));
     }
 
     int recipeid;
@@ -30,19 +30,19 @@ public class ContentManagementByAdmin {
 
     @When("the admin chooses a recipe to display its feedbacks by  its id {int} and FeedbackId {int}")
     public void the_admin_chooses_a_recipe_to_display_its_feedbacks_by_its_id_and_feedback_id(Integer int1, Integer int2) {
-        obj.getRecipemanager().postRecipe(addedre);
-        obj.getRecipemanager().validateRecipe(addedre);
-        obj.getRecipemanager().getValidatedRecipes().get(0).addFeedback("what an easy recipe");
-        obj.getRecipemanager().getValidatedRecipes().get(0).addFeedback("Excellent!!!");
-        obj.getRecipemanager().showAllRecipes();
+        obj.getRecipeManager().postRecipe(addedre);
+        obj.getRecipeManager().validateRecipe(addedre);
+        obj.getRecipeManager().getValidatedRecipes().get(0).addFeedback("what an easy recipe");
+        obj.getRecipeManager().getValidatedRecipes().get(0).addFeedback("Excellent!!!");
+        obj.getRecipeManager().showAllRecipes();
         recipeid= int1 ;
-        obj.getRecipemanager().searchRecipeById(recipeid).showFeedbaks();
+        obj.getRecipeManager().searchRecipeById(recipeid).showFeedbaks();
         feedid=int2;
     }
 
     @Then("the feedback is deleted")
     public void the_feedback_is_deleted() {
-       assertTrue("Succeed",obj.getRecipemanager().deleteaFeedofaRecipe(recipeid,feedid));
+       assertTrue("Succeed",obj.getRecipeManager().deleteaFeedofaRecipe(recipeid,feedid));
     }
     int enteredbyadmin;
     @When("the admin  enters Invalid  recipe id  {int}")
@@ -52,7 +52,7 @@ public class ContentManagementByAdmin {
 
     @Then("Message Invalid Recipe Id")
     public void message_invalid_recipe_id() {
-        Recipe SEARCHED= obj.getRecipemanager().searchRecipeByIdNotvalidated(enteredbyadmin);
+        Recipe SEARCHED= obj.getRecipeManager().searchRecipeByIdNotvalidated(enteredbyadmin);
         assertEquals("Not Found",null,SEARCHED);
     }
     @When("the admin  enters valid  recipe id  {int}")
@@ -62,7 +62,7 @@ public class ContentManagementByAdmin {
 
     @Then("Message valid Recipe Id")
     public void message_valid_recipe_id() {
-        Recipe Searched = obj.getRecipemanager().searchRecipeByIdNotvalidated(enteredbyadmin);
+        Recipe Searched = obj.getRecipeManager().searchRecipeByIdNotvalidated(enteredbyadmin);
         assertNotNull("Found",Searched);
     }
 
@@ -74,7 +74,7 @@ public class ContentManagementByAdmin {
 
     @Then("failed message appears Invalid Feedback Id")
     public void failed_message_appears_invalid_feedback_id() {
-        assertFalse(obj.getRecipemanager().deleteaFeedofaRecipe(recipeid,feedid));
+        assertFalse(obj.getRecipeManager().deleteaFeedofaRecipe(recipeid,feedid));
     }
 
     @When("the admin chooses a recipe to display its feedbacks by  Invalid  id {int} and   FeedbackId {int}")
@@ -85,7 +85,7 @@ public class ContentManagementByAdmin {
 
     @Then("failed message appears Invalid Recipe Id")
     public void failed_message_appears_invalid_recipe_id() {
-        assertFalse(obj.getRecipemanager().deleteaFeedofaRecipe(recipeid,feedid));
+        assertFalse(obj.getRecipeManager().deleteaFeedofaRecipe(recipeid,feedid));
     }
 
 }

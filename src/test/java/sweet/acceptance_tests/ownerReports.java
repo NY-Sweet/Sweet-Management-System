@@ -18,12 +18,10 @@ public class ownerReports {
 
     public SweetApp obj;
     private Supplier owner;
-private boolean success;
+    private boolean success;
     public LoginManager loginManager;
     public UserManager userManager;
     public SupplierManager supplierManager;
-
-    private static final Logger logger = Logger.getLogger(ownerReports.class.getName());
     public ownerReports(SweetApp obj) {
         super();
         this.obj=obj;
