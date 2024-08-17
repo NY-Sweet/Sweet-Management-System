@@ -123,39 +123,33 @@ public class OrderManager {
 
 
     public void showBestProducts() {
-        Map<String, Integer> productSales = calculateProductSales();
-        List<Map.Entry<String, Integer>> topProducts = getTopProducts(productSales, 5);
-        logBestSellingProducts(topProducts);
-    }
 
-    private Map<String, Integer> calculateProductSales() {
-        return orders.stream()
-                .flatMap(order -> order.getOrderDetails().stream())
-                .collect(Collectors.groupingBy(
-                        orderDetail -> orderDetail.getProduct().getId(),
-                        Collectors.summingInt(OrderDetails::getQuantity)
-                ));
-    }
+        Map<String, Integer> productSales = new HashMap<>();
 
-    private List<Map.Entry<String, Integer>> getTopProducts(Map<String, Integer> productSales, int limit) {
-        return productSales.entrySet().stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .limit(limit)
-                .collect(Collectors.toList());
-    }
-
-    private void logBestSellingProducts(List<Map.Entry<String, Integer>> topProducts) {
-        if (!topProducts.isEmpty()) {
-            String report = generateBestSellingProductsReport(topProducts);
-            logger.info(report);
+        // Count the total quantity sold for each product
+        for (Order order : orders) {
+            for (OrderDetails orderDetail : order.getOrderDetails()) {
+                String productId = orderDetail.getProduct().getId();
+                int quantitySold = orderDetail.getQuantity();
+                productSales.merge(productId, quantitySold, Integer::sum);
+            }
         }
-    }
 
-    private String generateBestSellingProductsReport(List<Map.Entry<String, Integer>> topProducts) {
-        return "Top 5 Best Selling Products:\n" +
-                topProducts.stream()
-                        .map(entry -> String.format("Product ID: %s, Quantity Sold: %d", entry.getKey(), entry.getValue()))
-                        .collect(Collectors.joining("\n"));
+        // Sort the products by quantity sold in descending order and get the top 5
+        List<Map.Entry<String, Integer>> topProducts = productSales.entrySet()
+                .stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .limit(5)
+                .collect(Collectors.toList());
+
+        // Log the best-selling products
+        logger.info(() -> {
+            StringBuilder bestProducts = new StringBuilder("Top 5 Best Selling Products:%n");
+            for (Map.Entry<String, Integer> entry : topProducts) {
+                bestProducts.append(String.format("Product ID: %s, Quantity Sold: %d%n", entry.getKey(), entry.getValue()));
+            }
+            return bestProducts.toString();
+        });
     }
 
     public void reserveStock(Order order) {
