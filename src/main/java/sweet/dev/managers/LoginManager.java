@@ -1,25 +1,41 @@
-package sweet.dev;
+package sweet.dev.managers;
 
-import java.util.List;
+import sweet.dev.models.Admin;
+import sweet.dev.models.Supplier;
+import sweet.dev.models.User;
+
+import java.util.*;
 
 public class LoginManager {
     private boolean validation;
     private Integer roleInSys;
     private boolean forget;
     private String enteredUsername;
-    private List<user> users;
-    private List<supplier> suppliers;
-    private String LoggedInSupplier;
-    private String LoggedInUser;
+    private List<User> users;
+    private List<Supplier> suppliers;
+    private List<Admin> admins;
+    private String loggedInSupplier;
+    private String loggedInUser;
 
-    private supplier LoggedSupplierObj;
-    private user LoggedUserObj;
+    private Supplier loggedSupplierObj;
+    private User loggedUserObj;
+    private Map<String, String> resetTokens = new HashMap<>();
 
-    public LoginManager(List<user> users, List<supplier> suppliers) {
+
+    public LoginManager(List<User> users, List<Supplier> suppliers, List<Admin> admins) {
         this.users = users;
         this.suppliers = suppliers;
+        this.admins=admins;
     }
 
+
+    public void setRoleInSys(Integer roleInSys) {
+        this.roleInSys = roleInSys;
+    }
+
+    public void setEnteredUsername(String enteredUsername) {
+        this.enteredUsername = enteredUsername;
+    }
 
     public boolean isValidation() {
         return validation;
@@ -33,36 +49,40 @@ public class LoginManager {
         return forget;
     }
 
-    public void setForget(boolean forget) {
-        this.forget = forget;
-    }
 
     public String getEnteredUsername() {
         return enteredUsername;
     }
 
-    public void setEnteredUsername(String enteredUsername) {
-        this.enteredUsername = enteredUsername;
-    }
 
     public void setUsernameAndPasswordFromSystem(String userName, String password) {
         validation = false;
-        for (user u : users) {
+        for (User u : users) {
             if (u.getUserName().equals(userName) && u.getPassword().equals(password)) {
                 validation = true;
                 roleInSys = 0;
-                LoggedInUser = userName;
+                enteredUsername=userName;
+                loggedInUser = userName;
                 return;
             }
         }
-        for (supplier s : suppliers) {
+        for (Supplier s : suppliers) {
             if (s.getUserName().equals(userName) && s.getPassword().equals(password)) {
                 validation = true;
-                LoggedInSupplier = userName;
+                loggedInSupplier = userName;
+                enteredUsername=userName;
                 roleInSys = 1;
             }
         }
+        for (Admin admin : admins) {
+            if (admin.getAdminName().equals(userName) && admin.getPassword().equals(password)) {
+                validation = true;
+                enteredUsername=userName;
+                roleInSys = 2;
+            }
+        }
     }
+
 
     public void setEmptyUsernameAndPasswordFromSystem(String username, String password) {
         if (username.isEmpty() && !password.isEmpty()) {
@@ -78,11 +98,11 @@ public class LoginManager {
 
     public void validUsernameAndForgetPassword(String username, String forget) {
         this.forget = false;
-        for (user u : users) {
+        for (User u : users) {
             if (u.getUserName().equals(username) && forget.equals("Forget")) {
                 this.forget = true;
                 this.enteredUsername = username;
-                LoggedInUser = username;
+                loggedInUser = username;
                 return;
             }
         }
@@ -90,7 +110,7 @@ public class LoginManager {
 
     public void updatePassword(String newPassword) {
         if (isForget()) {
-            for (user u : users) {
+            for (User u : users) {
                 if (u.getUserName().equals(enteredUsername)) {
                     u.setPassword(newPassword);
                     roleInSys = 0;
@@ -98,17 +118,6 @@ public class LoginManager {
                 }
             }
         }
-    }
-
-    public user getTheUser() {
-        if (LoggedInUser != null) {
-            for (user u : users) {
-                if (u.getUserName().equals(LoggedInUser)) {
-                    return u;
-                }
-            }
-        }
-        return null;
     }
 
 }

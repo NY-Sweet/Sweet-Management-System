@@ -1,38 +1,45 @@
 Feature: Content Management
 
-  Scenario Outline: admin enters the Admin page
-    Given the admin is on the admin page
-    When the admin enters <int1>
-    Then the admin enters the Manage content page
-    Examples:
-      | int1 |
-      | 3    |
-
-  Scenario Outline: admin doesn't enter the Manage content page
-    Given the admin is on the admin page
-    When the admin enters <int1>
-    Then the admin doesn't enter the Manage content page
-    Examples:
-      | int1 |
-      | 3    |
-
   Scenario Outline: manage recipes
-    Given the admin is on the manage content page
-    When the admin chooses option manage recipes <int1> and sets recipe id to delete <id>
+
+    When the admin  choose recipe id to delete <id>
     Then the recipe is deleted and a message is shown
     Examples:
-      | int1 | id  |
-      | 1    | 101 |
+       | id  |
+       | 0 |
 
   Scenario Outline: manage feedbacks
-    Given the admin is on the manage content page
-    When the admin chooses option manage feedbacks <int1> and sets feedback id to delete <id>
-    Then the feedback is deleted and a message is shown
+    When the admin chooses a recipe to display its feedbacks by  its id <id> and FeedbackId <FeedbackId>
+    Then the feedback is deleted
     Examples:
-      | int1 | id  |
-      | 2    | 123 |
+      | id  |FeedbackId|
+      | 0 |0       |
+  Scenario Outline: manage feedbacks invalid feedback id
+    When the admin chooses a recipe to display its feedbacks by  its id <id> and  Invalid FeedbackId <FeedbackId>
+    Then  failed message appears Invalid Feedback Id
+    Examples:
+      | id  |FeedbackId|
+      | 0 |-1       |
 
-  Scenario: back to admin page
-    Given the admin is on the account manage page
-    When the user selects back "6"
-    Then it goes back to the admin page
+  Scenario Outline: manage feedbacks invalid Recipe  id
+    When the admin chooses a recipe to display its feedbacks by  Invalid  id <id> and   FeedbackId <FeedbackId>
+    Then  failed message appears Invalid Recipe Id
+    Examples:
+      | id  |FeedbackId|
+      | -1|0       |
+
+
+  Scenario Outline: Invalid Recipe Id
+
+    When the admin  enters Invalid  recipe id  <id>
+    Then Message Invalid Recipe Id
+    Examples:
+      | id  |
+      | -1|
+  Scenario Outline: valid Recipe Id
+
+    When the admin  enters valid  recipe id  <id>
+    Then Message valid Recipe Id
+    Examples:
+      | id  |
+      | 1|

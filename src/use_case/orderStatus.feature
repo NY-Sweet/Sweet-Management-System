@@ -9,6 +9,14 @@ Feature: Process and track orders [status].
     |"noor"|"order001"  |"shipped"|
     |"noor"|"order001"  |"rejected"       |
 
+  Scenario Outline: Owner flied to update order status invalid order id
+    Given I'm the owner in track order page
+    When the owner <owner> choose update option set invalid id <orderId>
+    Then the order status failed to updated
+    Examples:
+      |owner |orderId|
+      |"noor"|"-1"  |
+
 
 
   Scenario Outline: Owner updates order status shipped to delivered
@@ -17,7 +25,7 @@ Feature: Process and track orders [status].
     Then the order status should be updated and email sent
     Examples:
       |owner |orderId|state|
-      |"noor"|"order001"  |"delivered"|
+      |"noor"|"order002"  |"delivered"|
 
 
   Scenario Outline: Show delivered orders

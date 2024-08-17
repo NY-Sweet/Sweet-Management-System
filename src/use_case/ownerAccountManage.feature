@@ -1,77 +1,34 @@
-Feature:  Manage personal accounts
+Feature: Account Settings
 
-  Scenario Outline: owner enters the Account setting page
-    Given the owner in owner page
-    When the owner enters the <int1>
-    Then the owner enters the Account setting page
+  Scenario Outline: Owner updates account settings
+    Given owner "<owner>" is on the account settings Account_Settings
+    When the owner selects edit <field> and updates the field with a new <new_value>
+    Then the system displays a message indicating that the <field> has been updated successfully
+
     Examples:
-      | int1 |
-      | 5    |
-  Scenario Outline: owner doesnt enters the Account setting page
-    Given the owner in owner page
-    When the owner enters the <int1>
-    Then the owner doesnt enters the  Account setting page
-    Examples:
-      | int1 |
-      | 6    |
-
-  Scenario: change owner city
-    Given  owner is on the account settings Account_Settings
-    When the owner select edit city "c"
-    And the owner updates the "new_City" field with a new city name
-    Then  the system displays a confirmation message indicating that the address has been updated successfully
-    And back to Account Settings
-
-  Scenario: change owner street
-    Given  owner is on the account settings Account_Settings
-    When the owner select edit street "s"
-    And the owner updates the "new_street" field with a new street name
-    Then  the system displays a confirmation message indicating that the address has been updated successfully
-    And back to Account Settings
-
-  Scenario: change owner home number
-    Given  owner is on the account settings Account_Settings
-    When the owner select edit home number "h"
-    And the owner updates the "new_home_number" field with a new home number name
-    Then  the system displays a confirmation message indicating that the home number has been updated successfully
-    And back to Account Settings
-
-  Scenario: change owner phone number
-    Given  owner is on the account settings Account_Settings
-    When the owner select edit phone number "n"
-    And the owner updates the "new_phone_number" field with a new phone number name
-    Then the system displays a confirmation message indicating that the phone number has been updated successfully
-    And back to Account Settings
-
-  Scenario: change owner email
-    Given  owner is on the account settings Account_Settings
-    When the owner select edit email "e"
-    And the owner updates the "new_email" field with a new email name
-    Then the system validates the new email details
-    And if the details are valid, the system saves the new email
-    And the system displays a confirmation message indicating that the email has been updated successfully
-    And back to Account Settings
+      | owner | field            | new_value                |
+      | noor  | city             | "Qalqilya"          |
+      | noor  | street           | "Nablus-street"        |
+      | noor  | home number      | "45G"        |
+      | noor  | phone number     | "0593224565"       |
+      | noor  | email              | "noor@gmail.com"  |
+      | noor  | employee number    | "12345"                  |
 
   Scenario: change owner password
-    Given  owner is on the account settings Account_Settings
-    When the owner select edit password "p"
-    And the owner enters old password  "old Password" new password "New Password" and confirm password "Confirm Password"
-    Then the system validates the old password
-    And new password match the confirm password
-    And the system displays a confirmation message indicating that the  password has been updated successfully
-    And back to Account Settings
+    Given  owner "noor" is on the account settings Account_Settings
+    When the owner select edit password and enters old password  "123456" new password "12333" and confirm password "12333"
+    Then the system displays a message indicating that the  password has been updated successfully
 
-  Scenario: change employee number
-    Given  owner is on the account settings Account_Settings
-    When the owner select edit employee number "e"
-    And the owner updates the "new employee number" field with a new employee number
-    Then  the system displays a confirmation message indicating that the new employee number has been updated successfully
-    And back to Account Settings
+  Scenario: failed to change owner password incorrect old password
+    Given  owner "noor" is on the account settings Account_Settings
+    When the owner select edit password and enters incorrect old password  "9999" new password "12333" and confirm password "12333"
+    Then the system displays a message indicating that the old password wrong
 
-  Scenario: back to owner page
-    Given  owner is on the account settings Account_Settings
-    When the owner select back "b"
-    Then back to owner page
-
-
-
+  Scenario: failed to change owner password mismatch password
+    Given  owner "noor" is on the account settings Account_Settings
+    When the owner select edit password and enters old password  "123456" new password "12333" and mismatch confirm password "99999"
+    Then the system displays a message indicating that the  password mismatch
+    Scenario: show owner account information
+      Given  owner "noor" is on the account settings Account_Settings
+      When the owner select account information
+      Then display owner information
