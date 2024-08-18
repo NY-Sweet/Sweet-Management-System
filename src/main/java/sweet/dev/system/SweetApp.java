@@ -12,11 +12,16 @@ public class SweetApp {
 
     private boolean isLogged;
     private LoginManager loginManager;
+    private boolean userInPurchasePage;
     private UserManager userManager;
     private SupplierManager supplierManager;
+
     private boolean ownerInReprotsPage;
     private boolean inMessagePage;
+    private boolean inOwnerTrackOrderPage;
+
     private boolean inProductPage;
+
     public LinkedList<User> users;
     private LinkedList<Admin> admins;
     private LinkedList<Supplier> suppliers;
@@ -176,6 +181,17 @@ public class SweetApp {
         return supplierManager;
     }
 
+
+
+
+
+
+
+
+    public void inOwnerTrackOrderPage(boolean inOwnerTrackOrderPage ) {
+        this.inOwnerTrackOrderPage=inOwnerTrackOrderPage;
+    }
+
     public boolean isInMessagePage() {
         return inMessagePage;
     }
@@ -223,7 +239,10 @@ public class SweetApp {
 
 
 
+    public void userInPurchasePage(boolean b) {
+        userInPurchasePage=true;
 
+    }
 
     public AdminManager getAdminManager() {
         return adminManager;
