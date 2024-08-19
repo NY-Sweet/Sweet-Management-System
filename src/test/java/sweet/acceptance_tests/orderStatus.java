@@ -38,7 +38,7 @@ public class orderStatus {
 
     @Given("I'm the owner in track order page")
     public void i_m_the_owner_in_track_order_page() {
-        obj.inOwnerTrackOrderPage(true);
+     //   obj.inOwnerTrackOrderPage(true);
     }
     @When("the owner {string} choose option  change pending set id {string} and states {string}")
     public void theOwnerChooseOptionChangePendingSetIdOrderIdAndStates(String string, String id,String state) {

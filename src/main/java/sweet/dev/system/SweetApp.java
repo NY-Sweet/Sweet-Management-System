@@ -13,17 +13,11 @@ import java.util.logging.Logger;
 
 public class SweetApp {
 
-    private boolean isLogged;
     private LoginManager loginManager;
-    private boolean userInPurchasePage;
     private UserManager userManager;
     private SupplierManager supplierManager;
 
-    private boolean ownerInReprotsPage;
     private boolean inMessagePage;
-    private boolean inOwnerTrackOrderPage;
-
-    private boolean inProductPage;
 
     private List<User> users;
     private LinkedList<Admin> admins;
@@ -50,15 +44,6 @@ public class SweetApp {
 
 
 
-    public void setInProductPage(boolean inProductPage) {
-        this.inProductPage = inProductPage;
-    }
-
-
-
-    public void setOwnerInReprotsPage(boolean ownerInReprotsPage) {
-        this.ownerInReprotsPage = ownerInReprotsPage;
-    }
 
     public SweetApp() {
         users = new LinkedList<>();
@@ -178,13 +163,7 @@ public class SweetApp {
         return messageManager;
     }
 
-    public void iAmNotInSystem() {
-        isLogged=false;
-    }
 
-    public void setLogged(boolean logged) {
-        isLogged = logged;
-    }
 
 
     public LoginManager getLoginManager() {
@@ -204,9 +183,7 @@ public class SweetApp {
         return users;
     }
 
-    public void inOwnerTrackOrderPage(boolean inOwnerTrackOrderPage ) {
-        this.inOwnerTrackOrderPage=inOwnerTrackOrderPage;
-    }
+
 
     public boolean isInMessagePage() {
         return inMessagePage;
@@ -250,13 +227,6 @@ public class SweetApp {
     }
 
 
-    public boolean recipeToSearch(String recipe){
-        return true ;
-    }
-    public void userInPurchasePage(boolean b) {
-        userInPurchasePage=b;
-
-    }
 
     public AdminManager getAdminManager() {
         return adminManager;

@@ -40,7 +40,7 @@ public class ownerReports {
 
     @Given("the owner in Reports page")
     public void the_owner_in_reports_page() {
-        obj.setOwnerInReprotsPage(true);
+     //   obj.setOwnerInReprotsPage(true);
 
     }
 

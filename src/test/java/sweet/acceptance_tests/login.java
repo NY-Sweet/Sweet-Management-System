@@ -38,7 +38,7 @@ public class login {
 
     @Given("I am not in sweet management system")
     public void i_am_not_in_sweet_management_system() {
-        obj.iAmNotInSystem();
+       // obj.iAmNotInSystem();
     }
 
     @When("set username {string} and password {string}")
@@ -89,7 +89,7 @@ public class login {
 
     @Given("I don't have an account")
     public void i_don_t_have_an_account() {
-        obj.setLogged(false);
+       // obj.setLogged(false);
     }
 
     @When("set new username {string}, password {string}, city={string},street={string},home number={string}, phone number={string} , email={string} and role={string}")

@@ -48,7 +48,7 @@ public class productManage {
 
     @Given("the owner in Product page")
     public void the_owner_in_product_page() {
-    obj.setInProductPage(true);
+   // obj.setInProductPage(true);
     }
     @When("the {string} enters option to show products")
     public void the_enters_option_to_show_products(String string) {

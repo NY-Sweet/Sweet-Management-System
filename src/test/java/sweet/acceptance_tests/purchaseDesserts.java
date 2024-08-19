@@ -35,7 +35,7 @@ public class purchaseDesserts {
     }
     @Given("I am a user {string} on the Purchase desserts page")
     public void i_am_a_user_on_the_purchase_desserts_page(String string) {
-        obj.userInPurchasePage(true);
+    //    obj.userInPurchasePage(true);
         user=userManager.getTheUser(string);
 
     }
