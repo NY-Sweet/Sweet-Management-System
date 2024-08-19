@@ -29,7 +29,7 @@ public class SweetApp {
     private RecipeManager recipeManager;
     private boolean isMessageDisplayedforVlidationaRecipe = false;
 
-    private static final String PASSWORD_EX = System.getenv("PASSWORD_EX");
+    private static final String PASS ="123456";
     private static final String EMAIL_EX="s12112422@stu.najah.edu";
 
     private static final String CITY_EX="NABLUS";
@@ -58,11 +58,11 @@ public class SweetApp {
         users = new LinkedList<>();
         suppliers = new LinkedList<>();
         admins=new LinkedList<>();
-        User u1=new User("haya",PASSWORD_EX,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
+        User u1=new User("haya", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
         users.add(u1);
-        User u2=new User("sara",PASSWORD_EX,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
+        User u2=new User("sara", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
         users.add(u2);
-       Supplier s1=new Supplier("noor",PASSWORD_EX,"",EMAIL_EX,new Adress(CITY_EX,"",""),"s","sweetee",4);
+       Supplier s1=new Supplier("noor", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"s","sweetee",4);
        s1.getProductManager().addProduct(new Product("101","milk",100,10.5,8.0,new Date(28,7,2024),0.0));
        s1.getProductManager().addProduct(new Product("102", "bread", 50, 3.0, 2.0, new Date(25, 7, 2024), 0.0));
         this.recipeManager = new RecipeManager();
@@ -82,7 +82,7 @@ public class SweetApp {
 
        suppliers.add(s1);
 
-       admins.add(new Admin("admin",PASSWORD_EX));
+       admins.add(new Admin("admin", PASS));
 
        this.loginManager = new LoginManager(users, suppliers,admins);
         this.userManager = new UserManager(users);
