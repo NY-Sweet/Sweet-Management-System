@@ -29,7 +29,7 @@ public class SweetApp {
     private RecipeManager recipeManager;
     private boolean isMessageDisplayedforVlidationaRecipe = false;
 
-    private static final String PASSWORD_EX="123456";
+    private static final String PASSWORD_EX = System.getenv("PASSWORD_EX");
     private static final String EMAIL_EX="s12112422@stu.najah.edu";
 
     private static final String CITY_EX="NABLUS";

@@ -13,6 +13,8 @@ jobs:
     env:
       EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME }}
       EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+      PASSWORD_EX: ${{ secrets.PASSWORD_EX }}
+
     steps:
       - uses: actions/checkout@v3
         with:
