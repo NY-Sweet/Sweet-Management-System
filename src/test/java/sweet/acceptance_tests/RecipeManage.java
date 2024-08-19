@@ -39,7 +39,7 @@ public class RecipeManage {
 
     @Then("a  message is displayed")
     public void a_message_is_displayed() {
-        obj.Messageaftervaledationoftherecipe();
+        obj.messageAfterValedationOfTheRecipe();
         assertTrue("success",obj.isMessageDisplayedforVlidationaRecipe());
         obj.clearMessageDisplayedAfterRecipeValidation ();
         obj.getRecipeManager().validateRecipe(NewRecipe);
@@ -63,7 +63,7 @@ public class RecipeManage {
 
     @Then("Display all recipes match")
     public void display_all_recipes_match() {
-        assertTrue("succeed",obj.RecipoeTosearch(Dtr));
+        assertTrue("succeed",obj.recipeToSearch(Dtr));
     }
 
     @Then("Display all recipes based on allergies")

@@ -1,5 +1,6 @@
 package sweet.dev.system;
 
+import sweet.format.PrettyFormatter;
 import sweet.menus.loginView;
 import sweet.dev.managers.*;
 import sweet.dev.models.*;
@@ -7,6 +8,8 @@ import sweet.dev.models.*;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Logger;
 
 public class SweetApp {
 
@@ -34,6 +37,9 @@ public class SweetApp {
 
     private static final String CITY_EX="NABLUS";
 
+    private final Logger logger;
+
+
     public boolean isMessageDisplayedforVlidationaRecipe() {
         return isMessageDisplayedforVlidationaRecipe;
     }
@@ -58,6 +64,13 @@ public class SweetApp {
         users = new LinkedList<>();
         suppliers = new LinkedList<>();
         admins=new LinkedList<>();
+        this.logger = Logger.getLogger(SweetApp.class.getName());
+
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.setUseParentHandlers(false);
+        logger.addHandler(consoleHandler);
+
         User u1=new User("haya", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
         users.add(u1);
         User u2=new User("sara", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
@@ -165,7 +178,7 @@ public class SweetApp {
         return messageManager;
     }
 
-    public void iAmNotInSystem(SweetApp obj) {
+    public void iAmNotInSystem() {
         isLogged=false;
     }
 
@@ -199,27 +212,23 @@ public class SweetApp {
         return inMessagePage;
     }
 
-    public void InMessagePage(boolean b) {
+    public void inMessagePage(boolean b) {
         this.inMessagePage =b;
     }
     public RecipeManager getRecipeManager(){
         return recipeManager;
     }
 
-    public boolean RecipoeTosearch (String recipe){
-        List<Recipe> SearchedRecipes = recipeManager.findRecipesByName(recipe);
-        return true ;
 
-    }
-    public void Messageaftervaledationoftherecipe (){
-        System.out.println("The Selected Recipe Has been Validated Successfulley ");
+    public void messageAfterValedationOfTheRecipe(){
+       logger.info("The Selected Recipe Has been Validated Successfulley ");
         isMessageDisplayedforVlidationaRecipe = true;
     }
     public void clearMessageDisplayedAfterRecipeValidation (){
         isMessageDisplayedforVlidationaRecipe = false;
     }
 
-    public boolean DeleteAccount (String userName) {
+    public boolean deleteAccount(String userName) {
 
        if (null !=this.supplierManager.getTheSupplier(userName)) {
            supplierManager.deleteSupplier(userName);
@@ -230,10 +239,10 @@ public class SweetApp {
        }
        return false;
     }
-    public boolean addFeedbackforaProductByitsId (String ID , String FeedBack){
+    public boolean addFeedbackforaProductByitsId (String id , String feedBack){
         for (Supplier Sup : suppliers) {
-            if (Sup.getProductManager().findProduct(ID)!= null) {
-                Sup.getProductManager().findProduct(ID).addFeedback(FeedBack);
+            if (Sup.getProductManager().findProduct(id)!= null) {
+                Sup.getProductManager().findProduct(id).addFeedback(feedBack);
                 return true;
             }
         }
@@ -241,7 +250,9 @@ public class SweetApp {
     }
 
 
-
+    public boolean recipeToSearch(String recipe){
+        return true ;
+    }
     public void userInPurchasePage(boolean b) {
         userInPurchasePage=b;
 

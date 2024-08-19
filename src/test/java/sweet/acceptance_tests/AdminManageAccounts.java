@@ -1,6 +1,5 @@
 package sweet.acceptance_tests;
 
-import io.cucumber.java.bs.A;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import sweet.dev.models.Adress;
@@ -60,7 +59,7 @@ public class AdminManageAccounts {
     }
     @Then("the user deleted and a message displayed")
     public void the_user_deleted_and_a_message_displayed() {
-        assertTrue("Succeed",obj.DeleteAccount(UserNametobedeleted));
+        assertTrue("Succeed",obj.deleteAccount(UserNametobedeleted));
     }
     @When("the admin set  username {string} to delete this invalid user")
     public void the_admin_set_username_to_delete_this_invalid_user(String string) {
@@ -69,17 +68,17 @@ public class AdminManageAccounts {
 
     @Then("Failed Message Diplayed")
     public void failed_message_diplayed() {
-        assertFalse(obj.DeleteAccount(UserNametobedeleted));
+        assertFalse(obj.deleteAccount(UserNametobedeleted));
 
     }
 
     @Then("a failed message displayed")
     public void a_failed_message_displayed() {
-        assertFalse("Succeed",obj.DeleteAccount(UserNametobedeleted));
+        assertFalse("Succeed",obj.deleteAccount(UserNametobedeleted));
     }
     @Then("the Supplier deleted and a message displayed")
     public void the_supplier_deleted_and_a_message_displayed() {
-        assertTrue("Succeed",obj.DeleteAccount(UserNametobedeleted));
+        assertTrue("Succeed",obj.deleteAccount(UserNametobedeleted));
     }
 
 

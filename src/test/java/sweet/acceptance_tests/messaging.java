@@ -42,7 +42,7 @@ public class messaging {
 
     @Given("the user in Messages  page")
     public void the_user_in_messages_page() {
-        obj.InMessagePage(true);
+        obj.inMessagePage(true);
 
     }
     @When("user {string} set valid receiver={string} content ={string}  date {int}-{int}-{int} status read={int}")

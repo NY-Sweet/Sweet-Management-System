@@ -38,7 +38,7 @@ public class login {
 
     @Given("I am not in sweet management system")
     public void i_am_not_in_sweet_management_system() {
-        obj.iAmNotInSystem(obj);
+        obj.iAmNotInSystem();
     }
 
     @When("set username {string} and password {string}")
