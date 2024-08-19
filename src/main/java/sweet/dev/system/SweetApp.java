@@ -1,7 +1,7 @@
 package sweet.dev.system;
 
 import sweet.format.PrettyFormatter;
-import sweet.menus.loginView;
+import sweet.menus.LoginView;
 import sweet.dev.managers.*;
 import sweet.dev.models.*;
 
@@ -233,7 +233,7 @@ public class SweetApp {
     }
 
     public void run() {
-        loginView loginView = new loginView( loginManager,userManager, supplierManager,messageManager,adminManager, recipeManager);
+        LoginView loginView = new LoginView( loginManager,userManager, supplierManager,messageManager,adminManager, recipeManager);
         loginView.displayMenu();
     }
 

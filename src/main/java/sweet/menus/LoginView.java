@@ -9,9 +9,10 @@ import sweet.dev.models.Admin;
 
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class loginView {
+public class LoginView {
     private static final String ANSI_PURPLE = "\n\u001B[95m";
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_WHITE = "\u001B[37m";
@@ -24,15 +25,17 @@ public class loginView {
     private final Scanner scanner;
     private final Logger logger;
     private AdminManager adminManager;
+    private static final String USERNAME_ST="Enter username: ";
+    private static final String PASSWORD_ST="Enter password: ";
 
 
-    public loginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager,MessageManager messageManager,AdminManager adminManager,RecipeManager recipeManager) {
+    public LoginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager, MessageManager messageManager, AdminManager adminManager, RecipeManager recipeManager) {
         this.loginManager = loginManager;
         this.userManager = userManager;
         this.supplierManager = supplierManager;
         this.adminManager=adminManager;
         this.scanner = new Scanner(System.in);
-        this.logger = Logger.getLogger(loginView.class.getName());
+        this.logger = Logger.getLogger(LoginView.class.getName());
         this.recipeManager = recipeManager;
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(new PrettyFormatter());
@@ -70,7 +73,9 @@ public class loginView {
                     logger.info("Exiting application");
                     return;
                 default:
-                    logger.warning("Invalid menu choice: " + choice);
+                    if (logger.isLoggable(Level.WARNING)) {
+                        logger.warning("Invalid menu choice: " + choice);
+                    }
                     logger.info(ANSI_WHITE + "Invalid choice. Please select a valid option." + ANSI_RESET);
             }
         }
@@ -78,8 +83,8 @@ public class loginView {
 
     private void login() {
         logger.info("====== Login ======");
-        String username = promptForNonEmptyInput("Enter username: ");
-        String password = promptForNonEmptyInput("Enter password: ");
+        String username = promptForNonEmptyInput(USERNAME_ST);
+        String password = promptForNonEmptyInput(PASSWORD_ST);
 
         loginManager.setUsernameAndPasswordFromSystem(username, password);
 
@@ -96,7 +101,7 @@ public class loginView {
             else if(loginManager.getRoleInSys()==2)
             {
 
-                Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
+//                Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
                 AdminView adminView=new AdminView(supplierManager,userManager,adminManager,recipeManager);
                 adminView.displayMenu();
 
@@ -113,7 +118,10 @@ public class loginView {
 
             handleSuccessfulLogin();
         } else {
-            logger.warning("Login failed for username: " + username);
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.warning("Login failed for username: " + username);
+
+            }
             logger.info(ANSI_WHITE + "Invalid username or password. Please try again." + ANSI_RESET);
         }
     }
@@ -156,30 +164,36 @@ public class loginView {
                 handleSupplierSignup();
                 break;
             default:
-                logger.warning("Invalid signup choice: " + choice);
+                if (logger.isLoggable(Level.WARNING)) {
+                    logger.warning("Invalid signup choice: " + choice);
+
+                }
                 logger.info(ANSI_WHITE + "Invalid choice. Returning to main menu." + ANSI_RESET);
         }
     }
 
     private void handleUserSignup() {
         logger.info("=== User Signup ===");
-        String username = promptForNonEmptyInput("Enter username: ");
-        String password = promptForNonEmptyInput("Enter password: ");
+        String username = promptForNonEmptyInput(USERNAME_ST);
+        String password = promptForNonEmptyInput(PASSWORD_ST);
         String phoneNumber = promptForNonEmptyInput("Enter phone number: ");
         String email = promptForNonEmptyInput("Enter email: ");
         String city = promptForNonEmptyInput("Enter city: ");
         String street = promptForNonEmptyInput("Enter street: ");
         String homeNumber = promptForNonEmptyInput("Enter home number: ");
         userManager.addUser(new User(username, password, phoneNumber, email,new Adress( city, street, homeNumber), "u"));
-        logger.info("User registered successfully: " + username);
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("User registered successfully: " + username);
+
+        }
         login();
 
     }
 
     private void handleSupplierSignup() {
         logger.info("=== Supplier Signup ===");
-        String username = promptForNonEmptyInput("Enter username: ");
-        String password = promptForNonEmptyInput("Enter password: ");
+        String username = promptForNonEmptyInput(USERNAME_ST);
+        String password = promptForNonEmptyInput(PASSWORD_ST);
         String phoneNumber = promptForNonEmptyInput("Enter phone number: ");
         String email = promptForNonEmptyInput("Enter email: ");
         String city = promptForNonEmptyInput("Enter city: ");
@@ -189,20 +203,29 @@ public class loginView {
         int employeeNum = promptForIntegerInput("Enter employee number: ");
 
         supplierManager.addSupplier(new Supplier(username, password, phoneNumber, email, new Adress(city, street, homeNumber), "s", shopName, employeeNum));
-        logger.info("Supplier registered successfully: " + username);
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Supplier registered successfully: " + username);
+
+        }
         login();
     }
 
     private void updatePassword() {
         logger.info("====== Update Password ======");
-        String username = promptForNonEmptyInput("Enter username: ");
+        String username = promptForNonEmptyInput(USERNAME_ST);
         String newPassword = promptForNonEmptyInput("Enter new password: ");
         loginManager.validUsernameAndForgetPassword(username,"Forget");
         if (loginManager.isForget()) {
             loginManager.updatePassword(newPassword);
-            logger.info("Password updated successfully for username: " + username);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Password updated successfully for username: " + username);
+
+            }
         } else {
-            logger.warning("Password update failed for username: " + username);
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.warning("Password update failed for username: " + username);
+
+            }
             logger.info(ANSI_WHITE + "Failed to update password. User may not be valid or not in forget mode." + ANSI_RESET);
 
         }
@@ -211,7 +234,10 @@ public class loginView {
     private String promptForNonEmptyInput(String prompt) {
         String input = "";
         while (input.isEmpty()) {
-            logger.info(ANSI_WHITE + prompt + ANSI_RESET);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(ANSI_WHITE + prompt + ANSI_RESET);
+
+            }
             input = scanner.nextLine();
             if (input.isEmpty()) {
                 logger.warning("Input field was empty.");
@@ -224,8 +250,10 @@ public class loginView {
     private int promptForIntegerInput(String prompt) {
         int input = -1;
         while (input < 0) {
-            logger.info(ANSI_WHITE + prompt + ANSI_RESET);
-            try {
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(ANSI_WHITE + prompt + ANSI_RESET);
+
+            }            try {
                 input = Integer.parseInt(scanner.nextLine());
                 if (input < 0) {
                     logger.warning("Entered negative integer.");
