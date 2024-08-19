@@ -20,26 +20,19 @@ public class adminReport {
     private boolean  success;
 
 
-    private LoginManager loginManager;
-    private UserManager userManager;
-    private SupplierManager supplierManager;
-    private Admin admin;
+
     private AdminManager adminManager;
 
-    private static final Logger logger = Logger.getLogger(adminReport.class.getName());
     public adminReport(SweetApp obj) {
         super();
         this.obj=obj;
-        userManager = obj.getUserManager();
-        supplierManager = obj.getSupplierManager();
-        loginManager = obj.getLoginManager();
         adminManager=obj.getAdminManager();
 
     }
 
     @Given("the admin {string} is on the Reports page")
     public void the_admin_is_on_the_reports_page(String string) {
-        admin=adminManager.getTheAdmin(string);
+        adminManager.getTheAdmin(string);
 
     }
     @When("the admin selects the financial reports set year {int}")
