@@ -12,9 +12,10 @@ import sweet.dev.models.Recipe;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class adminView {
+public class AdminView {
     private SupplierManager supplierManager;
     private UserManager userManager;
     private AdminManager adminManager;
@@ -28,14 +29,14 @@ public class adminView {
     private static final String CHOICE_PROMPT = ANSI_WHITE + "Enter the number of your choice: " + ANSI_RESET;
 
 
-    public adminView(SupplierManager supplierManager, UserManager userManager,AdminManager adminManager,RecipeManager recipeManager) {
+    public AdminView(SupplierManager supplierManager, UserManager userManager, AdminManager adminManager, RecipeManager recipeManager) {
         this.supplierManager=supplierManager;
         this.userManager=userManager;
         this.adminManager=adminManager;
         this.recipeManager=recipeManager;
         this.scanner = new Scanner(System.in);
 
-        this.logger = Logger.getLogger(adminView.class.getName());
+        this.logger = Logger.getLogger(AdminView.class.getName());
 
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(new PrettyFormatter());
@@ -70,7 +71,7 @@ public class adminView {
 
             switch (choice) {
                 case "1":
-                    ManageUsersAccounts();
+                    manageUsersAccounts();
                     break;
                 case "2":
                     monitorAndReportFinancial();
@@ -82,10 +83,10 @@ public class adminView {
                     adminManager.showStatisticsOnRegisteredUsersByCity();
                     break;
                 case "5":
-                    ManageFeeds();
+                    manageFeeds();
                     break;
                 case "6":
-                    ManageContent();
+                    manageContent();
                     break;
                  case "7":
                      return;
@@ -95,7 +96,7 @@ public class adminView {
         }
     }
 
-    private void ManageFeeds() {
+    private void manageFeeds() {
         logger.info("Heres the recipes in our system and their feedbacks ");
         recipeManager.showAllRecipes();
         while (true) {
@@ -107,25 +108,38 @@ public class adminView {
 
                 int i = 0;
                 for (String feed : feeds) {
-                    logger.info(i + ".  " + feed);
+                    logger.info(String.format("%d.  %s", i, feed));
                     i++;
                 }
+
                 logger.info("Enter the Feedback Id you want to delete");
                 int feedbacId = Integer.parseInt(scanner.nextLine());
-                if(recipeManager.deleteaFeedofaRecipe(recipeId, feedbacId))
-                logger.info(" Deleted the Feedback Id " + feedbacId);
+                if(recipeManager.deleteaFeedofaRecipe(recipeId, feedbacId)) {
+                    if (logger.isLoggable(Level.INFO)) {
+                        logger.info(" Deleted the Feedback Id " + feedbacId);
+
+                    }
+                }
                 else
-                    logger.warning("Feedback Id not valid " + feedbacId);
+                {
+                    if (logger.isLoggable(Level.WARNING)) {
+                        logger.warning("Feedback Id not valid " + feedbacId);
+
+                    }
+                }
                 break;
             }
             else
+            if (logger.isLoggable(Level.WARNING)) {
                 logger.warning("Recipe id not found enter valid one!!");
+
+            }
         }
 
     }
 
-    private void ManageUsersAccounts() {
-        Scanner scanner = new Scanner(System.in); // Create scanner outside loop (resource management)
+    private void manageUsersAccounts() {
+        Scanner scanner0 = new Scanner(System.in); // Create scanner0 outside loop (resource management)
 
         while (true) {
             String menuOptions = ANSI_PURPLE + """
@@ -138,7 +152,7 @@ public class adminView {
                 """ + ANSI_RESET;
 
             logger.info(menuOptions);
-            String choice = scanner.nextLine();
+            String choice = scanner0.nextLine();
 
             switch (choice) {
                 case "1":
@@ -202,9 +216,14 @@ public class adminView {
                 logger.info("Enter the name of the store owner to delete:");
                 String supplierToDelete = scanner.nextLine();
                 if (supplierManager.deleteSupplier(supplierToDelete)) {
-                    logger.config("Successfully deleted store owner: " + supplierToDelete);
+                    if (logger.isLoggable(Level.CONFIG)) {
+                        logger.config("Successfully deleted store owner: " + supplierToDelete);
+
+                    }
                 } else {
-                    logger.warning("Store owner not found: " + supplierToDelete);
+                    if (logger.isLoggable(Level.WARNING)) {
+                        logger.warning("Store owner not found: " + supplierToDelete);
+                    }
                 }
                 break;
             case "no":
@@ -237,9 +256,13 @@ public class adminView {
                 logger.info("Enter the name of the normal user to delete:");
                 String userToDelete = scanner.nextLine();
                 if (userManager.deleteUser(userToDelete)) {
-                    logger.config("Successfully deleted normal user: " + userToDelete);
+                    if (logger.isLoggable(Level.CONFIG)) {
+                        logger.config("Successfully deleted normal user: " + userToDelete);
+                    }
                 } else {
-                    logger.warning("Normal user not found: " + userToDelete);
+                    if (logger.isLoggable(Level.WARNING)) {
+                        logger.warning("Normal user not found: " + userToDelete);
+                    }
                 }
                 break;
             case "no":
@@ -251,7 +274,7 @@ public class adminView {
     }
 
 
-    private void ManageContent() {
+    private void manageContent() {
         String menuOptions = ANSI_PURPLE + """
         ╔═════════════════════════════════════════════════════════╗
         ║              App Content Management                     ║

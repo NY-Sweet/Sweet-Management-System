@@ -97,7 +97,7 @@ public class loginView {
             {
 
                 Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
-                adminView adminView=new adminView(supplierManager,userManager,adminManager,recipeManager);
+                AdminView adminView=new AdminView(supplierManager,userManager,adminManager,recipeManager);
                 adminView.displayMenu();
 
             }
