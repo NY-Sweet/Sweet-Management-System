@@ -8,9 +8,6 @@ import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.models.Supplier;
 import sweet.dev.system.SweetApp;
-
-import java.util.logging.Logger;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -23,7 +20,6 @@ public class ownerAccountSetting {
     public UserManager userManager;
     public SupplierManager supplierManager;
 
-    private static final Logger logger = Logger.getLogger(ownerReports.class.getName());
     public ownerAccountSetting(SweetApp obj) {
         super();
         this.obj=obj;

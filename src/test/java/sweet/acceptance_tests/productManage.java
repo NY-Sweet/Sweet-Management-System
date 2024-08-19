@@ -3,7 +3,6 @@ package sweet.acceptance_tests;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
-import sweet.dev.managers.LoginManager;
 import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.models.*;
@@ -20,7 +19,6 @@ public class productManage {
     private Supplier owner;
     private boolean result;
 
-    private LoginManager loginManager;
     private UserManager userManager;
     private SupplierManager supplierManager;
 
@@ -32,7 +30,6 @@ public class productManage {
         userManager = obj.getUserManager();
         userManager.addUser(new User("haya","123456","","",new Adress("","",""),"u"));
         supplierManager = obj.getSupplierManager();
-        loginManager = obj.getLoginManager();
 
 
     }
@@ -48,7 +45,7 @@ public class productManage {
 
     @Given("the owner in Product page")
     public void the_owner_in_product_page() {
-   // obj.setInProductPage(true);
+   // the owner in Product page
     }
     @When("the {string} enters option to show products")
     public void the_enters_option_to_show_products(String string) {

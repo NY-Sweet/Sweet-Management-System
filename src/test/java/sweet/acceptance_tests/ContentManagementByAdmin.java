@@ -62,8 +62,8 @@ public class ContentManagementByAdmin {
 
     @Then("Message valid Recipe Id")
     public void message_valid_recipe_id() {
-        Recipe Searched = obj.getRecipeManager().searchRecipeByIdNotvalidated(enteredbyadmin);
-        assertNotNull("Found",Searched);
+        Recipe searched = obj.getRecipeManager().searchRecipeByIdNotvalidated(enteredbyadmin);
+        assertNotNull("Found",searched);
     }
 
     @When("the admin chooses a recipe to display its feedbacks by  its id {int} and  Invalid FeedbackId {int}")

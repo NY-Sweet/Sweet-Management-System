@@ -8,10 +8,7 @@ import sweet.dev.managers.MessageManager;
 import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.system.SweetApp;
-
 import java.time.LocalDate;
-import java.util.logging.Logger;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 

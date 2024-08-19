@@ -4,14 +4,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import sweet.dev.managers.AdminManager;
-import sweet.dev.managers.LoginManager;
-import sweet.dev.managers.SupplierManager;
-import sweet.dev.managers.UserManager;
-import sweet.dev.models.Admin;
 import sweet.dev.system.SweetApp;
-
-import java.util.logging.Logger;
-
 import static org.junit.Assert.assertTrue;
 
 public class adminReport {

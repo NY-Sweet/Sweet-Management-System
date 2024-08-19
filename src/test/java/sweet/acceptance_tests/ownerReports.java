@@ -3,15 +3,11 @@ package sweet.acceptance_tests;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Given;
-
 import sweet.dev.managers.LoginManager;
 import sweet.dev.managers.SupplierManager;
 import sweet.dev.managers.UserManager;
 import sweet.dev.models.Supplier;
 import sweet.dev.system.SweetApp;
-
-import java.util.logging.Logger;
-
 import static org.junit.Assert.assertTrue;
 
 public class ownerReports {
@@ -40,7 +36,7 @@ public class ownerReports {
 
     @Given("the owner in Reports page")
     public void the_owner_in_reports_page() {
-     //   obj.setOwnerInReprotsPage(true);
+     //   the owner in Reports page
 
     }
 

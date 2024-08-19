@@ -25,9 +25,9 @@ public class UserAccountManagement {
 
     @Then("the system saves the new city")
     public void the_system_saves_the_new_city() {
-        String OldCity=obj.getUsers().get(0).getAdress().getStreet();
+        String oldCity=obj.getUsers().get(0).getAdress().getStreet();
         obj.getUsers().get(0).getAdress().setCity(newCityName);
-        assertNotEquals(OldCity,obj.getUsers().get(0).getAdress().getCity());
+        assertNotEquals(oldCity,obj.getUsers().get(0).getAdress().getCity());
 
     }
 
@@ -60,9 +60,9 @@ public class UserAccountManagement {
 
     @Then("the system saves the new home number")
     public void the_system_saves_the_new_home_number() {
-        String Oldhome=obj.getUsers().get(0).getAdress().getHomeNum();
+        String oldHome=obj.getUsers().get(0).getAdress().getHomeNum();
        obj.getUsers().get(0).getAdress().setHomeNum(newHomeNumber);
-        assertNotEquals(Oldhome,obj.getUsers().get(0).getAdress().getHomeNum());
+        assertNotEquals(oldHome,obj.getUsers().get(0).getAdress().getHomeNum());
     }
     String newPhoneNumber;
     @When("the user select edit phone number {string}")
