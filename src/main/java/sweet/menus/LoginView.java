@@ -109,7 +109,7 @@ public class LoginView {
             {
 
                 User user=userManager.getTheUser(loginManager.getEnteredUsername());
-                UserView userView=new UserView(user,userManager,recipeManager,supplierManager,messageManager);
+                UserView userView=new UserView(user,recipeManager,supplierManager,messageManager);
                 userView.displayMenu();
 
             }

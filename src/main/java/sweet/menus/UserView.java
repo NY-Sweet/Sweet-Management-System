@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.function.Function;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -18,20 +19,18 @@ public class UserView {
     private final Scanner scanner;
     private final Logger logger;
 
-    private sweet.dev.models.User user;
-    private UserManager userManager;
+    private User user;
     private RecipeManager recipeManager;
     private SupplierManager supplierManager ;
     private MessageManager messageManager ;
 
-    public UserView(sweet.dev.models.User user, UserManager userManager , RecipeManager recipeManager , SupplierManager supplierManager, MessageManager messageManager) {
+    public UserView(User user , RecipeManager recipeManager , SupplierManager supplierManager, MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger("UserView");
         logger.setUseParentHandlers(false);
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(new PrettyFormatter());
         logger.addHandler(consoleHandler);
-        this.userManager = userManager;
         this.user = user;
         this.supplierManager = supplierManager;
         this.recipeManager = recipeManager;
@@ -108,16 +107,19 @@ public class UserView {
                     recipeManager.filterRecipesByDietaryRestrictions(recipeManager.getValidatedRecipes(),dietary);
                     break;
                 case "2":
-                    logger.info("Enter the Alergry Your looking for");
-                    String alergry = scanner.nextLine();
-                    Set<String> Alergry = new HashSet<>();
-                    Alergry.add(alergry);
-                    recipeManager.filterRecipesByAllergies(recipeManager.getValidatedRecipes(),Alergry);
+                    logger.info("Enter the allergy Your looking for");
+                    String allergy = scanner.nextLine();
+                    Set<String> allergrySet = new HashSet<>();
+                    allergrySet.add(allergy);
+                    recipeManager.filterRecipesByAllergies(recipeManager.getValidatedRecipes(),allergrySet);
                     break;
                 case "3":
                     return;
                 default:
-                    logger.warning("Invalid menu choice: " + choice);
+                    if (logger.isLoggable(Level.WARNING)) {
+                        logger.warning("Invalid menu choice: " + choice);
+
+                    }
             }
 
         }
@@ -194,7 +196,7 @@ public class UserView {
                         default:
                             printInvalidMenuChoice(choice);
                     }
-
+break;
 
                 case "3":
                     return;
@@ -205,7 +207,11 @@ public class UserView {
     }
 
     private void printInvalidMenuChoice(String choice) {
-        logger.warning("Invalid menu choice: " + choice);
+        if (logger.isLoggable(Level.WARNING)) {
+            logger.warning("Invalid menu choice: " + choice);
+
+        }
+
         logger.info("Invalid choice. Please select a valid option.");
     }
 
@@ -259,13 +265,15 @@ public class UserView {
 
     private void logOrderedProducts(Map<String, Product> productMap) {
         StringBuilder report = new StringBuilder("Here's the Product you have ordered:\n");
-        report.append(String.format("%-15s %-20s\n", "Product Id", "Name"));
+        report.append(String.format("%-15s %-20s %n", "Product Id", "Name"));
 
         for (Product product : productMap.values()) {
-            report.append(String.format("%-15s %-20s\n", product.getId(), product.getName()));
+            report.append(String.format("%-15s %-20s %n", product.getId(), product.getName()));
         }
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(report.toString());
 
-        logger.info(report.toString());
+        }
     }
 
     private void handleRecipeFeedback() {
@@ -367,8 +375,8 @@ public class UserView {
         }
         logger.info("Enter shop name ");
         String shopName = scanner.nextLine();
-        Supplier Supplier = supplierManager.getTheSupplierByUsingShopName(shopName);
-        ProductManager prodManager= Supplier.getProductManager();
+        Supplier supplier = supplierManager.getTheSupplierByUsingShopName(shopName);
+        ProductManager prodManager= supplier.getProductManager();
 
         prodManager.showProductsForCustomer();
         LinkedList<OrderDetails> orderDetailsList = new LinkedList<>();
@@ -385,18 +393,23 @@ public class UserView {
                 logger.info("Enter the quantity for " + product.getName() + ": ");
                 int quantity = Integer.parseInt(scanner.nextLine());
                 orderDetailsList.add(new OrderDetails(product, quantity));
-                logger.info(quantity + " units of " + product.getName() + " added to your order.");
+                if (logger.isLoggable(Level.INFO)) {
+                    logger.info(quantity + " units of " + product.getName() + " added to your order.");
+
+                }
             } else {
                 logger.warning("Invalid product ID entered. Please try again.");
             }
         }
         if (!orderDetailsList.isEmpty()) {
 
-            String orderId = user.getUserName() + (Supplier.getOrders().size() + 1);
+            String orderId = user.getUserName() + (supplier.getOrders().size() + 1);
             Order newOrder = new Order(orderId, user.getUserName(), orderDetailsList);
-            Supplier.getOrderManager().addOrder(newOrder);
+            supplier.getOrderManager().addOrder(newOrder);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Order placed successfully with Order ID: " + orderId);
 
-            logger.info("Order placed successfully with Order ID: " + orderId);
+            }
         } else {
             logger.warning("No products were added to the order.");
         }
