@@ -11,7 +11,7 @@ public class ContentManagementByAdmin {
     SweetApp obj = new SweetApp();
 
     int RecipeTodelete;
-    Recipe addedre = new Recipe("Egg",3,"Egg salt Oil","Heat and mix",obj.users.get(0).getUserName());
+    Recipe addedre = new Recipe("Egg",3,"Egg salt Oil","Heat and mix",obj.getUsers().get(0).getUserName());
 
     @When("the admin  choose recipe id to delete {int}")
     public void the_admin_choose_recipe_id_to_delete(Integer int1) {

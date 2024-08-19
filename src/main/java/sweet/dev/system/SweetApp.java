@@ -22,13 +22,18 @@ public class SweetApp {
 
     private boolean inProductPage;
 
-    public LinkedList<User> users;
+    private List<User> users;
     private LinkedList<Admin> admins;
     private LinkedList<Supplier> suppliers;
     private MessageManager messageManager;
     private RecipeManager recipeManager;
     private boolean isMessageDisplayedforVlidationaRecipe = false;
-    private Admin admin = new Admin("Yara","123456789");
+
+    private static final String PASSWORD_EX="123456";
+    private static final String EMAIL_EX="s12112422@stu.najah.edu";
+
+    private static final String CITY_EX="NABLUS";
+
     public boolean isMessageDisplayedforVlidationaRecipe() {
         return isMessageDisplayedforVlidationaRecipe;
     }
@@ -53,11 +58,11 @@ public class SweetApp {
         users = new LinkedList<>();
         suppliers = new LinkedList<>();
         admins=new LinkedList<>();
-        User u1=new User("haya","123456","","s12112422@stu.najah.edu",new Adress("nablus","",""),"u");
+        User u1=new User("haya",PASSWORD_EX,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
         users.add(u1);
-        User u2=new User("sara","123456","","s12112422@stu.najah.edu",new Adress("nablus","",""),"u");
+        User u2=new User("sara",PASSWORD_EX,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
         users.add(u2);
-       Supplier s1=new Supplier("noor","123456","","s12112422@stu.najah.edu",new Adress("nablus","",""),"s","sweetee",4);
+       Supplier s1=new Supplier("noor",PASSWORD_EX,"",EMAIL_EX,new Adress(CITY_EX,"",""),"s","sweetee",4);
        s1.getProductManager().addProduct(new Product("101","milk",100,10.5,8.0,new Date(28,7,2024),0.0));
        s1.getProductManager().addProduct(new Product("102", "bread", 50, 3.0, 2.0, new Date(25, 7, 2024), 0.0));
         this.recipeManager = new RecipeManager();
@@ -77,7 +82,7 @@ public class SweetApp {
 
        suppliers.add(s1);
 
-       admins.add(new Admin("admin","123456"));
+       admins.add(new Admin("admin",PASSWORD_EX));
 
        this.loginManager = new LoginManager(users, suppliers,admins);
         this.userManager = new UserManager(users);
@@ -91,64 +96,64 @@ public class SweetApp {
         s1.getOrderManager().updateOrderStatus("order003","delivered",userManager);
 
         this.recipeManager =new RecipeManager();
-        Recipe Rec1;
-        recipeManager.postRecipe(Rec1 = new Recipe("Pancake", 3, "Milk, flour, oil", "Mix them all", u1.getUserName()));
-        Rec1.addFeedback("0-by: haya nice and easy");
+        Recipe rec1=new Recipe("Pancake", 3, "Milk, flour, oil", "Mix them all", u1.getUserName());
+        recipeManager.postRecipe(rec1);
+        rec1.addFeedback("0-by: haya nice and easy");
 
-        Rec1.setId(1);
-        Recipe Rec2;
-        recipeManager.postRecipe(Rec2 = new Recipe("Chocolate Cake", 4, "Flour, sugar, cocoa powder, eggs, butter", "Bake it at 350°F for 30 minutes", u2.getUserName()));
-        recipeManager.validateRecipe(Rec2);
-        Rec2.addFeedback("0-by: sara delicious and rich");
-        Rec2.setId(2);
+        rec1.setId(1);
+        Recipe rec2= new Recipe("Chocolate Cake", 4, "Flour, sugar, cocoa powder, eggs, butter", "Bake it at 350°F for 30 minutes", u2.getUserName());
+        recipeManager.postRecipe(rec2 );
+        recipeManager.validateRecipe(rec2);
+        rec2.addFeedback("0-by: sara delicious and rich");
+        rec2.setId(2);
 
-        Recipe Rec3;
-        recipeManager.postRecipe(Rec3 = new Recipe("Vegetable Soup", 5, "Carrots, potatoes, celery, onions, water, salt", "Simmer all ingredients for 40 minutes", u1.getUserName()));
-        recipeManager.validateRecipe(Rec3);
-        Rec3.addFeedback("0-by: haya healthy and comforting");
-        Rec3.setId(3);
+        Recipe rec3 = new Recipe("Vegetable Soup", 5, "Carrots, potatoes, celery, onions, water, salt", "Simmer all ingredients for 40 minutes", u1.getUserName());
+        recipeManager.postRecipe(rec3);
+        recipeManager.validateRecipe(rec3);
+        rec3.addFeedback("0-by: haya healthy and comforting");
+        rec3.setId(3);
 
-        Recipe Rec4;
-        recipeManager.postRecipe(Rec4 = new Recipe("Spaghetti Bolognese", 4, "Spaghetti, ground beef, tomato sauce, onions, garlic", "Cook spaghetti and sauce separately and then mix", u1.getUserName()));
-        recipeManager.validateRecipe(Rec4);
-        Rec4.addFeedback("0-by: sara classic and tasty");
-        Rec4.setId(0);
+        Recipe rec4 = new Recipe("Spaghetti Bolognese", 4, "Spaghetti, ground beef, tomato sauce, onions, garlic", "Cook spaghetti and sauce separately and then mix", u1.getUserName());
+        recipeManager.postRecipe(rec4);
+        recipeManager.validateRecipe(rec4);
+        rec4.addFeedback("0-by: sara classic and tasty");
+        rec4.setId(0);
 
-        Recipe Rec5;
-        recipeManager.postRecipe(Rec5 = new Recipe("Caesar Salad", 2, "Lettuce, croutons, Parmesan cheese, Caesar dressing", "Toss all ingredients together", u2.getUserName()));
-        recipeManager.validateRecipe(Rec5);
-        Rec5.addFeedback("0-by: haya fresh and crisp");
-        Rec5.setId(4);
+        Recipe rec5= new Recipe("Caesar Salad", 2, "Lettuce, croutons, Parmesan cheese, Caesar dressing", "Toss all ingredients together", u2.getUserName());
+        recipeManager.postRecipe(rec5 );
+        recipeManager.validateRecipe(rec5);
+        rec5.addFeedback("0-by: haya fresh and crisp");
+        rec5.setId(4);
 
-        Recipe Rec6;
-        recipeManager.postRecipe(Rec6 = new Recipe("Lemonade", 1, "Lemons, sugar, water", "Mix lemon juice, sugar, and water", u1.getUserName()));
-        recipeManager.validateRecipe(Rec6);
-        Rec6.addFeedback("0-by: sara refreshing and sweet");
-        Rec6.setId(5);
+        Recipe rec6 = new Recipe("Lemonade", 1, "Lemons, sugar, water", "Mix lemon juice, sugar, and water", u1.getUserName());
+        recipeManager.postRecipe(rec6);
+        recipeManager.validateRecipe(rec6);
+        rec6.addFeedback("0-by: sara refreshing and sweet");
+        rec6.setId(5);
 
-        Recipe Rec7;
-        recipeManager.postRecipe(Rec7 = new Recipe("French Toast", 2, "Bread, eggs, milk, cinnamon, butter", "Dip bread in egg mixture and cook in butter", u1.getUserName()));
-        recipeManager.validateRecipe(Rec7);
-        Rec7.addFeedback("0-by: haya easy and delicious");
-        Rec7.setId(6);
+        Recipe rec7= new Recipe("French Toast", 2, "Bread, eggs, milk, cinnamon, butter", "Dip bread in egg mixture and cook in butter", u1.getUserName());
+        recipeManager.postRecipe(rec7 );
+        recipeManager.validateRecipe(rec7);
+        rec7.addFeedback("0-by: haya easy and delicious");
+        rec7.setId(6);
 
-        Recipe Rec8;
-        recipeManager.postRecipe(Rec8 = new Recipe("Chicken Curry", 4, "Chicken, curry powder, coconut milk, onions, garlic", "Cook chicken with spices and add coconut milk", u2.getUserName()));
-        recipeManager.validateRecipe(Rec8);
-        Rec8.addFeedback("0-by: sara spicy and flavorful");
-        Rec8.setId(7);
+        Recipe rec8 = new Recipe("Chicken Curry", 4, "Chicken, curry powder, coconut milk, onions, garlic", "Cook chicken with spices and add coconut milk", u2.getUserName());
+        recipeManager.postRecipe(rec8);
+        recipeManager.validateRecipe(rec8);
+        rec8.addFeedback("0-by: sara spicy and flavorful");
+        rec8.setId(7);
 
-        Recipe Rec9;
-        recipeManager.postRecipe(Rec9 = new Recipe("Fruit Salad", 2, "Apples, bananas, grapes, oranges, honey", "Mix all fruits and drizzle with honey", u2.getUserName()));
-        recipeManager.validateRecipe(Rec9);
-        Rec9.addFeedback("0-by: haya sweet and tangy");
-        Rec9.setId(8);
+        Recipe rec9= new Recipe("Fruit Salad", 2, "Apples, bananas, grapes, oranges, honey", "Mix all fruits and drizzle with honey", u2.getUserName());
+        recipeManager.postRecipe(rec9 );
+        recipeManager.validateRecipe(rec9);
+        rec9.addFeedback("0-by: haya sweet and tangy");
+        rec9.setId(8);
 
-        Recipe Rec10;
-        recipeManager.postRecipe(Rec10 = new Recipe("Grilled Cheese Sandwich", 1, "Bread, cheese, butter", "Butter bread, add cheese, and grill", u1.getUserName()));
-        recipeManager.validateRecipe(Rec10);
-        Rec10.addFeedback("0-by: sara gooey and cheesy");
-        Rec10.setId(9);
+        Recipe rec10 = new Recipe("Grilled Cheese Sandwich", 1, "Bread, cheese, butter", "Butter bread, add cheese, and grill", u1.getUserName());
+        recipeManager.postRecipe(rec10);
+        recipeManager.validateRecipe(rec10);
+        rec10.addFeedback("0-by: sara gooey and cheesy");
+        rec10.setId(9);
 
 
 
@@ -161,7 +166,7 @@ public class SweetApp {
     }
 
     public void iAmNotInSystem(SweetApp obj) {
-        obj.setLogged(false);
+        isLogged=false;
     }
 
     public void setLogged(boolean logged) {
@@ -182,11 +187,9 @@ public class SweetApp {
     }
 
 
-
-
-
-
-
+    public List<User> getUsers() {
+        return users;
+    }
 
     public void inOwnerTrackOrderPage(boolean inOwnerTrackOrderPage ) {
         this.inOwnerTrackOrderPage=inOwnerTrackOrderPage;
@@ -240,7 +243,7 @@ public class SweetApp {
 
 
     public void userInPurchasePage(boolean b) {
-        userInPurchasePage=true;
+        userInPurchasePage=b;
 
     }
 

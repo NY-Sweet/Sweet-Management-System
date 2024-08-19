@@ -25,9 +25,9 @@ public class UserAcountManagement {
 
     @Then("the system saves the new city")
     public void the_system_saves_the_new_city() {
-        String OldCity=obj.users.get(0).getAdress().getStreet();
-        obj.users.get(0).getAdress().setCity(NewCityName);
-        assertNotEquals(OldCity,obj.users.get(0).getAdress().getCity());
+        String OldCity=obj.getUsers().get(0).getAdress().getStreet();
+        obj.getUsers().get(0).getAdress().setCity(NewCityName);
+        assertNotEquals(OldCity,obj.getUsers().get(0).getAdress().getCity());
 
     }
 
@@ -43,9 +43,9 @@ public class UserAcountManagement {
 
     @Then("the system saves the new street")
     public void the_system_saves_the_new_street() {
-        String OldStreet=obj.users.get(0).getAdress().getStreet();
-       obj.users.get(0).getAdress().setStreet(NewStreetName);
-        assertNotEquals(OldStreet,obj.users.get(0).getAdress().getStreet());
+        String OldStreet=obj.getUsers().get(0).getAdress().getStreet();
+       obj.getUsers().get(0).getAdress().setStreet(NewStreetName);
+        assertNotEquals(OldStreet,obj.getUsers().get(0).getAdress().getStreet());
     }
     String NewHomenumber;
     @When("the user select edit home number {string}")
@@ -60,9 +60,9 @@ public class UserAcountManagement {
 
     @Then("the system saves the new home number")
     public void the_system_saves_the_new_home_number() {
-        String Oldhome=obj.users.get(0).getAdress().getHomeNum();
-       obj.users.get(0).getAdress().setHomeNum(NewHomenumber);
-        assertNotEquals(Oldhome,obj.users.get(0).getAdress().getHomeNum());
+        String Oldhome=obj.getUsers().get(0).getAdress().getHomeNum();
+       obj.getUsers().get(0).getAdress().setHomeNum(NewHomenumber);
+        assertNotEquals(Oldhome,obj.getUsers().get(0).getAdress().getHomeNum());
     }
     String NewPhoneNumber;
     @When("the user select edit phone number {string}")
@@ -77,9 +77,9 @@ public class UserAcountManagement {
 
     @Then("the system saves the new phone number")
     public void the_system_saves_the_new_phone_number() {
-        String Oldphone=obj.users.get(0).getPhoneNum();
-        assertTrue("Success",obj.users.get(0).setPhoneNum(NewPhoneNumber));
-        assertNotEquals(Oldphone,obj.users.get(0).getPhoneNum());
+        String Oldphone=obj.getUsers().get(0).getPhoneNum();
+        assertTrue("Success",obj.getUsers().get(0).setPhoneNum(NewPhoneNumber));
+        assertNotEquals(Oldphone,obj.getUsers().get(0).getPhoneNum());
     }
 
     @When("the user select edit email {string}")
@@ -95,7 +95,7 @@ public class UserAcountManagement {
 
     @Then("the system saves the new email")
     public void theSystemSavesTheNewEmail() {
-        assertTrue("Success",obj.users.get(0).setEmail(NewEmail));
+        assertTrue("Success",obj.getUsers().get(0).setEmail(NewEmail));
 
     }
     @When("the user select edit password {string}")
@@ -107,22 +107,22 @@ public class UserAcountManagement {
     String confirmPassword;
     @When("the user enters old password  {string} new password {string} and confirm password {string}")
     public void the_user_enters_old_password_new_password_and_confirm_password(String string, String string2, String string3) {
-        oldPassword = obj.users.get(0).getPassword();
+        oldPassword = obj.getUsers().get(0).getPassword();
         newPassword = string2;
         confirmPassword = string3;
 
     }
     @Then("the system validates the inputs and sets the new password")
     public void theSystemValidatesTheInputsAndSetsTheNewPassword() {
-        assertTrue("Success",obj.getUserManager().isValidPassword(oldPassword, newPassword, confirmPassword, obj.users.get(0)));
-       obj.users.get(0).setPassword(newPassword);
+        assertTrue("Success",obj.getUserManager().isValidPassword(oldPassword, newPassword, confirmPassword, obj.getUsers().get(0)));
+       obj.getUsers().get(0).setPassword(newPassword);
 
     }
     boolean areEqual;
 
     @When("the user enters  invalid inputs old password  {string} new password {string} and confirm password {string}")
     public void the_user_enters_invalid_inputs_old_password_new_password_and_confirm_password(String string, String string2, String string3) {
-        oldPassword = obj.users.get(0).getPassword();
+        oldPassword = obj.getUsers().get(0).getPassword();
         newPassword = string2;
         confirmPassword = string3;
         if (oldPassword.equals(newPassword)){
@@ -132,7 +132,7 @@ public class UserAcountManagement {
 
     @Then("the system validates the inputs and password change is not valid")
     public void the_system_validates_the_inputs_and_password_change_is_not_valid() {
-        assertFalse(obj.getUserManager().isValidPassword(oldPassword, newPassword, confirmPassword, obj.users.get(0)));
+        assertFalse(obj.getUserManager().isValidPassword(oldPassword, newPassword, confirmPassword, obj.getUsers().get(0)));
 
     }
 
