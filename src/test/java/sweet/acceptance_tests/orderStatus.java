@@ -18,14 +18,11 @@ public class orderStatus {
 
     public SweetApp obj;
     private Supplier owner;
-    private boolean  isValidOption;
-
 
     public LoginManager loginManager;
     public UserManager userManager;
     public SupplierManager supplierManager;
 
-    private static final Logger logger = Logger.getLogger(orderStatus.class.getName());
     public orderStatus(SweetApp obj) {
         super();
         this.obj=obj;
@@ -38,7 +35,7 @@ public class orderStatus {
 
     @Given("I'm the owner in track order page")
     public void i_m_the_owner_in_track_order_page() {
-     //   obj.inOwnerTrackOrderPage(true);
+     //   I'm the owner in track order page
     }
     @When("the owner {string} choose option  change pending set id {string} and states {string}")
     public void theOwnerChooseOptionChangePendingSetIdOrderIdAndStates(String string, String id,String state) {
