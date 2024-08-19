@@ -13,9 +13,10 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ownerView {
+public class OwnerView {
 
     private static final String ANSI_PURPLE = "\n\u001B[95m";
     private static final String ANSI_RESET = "\u001B[0m";
@@ -26,10 +27,14 @@ public class ownerView {
     private Supplier supplier;
     private UserManager userManager;
     private MessageManager messageManager;
+    private static final String INVALID_CHOICE_ST="Invalid menu choice: ";
+    private static final String INVALID_CHOICE_INF_ST="Invalid choice. Please select a valid option.";
+    private static final String SHIPPED_ST="shipped";
+    private static final String YEAR_ST="Enter the year (YYYY): ";
 
-    public ownerView(Supplier supplier, UserManager userManager, MessageManager messageManager) {
+    public OwnerView(Supplier supplier, UserManager userManager, MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
-        this.logger = Logger.getLogger(ownerView.class.getName());
+        this.logger = Logger.getLogger(OwnerView.class.getName());
         logger.setUseParentHandlers(false);
         ConsoleHandler consoleHandler = new ConsoleHandler();
         consoleHandler.setFormatter(new PrettyFormatter());
@@ -82,20 +87,22 @@ public class ownerView {
                     logger.info("Exiting owner menu");
                     return;
                 default:
-                    logger.warning("Invalid menu choice: " + choice);
-                    logger.info("Invalid choice. Please select a valid option.");
+                    printDefault(choice);
             }
         }
     }
 
     private void productFeedback() {
         ProductManager productManager=supplier.getProductManager();
-        List<Product> Products =productManager.getProducts();
-        for (Product product: Products)
+        List<Product> products =productManager.getProducts();
+        for (Product product: products)
         {
-            logger.info(product.getId()+"       " + product.getName());
-            logger.info(product.formatFeedbacks());
-        }
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(product.getId()+"       " + product.getName());
+                logger.info(product.formatFeedbacks());
+            }
+            }
+
 
     }
 
@@ -142,92 +149,102 @@ public class ownerView {
 
     private void ownerAccountManage() {
         while (true) {
-
-            String menuOptions = ANSI_PURPLE + """
-                    ╔════════════════════════════════════╗
-                    ║   Owner Account Management Menu    ║
-                    ╠════════════════════════════════════╣
-                    ║ 1. Update Phone Number             ║
-                    ║ 2. Update Email                    ║
-                    ║ 3. Update City                     ║
-                    ║ 4. Update Street                   ║
-                    ║ 5. Update Home Number              ║
-                    ║ 6. Update Employee Number          ║
-                    ║ 7. Update Password                 ║
-                    ║ 8. Go Back                         ║
-                    ╚════════════════════════════════════╝
-                    """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
-
-
-            logger.info(menuOptions);
-
+            displayOwnerAccountMenu();
             supplier.displaySupplierInfo();
 
             String choice = scanner.nextLine();
-
             switch (choice) {
-                case "1":
-                    logger.info("Enter new phone number: ");
-                    String phoneNum = scanner.nextLine();
-                    supplier.setPhoneNum(phoneNum);
-                    break;
-                case "2":
-                    logger.info("Enter new email: ");
-                    String email = scanner.nextLine();
-                    supplier.setEmail(email);
-                    break;
-                case "3":
-                    logger.info("Enter new city: ");
-                    String city = scanner.nextLine();
-                    supplier.getAdress().setCity(city);
-                    break;
-                case "4":
-                    logger.info("Enter new street: ");
-                    String street = scanner.nextLine();
-                    supplier.getAdress().setStreet(street);
-                    break;
-                case "5":
-                    logger.info("Enter new home number: ");
-                    String homeNum = scanner.nextLine();
-                    supplier.getAdress().setHomeNum(homeNum);
-                    break;
-                case "6":
-                    logger.info("Enter new employee number: ");
-                    int employeeNum = Integer.parseInt(scanner.nextLine());
-                    supplier.setEpmloyeeNum(employeeNum);
-                    break;
-
-                case "7":
-                    while (!supplier.isOperationSuccess()) {
-                        logger.info("Enter old password: ");
-                        String oldPassword = scanner.nextLine();
-                        logger.info("Enter new password: ");
-                        String newPassword = scanner.nextLine();
-                        logger.info("Confirm new password: ");
-                        String confirmPassword = scanner.nextLine();
-                        supplier.updatePassword(oldPassword, newPassword, confirmPassword);
-                        if (supplier.isWrongOldPass()) {
-                            logger.info("Old password is incorrect.");
-                        } else if (supplier.isMismatchPass()) {
-                            logger.info("New password and confirmation do not match.");
-                        } else if (supplier.isOperationSuccess()) {
-                            logger.info("Password updated successfully.");
-                        }
-                    }
-                    break;
+                case "1": updatePhoneNumber(); break;
+                case "2": updateEmail(); break;
+                case "3": updateCity(); break;
+                case "4": updateStreet(); break;
+                case "5": updateHomeNumber(); break;
+                case "6": updateEmployeeNumber(); break;
+                case "7": updatePassword(); break;
                 case "8":
                     logger.info("Going back to the previous menu...");
                     return;
-
-                default:
-                    logger.info("Invalid choice. Please try again.");
+                default: logger.info("Invalid choice. Please try again.");
             }
-            if (supplier.isOperationSuccess())
-                logger.info("Information updated successfully.");
-        }
 
+            if (supplier.isOperationSuccess()) {
+                logger.info("Information updated successfully.");
+            }
+        }
     }
 
+    private void displayOwnerAccountMenu() {
+        String menuOptions = ANSI_PURPLE + """
+            ╔════════════════════════════════════╗
+            ║   Owner Account Management Menu    ║
+            ╠════════════════════════════════════╣
+            ║ 1. Update Phone Number             ║
+            ║ 2. Update Email                    ║
+            ║ 3. Update City                     ║
+            ║ 4. Update Street                   ║
+            ║ 5. Update Home Number              ║
+            ║ 6. Update Employee Number          ║
+            ║ 7. Update Password                 ║
+            ║ 8. Go Back                         ║
+            ╚════════════════════════════════════╝
+            """ + ANSI_RESET + "\n" + CHOICE_PROMPT;
+        logger.info(menuOptions);
+    }
+
+    private void updatePhoneNumber() {
+        logger.info("Enter new phone number: ");
+        String phoneNum = scanner.nextLine();
+        supplier.setPhoneNum(phoneNum);
+    }
+
+    private void updateEmail() {
+        logger.info("Enter new email: ");
+        String email = scanner.nextLine();
+        supplier.setEmail(email);
+    }
+
+    private void updateCity() {
+        logger.info("Enter new city: ");
+        String city = scanner.nextLine();
+        supplier.getAdress().setCity(city);
+    }
+
+    private void updateStreet() {
+        logger.info("Enter new street: ");
+        String street = scanner.nextLine();
+        supplier.getAdress().setStreet(street);
+    }
+
+    private void updateHomeNumber() {
+        logger.info("Enter new home number: ");
+        String homeNum = scanner.nextLine();
+        supplier.getAdress().setHomeNum(homeNum);
+    }
+
+    private void updateEmployeeNumber() {
+        logger.info("Enter new employee number: ");
+        int employeeNum = Integer.parseInt(scanner.nextLine());
+        supplier.setEpmloyeeNum(employeeNum);
+    }
+
+    private void updatePassword() {
+        while (!supplier.isOperationSuccess()) {
+            logger.info("Enter old password: ");
+            String oldPassword = scanner.nextLine();
+            logger.info("Enter new password: ");
+            String newPassword = scanner.nextLine();
+            logger.info("Confirm new password: ");
+            String confirmPassword = scanner.nextLine();
+            supplier.updatePassword(oldPassword, newPassword, confirmPassword);
+            if (supplier.isWrongOldPass()) {
+                logger.info("Old password is incorrect.");
+            } else if (supplier.isMismatchPass()) {
+                logger.info("New password and confirmation do not match.");
+            } else if (supplier.isOperationSuccess()) {
+                logger.info("Password updated successfully.");
+            }
+        }
+    }
 
     private void manageProducts() {
         while (true) {
@@ -270,8 +287,7 @@ public class ownerView {
                     logger.info("Exiting owner menu");
                     return;
                 default:
-                    logger.warning("Invalid menu choice: " + choice);
-                    logger.info("Invalid choice. Please select a valid option.");
+                    printDefault(choice);
             }
         }
     }
@@ -392,8 +408,7 @@ public class ownerView {
                 case "6":
                     return;
                 default:
-                    logger.warning("Invalid menu choice: " + choice);
-                    logger.info("Invalid choice. Please select a valid option.");
+                    printDefault(choice);
             }
         }
     }
@@ -456,14 +471,14 @@ public class ownerView {
                     int day = Integer.parseInt(scanner.nextLine());
                     logger.info("Enter the month (MM): ");
                     int month = Integer.parseInt(scanner.nextLine());
-                    logger.info("Enter the year (YYYY): ");
+                    logger.info(YEAR_ST);
                     int year = Integer.parseInt(scanner.nextLine());
                     orderManager.viewDailySalesAndProfits(day, month, year);
                     break;
                 case "2":
                     logger.info("Enter the month (MM): ");
                     int monthForMonthlyReport = Integer.parseInt(scanner.nextLine());
-                    logger.info("Enter the year (YYYY): ");
+                    logger.info(YEAR_ST);
                     int yearForMonthlyReport = Integer.parseInt(scanner.nextLine());
                     orderManager.viewMonthlySalesAndProfits(monthForMonthlyReport, yearForMonthlyReport);
                     break;
@@ -471,15 +486,14 @@ public class ownerView {
                     orderManager.showBestProducts();
                     break;
                 case "4":
-                    logger.info("Enter the year (YYYY): ");
+                    logger.info(YEAR_ST);
                     int yearForAnnualReport = Integer.parseInt(scanner.nextLine());
                     orderManager.showFinancialReports(yearForAnnualReport);
                     break;
                 case "5":
                     return;
                 default:
-                    logger.warning("Invalid menu choice: " + choice);
-                    logger.info("Invalid choice. Please select a valid option.");
+                    printDefault(choice);
             }
         }
     }
@@ -505,7 +519,7 @@ public class ownerView {
                     showOrdersByState("pending");
                     break;
                 case "2":
-                    showOrdersByState("shipped");
+                    showOrdersByState(SHIPPED_ST);
                     break;
                 case "3":
                     showOrdersByState("delivered");
@@ -517,18 +531,32 @@ public class ownerView {
                     logger.info("Returning to main menu");
                     return;
                 default:
-                    logger.warning("Invalid menu choice: " + choice);
-                    logger.info("Invalid choice. Please select a valid option.");
+                    printDefault(choice);
             }
         }
     }
+
+    private void printDefault(String choice) {
+        if (logger.isLoggable(Level.WARNING)) {
+            logger.warning(INVALID_CHOICE_ST + choice);
+
+        }
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(INVALID_CHOICE_INF_ST);
+
+        }
+    }
+
     private void showOrdersByState(String state) {
-        logger.info("Showing orders with state: " + state);
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Showing orders with state: " + state);
+
+        }
         supplier.getOrderManager().showOrders(state);
     }
     private void updateOrderStatus() {
         showOrdersByState("pending");
-        showOrdersByState("shipped");
+        showOrdersByState(SHIPPED_ST);
         String orderId;
         while(true)
         {
@@ -540,7 +568,7 @@ public class ownerView {
             logger.warning("Invalid Order Id");
         }
         String newStatus = promptForNonEmptyInput("Enter new status (shipped, rejected, or delivered): ").toLowerCase();
-        if (newStatus.equals("shipped") || newStatus.equals("rejected") || newStatus.equals("delivered")) {
+        if (newStatus.equals(SHIPPED_ST) || newStatus.equals("rejected") || newStatus.equals("delivered")) {
             supplier.getOrderManager().updateOrderStatus(orderId, newStatus, userManager);
 
             if (supplier.getOrderManager().isSuccessOperation()) {
@@ -549,7 +577,10 @@ public class ownerView {
                 logger.warning("Failed to update order status. Please check if the Order ID is correct.");
             }
         } else {
-            logger.warning("Invalid new status: " + newStatus);
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.warning("Invalid new status: " + newStatus);
+
+            }
             logger.info("Status update failed.");
         }
     }

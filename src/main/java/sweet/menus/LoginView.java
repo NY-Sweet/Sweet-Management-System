@@ -5,7 +5,6 @@ import sweet.dev.models.Supplier;
 import sweet.dev.models.User;
 import sweet.format.PrettyFormatter;
 import sweet.dev.managers.*;
-import sweet.dev.models.Admin;
 
 import java.util.Scanner;
 import java.util.logging.ConsoleHandler;
@@ -94,14 +93,13 @@ public class LoginView {
             if(loginManager.getRoleInSys()==1)
             {
                 Supplier supplier=supplierManager.getTheSupplier(loginManager.getEnteredUsername());
-                ownerView ownerView=new ownerView(supplier,userManager,messageManager);
+                OwnerView ownerView=new OwnerView(supplier,userManager,messageManager);
                 ownerView.displayMenu();
             }
 
             else if(loginManager.getRoleInSys()==2)
             {
 
-//                Admin admin=adminManager.getTheAdmin(loginManager.getEnteredUsername());
                 AdminView adminView=new AdminView(supplierManager,userManager,adminManager,recipeManager);
                 adminView.displayMenu();
 
