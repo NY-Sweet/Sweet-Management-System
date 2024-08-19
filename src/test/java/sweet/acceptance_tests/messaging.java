@@ -27,7 +27,6 @@ public class messaging {
     public SupplierManager supplierManager;
     public MessageManager messageManager;
 
-    private static final Logger logger = Logger.getLogger(orderStatus.class.getName());
     public messaging(SweetApp obj) {
         super();
         this.obj=obj;

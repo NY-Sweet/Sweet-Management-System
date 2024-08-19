@@ -10,19 +10,19 @@ import static org.junit.Assert.*;
 public class ContentManagementByAdmin {
     SweetApp obj = new SweetApp();
 
-    int RecipeTodelete;
+    int recipeToDelete;
     Recipe addedre = new Recipe("Egg",3,"Egg salt Oil","Heat and mix",obj.getUsers().get(0).getUserName());
 
     @When("the admin  choose recipe id to delete {int}")
     public void the_admin_choose_recipe_id_to_delete(Integer int1) {
-        RecipeTodelete= int1;
+        recipeToDelete = int1;
         obj.getRecipeManager().postRecipe(addedre);
         obj.getRecipeManager().validateRecipe(addedre);
     }
 
     @Then("the recipe is deleted and a message is shown")
     public void the_recipe_is_deleted_and_a_message_is_shown() {
-        assertTrue("Succeed",obj.getRecipeManager().deleteRecipeByIndex(RecipeTodelete));
+        assertTrue("Succeed",obj.getRecipeManager().deleteRecipeByIndex(recipeToDelete));
     }
 
     int recipeid;
@@ -52,8 +52,8 @@ public class ContentManagementByAdmin {
 
     @Then("Message Invalid Recipe Id")
     public void message_invalid_recipe_id() {
-        Recipe SEARCHED= obj.getRecipeManager().searchRecipeByIdNotvalidated(enteredbyadmin);
-        assertEquals("Not Found",null,SEARCHED);
+        Recipe searched= obj.getRecipeManager().searchRecipeByIdNotvalidated(enteredbyadmin);
+        assertEquals("Not Found",null,searched);
     }
     @When("the admin  enters valid  recipe id  {int}")
     public void the_admin_enters_valid_recipe_id(Integer int1) {
@@ -68,8 +68,12 @@ public class ContentManagementByAdmin {
 
     @When("the admin chooses a recipe to display its feedbacks by  its id {int} and  Invalid FeedbackId {int}")
     public void the_admin_chooses_a_recipe_to_display_its_feedbacks_by_its_id_and_invalid_feedback_id(Integer int1, Integer int2) {
-        recipeid=int1;
-        feedid=int2;
+        impRecIdFeedId(int1, int2);
+    }
+
+    private void impRecIdFeedId(Integer int1, Integer int2) {
+        recipeid= int1;
+        feedid= int2;
     }
 
     @Then("failed message appears Invalid Feedback Id")
@@ -79,8 +83,7 @@ public class ContentManagementByAdmin {
 
     @When("the admin chooses a recipe to display its feedbacks by  Invalid  id {int} and   FeedbackId {int}")
     public void the_admin_chooses_a_recipe_to_display_its_feedbacks_by_invalid_id_and_feedback_id(Integer int1, Integer int2) {
-        recipeid=int1;
-        feedid=int2;
+        impRecIdFeedId(int1, int2);
     }
 
     @Then("failed message appears Invalid Recipe Id")
