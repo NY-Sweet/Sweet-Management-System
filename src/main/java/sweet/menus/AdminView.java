@@ -97,45 +97,57 @@ public class AdminView {
     }
 
     private void manageFeeds() {
-        logger.info("Heres the recipes in our system and their feedbacks ");
+        logger.info("Here's the recipes in our system and their feedbacks");
         recipeManager.showAllRecipes();
+
         while (true) {
-            logger.info(" enter the recipe Id you want to modify its feedBacks");
-            int recipeId = Integer.parseInt(scanner.nextLine());
-            Recipe recipe=recipeManager.searchRecipeById(recipeId);
-            if(recipe!=null) {
-                List<String> feeds = recipe.getFeedbacks();
+            int recipeId = promptForRecipeId();
+            Recipe recipe = recipeManager.searchRecipeById(recipeId);
 
-                int i = 0;
-                for (String feed : feeds) {
-                    logger.info(String.format("%d.  %s", i, feed));
-                    i++;
-                }
-
-                logger.info("Enter the Feedback Id you want to delete");
-                int feedbacId = Integer.parseInt(scanner.nextLine());
-                if(recipeManager.deleteaFeedofaRecipe(recipeId, feedbacId)) {
-                    if (logger.isLoggable(Level.INFO)) {
-                        logger.info(" Deleted the Feedback Id " + feedbacId);
-
-                    }
-                }
-                else
-                {
-                    if (logger.isLoggable(Level.WARNING)) {
-                        logger.warning("Feedback Id not valid " + feedbacId);
-
-                    }
-                }
+            if (recipe != null) {
+                showFeedbacks(recipe);
+                int feedbackId = promptForFeedbackId();
+                handleFeedbackDeletion(recipeId, feedbackId);
                 break;
-            }
-            else
-            if (logger.isLoggable(Level.WARNING)) {
-                logger.warning("Recipe id not found enter valid one!!");
-
+            } else {
+                logInvalidRecipeId();
             }
         }
+    }
 
+    private int promptForRecipeId() {
+        logger.info("Enter the recipe Id you want to modify its feedbacks");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private void showFeedbacks(Recipe recipe) {
+        List<String> feeds = recipe.getFeedbacks();
+        for (int i = 0; i < feeds.size(); i++) {
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info(String.format("%d.  %s", i, feeds.get(i)));
+            }
+        }
+    }
+
+    private int promptForFeedbackId() {
+        logger.info("Enter the Feedback Id you want to delete");
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    private void handleFeedbackDeletion(int recipeId, int feedbackId) {
+        if (recipeManager.deleteaFeedofaRecipe(recipeId, feedbackId)) {
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Deleted the Feedback Id " + feedbackId);
+            }
+        } else {
+            if (logger.isLoggable(Level.WARNING)) {
+                logger.warning("Feedback Id not valid " + feedbackId);
+            }
+        }
+    }
+
+    private void logInvalidRecipeId() {
+        logger.warning("Recipe id not found, enter a valid one!!");
     }
 
     private void manageUsersAccounts() {
