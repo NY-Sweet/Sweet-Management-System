@@ -1,4 +1,4 @@
-# Sweet Management System
+# Sweet Management System By YARA & NOUR
 
 The Sweet Management System is designed to streamline the management of sweets and desserts by catering to the needs of store owners, raw material suppliers, and users. This system provides features for user management, product management, order processing, communication, and financial reporting.
 
