@@ -2,7 +2,7 @@ package sweet.dev.managers;
 
 import sweet.dev.models.Date;
 import sweet.dev.models.Product;
-import sweet.format.PrettyFormatter;
+import main.format.PrettyFormatter;
 import sweet.dev.models.DiscountRule;
 
 import java.time.LocalDate;

@@ -1,7 +1,7 @@
 package sweet.dev.managers;
 
 import sweet.dev.models.Product;
-import sweet.format.PrettyFormatter;
+import main.format.PrettyFormatter;
 import sweet.dev.models.Order;
 import sweet.dev.models.OrderDetails;
 import sweet.dev.models.Supplier;

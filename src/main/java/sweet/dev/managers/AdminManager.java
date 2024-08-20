@@ -2,7 +2,7 @@ package sweet.dev.managers;
 
 import sweet.dev.models.Supplier;
 import sweet.dev.models.User;
-import sweet.format.PrettyFormatter;
+import main.format.PrettyFormatter;
 import sweet.dev.models.Admin;
 
 import java.util.HashMap;

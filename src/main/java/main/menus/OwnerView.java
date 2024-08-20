@@ -1,8 +1,8 @@
-package sweet.menus;
+package main.menus;
 import sweet.dev.models.Date;
 import sweet.dev.models.Product;
 import sweet.dev.models.Supplier;
-import sweet.format.PrettyFormatter;
+import main.format.PrettyFormatter;
 import sweet.dev.managers.MessageManager;
 import sweet.dev.managers.OrderManager;
 import sweet.dev.managers.ProductManager;

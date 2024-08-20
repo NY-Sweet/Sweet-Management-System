@@ -1,6 +1,6 @@
 package sweet.dev.managers;
 
-import sweet.format.PrettyFormatter;
+import main.format.PrettyFormatter;
 import sweet.dev.models.Recipe;
 
 import java.util.*;

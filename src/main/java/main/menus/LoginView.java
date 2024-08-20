@@ -1,9 +1,9 @@
-package sweet.menus;
+package main.menus;
 
 import sweet.dev.models.Adress;
 import sweet.dev.models.Supplier;
 import sweet.dev.models.User;
-import sweet.format.PrettyFormatter;
+import main.format.PrettyFormatter;
 import sweet.dev.managers.*;
 
 import java.util.Scanner;

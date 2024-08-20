@@ -1,5 +1,5 @@
 package sweet.dev.models;
-import sweet.format.PrettyFormatter;
+import main.format.PrettyFormatter;
 
 import java.util.LinkedList;
 import java.util.List;

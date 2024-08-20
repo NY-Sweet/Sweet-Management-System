@@ -1,7 +1,7 @@
 package sweet.dev.system;
 
-import sweet.format.PrettyFormatter;
-import sweet.menus.LoginView;
+import main.format.PrettyFormatter;
+import main.menus.LoginView;
 import sweet.dev.managers.*;
 import sweet.dev.models.*;
 

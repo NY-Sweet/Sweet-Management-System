@@ -1,4 +1,4 @@
-package sweet.format;
+package main.format;
 
 import java.util.logging.Formatter;
 import java.util.logging.LogRecord;

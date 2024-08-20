@@ -1,8 +1,8 @@
-package sweet.menus;
+package main.menus;
 
 import sweet.dev.models.Supplier;
 import sweet.dev.models.User;
-import sweet.format.PrettyFormatter;
+import main.format.PrettyFormatter;
 import sweet.dev.managers.AdminManager;
 import sweet.dev.managers.RecipeManager;
 import sweet.dev.managers.SupplierManager;
