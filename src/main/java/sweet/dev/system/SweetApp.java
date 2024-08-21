@@ -60,32 +60,59 @@ public class SweetApp {
         users.add(u1);
         User u2=new User("sara", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
         users.add(u2);
-       Supplier s1=new Supplier("noor", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"s","sweetee",4);
-       s1.getProductManager().addProduct(new Product("101","milk",100,10.5,8.0,new Date(28,7,2024),0.0));
-       s1.getProductManager().addProduct(new Product("102", "bread", 50, 3.0, 2.0, new Date(25, 7, 2024), 0.0));
+        User u3=new User("ahmed", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
+        users.add(u3);
+        User u4=new User("ali", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
+        users.add(u4);
+        User u5=new User("hasan", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
+        users.add(u5);
+
+        Supplier s1=new Supplier("noor", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"s","sweetee",4);
+        s1.getProductManager().addProduct(new Product("101","milk",100,10.5,8.0,new Date(28,7,2024),0.0));
+        s1.getProductManager().addProduct(new Product("102", "bread", 50, 3.0, 2.0, new Date(25, 7, 2024), 0.0));
+
+        Supplier s2=new Supplier("mohammed", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"s","Western Sweets",5);
+        s2.getProductManager().addProduct(new Product("103","Kunafeh",100,21.0,15.0,new Date(28,6,2024),0.0));
+        s2.getProductManager().addProduct(new Product("104", "Baklawah", 50, 15.0, 10.0, new Date(25, 7, 2024), 0.0));
+        s2.getProductManager().addProduct(new Product("105", "CheesCacke", 60, 10.0, 3.0, new Date(21, 8, 2024), 0.0));
+
+        Supplier s3=new Supplier("doha", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"s","Qad Sweets",7);
+        s3.getProductManager().addProduct(new Product("106","Kunafeh",100,21.0,15.0,new Date(28,6,2024),0.0));
+        s3.getProductManager().addProduct(new Product("107", "Baklawah", 50, 15.0, 10.0, new Date(25, 7, 2024), 0.0));
+        s3.getProductManager().addProduct(new Product("108", "CheesCackeBlueBerry", 60, 10.0, 3.0, new Date(21, 8, 2024), 0.0));
+        s3.getProductManager().addProduct(new Product("109", "Pancacke", 50, 15.0, 10.0, new Date(25, 7, 2024), 0.0));
+        s3.getProductManager().addProduct(new Product("110", "CheesCackeLotus", 60, 10.0, 3.0, new Date(21, 8, 2024), 0.0));
+
+
+
         this.recipeManager = new RecipeManager();
         LinkedList<OrderDetails> orderDetails = new LinkedList<>();
+        LinkedList <OrderDetails> orderDetails1 = new LinkedList<>();
         Product milk = s1.getProductManager().findProduct("101");
         Product bread =s1.getProductManager().findProduct("102");
-        milk.addFeedback("Good Milk ");
+        milk.addFeedback("Good Milk");
+        Product kunafeh =s2.getProductManager().findProduct("103");
+        kunafeh.addFeedback("Good Kunafeh");
+        orderDetails1.add(new OrderDetails (kunafeh,2));
         orderDetails.add(new OrderDetails(milk, 5)); // 5 units of milk
         orderDetails.add(new OrderDetails(bread, 2)); // 2 units of bread
         Order order1 = new Order("order001", "sara", orderDetails);
         Order order2 = new Order("order002", "haya", orderDetails);
         Order order3 = new Order("order003", "haya", orderDetails);
-
+        Order order4 = new Order("order004", "ali", orderDetails1);
         s1.getOrderManager().addOrder(order1);
         s1.getOrderManager().addOrder(order2);
         s1.getOrderManager().addOrder(order3);
+        s2.getOrderManager().addOrder(order4);
+        suppliers.add(s1);
+        suppliers.add(s2);
+        suppliers.add(s3);
 
-       suppliers.add(s1);
+        admins.add(new Admin("admin", PASS));
 
-       admins.add(new Admin("admin", PASS));
-
-       this.loginManager = new LoginManager(users, suppliers,admins);
+        this.loginManager = new LoginManager(users, suppliers,admins);
         this.userManager = new UserManager(users);
         this.supplierManager = new SupplierManager(suppliers);
-
         this.adminManager=new AdminManager(admins,supplierManager,userManager);
 
         this.messageManager=new MessageManager(userManager,supplierManager);
