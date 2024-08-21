@@ -16,6 +16,6 @@ Feature:  Provide feedback on purchased products
 
     Examples:
       | id | content                  |
-      | "105"  | "Great product!"     |
+      | "-1"  | "Great product!"     |
 
 
