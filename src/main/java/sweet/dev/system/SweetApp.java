@@ -60,11 +60,11 @@ public class SweetApp {
         users.add(u1);
         User u2=new User("sara", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
         users.add(u2);
-        User u3=new User("ahmed", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
+        User u3=new User("ahmed", PASS,"",EMAIL_EX,new Adress("Tubas","",""),"u");
         users.add(u3);
         User u4=new User("ali", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
         users.add(u4);
-        User u5=new User("hasan", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"u");
+        User u5=new User("hasan", PASS,"",EMAIL_EX,new Adress("Jenin","",""),"u");
         users.add(u5);
 
         Supplier s1=new Supplier("noor", PASS,"",EMAIL_EX,new Adress(CITY_EX,"",""),"s","sweetee",4);
@@ -124,8 +124,9 @@ public class SweetApp {
         Recipe rec1=new Recipe("Pancake", 3, "Milk, flour, oil", "Mix them all", u1.getUserName());
         recipeManager.postRecipe(rec1);
         rec1.addFeedback("0-by: haya nice and easy");
-
         rec1.setId(1);
+        recipeManager.validateRecipe(rec1);
+
         Recipe rec2= new Recipe("Chocolate Cake", 4, "Flour, sugar, cocoa powder, eggs, butter", "Bake it at 350°F for 30 minutes", u2.getUserName());
         recipeManager.postRecipe(rec2 );
         recipeManager.validateRecipe(rec2);
@@ -179,6 +180,10 @@ public class SweetApp {
         recipeManager.validateRecipe(rec10);
         rec10.addFeedback("0-by: sara gooey and cheesy");
         rec10.setId(9);
+
+        Recipe rec11 = new Recipe("Grilled Cheese Sandwich", 1, "Bread, cheese, butter", "Butter bread, add cheese, and grill", u1.getUserName());
+        recipeManager.postRecipe(rec11);
+        rec11.setId(10);
 
 
 

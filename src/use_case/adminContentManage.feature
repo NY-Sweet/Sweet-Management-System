@@ -42,4 +42,4 @@ Feature: Content Management
     Then Message valid Recipe Id
     Examples:
       | id  |
-      | 1|
+      | 10|

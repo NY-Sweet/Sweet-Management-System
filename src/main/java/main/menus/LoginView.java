@@ -27,6 +27,7 @@ public class LoginView {
     private static final String USERNAME_ST="Enter username: ";
     private static final String PASSWORD_ST="Enter password: ";
 
+    private static boolean isLoggerConfigured = false;
 
     public LoginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager, MessageManager messageManager, AdminManager adminManager, RecipeManager recipeManager) {
         this.loginManager = loginManager;
@@ -36,10 +37,17 @@ public class LoginView {
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger(LoginView.class.getName());
         this.recipeManager = recipeManager;
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new PrettyFormatter());
-        logger.setUseParentHandlers(false);
-        logger.addHandler(consoleHandler);
+        if (!isLoggerConfigured) {
+            logger.setUseParentHandlers(false);
+            logger.info("Setting up logger...");
+
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(new PrettyFormatter());
+            logger.addHandler(consoleHandler);
+
+            isLoggerConfigured = true; // Prevent further configuration
+        }
+
         this.messageManager=messageManager;
     }
 

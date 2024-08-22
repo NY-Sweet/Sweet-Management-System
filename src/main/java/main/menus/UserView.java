@@ -23,14 +23,21 @@ public class UserView {
     private RecipeManager recipeManager;
     private SupplierManager supplierManager ;
     private MessageManager messageManager ;
+    private static boolean isLoggerConfigured = false;
 
     public UserView(User user , RecipeManager recipeManager , SupplierManager supplierManager, MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger("UserView");
-        logger.setUseParentHandlers(false);
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new PrettyFormatter());
-        logger.addHandler(consoleHandler);
+        if (!isLoggerConfigured) {
+            logger.setUseParentHandlers(false);
+            logger.info("Setting up logger...");
+
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(new PrettyFormatter());
+            logger.addHandler(consoleHandler);
+
+            isLoggerConfigured = true; // Prevent further configuration
+        }
         this.user = user;
         this.supplierManager = supplierManager;
         this.recipeManager = recipeManager;
@@ -375,43 +382,51 @@ break;
         }
         logger.info("Enter shop name ");
         String shopName = scanner.nextLine();
+
         Supplier supplier = supplierManager.getTheSupplierByUsingShopName(shopName);
-        ProductManager prodManager= supplier.getProductManager();
 
-        prodManager.showProductsForCustomer();
-        LinkedList<OrderDetails> orderDetailsList = new LinkedList<>();
-        while (true) {
-            logger.info("Enter the product ID to add to your order or type 'done' to finish: ");
-            String productId = scanner.nextLine();
+        if(supplier!=null) {
+            ProductManager prodManager = supplier.getProductManager();
 
-            if (productId.equalsIgnoreCase("done")) {
-                break; // Exit the loop if the user is done adding products
+            prodManager.showProductsForCustomer();
+
+            LinkedList<OrderDetails> orderDetailsList = new LinkedList<>();
+            while (true) {
+                logger.info("Enter the product ID to add to your order or type 'done' to finish: ");
+                String productId = scanner.nextLine();
+
+                if (productId.equalsIgnoreCase("done")) {
+                    break; // Exit the loop if the user is done adding products
+                }
+
+                Product product = prodManager.findProduct(productId);
+                if (product != null) {
+                    logger.info("Enter the quantity for " + product.getName() + ": ");
+                    int quantity = Integer.parseInt(scanner.nextLine());
+                    orderDetailsList.add(new OrderDetails(product, quantity));
+                    if (logger.isLoggable(Level.INFO)) {
+                        logger.info(quantity + " units of " + product.getName() + " added to your order.");
+
+                    }
+                } else {
+                    logger.warning("Invalid product ID entered. Please try again.");
+                }
             }
+            if (!orderDetailsList.isEmpty()) {
 
-            Product product = prodManager.findProduct(productId);
-            if (product != null) {
-                logger.info("Enter the quantity for " + product.getName() + ": ");
-                int quantity = Integer.parseInt(scanner.nextLine());
-                orderDetailsList.add(new OrderDetails(product, quantity));
+                String orderId = user.getUserName() + (supplier.getOrders().size() + 1);
+                Order newOrder = new Order(orderId, user.getUserName(), orderDetailsList);
+                supplier.getOrderManager().addOrder(newOrder);
                 if (logger.isLoggable(Level.INFO)) {
-                    logger.info(quantity + " units of " + product.getName() + " added to your order.");
+                    logger.info("Order placed successfully with Order ID: " + orderId);
 
                 }
             } else {
-                logger.warning("Invalid product ID entered. Please try again.");
+                logger.warning("No products were added to the order.");
             }
         }
-        if (!orderDetailsList.isEmpty()) {
-
-            String orderId = user.getUserName() + (supplier.getOrders().size() + 1);
-            Order newOrder = new Order(orderId, user.getUserName(), orderDetailsList);
-            supplier.getOrderManager().addOrder(newOrder);
-            if (logger.isLoggable(Level.INFO)) {
-                logger.info("Order placed successfully with Order ID: " + orderId);
-
-            }
-        } else {
-            logger.warning("No products were added to the order.");
+        else {
+            logger.warning("enter valid shop name");
         }
 
     }

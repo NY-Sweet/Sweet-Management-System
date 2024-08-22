@@ -31,14 +31,21 @@ public class OwnerView {
     private static final String INVALID_CHOICE_INF_ST="Invalid choice. Please select a valid option.";
     private static final String SHIPPED_ST="shipped";
     private static final String YEAR_ST="Enter the year (YYYY): ";
+    private static boolean isLoggerConfigured = false;
 
     public OwnerView(Supplier supplier, UserManager userManager, MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
         this.logger = Logger.getLogger(OwnerView.class.getName());
-        logger.setUseParentHandlers(false);
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new PrettyFormatter());
-        logger.addHandler(consoleHandler);
+        if (!isLoggerConfigured) {
+            logger.setUseParentHandlers(false);
+            logger.info("Setting up logger...");
+
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(new PrettyFormatter());
+            logger.addHandler(consoleHandler);
+
+            isLoggerConfigured = true; // Prevent further configuration
+        }
 
         this.supplier = supplier;
         this.userManager=userManager;
@@ -172,6 +179,7 @@ public class OwnerView {
             }
         }
     }
+
 
     private void displayOwnerAccountMenu() {
         String menuOptions = ANSI_PURPLE + """
@@ -499,7 +507,6 @@ public class OwnerView {
     }
 
     private void orderManagement() {
-        while (true) {
             String menuOptions = ANSI_PURPLE + """
             ╔════════════════════════════════════╗
             ║      Order Management Menu         ║
@@ -533,7 +540,7 @@ public class OwnerView {
                 default:
                     printDefault(choice);
             }
-        }
+
     }
 
     private void printDefault(String choice) {

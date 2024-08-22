@@ -23,6 +23,8 @@ public class Supplier {
     private boolean operationSuccess;
     private boolean wrongOldPass;
     private boolean mismatchPass;
+    private static boolean isLoggerConfigured = false;
+
 
     public boolean isMismatchPass() {
         return mismatchPass;
@@ -56,14 +58,21 @@ public class Supplier {
         this.productManager = new ProductManager(this.products);
         this.orderManager=new OrderManager(this);
 
-        logger.setUseParentHandlers(false);
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new PrettyFormatter());
-        logger.addHandler(consoleHandler);
+        if (!isLoggerConfigured) {
+            logger.setUseParentHandlers(false);
+            logger.info("Setting up logger...");
+
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(new PrettyFormatter());
+            logger.addHandler(consoleHandler);
+
+            isLoggerConfigured = true; // Prevent further configuration
+        }
 
 
 
     }
+
 
 
     public OrderManager getOrderManager() {

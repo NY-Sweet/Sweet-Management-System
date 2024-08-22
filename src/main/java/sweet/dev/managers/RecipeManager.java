@@ -199,9 +199,12 @@ public class RecipeManager {
               validatedRecipes.get(recipeid).getFeedbacks().remove(feedbackid);
               return true;
           }
+            System.out.println("l"+recipeid+feedbackid);
           return false;
         }
-       return false;
+        System.out.println("n"+recipeid+feedbackid+validatedRecipes.size());
+
+        return false;
 
     }
 }

@@ -26,6 +26,8 @@ public class ProductManager {
     private static final String PRICE_STRING = "Price";
     private static final String DISCOUNT_STRING ="Discount (%)";
    private static final String EXPIRATION_DATE_FORMAT_STRING ="%02d/%02d/%04d";
+    private static boolean isLoggerConfigured = false;
+
 
 
 
@@ -40,10 +42,16 @@ public class ProductManager {
     }
 
     private void setupLogger() {
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new PrettyFormatter());
-        logger.setUseParentHandlers(false);
-        logger.addHandler(consoleHandler);
+        if (!isLoggerConfigured) {
+            logger.setUseParentHandlers(false);
+            logger.info("Setting up logger...");
+
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(new PrettyFormatter());
+            logger.addHandler(consoleHandler);
+
+            isLoggerConfigured = true; // Prevent further configuration
+        }
     }
 
     public void addProduct(Product product) {
@@ -101,7 +109,7 @@ public class ProductManager {
         }
 
         if (logger.isLoggable(Level.INFO)) {
-            logger.info(table::toString);
+           logger.info(table::toString);
         }
         return true;
     }

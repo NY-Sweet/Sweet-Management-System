@@ -16,6 +16,8 @@ public class AdminManager {
     private  List<Admin> admins;
     private SupplierManager supplierManager;
     private UserManager userManager;
+    private static boolean isLoggerConfigured = false;
+
     private static final Logger logger = Logger.getLogger(AdminManager.class.getName());
 
 
@@ -24,10 +26,16 @@ public class AdminManager {
         this.supplierManager = supplierManager;
         this.userManager = userManager;
 
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new PrettyFormatter());
-        logger.setUseParentHandlers(false);
-        logger.addHandler(consoleHandler);
+        if (!isLoggerConfigured) {
+            logger.setUseParentHandlers(false);
+            logger.info("Setting up logger...");
+
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(new PrettyFormatter());
+            logger.addHandler(consoleHandler);
+
+            isLoggerConfigured = true; // Prevent further configuration
+        }
     }
 
     public Admin getTheAdmin(String string) {
@@ -45,7 +53,7 @@ public class AdminManager {
         List<Supplier> suppliers =supplierManager.getSuppliers();
         for(Supplier supplier:suppliers)
         {
-            logger.info("Annual Report "+supplier.getShopName()+" manage by"+supplier.getUserName()+ " has employee number"+supplier.getEpmloyeeNum());
+            logger.info("Annual Report "+supplier.getShopName()+" manage by "+supplier.getUserName()+ " has employee number "+supplier.getEpmloyeeNum());
             supplier.getOrderManager().showFinancialReports(year);
         }
         return true;
@@ -55,7 +63,7 @@ public class AdminManager {
 
 
         for (Supplier supplier : suppliers) {
-            logger.info("Best selling products in "+supplier.getShopName()+" manage by"+supplier.getUserName()+ " has employee number"+supplier.getEpmloyeeNum());
+            logger.info("Best selling products in "+supplier.getShopName()+" manage by "+supplier.getUserName()+ " has employee number "+supplier.getEpmloyeeNum());
             supplier.getOrderManager().showBestProducts();
         }
         return true;
@@ -81,9 +89,9 @@ public class AdminManager {
 
         logger.info(() -> {
             StringBuilder sb = new StringBuilder();
-            sb.append("User Statistics by City%n");
+            sb.append(String.format("User Statistics by City %n%n"));
             sb.append(String.format("%-20s %-10s%n", "City", "User Count"));
-            sb.append("------------------------------%n");
+            sb.append(String.format("%n------------------------------%n%n"));
 
             for (Map.Entry<String, Integer> entry : cityUserCountMap.entrySet()) {
                 sb.append(String.format("%-20s %-10d%n", entry.getKey(), entry.getValue()));

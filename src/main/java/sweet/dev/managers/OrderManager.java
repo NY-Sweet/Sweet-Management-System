@@ -28,6 +28,8 @@ public class OrderManager {
      private static final String ORDER_ID_STRING = "Order Id";
      private static final String USER_NAME_STRING = "User Name";
     private static final String TOTAL_COST_STRING = "Total Cost";
+    private static boolean isLoggerConfigured = false;
+
     public boolean isSuccessOperation() {
         return successOperation;
     }
@@ -39,10 +41,18 @@ public class OrderManager {
         setupLogger();
     }
     private void setupLogger() {
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new PrettyFormatter());
-        logger.setUseParentHandlers(false);
-        logger.addHandler(consoleHandler);
+        if (!isLoggerConfigured) {
+            logger.setUseParentHandlers(false);
+            logger.info("Setting up logger...");
+
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(new PrettyFormatter());
+            logger.addHandler(consoleHandler);
+
+            isLoggerConfigured = true; // Prevent further configuration
+        }
+
+
     }
 
 
@@ -145,9 +155,9 @@ public class OrderManager {
                 .toList();
 
         logger.info(() -> {
-            StringBuilder bestProducts = new StringBuilder("Top 5 Best Selling Products:%n");
+            StringBuilder bestProducts = new StringBuilder(String.format("Top 5 Best Selling Products:%n%n"));
             for (Map.Entry<String, Integer> entry : topProducts) {
-                bestProducts.append(String.format("Product ID: %s, Quantity Sold: %d%n", entry.getKey(), entry.getValue()));
+                bestProducts.append(String.format("Product ID: %s, Quantity Sold: %d %n%n", entry.getKey(), entry.getValue()));
             }
             return bestProducts.toString();
         });
@@ -194,13 +204,16 @@ public class OrderManager {
                 order.setStatus(newStatus);
                 String message = String.format("Order status updated: %s to %s%n", orderId, newStatus);
                 StringBuilder table = new StringBuilder();
+                StringBuilder tableEmail = new StringBuilder();
+
                 printProduct(order, table);
+                printProductEmail(order,tableEmail);
                 String username = order.getUsername();
                 String email = userManager.getTheUser(username).getEmail();
                 if (logger.isLoggable(Level.INFO)) {
                     logger.info(String.format("Order status updated: %s to %s", orderId, newStatus));
                 }
-                sendEmailTo(email, message + table.toString());
+                sendEmailTo(email, message + tableEmail.toString());
                 successOperation = true;
                 if(newStatus.equals("delivered"))
                 {
@@ -227,13 +240,37 @@ public class OrderManager {
 
     public void printProduct(Order order, StringBuilder table) {
         table.append("Products:\n");
-        table.append(String.format("  %-10s %-20s %-10s %-10s%n", "Product ID", "Name", "Quantity", "Price"));
+        table.append(String.format("%-10s %-10s %-8s %-10s%n", "Product ID", "Name", "Quantity", "Price"));
         for (OrderDetails details : order.getOrderDetails()) {
             Product product = details.getProduct();
-            table.append(String.format("  %-10s %-20s %-10d %-10.2f%n",
+            table.append(String.format("%-10s %-10s %-8d %-10.2f%n",
                     product.getId(), product.getName(), details.getQuantity(), product.getPrice()));
         }
         table.append("---------------------------------------------------------\n");
+    }
+    public void printProductEmail(Order order, StringBuilder table) {
+        table.append("<html>\n");
+        table.append("<body>\n");
+        table.append("<h2>Products:</h2>\n");
+        table.append("<table border=\"1\" cellpadding=\"5\" cellspacing=\"0\">\n");
+        table.append("<tr>\n");
+        table.append("<th>Product ID</th>\n");
+        table.append("<th>Name</th>\n");
+        table.append("<th>Quantity</th>\n");
+        table.append("<th>Price</th>\n");
+        table.append("</tr>\n");
+        for (OrderDetails details : order.getOrderDetails()) {
+            Product product = details.getProduct();
+            table.append("<tr>\n");
+            table.append(String.format("<td>%s</td>\n", product.getId()));
+            table.append(String.format("<td>%s</td>\n", product.getName()));
+            table.append(String.format("<td>%d</td>\n", details.getQuantity()));
+            table.append(String.format("<td>%.2f</td>\n", product.getPrice()));
+            table.append("</tr>\n");
+        }
+        table.append("</table>\n");
+        table.append("</body>\n");
+        table.append("</html>\n");
     }
 
 
@@ -249,7 +286,7 @@ public class OrderManager {
             properties.put("mail.smtp.starttls.enable", "true");
 
              String emailUsername = System.getenv("EMAIL_USERNAME");
-          String emailPassword = System.getenv("EMAIL_PASSWORD");
+             String emailPassword = System.getenv("EMAIL_PASSWORD");
             Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
                 @Override
                 protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
@@ -262,7 +299,9 @@ public class OrderManager {
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient, false));
 
             message.setSubject("sweet shop order");
-            message.setText(s);
+            message.setContent(s, "text/html; charset=utf-8");
+
+           // message.setText(s);
             Transport.send(message);
             successOperation=true;
         } catch (MessagingException m) {
@@ -376,6 +415,8 @@ public class OrderManager {
 
         return totalCost;
     }
+
+
 
 
 

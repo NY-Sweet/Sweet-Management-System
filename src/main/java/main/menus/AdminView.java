@@ -19,7 +19,7 @@ public class AdminView {
     private SupplierManager supplierManager;
     private UserManager userManager;
     private AdminManager adminManager;
-    private final Logger logger;
+    private final Logger logger =Logger.getLogger(AdminView.class.getName());
     private final Scanner scanner;
     private RecipeManager recipeManager;
 
@@ -28,6 +28,7 @@ public class AdminView {
     private static final String ANSI_WHITE = "\u001B[37m";
     private static final String CHOICE_PROMPT = ANSI_WHITE + "Enter the number of your choice: " + ANSI_RESET;
 
+    private static boolean isLoggerConfigured = false;
 
     public AdminView(SupplierManager supplierManager, UserManager userManager, AdminManager adminManager, RecipeManager recipeManager) {
         this.supplierManager=supplierManager;
@@ -36,12 +37,19 @@ public class AdminView {
         this.recipeManager=recipeManager;
         this.scanner = new Scanner(System.in);
 
-        this.logger = Logger.getLogger(AdminView.class.getName());
 
-        ConsoleHandler consoleHandler = new ConsoleHandler();
-        consoleHandler.setFormatter(new PrettyFormatter());
-        logger.setUseParentHandlers(false);
-        logger.addHandler(consoleHandler);
+
+        if (!isLoggerConfigured) {
+            logger.setUseParentHandlers(false);
+            logger.info("Setting up logger...");
+
+            ConsoleHandler consoleHandler = new ConsoleHandler();
+            consoleHandler.setFormatter(new PrettyFormatter());
+            logger.addHandler(consoleHandler);
+
+            isLoggerConfigured = true; // Prevent further configuration
+        }
+
     }
 
     public void displayMenu() {
@@ -114,12 +122,10 @@ public class AdminView {
             }
         }
     }
-
     private int promptForRecipeId() {
         logger.info("Enter the recipe Id you want to modify its feedbacks");
         return Integer.parseInt(scanner.nextLine());
     }
-
     private void showFeedbacks(Recipe recipe) {
         List<String> feeds = recipe.getFeedbacks();
         for (int i = 0; i < feeds.size(); i++) {
@@ -359,4 +365,5 @@ public class AdminView {
         }
 
     }
+
 }
