@@ -23,7 +23,7 @@ public class Supplier {
     private boolean operationSuccess;
     private boolean wrongOldPass;
     private boolean mismatchPass;
-    private static boolean isLoggerConfigured = false;
+
 
 
     public boolean isMismatchPass() {
@@ -42,6 +42,11 @@ public class Supplier {
     private DiscountRule discountRule;
     private ProductManager productManager;
     private OrderManager orderManager;
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler); }
+
     public Supplier(String userName, String password, String phoneNum, String email, Adress adress, String role, String shopName, int epmloyeeNum) {
 
         this.userName = userName;
@@ -58,16 +63,7 @@ public class Supplier {
         this.productManager = new ProductManager(this.products);
         this.orderManager=new OrderManager(this);
 
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
 
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
 
 
 

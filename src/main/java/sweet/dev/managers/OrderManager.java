@@ -239,30 +239,33 @@ public class OrderManager {
         table.append("---------------------------------------------------------\n");
     }
     public void printProductEmail(Order order, StringBuilder table) {
-        table.append("<html>\n");
-        table.append("<body>\n");
-        table.append("<h2>Products:</h2>\n");
-        table.append("<table border=\"1\" cellpadding=\"5\" cellspacing=\"0\">\n");
-        table.append("<tr>\n");
-        table.append("<th>Product ID</th>\n");
-        table.append("<th>Name</th>\n");
-        table.append("<th>Quantity</th>\n");
-        table.append("<th>Price</th>\n");
-        table.append("</tr>\n");
+        // Start HTML structure
+        table.append("<html>");
+        table.append("<body>");
+        table.append("<h2>Products:</h2>");
+        table.append("<table border=\"1\" cellpadding=\"5\" cellspacing=\"0\">");
+        table.append("<tr>");
+        table.append("<th>Product ID</th>");
+        table.append("<th>Name</th>");
+        table.append("<th>Quantity</th>");
+        table.append("<th>Price</th>");
+        table.append("</tr>");
 
+        // Iterate over order details to build the table rows
         for (OrderDetails details : order.getOrderDetails()) {
             Product product = details.getProduct();
-            table.append("<tr>\n");
-            table.append(String.format("<td>%s</td>\n", product.getId()));
-            table.append(String.format("<td>%s</td>\n", product.getName()));
-            table.append(String.format("<td>%d</td>\n", details.getQuantity()));
-            table.append(String.format("<td>%.2f</td>\n", product.getPrice()));
-            table.append("</tr>\n");
+            table.append("<tr>");
+            table.append(String.format("<td>%s</td>", product.getId()));
+            table.append(String.format("<td>%s</td>", product.getName()));
+            table.append(String.format("<td>%d</td>", details.getQuantity()));
+            table.append(String.format("<td>%.2f</td>", product.getPrice()));
+            table.append("</tr>");
         }
 
-        table.append("</table>\n");
-        table.append("</body>\n");
-        table.append("</html>\n");
+        // Close HTML structure
+        table.append("</table>");
+        table.append("</body>");
+        table.append("</html>");
     }
 
 
