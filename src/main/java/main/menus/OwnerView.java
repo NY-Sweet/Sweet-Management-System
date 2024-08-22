@@ -23,7 +23,7 @@ public class OwnerView {
     private static final String ANSI_WHITE = "\u001B[37m";
     private static final String CHOICE_PROMPT = ANSI_WHITE + "Enter the number of your choice: " + ANSI_RESET;
     private final Scanner scanner;
-    private final Logger logger;
+    private static final Logger logger = Logger.getLogger(OwnerView.class.getName());;
     private Supplier supplier;
     private UserManager userManager;
     private MessageManager messageManager;
@@ -31,22 +31,13 @@ public class OwnerView {
     private static final String INVALID_CHOICE_INF_ST="Invalid choice. Please select a valid option.";
     private static final String SHIPPED_ST="shipped";
     private static final String YEAR_ST="Enter the year (YYYY): ";
-    private static boolean isLoggerConfigured = false;
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler); }
 
     public OwnerView(Supplier supplier, UserManager userManager, MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
-        this.logger = Logger.getLogger(OwnerView.class.getName());
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
-
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
-
         this.supplier = supplier;
         this.userManager=userManager;
         this.messageManager=messageManager;

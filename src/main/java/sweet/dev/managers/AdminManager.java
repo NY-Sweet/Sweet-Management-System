@@ -16,26 +16,20 @@ public class AdminManager {
     private  List<Admin> admins;
     private SupplierManager supplierManager;
     private UserManager userManager;
-    private static boolean isLoggerConfigured = false;
+
 
     private static final Logger logger = Logger.getLogger(AdminManager.class.getName());
 
-
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler); }
     public AdminManager(List<Admin> admins, SupplierManager supplierManager, UserManager userManager) {
         this.admins = admins;
         this.supplierManager = supplierManager;
         this.userManager = userManager;
 
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
 
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
     }
 
     public Admin getTheAdmin(String string) {

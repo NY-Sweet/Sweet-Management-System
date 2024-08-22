@@ -22,12 +22,15 @@ public class LoginView {
     private final MessageManager messageManager;
     private final SupplierManager supplierManager;
     private final Scanner scanner;
-    private final Logger logger;
+    private static final Logger logger= Logger.getLogger(LoginView.class.getName());;
     private AdminManager adminManager;
     private static final String USERNAME_ST="Enter username: ";
     private static final String PASSWORD_ST="Enter password: ";
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler); }
 
-    private static boolean isLoggerConfigured = false;
 
     public LoginView(LoginManager loginManager, UserManager userManager, SupplierManager supplierManager, MessageManager messageManager, AdminManager adminManager, RecipeManager recipeManager) {
         this.loginManager = loginManager;
@@ -35,18 +38,8 @@ public class LoginView {
         this.supplierManager = supplierManager;
         this.adminManager=adminManager;
         this.scanner = new Scanner(System.in);
-        this.logger = Logger.getLogger(LoginView.class.getName());
         this.recipeManager = recipeManager;
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
 
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
 
         this.messageManager=messageManager;
     }

@@ -13,27 +13,20 @@ public class MessageManager {
 
     private SupplierManager supplierManager;
     private UserManager userManager;
-    private static boolean isLoggerConfigured = false;
 
     private static final Logger logger = Logger.getLogger(MessageManager.class.getName());
 
-
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler); }
 
     public MessageManager(UserManager userManager, SupplierManager supplierManager) {
         this.userManager=userManager;
         this.supplierManager=supplierManager;
         this.messages = new ArrayList<>();
 
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
 
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
     }
 
 

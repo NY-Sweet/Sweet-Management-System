@@ -19,7 +19,7 @@ public class AdminView {
     private SupplierManager supplierManager;
     private UserManager userManager;
     private AdminManager adminManager;
-    private final Logger logger =Logger.getLogger(AdminView.class.getName());
+    private static final Logger logger =Logger.getLogger(AdminView.class.getName());
     private final Scanner scanner;
     private RecipeManager recipeManager;
 
@@ -28,7 +28,10 @@ public class AdminView {
     private static final String ANSI_WHITE = "\u001B[37m";
     private static final String CHOICE_PROMPT = ANSI_WHITE + "Enter the number of your choice: " + ANSI_RESET;
 
-    private static boolean isLoggerConfigured = false;
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler); }
 
     public AdminView(SupplierManager supplierManager, UserManager userManager, AdminManager adminManager, RecipeManager recipeManager) {
         this.supplierManager=supplierManager;
@@ -39,16 +42,7 @@ public class AdminView {
 
 
 
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
 
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
 
     }
 

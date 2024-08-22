@@ -25,8 +25,12 @@ public class ProductManager {
     private static final String QUANTITY_STRING = "Quantity";
     private static final String PRICE_STRING = "Price";
     private static final String DISCOUNT_STRING ="Discount (%)";
-   private static final String EXPIRATION_DATE_FORMAT_STRING ="%02d/%02d/%04d";
-    private static boolean isLoggerConfigured = false;
+    private static final String EXPIRATION_DATE_FORMAT_STRING ="%02d/%02d/%04d";
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler);
+    }
 
 
 
@@ -38,21 +42,10 @@ public class ProductManager {
     public ProductManager(List<Product> products) {
         this.products = products;
         this.discountRule = new DiscountRule(0, 0);
-        setupLogger();
+
     }
 
-    private void setupLogger() {
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
 
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
-    }
 
     public void addProduct(Product product) {
        if(findProduct(product.getId())==null) {

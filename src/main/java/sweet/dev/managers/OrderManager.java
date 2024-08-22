@@ -28,7 +28,7 @@ public class OrderManager {
      private static final String ORDER_ID_STRING = "Order Id";
      private static final String USER_NAME_STRING = "User Name";
     private static final String TOTAL_COST_STRING = "Total Cost";
-    private static boolean isLoggerConfigured = false;
+
 
     public boolean isSuccessOperation() {
         return successOperation;
@@ -38,22 +38,12 @@ public class OrderManager {
     public OrderManager(Supplier supplier) {
         this.supplier = supplier;
         this.orders= supplier.getOrders();
-        setupLogger();
-    }
-    private void setupLogger() {
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
-
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
-
 
     }
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler); }
 
 
     public boolean addOrder(Order order) {
@@ -259,6 +249,7 @@ public class OrderManager {
         table.append("<th>Quantity</th>\n");
         table.append("<th>Price</th>\n");
         table.append("</tr>\n");
+
         for (OrderDetails details : order.getOrderDetails()) {
             Product product = details.getProduct();
             table.append("<tr>\n");
@@ -268,6 +259,7 @@ public class OrderManager {
             table.append(String.format("<td>%.2f</td>\n", product.getPrice()));
             table.append("</tr>\n");
         }
+
         table.append("</table>\n");
         table.append("</body>\n");
         table.append("</html>\n");
@@ -300,8 +292,6 @@ public class OrderManager {
 
             message.setSubject("sweet shop order");
             message.setContent(s, "text/html; charset=utf-8");
-
-           // message.setText(s);
             Transport.send(message);
             successOperation=true;
         } catch (MessagingException m) {

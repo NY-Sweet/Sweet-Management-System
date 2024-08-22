@@ -17,27 +17,19 @@ public class UserView {
     private static final String ANSI_WHITE = "\u001B[37m";
     private static final String CHOICE_PROMPT = ANSI_WHITE + "Enter the number of your choice: " + ANSI_RESET;
     private final Scanner scanner;
-    private final Logger logger;
+    private static final Logger logger = Logger.getLogger("UserView");;
 
     private User user;
     private RecipeManager recipeManager;
     private SupplierManager supplierManager ;
     private MessageManager messageManager ;
-    private static boolean isLoggerConfigured = false;
+    static { logger.setUseParentHandlers(false);
+        ConsoleHandler consoleHandler = new ConsoleHandler();
+        consoleHandler.setFormatter(new PrettyFormatter());
+        logger.addHandler(consoleHandler); }
 
     public UserView(User user , RecipeManager recipeManager , SupplierManager supplierManager, MessageManager messageManager) {
         this.scanner = new Scanner(System.in);
-        this.logger = Logger.getLogger("UserView");
-        if (!isLoggerConfigured) {
-            logger.setUseParentHandlers(false);
-            logger.info("Setting up logger...");
-
-            ConsoleHandler consoleHandler = new ConsoleHandler();
-            consoleHandler.setFormatter(new PrettyFormatter());
-            logger.addHandler(consoleHandler);
-
-            isLoggerConfigured = true; // Prevent further configuration
-        }
         this.user = user;
         this.supplierManager = supplierManager;
         this.recipeManager = recipeManager;
