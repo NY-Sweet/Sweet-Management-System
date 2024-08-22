@@ -17,8 +17,7 @@ public class UserView {
     private static final String ANSI_WHITE = "\u001B[37m";
     private static final String CHOICE_PROMPT = ANSI_WHITE + "Enter the number of your choice: " + ANSI_RESET;
     private final Scanner scanner;
-    private static final Logger logger = Logger.getLogger("UserView");;
-
+    private static final Logger logger = Logger.getLogger("UserView");
     private User user;
     private RecipeManager recipeManager;
     private SupplierManager supplierManager ;

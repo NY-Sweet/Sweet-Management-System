@@ -22,7 +22,7 @@ public class LoginView {
     private final MessageManager messageManager;
     private final SupplierManager supplierManager;
     private final Scanner scanner;
-    private static final Logger logger= Logger.getLogger(LoginView.class.getName());;
+    private static final Logger logger= Logger.getLogger(LoginView.class.getName());
     private AdminManager adminManager;
     private static final String USERNAME_ST="Enter username: ";
     private static final String PASSWORD_ST="Enter password: ";
